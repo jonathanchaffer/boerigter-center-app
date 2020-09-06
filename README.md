@@ -1,6 +1,8 @@
-# react-typescript-quickstart
+# Boerigter Center App _(Working Title)_
 
-This is a template TypeScript React project with my preferred project structure and configs. It's a good place to start for developers who are new to React and would like to enforce good code style and project structure. The template was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An app built for the Boerigter Center for Calling and Career at Hope College. Written by Jonathan Chaffer, Josie Crane, Nam Do, and Will von Seeger.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -20,7 +22,7 @@ Builds the app for production to the `build` folder.<br />
 
 ## Configuration
 
-Open [`workspace.code-workspace`](.vscode/workspace.code-workspace) in VSCode to take advantage of the built-in configurations of this template, including ESLint configs, Prettier configs, and VSCode settings. You may rename the workspace to whatever you wish. It is highly recommended that you install all of the recommended VSCode extensions listed in [`extensions.json`](.vscode/extensions.json). If you are missing any of the recommended extensions, VSCode will prompt you to install them.
+Open [`boerigter-center-app.code-workspace`](.vscode/workspace.code-workspace) in VSCode to take advantage of the built-in configurations of this template, including ESLint configs, Prettier configs, and VSCode settings. It is highly recommended that you install all of the recommended VSCode extensions listed in [`extensions.json`](.vscode/extensions.json). If you are missing any of the recommended extensions, VSCode will prompt you to install them.
 
 ## Project Structure
 
