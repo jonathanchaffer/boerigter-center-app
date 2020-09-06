@@ -8,7 +8,9 @@ export function Navigation(): JSX.Element {
   return (
     <Navbar bg="light">
       <Container>
-        <Navbar.Brand>Boerigter Center App</Navbar.Brand>
+        <Link to="/">
+          <Navbar.Brand>Boerigter Center App</Navbar.Brand>
+        </Link>
         <Nav>
           <Link to="/career" className="nav-link">
             Career Opportunities
