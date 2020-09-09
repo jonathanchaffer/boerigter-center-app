@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, useLocation } from "react-router-dom";
+import "./Navigation.scss";
 
 export function Navigation(): JSX.Element {
   return (
