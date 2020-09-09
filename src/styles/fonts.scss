@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "Verlag";
+  font-weight: normal;
+  src: local("Verlag-Book"), url("../assets/fonts/Verlag-Book.otf") format("opentype");
+}
+
+body {
+  font-family: "Verlag", Helvetica, sans-serif !important;
+}

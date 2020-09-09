@@ -1,21 +1,25 @@
-import logo from "assets/logo.svg";
+import { MapView, Navigation } from "components";
 import React from "react";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 
 export function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Testing pull requests.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navigation />
+      <Switch>
+        <Route exact path="/career">
+          <MapView />
+        </Route>
+        <Route exact path="/alumni">
+          <MapView />
+        </Route>
+        <Route exact path="/study-abroad">
+          <MapView />
+        </Route>
+        <Route>
+          <Redirect to="/career" />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
