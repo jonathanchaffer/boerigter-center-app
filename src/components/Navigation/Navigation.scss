@@ -1,6 +1,10 @@
 @import "styles/colors.scss";
 @import "styles/index.scss";
 
+.navbar {
+  z-index: 1;
+}
+
 .nav-link {
   padding: 0.5rem 1rem !important;
   border-radius: $border-radius;
