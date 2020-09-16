@@ -9,9 +9,10 @@ export function Navigation(): JSX.Element {
   return (
     <Navbar bg="light">
       <Container>
-        <Link to="/">
-          <Navbar.Brand>Boerigter Center App</Navbar.Brand>
-        </Link>
+        <Nav>
+          <NavLink path="/stories">Alumni Stories</NavLink>
+          <NavLink path="/poll">Quick Poll</NavLink>
+        </Nav>
         <Nav>
           <NavLink path="/career">Career Opportunities</NavLink>
           <NavLink path="/alumni">Find Alumni</NavLink>

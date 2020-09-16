@@ -7,6 +7,8 @@ export function App(): JSX.Element {
     <Router>
       <Navigation />
       <Switch>
+        <Route exact path="/stories" />
+        <Route exact path="/poll" />
         <Route exact path="/career">
           <MapView />
         </Route>
