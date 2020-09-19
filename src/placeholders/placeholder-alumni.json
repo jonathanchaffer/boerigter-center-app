@@ -1,5 +1,3 @@
-// JSON returned from POST https://connection.hope.edu/api/get-network-hub-users
-
 {
   "users": [
     {
