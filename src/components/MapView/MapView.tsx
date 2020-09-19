@@ -36,9 +36,5 @@ interface AlumPinProps {
 }
 
 function AlumPin({ alum }: AlumPinProps): JSX.Element {
-  return (
-    <span>
-      {alum.firstName} {alum.lastName}
-    </span>
-  );
+  return <i className="fas fa-user" />;
 }
