@@ -1,23 +1,22 @@
 import GoogleMapReact from "google-map-react";
-import { Alum } from "models";
+import { Mappable } from "models/Mappable";
 import React, { useState } from "react";
-import { parseAlumni } from "services";
 import { ClusterProperties, PointFeature } from "supercluster";
 import useSupercluster from "use-supercluster";
 import "./MapView.scss";
 
-interface MapViewProps {
-  mapType: "careers" | "alumni" | "study-abroad";
+interface MapViewProps<I extends Mappable> {
+  getData: () => I[];
 }
 
-export function MapView({ mapType }: MapViewProps): JSX.Element {
+export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.Element {
   const [mapZoom, setMapZoom] = useState(4);
-  const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([0, 0, 0, 0]);
+  const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
 
-  const points: PointFeature<Alum>[] = parseAlumni().map((alum: Alum) => {
+  const points: PointFeature<Mappable>[] = getData().map((item: I) => {
     return {
-      geometry: { coordinates: [alum.longitude, alum.latitude], type: "Point" },
-      properties: alum,
+      geometry: { coordinates: [item.longitude, item.latitude], type: "Point" },
+      properties: item,
       type: "Feature",
     };
   });
@@ -50,13 +49,13 @@ export function MapView({ mapType }: MapViewProps): JSX.Element {
           const cluster = pointOrCluster as PointFeature<ClusterProperties>;
           const { cluster: isCluster, point_count: pointCount } = cluster.properties;
 
-          const point = pointOrCluster as PointFeature<Alum>;
-          const alum = point.properties;
+          const point = pointOrCluster as PointFeature<Mappable>;
+          const item = point.properties;
 
           return isCluster ? (
             <ClusterPin count={pointCount} key={cluster.id} lat={latitude} lng={longitude} />
           ) : (
-            <AlumPin alum={alum} key={alum.id} lat={latitude} lng={longitude} />
+            <ItemPin item={item} key={item.id} lat={latitude} lng={longitude} />
           );
         })}
       </GoogleMapReact>
@@ -74,12 +73,12 @@ function ClusterPin({ count }: ClusterPinProps): JSX.Element {
   return <span>{count}</span>;
 }
 
-interface AlumPinProps {
-  alum: Alum;
+interface ItemPinProps<I extends Mappable> {
+  item: I;
   lat: number;
   lng: number;
 }
 
-function AlumPin({ alum }: AlumPinProps): JSX.Element {
+function ItemPin<I extends Mappable>({ item }: ItemPinProps<I>): JSX.Element {
   return <i className="fas fa-user" />;
 }
