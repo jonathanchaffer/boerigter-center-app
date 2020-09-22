@@ -8,12 +8,11 @@
   top: 0;
 }
 
-// TODO: cluster markers should be centered on their location, not aligned to top-left
 .cluster-marker {
+  background-color: $hope-blue;
   color: $white;
   font-family: $font-stack;
   font-size: 12pt;
-  background: $hope-blue;
   border-radius: 50%;
   padding: 10px;
   display: flex;
@@ -23,4 +22,12 @@
 
 .point-marker {
   color: $hope-blue;
+}
+
+.cluster-marker,
+.point-marker {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
 }
