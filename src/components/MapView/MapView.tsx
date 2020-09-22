@@ -5,6 +5,8 @@ import { ClusterProperties, PointFeature } from "supercluster";
 import useSupercluster from "use-supercluster";
 import "./MapView.scss";
 
+// tutorial followed for clustering: https://www.leighhalliday.com/google-maps-clustering
+
 interface MapViewProps<I extends Mappable> {
   getData: () => I[];
 }
