@@ -1,8 +1,14 @@
 import GoogleMapReact from "google-map-react";
+import { Alum } from "models";
 import React from "react";
+import { parseAlumni } from "services";
 import "./MapView.scss";
 
-export function MapView(): JSX.Element {
+interface MapViewProps {
+  mapType: "careers" | "alumni" | "study-abroad";
+}
+
+export function MapView({ mapType }: MapViewProps): JSX.Element {
   return (
     <div className="map-container">
       <GoogleMapReact
@@ -13,7 +19,22 @@ export function MapView(): JSX.Element {
         }}
         defaultZoom={4}
         options={{ maxZoom: 6 }}
-      />
+      >
+        {mapType === "alumni" &&
+          parseAlumni().map(alum => {
+            return <AlumPin alum={alum} key={alum.id} lat={alum.latitude} lng={alum.longitude} />;
+          })}
+      </GoogleMapReact>
     </div>
   );
+}
+
+interface AlumPinProps {
+  alum: Alum;
+  lat: number;
+  lng: number;
+}
+
+function AlumPin({ alum }: AlumPinProps): JSX.Element {
+  return <i className="fas fa-user" />;
 }

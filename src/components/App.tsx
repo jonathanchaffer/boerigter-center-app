@@ -10,13 +10,13 @@ export function App(): JSX.Element {
         <Route exact path="/stories" />
         <Route exact path="/poll" />
         <Route exact path="/career">
-          <MapView />
+          <MapView mapType="careers" />
         </Route>
         <Route exact path="/alumni">
-          <MapView />
+          <MapView mapType="alumni" />
         </Route>
         <Route exact path="/study-abroad">
-          <MapView />
+          <MapView mapType="study-abroad" />
         </Route>
         <Route>
           <Redirect to="/career" />
