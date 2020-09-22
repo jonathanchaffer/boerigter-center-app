@@ -4,6 +4,8 @@
   src: local("Verlag-Book"), url("../assets/fonts/Verlag-Book.otf") format("opentype");
 }
 
+$font-stack: "Verlag", Helvetica, sans-serif !important;
+
 body {
-  font-family: "Verlag", Helvetica, sans-serif !important;
+  font-family: $font-stack;
 }

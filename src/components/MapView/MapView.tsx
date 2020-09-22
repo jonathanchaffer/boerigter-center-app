@@ -37,7 +37,7 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
           lng: -97.922211,
         }}
         zoom={mapZoom}
-        options={{ maxZoom: 6 }}
+        options={{ maxZoom: 10 }}
         onChange={({ zoom, bounds }) => {
           setMapZoom(zoom);
           setMapBounds([bounds.nw.lng, bounds.se.lat, bounds.se.lng, bounds.nw.lat]);
@@ -53,7 +53,13 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
           const item = point.properties;
 
           return isCluster ? (
-            <ClusterPin count={pointCount} key={cluster.id} lat={latitude} lng={longitude} />
+            <ClusterPin
+              innerCount={pointCount}
+              totalPoints={clusters.length}
+              key={cluster.id}
+              lat={latitude}
+              lng={longitude}
+            />
           ) : (
             <ItemPin item={item} key={item.id} lat={latitude} lng={longitude} />
           );
@@ -64,13 +70,25 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
 }
 
 interface ClusterPinProps {
-  count: number;
+  innerCount: number;
+  totalPoints: number;
   lat: number;
   lng: number;
 }
 
-function ClusterPin({ count }: ClusterPinProps): JSX.Element {
-  return <span>{count}</span>;
+function ClusterPin({ innerCount, totalPoints }: ClusterPinProps): JSX.Element {
+  const size = Math.min(10 + (innerCount / totalPoints) * 20, 50);
+  return (
+    <div
+      className="cluster-marker"
+      style={{
+        height: `${size}px`,
+        width: `${size}px`,
+      }}
+    >
+      <span>{innerCount}</span>
+    </div>
+  );
 }
 
 interface ItemPinProps<I extends Mappable> {
@@ -80,5 +98,9 @@ interface ItemPinProps<I extends Mappable> {
 }
 
 function ItemPin<I extends Mappable>({ item }: ItemPinProps<I>): JSX.Element {
-  return <i className="fas fa-user" />;
+  return (
+    <div className="point-marker">
+      <i className="fas fa-user" />
+    </div>
+  );
 }
