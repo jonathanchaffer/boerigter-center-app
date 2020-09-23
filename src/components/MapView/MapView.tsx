@@ -15,7 +15,7 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
   const [mapZoom, setMapZoom] = useState(4);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
 
-  const points: PointFeature<Mappable>[] = getData().map((item: I) => {
+  const points: PointFeature<I>[] = getData().map((item: I) => {
     return {
       geometry: { coordinates: [item.longitude, item.latitude], type: "Point" },
       properties: item,
@@ -46,14 +46,21 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
         }}
       >
         {clusters.map(pointOrCluster => {
+          /* Regardless of whether pointOrCluster is a PointFeature<ClusterProperties> or a PointFeature<I>, it has a
+           * 'geometry' property that we can use to get the latitude and longitude. */
           const [longitude, latitude] = pointOrCluster.geometry.coordinates;
 
+          /* If pointOrCluster is a PointFeature<ClusterProperties>, then it has 'cluster' and 'point_count' properties.
+           * we can then use these to display cluster information on the map. */
           const cluster = pointOrCluster as PointFeature<ClusterProperties>;
           const { cluster: isCluster, point_count: pointCount } = cluster.properties;
 
-          const point = pointOrCluster as PointFeature<Mappable>;
+          /* Otherwise, pointOrCluster is just a PointFeature<I>, and its 'properties' property is the I object itself. */
+          const point = pointOrCluster as PointFeature<I>;
           const item = point.properties;
 
+          /* If isCluster, return the element that should display for cluster pins. otherwise, return the element
+           * that should display for item pins. */
           return isCluster ? (
             <ClusterPin
               innerCount={pointCount}
