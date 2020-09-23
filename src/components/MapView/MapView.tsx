@@ -1,14 +1,35 @@
 import GoogleMapReact from "google-map-react";
-import { Alum } from "models";
-import React from "react";
-import { parseAlumni } from "services";
+import { Mappable } from "models/Mappable";
+import React, { useState } from "react";
+import { ClusterProperties, PointFeature } from "supercluster";
+import useSupercluster from "use-supercluster";
 import "./MapView.scss";
 
-interface MapViewProps {
-  mapType: "careers" | "alumni" | "study-abroad";
+// tutorial followed for clustering: https://www.leighhalliday.com/google-maps-clustering
+
+interface MapViewProps<I extends Mappable> {
+  getData: () => I[];
 }
 
-export function MapView({ mapType }: MapViewProps): JSX.Element {
+export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.Element {
+  const [mapZoom, setMapZoom] = useState(4);
+  const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
+
+  const points: PointFeature<I>[] = getData().map((item: I) => {
+    return {
+      geometry: { coordinates: [item.longitude, item.latitude], type: "Point" },
+      properties: item,
+      type: "Feature",
+    };
+  });
+
+  const { clusters } = useSupercluster({
+    bounds: mapBounds,
+    options: { maxZoom: 20, radius: 75 },
+    points,
+    zoom: mapZoom,
+  });
+
   return (
     <div className="map-container">
       <GoogleMapReact
@@ -17,24 +38,78 @@ export function MapView({ mapType }: MapViewProps): JSX.Element {
           lat: 39.381266,
           lng: -97.922211,
         }}
-        defaultZoom={4}
-        options={{ maxZoom: 6 }}
+        zoom={mapZoom}
+        options={{ maxZoom: 10 }}
+        onChange={({ zoom, bounds }) => {
+          setMapZoom(zoom);
+          setMapBounds([bounds.nw.lng, bounds.se.lat, bounds.se.lng, bounds.nw.lat]);
+        }}
       >
-        {mapType === "alumni" &&
-          parseAlumni().map(alum => {
-            return <AlumPin alum={alum} key={alum.id} lat={alum.latitude} lng={alum.longitude} />;
-          })}
+        {clusters.map(pointOrCluster => {
+          /* Regardless of whether pointOrCluster is a PointFeature<ClusterProperties> or a PointFeature<I>, it has a
+           * 'geometry' property that we can use to get the latitude and longitude. */
+          const [longitude, latitude] = pointOrCluster.geometry.coordinates;
+
+          /* If pointOrCluster is a PointFeature<ClusterProperties>, then it has 'cluster' and 'point_count' properties.
+           * we can then use these to display cluster information on the map. */
+          const cluster = pointOrCluster as PointFeature<ClusterProperties>;
+          const { cluster: isCluster, point_count: pointCount } = cluster.properties;
+
+          /* Otherwise, pointOrCluster is just a PointFeature<I>, and its 'properties' property is the I object itself. */
+          const point = pointOrCluster as PointFeature<I>;
+          const item = point.properties;
+
+          /* If isCluster, return the element that should display for cluster pins. otherwise, return the element
+           * that should display for item pins. */
+          return isCluster ? (
+            <ClusterPin
+              innerCount={pointCount}
+              totalPoints={clusters.length}
+              key={cluster.id}
+              lat={latitude}
+              lng={longitude}
+            />
+          ) : (
+            <ItemPin item={item} key={item.id} lat={latitude} lng={longitude} />
+          );
+        })}
       </GoogleMapReact>
     </div>
   );
 }
 
-interface AlumPinProps {
-  alum: Alum;
+interface ClusterPinProps {
+  innerCount: number;
+  totalPoints: number;
   lat: number;
   lng: number;
 }
 
-function AlumPin({ alum }: AlumPinProps): JSX.Element {
-  return <i className="fas fa-user" />;
+function ClusterPin({ innerCount, totalPoints }: ClusterPinProps): JSX.Element {
+  const size = Math.min(10 + (innerCount / totalPoints) * 20, 50);
+  return (
+    <div
+      className="cluster-marker"
+      style={{
+        height: `${size}px`,
+        width: `${size}px`,
+      }}
+    >
+      <span>{innerCount}</span>
+    </div>
+  );
+}
+
+interface ItemPinProps<I extends Mappable> {
+  item: I;
+  lat: number;
+  lng: number;
+}
+
+function ItemPin<I extends Mappable>({ item }: ItemPinProps<I>): JSX.Element {
+  return (
+    <div className="point-marker">
+      <i className="fas fa-user" />
+    </div>
+  );
 }

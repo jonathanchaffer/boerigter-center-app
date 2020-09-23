@@ -1,9 +1,8 @@
-export interface Alum {
-  id: number;
+import { Mappable } from "./Mappable";
+
+export interface Alum extends Mappable {
   firstName: string;
   lastName: string;
-  latitude: number;
-  longitude: number;
   location: string;
   photoUrl: string;
   majors: string[];
