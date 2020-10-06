@@ -1,6 +1,6 @@
-import { Alum } from "models";
+import { PeopleGroveAlum } from "models";
 import * as placeholderAlumni from "placeholders/placeholder-alumni.json";
 
-export function getPeopleGroveAlumni(): Alum[] {
-  return placeholderAlumni.users as Alum[];
+export function getPeopleGroveAlumni(): PeopleGroveAlum[] {
+  return placeholderAlumni.users as PeopleGroveAlum[];
 }

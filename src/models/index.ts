@@ -1,1 +1,2 @@
-export * from "./Alum";
+export * from "./CuratedAlum";
+export * from "./PeopleGroveAlum";
