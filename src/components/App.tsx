@@ -1,4 +1,4 @@
-import { MapView, Navigation } from "components";
+import { AlumniStoriesList, MapView, Navigation } from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { getPeopleGroveAlumni } from "services";
@@ -8,7 +8,9 @@ export function App(): JSX.Element {
     <Router>
       <Navigation />
       <Switch>
-        <Route exact path="/stories" />
+        <Route exact path="/stories">
+          <AlumniStoriesList />
+        </Route>
         <Route exact path="/poll" />
         <Route exact path="/career">
           <MapView getData={() => []} />
