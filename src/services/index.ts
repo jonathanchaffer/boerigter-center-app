@@ -1,1 +1,1 @@
-export * from "./alumniService";
+export * from "./peopleGroveService";
