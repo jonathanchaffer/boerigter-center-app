@@ -1,5 +1,5 @@
 import { App } from "components";
-import firebase from "firebase/app";
+import * as firebase from "firebase";
 import React from "react";
 import ReactDOM from "react-dom";
 import "styles/fonts.scss";
@@ -16,6 +16,7 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+export const db = firebase.firestore();
 
 ReactDOM.render(
   <React.StrictMode>
