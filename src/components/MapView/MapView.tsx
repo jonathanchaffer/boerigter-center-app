@@ -1,6 +1,7 @@
 import GoogleMapReact from "google-map-react";
 import { Mappable } from "models/Mappable";
 import React, { useState } from "react";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 import { ClusterProperties, PointFeature } from "supercluster";
 import useSupercluster from "use-supercluster";
 import "./MapView.scss";
@@ -110,8 +111,18 @@ interface ItemPinProps<I extends Mappable> {
 
 function ItemPin<I extends Mappable>({ item }: ItemPinProps<I>): JSX.Element {
   return (
-    <button type="button" onClick={() => console.log("clicked point")} className="point-marker">
-      <i className="fas fa-user" />
-    </button>
+    <OverlayTrigger
+      trigger="focus"
+      placement="top"
+      overlay={
+        <Popover id={item.id.toString()}>
+          <Popover.Content>{item.id}</Popover.Content>
+        </Popover>
+      }
+    >
+      <button type="button" className="point-marker">
+        <i className="fas fa-user" />
+      </button>
+    </OverlayTrigger>
   );
 }
