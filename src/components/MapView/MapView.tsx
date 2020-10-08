@@ -86,7 +86,7 @@ interface ClusterPinProps {
 }
 
 function ClusterPin({ innerCount, totalPoints }: ClusterPinProps): JSX.Element {
-  const size = Math.min(10 + (innerCount / totalPoints) * 20, 50);
+  const size = Math.min(10 + (innerCount / totalPoints) * 20, 75);
   return (
     <div
       className="cluster-marker"

@@ -8,26 +8,28 @@
   top: 0;
 }
 
-.cluster-marker {
-  background-color: $hope-blue;
+.cluster-marker,
+.point-marker {
   color: $white;
-  font-family: $font-stack;
-  font-size: 12pt;
   border-radius: 50%;
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
 
-.point-marker {
-  color: $hope-blue;
-}
-
-.cluster-marker,
-.point-marker {
   position: absolute;
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+}
+
+.cluster-marker {
+  background-color: $hope-blue;
+  font-family: $font-stack;
+  font-size: 12pt;
+}
+
+.point-marker {
+  background-color: $lake-mi-blue;
+  padding: 6px;
 }
