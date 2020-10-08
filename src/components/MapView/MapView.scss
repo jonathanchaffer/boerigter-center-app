@@ -1,5 +1,6 @@
 @import "styles/colors.scss";
 @import "styles/fonts.scss";
+@import "styles/index.scss";
 
 .map-container {
   position: absolute;
@@ -21,6 +22,15 @@
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+
+  transition-duration: $transition-duration;
+}
+
+.cluster-marker:hover,
+.point-marker:hover {
+  cursor: pointer;
+  box-shadow: 0 0 1rem $white;
+  z-index: 1;
 }
 
 .cluster-marker {
