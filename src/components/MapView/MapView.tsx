@@ -88,7 +88,9 @@ interface ClusterPinProps {
 function ClusterPin({ innerCount, totalPoints }: ClusterPinProps): JSX.Element {
   const size = Math.min(10 + (innerCount / totalPoints) * 20, 75);
   return (
-    <div
+    <button
+      type="button"
+      onClick={() => console.log("clicked cluster")}
       className="cluster-marker"
       style={{
         height: `${size}px`,
@@ -96,7 +98,7 @@ function ClusterPin({ innerCount, totalPoints }: ClusterPinProps): JSX.Element {
       }}
     >
       <span>{innerCount}</span>
-    </div>
+    </button>
   );
 }
 
@@ -108,8 +110,8 @@ interface ItemPinProps<I extends Mappable> {
 
 function ItemPin<I extends Mappable>({ item }: ItemPinProps<I>): JSX.Element {
   return (
-    <div className="point-marker">
+    <button type="button" onClick={() => console.log("clicked point")} className="point-marker">
       <i className="fas fa-user" />
-    </div>
+    </button>
   );
 }
