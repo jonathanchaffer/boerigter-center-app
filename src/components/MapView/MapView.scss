@@ -27,7 +27,9 @@
 }
 
 .cluster-marker:hover,
-.point-marker:hover {
+.point-marker:hover,
+.cluster-marker:focus,
+.point-marker:focus {
   cursor: pointer;
   box-shadow: 0 0 1rem $white;
   z-index: 1;
