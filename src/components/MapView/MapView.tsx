@@ -1,10 +1,11 @@
 import GoogleMapReact from "google-map-react";
 import { Mappable } from "models/Mappable";
 import React, { useState } from "react";
-import { OverlayTrigger, Popover } from "react-bootstrap";
+import { ListGroup, OverlayTrigger, Popover } from "react-bootstrap";
 import { ClusterFeature, PointFeature } from "supercluster";
 import useSupercluster from "use-supercluster";
 import "./MapView.scss";
+import { PopoverItem } from "./PopoverItem";
 
 // tutorial followed for clustering: https://www.leighhalliday.com/google-maps-clustering
 
@@ -94,7 +95,7 @@ function ClusterPin<I extends Mappable>({
   totalNumPoints,
 }: ClusterPinProps<I>): JSX.Element {
   // Calculate the size of the pin. Better done programatically than in CSS.
-  const size = Math.min(10 + (items.length / totalNumPoints) * 20, 75);
+  const size = 25 + Math.min((items.length / totalNumPoints) * 20, 50);
   return (
     <PopoverTrigger popoverId={id} items={items}>
       <button
@@ -145,9 +146,19 @@ function PopoverTrigger<I extends Mappable>({
       trigger="focus"
       placement="top"
       overlay={
-        <Popover id={`popover-${popoverId.toString()}`}>
+        <Popover id={`popover-${popoverId.toString()}`} className="map-popover">
           <Popover.Content>
-            {items ? items.map(i => <li key={i.id}>{i.id}</li>) : item?.id}
+            {items ? (
+              <ListGroup variant="flush">
+                {items.map(i => (
+                  <ListGroup.Item key={i.id}>
+                    <PopoverItem item={i} />
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+            ) : (
+              item && <PopoverItem item={item} />
+            )}
           </Popover.Content>
         </Popover>
       }

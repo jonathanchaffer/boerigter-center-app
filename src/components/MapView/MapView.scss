@@ -45,3 +45,10 @@
   background-color: $lake-mi-blue;
   padding: 6px;
 }
+
+.map-popover {
+  > .popover-body {
+    max-height: 16rem;
+    overflow: auto;
+  }
+}
