@@ -1,3 +1,4 @@
+import { PopoverItem } from "components";
 import GoogleMapReact from "google-map-react";
 import { Mappable } from "models/Mappable";
 import React, { useState } from "react";
@@ -5,7 +6,6 @@ import { ListGroup, OverlayTrigger, Popover } from "react-bootstrap";
 import { ClusterFeature, PointFeature } from "supercluster";
 import useSupercluster from "use-supercluster";
 import "./MapView.scss";
-import { PopoverItem } from "./PopoverItem";
 
 // tutorial followed for clustering: https://www.leighhalliday.com/google-maps-clustering
 
