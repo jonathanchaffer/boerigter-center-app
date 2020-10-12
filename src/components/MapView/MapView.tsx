@@ -143,7 +143,7 @@ function PopoverTrigger<I extends Mappable>({
 }: PopoverTriggerProps<I>): JSX.Element {
   return (
     <OverlayTrigger
-      trigger="click"
+      trigger="focus"
       placement="top"
       overlay={
         <Popover id={`popover-${popoverId.toString()}`} className="map-popover">
