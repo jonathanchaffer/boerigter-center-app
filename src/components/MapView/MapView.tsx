@@ -143,7 +143,7 @@ function PopoverTrigger<I extends Mappable>({
 }: PopoverTriggerProps<I>): JSX.Element {
   return (
     <OverlayTrigger
-      trigger="focus"
+      trigger="click"
       placement="top"
       overlay={
         <Popover id={`popover-${popoverId.toString()}`} className="map-popover">
@@ -157,7 +157,13 @@ function PopoverTrigger<I extends Mappable>({
                 ))}
               </ListGroup>
             ) : (
-              item && <PopoverItem item={item} />
+              item && (
+                <ListGroup variant="flush">
+                  <ListGroup.Item>
+                    <PopoverItem item={item} />
+                  </ListGroup.Item>
+                </ListGroup>
+              )
             )}
           </Popover.Content>
         </Popover>

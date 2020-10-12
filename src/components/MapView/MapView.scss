@@ -38,7 +38,7 @@
 .cluster-marker {
   background-color: $hope-blue;
   font-family: $font-stack;
-  font-size: 12pt;
+  font-size: 14pt;
 }
 
 .point-marker {
@@ -47,8 +47,16 @@
 }
 
 .map-popover {
+  max-width: unset !important;
   > .popover-body {
     max-height: 16rem;
     overflow: auto;
+  }
+}
+
+.alum-popover-item {
+  width: 24rem;
+  img {
+    border-radius: 50%;
   }
 }
