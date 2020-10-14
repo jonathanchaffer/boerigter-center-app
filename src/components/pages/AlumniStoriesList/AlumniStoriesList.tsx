@@ -5,6 +5,10 @@ import React from "react";
 import { useAsync } from "react-async";
 import { Card, Spinner } from "react-bootstrap";
 import { getAlumniStories } from "services";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "./AlumniStories.scss";
 
 export function AlumniStoriesList(): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
@@ -28,9 +32,22 @@ interface AlumCardProps {
 function AlumCard({ alum }: AlumCardProps): JSX.Element {
   return (
     <Card>
-      <Card.Body>
-        {alum.firstName} {alum.lastName}
-      </Card.Body>
+      <Container>
+        <Row className="d-inline-flex p-2 col-example">
+          <Col xs={2}sm={4} md={4}> 
+            <Card.Img src="https://s3.amazonaws.com/campuskudos-images/generic_avatar.jpg"/> 
+          </Col>
+          <Col xs={6}> 
+            <Card.Body>
+              <Card.Title>{alum.firstName} {alum.lastName}</Card.Title>
+              <Card.Subtitle>{alum.majors} </Card.Subtitle>
+            </Card.Body>
+          </Col>
+          <Col xs={2}> 
+            <Card.Link href={alum.website}>Learn more</Card.Link>
+          </Col>
+        </Row>
+        </Container>
     </Card>
   );
 }
