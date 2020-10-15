@@ -1,5 +1,5 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
-import { Alum, Mappable } from "models";
+import { Mappable, PeopleGroveAlum } from "models";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Img from "react-cool-img";
@@ -11,7 +11,7 @@ interface PopoverItemProps<I extends Mappable> {
 export function PopoverItem<I extends Mappable>({ item }: PopoverItemProps<I>): JSX.Element {
   switch (item.type) {
     case "alum": {
-      const alum = (item as unknown) as Alum;
+      const alum = (item as unknown) as PeopleGroveAlum;
       return (
         <Row className="alum-popover-item">
           <Col xs={3} className="d-flex align-items-center">
