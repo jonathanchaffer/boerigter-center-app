@@ -1,6 +1,8 @@
+import genericAvatar from "assets/images/generic_avatar.jpg";
 import { Alum, Mappable } from "models";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
+import Img from "react-cool-img";
 
 interface PopoverItemProps<I extends Mappable> {
   item: I;
@@ -13,8 +15,9 @@ export function PopoverItem<I extends Mappable>({ item }: PopoverItemProps<I>): 
       return (
         <Row className="alum-popover-item">
           <Col xs={3} className="d-flex align-items-center">
-            <img
+            <Img
               src={alum.photoUrl}
+              placeholder={genericAvatar}
               alt={`${alum.firstName} ${alum.lastName}`}
               width="100%"
               loading="lazy"
