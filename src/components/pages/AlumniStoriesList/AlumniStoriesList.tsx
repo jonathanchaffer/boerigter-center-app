@@ -4,10 +4,10 @@ import { CuratedAlum } from "models";
 import React from "react";
 import { useAsync } from "react-async";
 import { Card, Spinner } from "react-bootstrap";
-import { getAlumniStories } from "services";
+import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { getAlumniStories } from "services";
 import "./AlumniStories.scss";
 
 export function AlumniStoriesList(): JSX.Element {
@@ -34,20 +34,22 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
     <Card>
       <Container>
         <Row className="d-inline-flex p-2 col-example">
-          <Col xs={2}sm={4} md={4}> 
-            <Card.Img src="https://s3.amazonaws.com/campuskudos-images/generic_avatar.jpg"/> 
+          <Col xs={2} sm={4} md={4}>
+            <Card.Img src="https://s3.amazonaws.com/campuskudos-images/generic_avatar.jpg" />
           </Col>
-          <Col xs={6}> 
+          <Col xs={6}>
             <Card.Body>
-              <Card.Title>{alum.firstName} {alum.lastName}</Card.Title>
+              <Card.Title>
+                {alum.firstName} {alum.lastName}
+              </Card.Title>
               <Card.Subtitle>{alum.majors} </Card.Subtitle>
             </Card.Body>
           </Col>
-          <Col xs={2}> 
+          <Col xs={2}>
             <Card.Link href={alum.website}>Learn more</Card.Link>
           </Col>
         </Row>
-        </Container>
+      </Container>
     </Card>
   );
 }
