@@ -1,7 +1,7 @@
-import { MapView, Navigation } from "components";
+import { MapView, Navigation, LogIn } from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { parseAlumni } from "services";
+import { parseAlumni, isLoggedIn } from "services";
 
 export function App(): JSX.Element {
   return (
@@ -14,7 +14,9 @@ export function App(): JSX.Element {
           <MapView getData={() => []} />
         </Route>
         <Route exact path="/alumni">
-          <MapView getData={parseAlumni} />
+
+          {isLoggedIn() ? <MapView getData={parseAlumni}/> : <div><MapView getData={() => []}/> <LogIn/></div>}
+          
         </Route>
         <Route exact path="/study-abroad">
           <MapView getData={() => []} />
