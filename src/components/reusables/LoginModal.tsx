@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { loginToPG } from "services";
 
 // TODO: use Formik for data validation
 
@@ -19,6 +20,7 @@ export function LoginModal(): JSX.Element {
   }
 
   function handleLogIn() {
+    loginToPG();
     closeModal();
   }
 
