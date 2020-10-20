@@ -1,31 +1,32 @@
 import React, { useState } from "react";
-import Modal from "react-modal";
-import { Button, Form } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 import "./LogIn.scss";
 
+// TODO: use Formik for data validation
+
 export function LogIn(): JSX.Element {
-  const [modalIsOpen, setIsOpen] = React.useState(true);
+  const [isOpen, setIsOpen] = useState(true);
   const [email, setEmail] = useState("");
-  const [pass, setPassword] = useState("");
+  const [password, setPassword] = useState("");
 
   function closeModal() {
     setIsOpen(false);
   }
+
   function checkEntry() {
-    return email.length > 0 && pass.length > 0;
+    return email.length > 0 && password.length > 0;
   }
+
   function handleLogIn() {
     closeModal();
   }
+
   return (
-    <div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Log-In Window"
-        overlayClassName="overlay"
-      >
-        <Form onSubmit={handleLogIn} className="Form">
+    <Modal show={isOpen} centered>
+      <Modal.Body>
+        <Form onSubmit={handleLogIn}>
           <Form.Group controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -40,7 +41,7 @@ export function LogIn(): JSX.Element {
             <Form.Control
               type="password"
               placeholder="Password"
-              value={pass}
+              value={password}
               onChange={e => setPassword(e.target.value)}
             />
           </Form.Group>
@@ -48,7 +49,7 @@ export function LogIn(): JSX.Element {
             Log In
           </Button>
         </Form>
-      </Modal>
-    </div>
+      </Modal.Body>
+    </Modal>
   );
 }
