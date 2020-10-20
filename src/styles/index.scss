@@ -10,3 +10,15 @@ body {
 #root {
   height: 100%;
 }
+
+button {
+  border: none;
+}
+
+*:focus {
+  outline: none !important;
+}
+
+.card {
+  margin-bottom: 1rem;
+}

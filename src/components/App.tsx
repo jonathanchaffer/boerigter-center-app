@@ -1,22 +1,25 @@
-import { MapView, Navigation, LogIn } from "components";
+import { AlumniStoriesList, LogIn, MapView, Navigation } from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { parseAlumni, isLoggedIn } from "services";
+import { getPeopleGroveAlumni, isLoggedInToPG } from "services";
 
 export function App(): JSX.Element {
   return (
     <Router>
       <Navigation />
       <Switch>
-        <Route exact path="/stories" />
+        <Route exact path="/stories">
+          <AlumniStoriesList />
+        </Route>
         <Route exact path="/poll" />
         <Route exact path="/career">
           <MapView getData={() => []} />
         </Route>
         <Route exact path="/alumni">
-
-          {isLoggedIn() ? <MapView getData={parseAlumni}/> : <div><MapView getData={() => []}/> <LogIn/></div>}
-          
+          <>
+            <MapView getData={isLoggedInToPG() ? getPeopleGroveAlumni : () => []} />
+            {!isLoggedInToPG() && <LogIn />}
+          </>
         </Route>
         <Route exact path="/study-abroad">
           <MapView getData={() => []} />

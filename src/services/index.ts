@@ -1,1 +1,2 @@
-export * from "./alumniService";
+export * from "./firebaseService";
+export * from "./peopleGroveService";

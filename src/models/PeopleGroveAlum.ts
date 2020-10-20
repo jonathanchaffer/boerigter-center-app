@@ -1,6 +1,7 @@
 import { Mappable } from "./Mappable";
 
-export interface Alum extends Mappable {
+export interface PeopleGroveAlum extends Mappable {
+  type: "alum";
   firstName: string;
   lastName: string;
   location: string;
