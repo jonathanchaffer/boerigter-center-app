@@ -6,3 +6,13 @@ export function getPeopleGroveAlumni(): PeopleGroveAlum[] {
     return { ...user, type: "alum" } as PeopleGroveAlum;
   });
 }
+
+// TODO: temporary
+export function isLoggedInToPG(): boolean {
+  return JSON.parse(localStorage.getItem("isLoggedInToPG") || JSON.stringify(false)) || false;
+}
+
+// TODO: temporary
+export function loginToPG(): void {
+  localStorage.setItem("isLoggedInToPG", JSON.stringify(true));
+}

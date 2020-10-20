@@ -1,7 +1,7 @@
-import { AlumniStoriesList, MapView, Navigation } from "components";
+import { AlumniStoriesList, LoginModal, MapView, Navigation } from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { getPeopleGroveAlumni } from "services";
+import { getPeopleGroveAlumni, isLoggedInToPG } from "services";
 
 export function App(): JSX.Element {
   return (
@@ -16,7 +16,10 @@ export function App(): JSX.Element {
           <MapView getData={() => []} />
         </Route>
         <Route exact path="/alumni">
-          <MapView getData={getPeopleGroveAlumni} />
+          <>
+            <MapView getData={isLoggedInToPG() ? getPeopleGroveAlumni : () => []} />
+            {!isLoggedInToPG() && <LoginModal />}
+          </>
         </Route>
         <Route exact path="/study-abroad">
           <MapView getData={() => []} />
