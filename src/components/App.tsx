@@ -1,4 +1,4 @@
-import { AlumniStoriesList, LogIn, MapView, Navigation } from "components";
+import { AlumniStoriesList, LoginModal, MapView, Navigation } from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { getPeopleGroveAlumni, isLoggedInToPG } from "services";
@@ -18,7 +18,7 @@ export function App(): JSX.Element {
         <Route exact path="/alumni">
           <>
             <MapView getData={isLoggedInToPG() ? getPeopleGroveAlumni : () => []} />
-            {!isLoggedInToPG() && <LogIn />}
+            {!isLoggedInToPG() && <LoginModal />}
           </>
         </Route>
         <Route exact path="/study-abroad">

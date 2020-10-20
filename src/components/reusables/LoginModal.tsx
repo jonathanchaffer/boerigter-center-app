@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import "./LogIn.scss";
 
 // TODO: use Formik for data validation
 
-export function LogIn(): JSX.Element {
+export function LoginModal(): JSX.Element {
   const [isOpen, setIsOpen] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +23,7 @@ export function LogIn(): JSX.Element {
   }
 
   return (
-    <Modal show={isOpen} centered>
+    <Modal show={isOpen} centered onHide={closeModal}>
       <Modal.Body>
         <Form onSubmit={handleLogIn}>
           <Form.Group controlId="email">
