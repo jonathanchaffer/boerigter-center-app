@@ -1,4 +1,4 @@
-import { Mappable } from "./Mappable";
+import { Mappable } from "models";
 
 export interface PeopleGroveAlum extends Mappable {
   type: "alum";

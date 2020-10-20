@@ -2,17 +2,17 @@
 @import "styles/index.scss";
 
 .logIn-win {
-    position: absolute;
-    vertical-align: middle;
+  position: absolute;
+  vertical-align: middle;
 }
 
-  .overlay {
-    position: absolute;
-    top: 20%;
-    left: 20%;
-    bottom: auto;
-    right: auto;
-    width: 60%;
-    height: 60%;
-    background-color: white;
-  }
+.overlay {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  bottom: auto;
+  right: auto;
+  width: 60%;
+  height: 60%;
+  background-color: white;
+}
