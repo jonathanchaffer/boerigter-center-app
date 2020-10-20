@@ -1,7 +1,9 @@
+import { PopoverItem } from "components";
 import GoogleMapReact from "google-map-react";
 import { Mappable } from "models/Mappable";
 import React, { useState } from "react";
-import { ClusterProperties, PointFeature } from "supercluster";
+import { ListGroup, OverlayTrigger, Popover } from "react-bootstrap";
+import { ClusterFeature, PointFeature } from "supercluster";
 import useSupercluster from "use-supercluster";
 import "./MapView.scss";
 
@@ -23,7 +25,7 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
     };
   });
 
-  const { clusters } = useSupercluster({
+  const { clusters, supercluster } = useSupercluster({
     bounds: mapBounds,
     options: { maxZoom: 20, radius: 75 },
     points,
@@ -50,21 +52,22 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
            * 'geometry' property that we can use to get the latitude and longitude. */
           const [longitude, latitude] = pointOrCluster.geometry.coordinates;
 
-          /* If pointOrCluster is a PointFeature<ClusterProperties>, then it has 'cluster' and 'point_count' properties.
-           * we can then use these to display cluster information on the map. */
-          const cluster = pointOrCluster as PointFeature<ClusterProperties>;
-          const { cluster: isCluster, point_count: pointCount } = cluster.properties;
+          /* If pointOrCluster is a ClusterFeature<I>, then it has 'cluster' and 'cluster_id' properties.
+           * We can use these to display cluster information on the map. */
+          const cluster = pointOrCluster as ClusterFeature<I>;
+          const { cluster: isCluster, cluster_id: clusterId } = cluster.properties;
 
           /* Otherwise, pointOrCluster is just a PointFeature<I>, and its 'properties' property is the I object itself. */
           const point = pointOrCluster as PointFeature<I>;
           const item = point.properties;
 
-          /* If isCluster, return the element that should display for cluster pins. otherwise, return the element
+          /* If isCluster, return the element that should display for cluster pins. Otherwise, return the element
            * that should display for item pins. */
           return isCluster ? (
             <ClusterPin
-              innerCount={pointCount}
-              totalPoints={clusters.length}
+              id={cluster.id?.toString() ?? ""}
+              items={supercluster?.getLeaves(clusterId, Infinity).map(pt => pt.properties) || []}
+              totalNumPoints={clusters.length}
               key={cluster.id}
               lat={latitude}
               lng={longitude}
@@ -78,25 +81,34 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
   );
 }
 
-interface ClusterPinProps {
-  innerCount: number;
-  totalPoints: number;
+interface ClusterPinProps<I extends Mappable> {
+  id: string;
+  items: I[];
+  totalNumPoints: number;
   lat: number;
   lng: number;
 }
 
-function ClusterPin({ innerCount, totalPoints }: ClusterPinProps): JSX.Element {
-  const size = Math.min(10 + (innerCount / totalPoints) * 20, 50);
+function ClusterPin<I extends Mappable>({
+  id,
+  items,
+  totalNumPoints,
+}: ClusterPinProps<I>): JSX.Element {
+  // Calculate the size of the pin. Better done programatically than in CSS.
+  const size = 25 + Math.min((items.length / totalNumPoints) * 20, 50);
   return (
-    <div
-      className="cluster-marker"
-      style={{
-        height: `${size}px`,
-        width: `${size}px`,
-      }}
-    >
-      <span>{innerCount}</span>
-    </div>
+    <PopoverTrigger popoverId={id} items={items}>
+      <button
+        type="button"
+        className="cluster-marker"
+        style={{
+          height: `${size}px`,
+          width: `${size}px`,
+        }}
+      >
+        <span>{items.length}</span>
+      </button>
+    </PopoverTrigger>
   );
 }
 
@@ -108,8 +120,56 @@ interface ItemPinProps<I extends Mappable> {
 
 function ItemPin<I extends Mappable>({ item }: ItemPinProps<I>): JSX.Element {
   return (
-    <div className="point-marker">
-      <i className="fas fa-user" />
-    </div>
+    <PopoverTrigger popoverId={item.id.toString()} item={item}>
+      <button type="button" className="point-marker">
+        <i className="fas fa-user" />
+      </button>
+    </PopoverTrigger>
+  );
+}
+
+interface PopoverTriggerProps<I extends Mappable> {
+  popoverId: string;
+  item?: I;
+  items?: I[];
+  children: React.ReactElement;
+}
+
+function PopoverTrigger<I extends Mappable>({
+  popoverId,
+  item,
+  items,
+  children,
+}: PopoverTriggerProps<I>): JSX.Element {
+  return (
+    <OverlayTrigger
+      trigger="focus"
+      placement="top"
+      overlay={
+        <Popover id={`popover-${popoverId.toString()}`} className="map-popover">
+          <Popover.Content>
+            {items ? (
+              <ListGroup variant="flush">
+                {items.map(i => (
+                  <ListGroup.Item key={i.id}>
+                    <PopoverItem item={i} />
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+            ) : (
+              item && (
+                <ListGroup variant="flush">
+                  <ListGroup.Item>
+                    <PopoverItem item={item} />
+                  </ListGroup.Item>
+                </ListGroup>
+              )
+            )}
+          </Popover.Content>
+        </Popover>
+      }
+    >
+      {children}
+    </OverlayTrigger>
   );
 }
