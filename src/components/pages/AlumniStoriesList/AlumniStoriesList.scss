@@ -1,0 +1,15 @@
+@import "styles/colors.scss";
+.alumni-stories-list {
+  .card-body {
+    padding: 2rem;
+  }
+  .secondary-info {
+    i {
+      margin-right: 0.5rem;
+      color: $md-gray;
+    }
+    span:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
+}
