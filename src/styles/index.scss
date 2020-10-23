@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "./colors.scss";
 
 $transition-duration: 0.2s;
 $border-radius: 0.25rem;
@@ -25,4 +26,19 @@ button {
 
 .img-circle {
   border-radius: 9999px;
+}
+
+.secondary-info {
+  i {
+    margin-right: 0.5rem;
+    color: $md-gray;
+    min-width: 30px;
+  }
+  span:not(:last-child) {
+    margin-right: 2rem;
+  }
+}
+
+hr {
+  margin: 2rem 0;
 }
