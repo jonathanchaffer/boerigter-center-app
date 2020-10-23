@@ -34,11 +34,13 @@ button {
     color: $md-gray;
     min-width: 30px;
   }
-  span:not(:last-child) {
+  span:not(:last-child),
+  a:not(:last-child) {
     margin-right: 2rem;
+    margin-bottom: 0.5rem;
   }
 }
 
 hr {
-  margin: 2rem 0;
+  margin: 1.75rem 0;
 }

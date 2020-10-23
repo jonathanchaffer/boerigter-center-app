@@ -1,6 +1,6 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
 import { ErrorModal, PageContainer } from "components";
-import { AlumSecondaryInfo } from "components/reusables";
+import { AlumContactInfo, AlumSecondaryInfo } from "components/reusables";
 import React, { useCallback } from "react";
 import { useAsync } from "react-async";
 import { Col, Row, Spinner } from "react-bootstrap";
@@ -34,6 +34,7 @@ export function AlumStoryDetails(): JSX.Element {
                 <hr />
                 <AlumSecondaryInfo alum={alum} direction="column" />
                 <hr />
+                <AlumContactInfo alum={alum} />
               </Col>
               <Col xs={6}>
                 <h1>{fullName(alum.firstName, alum.lastName)}</h1>
