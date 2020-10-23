@@ -1,4 +1,4 @@
-import { AlumniStoriesList, MapView, Navigation } from "components";
+import { AlumniStoriesList, Admin, MapView, Navigation } from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { getPeopleGroveAlumni } from "services";
@@ -10,6 +10,9 @@ export function App(): JSX.Element {
       <Switch>
         <Route exact path="/stories">
           <AlumniStoriesList />
+        </Route>
+        <Route exact path="/admin">
+          <Admin />
         </Route>
         <Route exact path="/poll" />
         <Route exact path="/career">
