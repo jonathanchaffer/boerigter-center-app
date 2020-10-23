@@ -44,3 +44,17 @@ button {
 hr {
   margin: 1.75rem 0;
 }
+
+.quotes {
+  border: none;
+  background-color: $lt-gray;
+  h1 {
+    margin-top: -0.25rem;
+    margin-left: -0.25rem;
+    margin-right: 0.5rem;
+  }
+
+  .quote:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}

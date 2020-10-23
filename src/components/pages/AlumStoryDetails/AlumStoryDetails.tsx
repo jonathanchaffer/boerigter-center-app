@@ -3,7 +3,7 @@ import { ErrorModal, PageContainer } from "components";
 import { AlumContactInfo, AlumSecondaryInfo } from "components/reusables";
 import React, { useCallback } from "react";
 import { useAsync } from "react-async";
-import { Col, Row, Spinner } from "react-bootstrap";
+import { Card, Col, Row, Spinner } from "react-bootstrap";
 import Img from "react-cool-img";
 import { useParams } from "react-router-dom";
 import { getAlumStory } from "services";
@@ -36,9 +36,34 @@ export function AlumStoryDetails(): JSX.Element {
                 <hr />
                 <AlumContactInfo alum={alum} />
               </Col>
-              <Col xs={6}>
-                <h1>{fullName(alum.firstName, alum.lastName)}</h1>
-                <span>{`Class of ${alum.gradYear}`}</span>
+              <Col>
+                <Row>
+                  <Col>
+                    <h1>{fullName(alum.firstName, alum.lastName)}</h1>
+                    <span>{`Class of ${alum.gradYear}`}</span>
+                    <hr />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={8}>
+                    <h4>About</h4>
+                    <p>{alum.bio}</p>
+                  </Col>
+                  <Col xs={4}>
+                    {alum.quotes && (
+                      <>
+                        <h4>Quotes</h4>
+                        <Card className="quotes">
+                          <Card.Body>
+                            {alum.quotes.map(quote => (
+                              <AlumQuote key={quote} quote={quote} />
+                            ))}
+                          </Card.Body>
+                        </Card>
+                      </>
+                    )}
+                  </Col>
+                </Row>
               </Col>
             </Row>
           )
@@ -46,5 +71,18 @@ export function AlumStoryDetails(): JSX.Element {
       </div>
       <ErrorModal error={error} />
     </PageContainer>
+  );
+}
+
+interface AlumQuoteProps {
+  quote: string;
+}
+
+function AlumQuote({ quote }: AlumQuoteProps): JSX.Element {
+  return (
+    <div className="quote d-flex flex-row">
+      <h1>&quot;</h1>
+      <span>{quote}&quot;</span>
+    </div>
   );
 }
