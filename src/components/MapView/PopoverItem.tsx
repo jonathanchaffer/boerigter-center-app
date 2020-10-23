@@ -16,13 +16,15 @@ export function PopoverItem<I extends Mappable>({ item }: PopoverItemProps<I>): 
       return (
         <Row className="alum-popover-item">
           <Col xs={3} className="d-flex align-items-center">
-            <Img
-              src={alum.photoUrl}
-              placeholder={genericAvatar}
-              alt={`${alum.firstName} ${alum.lastName}`}
-              width="100%"
-              loading="lazy"
-            />
+            <div className="img-circle-container">
+              <Img
+                src={alum.photoUrl}
+                placeholder={genericAvatar}
+                alt={`${alum.firstName} ${alum.lastName}`}
+                width="100%"
+                loading="lazy"
+              />
+            </div>
           </Col>
           <Col className="d-flex align-items-center">
             <div>

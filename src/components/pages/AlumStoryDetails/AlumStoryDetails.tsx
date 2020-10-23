@@ -16,59 +16,57 @@ export function AlumStoryDetails(): JSX.Element {
   const alum = data;
   return (
     <PageContainer>
-      <div className="alumni-stories-list">
-        {isPending ? (
-          <Spinner animation="border" />
-        ) : (
-          alum && (
-            <Row>
-              <Col xs={3}>
-                <Img
-                  src={alum.profilePhoto || ""}
-                  placeholder={genericAvatar}
-                  alt={`${alum.firstName} ${alum.lastName}`}
-                  width="100%"
-                  loading="lazy"
-                  className="img-circle"
-                />
-                <hr />
-                <AlumSecondaryInfo alum={alum} direction="column" />
-                <hr />
-                <AlumContactInfo alum={alum} />
-              </Col>
-              <Col>
-                <Row>
-                  <Col>
-                    <h1>{fullName(alum.firstName, alum.lastName)}</h1>
-                    <span>{`Class of ${alum.gradYear}`}</span>
-                    <hr />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={8}>
-                    <h4>About</h4>
-                    <p>{alum.bio}</p>
-                  </Col>
-                  <Col xs={4}>
-                    {alum.quotes && (
-                      <>
-                        <h4>Quotes</h4>
-                        <Card className="quotes">
-                          <Card.Body>
-                            {alum.quotes.map(quote => (
-                              <AlumQuote key={quote} quote={quote} />
-                            ))}
-                          </Card.Body>
-                        </Card>
-                      </>
-                    )}
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          )
-        )}
-      </div>
+      {isPending ? (
+        <Spinner animation="border" />
+      ) : (
+        alum && (
+          <Row>
+            <Col xs={3}>
+              <Img
+                src={alum.profilePhoto || ""}
+                placeholder={genericAvatar}
+                alt={`${alum.firstName} ${alum.lastName}`}
+                width="100%"
+                loading="lazy"
+                className="img-circle"
+              />
+              <hr />
+              <AlumSecondaryInfo alum={alum} direction="column" />
+              <hr />
+              <AlumContactInfo alum={alum} />
+            </Col>
+            <Col>
+              <Row>
+                <Col>
+                  <h1>{fullName(alum.firstName, alum.lastName)}</h1>
+                  <span>{`Class of ${alum.gradYear}`}</span>
+                  <hr />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={8}>
+                  <h4>About</h4>
+                  <p>{alum.bio}</p>
+                </Col>
+                <Col xs={4}>
+                  {alum.quotes && (
+                    <>
+                      <h4>Quotes</h4>
+                      <Card className="quotes">
+                        <Card.Body>
+                          {alum.quotes.map(quote => (
+                            <AlumQuote key={quote} quote={quote} />
+                          ))}
+                        </Card.Body>
+                      </Card>
+                    </>
+                  )}
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        )
+      )}
       <ErrorModal error={error} />
     </PageContainer>
   );

@@ -24,8 +24,27 @@ button {
   margin-bottom: 1rem;
 }
 
-.img-circle {
-  border-radius: 9999px;
+.img-circle-container {
+  border-radius: 50%;
+  width: 100%;
+  padding-top: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 0;
+  }
+}
+
+.img-square-container {
+  @extend .img-circle-container;
+  border-radius: $border-radius;
+}
+
+img {
+  border-radius: $border-radius;
 }
 
 .secondary-info {

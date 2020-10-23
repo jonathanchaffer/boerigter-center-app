@@ -40,20 +40,21 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
       <Card.Body>
         <Row>
           <Col xs={3} md={2} className="d-flex align-items-center">
-            <Img
-              src={alum.profilePhoto || ""}
-              placeholder={genericAvatar}
-              alt={`${alum.firstName} ${alum.lastName}`}
-              width="100%"
-              loading="lazy"
-              className="img-circle"
-            />
+            <div className="img-square-container">
+              <Img
+                src={alum.profilePhoto || ""}
+                placeholder={genericAvatar}
+                alt={`${alum.firstName} ${alum.lastName}`}
+                width="100%"
+                loading="lazy"
+              />
+            </div>
           </Col>
           <Col className="d-flex align-items-center">
             <div>
               <h2>
                 {`${alum.firstName} ${alum.lastName}`}{" "}
-                <span className="light">&apos;{alum.gradYear % 1000}</span>
+                <span className="light">&apos;{alum.gradYear % 100}</span>
               </h2>
               <AlumSecondaryInfo alum={alum} />
             </div>
