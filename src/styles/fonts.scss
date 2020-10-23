@@ -18,12 +18,14 @@ body,
   font-size: 1.125rem !important;
 
   h4,
-  h2 {
+  h2,
+  h1 {
     font-weight: bold;
   }
 
-  h4 {
-    margin-bottom: 0.25rem;
+  h4,
+  h1 {
+    margin-bottom: 0.25rem !important;
   }
 
   .light {
