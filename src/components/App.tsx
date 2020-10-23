@@ -1,4 +1,4 @@
-import { AlumniStoriesList, LoginModal, MapView, Navigation } from "components";
+import { AlumniStoriesList, AlumStoryDetails, LoginModal, MapView, Navigation } from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { getPeopleGroveAlumni, isLoggedInToPG } from "services";
@@ -10,6 +10,9 @@ export function App(): JSX.Element {
       <Switch>
         <Route exact path="/stories">
           <AlumniStoriesList />
+        </Route>
+        <Route exact path="/stories/:id">
+          <AlumStoryDetails />
         </Route>
         <Route exact path="/poll" />
         <Route exact path="/career">
