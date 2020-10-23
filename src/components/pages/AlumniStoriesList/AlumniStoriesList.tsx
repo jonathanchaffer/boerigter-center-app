@@ -18,6 +18,7 @@ export function AlumniStoriesList(): JSX.Element {
     <PageContainer>
       <div className="alumni-stories-list">
         <h1>Alumni Stories</h1>
+        <p>Alumni hand-picked by Boerigter Center staff.</p>
         {isPending ? (
           <Spinner animation="border" />
         ) : (
