@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
   baseURL: "https://cors-anywhere.herokuapp.com/https://connection.hope.edu/api/",
 });
 
-export function getPeopleGroveAlumni(): PeopleGroveAlum[] {
+export async function getPeopleGroveAlumni(): Promise<PeopleGroveAlum[]> {
   return placeholderAlumni.users.map(user => {
     return { ...user, type: "alum" } as PeopleGroveAlum;
   });

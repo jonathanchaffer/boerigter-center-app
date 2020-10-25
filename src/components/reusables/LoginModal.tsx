@@ -3,11 +3,11 @@ import { Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { loginToPG } from "services";
+import { isLoggedInToPG, loginToPG } from "services";
 // TODO: use Formik for data validation
 
 export function LoginModal(): JSX.Element {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(!isLoggedInToPG());
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
