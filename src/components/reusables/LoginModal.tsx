@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { loginToPG } from "services";
-
 // TODO: use Formik for data validation
 
 export function LoginModal(): JSX.Element {
@@ -16,7 +15,10 @@ export function LoginModal(): JSX.Element {
   function handleLogIn() {
     setIsLoading(true);
     loginToPG(email, password)
-      .then(() => setIsOpen(false))
+      .then(() => {
+        setIsOpen(false);
+        window.location.reload();
+      })
       .catch((error: Error) => console.log(error))
       .finally(() => setIsLoading(false));
   }
