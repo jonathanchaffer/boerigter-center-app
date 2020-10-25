@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -10,24 +11,28 @@ export function LoginModal(): JSX.Element {
   const [isOpen, setIsOpen] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function checkEntry() {
-    return email.length > 0 && password.length > 0;
-  }
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleLogIn() {
-    loginToPG();
-    closeModal();
+    setIsLoading(true);
+    loginToPG(email, password)
+      .then(() => setIsOpen(false))
+      .catch((error: Error) => console.log(error))
+      .finally(() => setIsLoading(false));
   }
 
   return (
-    <Modal show={isOpen} centered onHide={closeModal}>
+    <Modal show={isOpen} centered onHide={() => setIsOpen(false)}>
       <Modal.Body>
-        <Form onSubmit={handleLogIn}>
+        <Modal.Title>Login</Modal.Title>
+        <p>
+          Please log in using your{" "}
+          <a href="https://connection.hope.edu/" target="blank">
+            connection.hope.edu
+          </a>{" "}
+          credentials to view this content.
+        </p>
+        <Form>
           <Form.Group controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -46,9 +51,17 @@ export function LoginModal(): JSX.Element {
               onChange={e => setPassword(e.target.value)}
             />
           </Form.Group>
-          <Button variant="primary" disabled={!checkEntry()} type="submit">
-            Log In
-          </Button>
+          <div>
+            <Button variant="primary" disabled={isLoading} onClick={handleLogIn}>
+              Login
+            </Button>
+            {isLoading && (
+              <>
+                <Spinner animation="border" size="sm" />{" "}
+                <span>Logging you in. This might take a minute or two.</span>
+              </>
+            )}
+          </div>
         </Form>
       </Modal.Body>
     </Modal>
