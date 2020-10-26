@@ -7,11 +7,12 @@ import { Button, Card, Spinner } from "react-bootstrap";
 import { getAlumniStories } from "services";
 
 
-const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
+// const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
 
 export function Admin(): JSX.Element {
   const [isLoggedIn, toggleSetLoggedIn] = useState(false);
-  // const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
+  const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
+  const param = { data, error, isPending };
 
   const handleClick = () => {
     toggleSetLoggedIn(true);
@@ -22,7 +23,7 @@ export function Admin(): JSX.Element {
       <h1>Alumni Stories</h1>
       <h2>Admin View</h2>
       {isLoggedIn ? (
-        RenderContent()
+        RenderContent({ data, error, isPending })
       ) : (
         <Button value="Login" onClick={handleClick} >Login</Button>
       )}
@@ -44,7 +45,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
     </Card>
   );
 }
-function RenderContent(): JSX.Element {
+function RenderContent({ data, error, isPending }: any): JSX.Element {
   // const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
   return (
     <div>
@@ -52,7 +53,7 @@ function RenderContent(): JSX.Element {
       {isPending ? (
         <Spinner animation="border" />
       ) : (
-        data && data.map(alum => <AlumCard key={alum.uid} alum={alum} />)
+        data && data.map((alum: CuratedAlum) => <AlumCard key={alum.uid} alum={alum} />)
       )}
     </div>
   )
