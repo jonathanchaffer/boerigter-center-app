@@ -3,19 +3,26 @@ import { ErrorModal } from "components/reusables";
 import { CuratedAlum } from "models";
 import React, {useState} from "react";
 import { useAsync } from "react-async";
-import { Button, Card, Spinner } from "react-bootstrap";
+import { Card, Spinner } from "react-bootstrap";
 import { getAlumniStories } from "services";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 
 // const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
 
 export function Admin(): JSX.Element {
   const [isLoggedIn, toggleSetLoggedIn] = useState(false);
+  const [password, setPassword] = useState("");
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
   const param = { data, error, isPending };
 
-  const handleClick = () => {
+  const handleLogIn = () => {
     toggleSetLoggedIn(true);
+  }
+  const handleLogOut = () => {
+    toggleSetLoggedIn(false);
+    setPassword("");
   }
 
   return (
@@ -23,14 +30,37 @@ export function Admin(): JSX.Element {
       <h1>Alumni Stories</h1>
       <h2>Admin View</h2>
       {isLoggedIn ? (
-        RenderContent({ data, error, isPending })
+        <div>
+          <Button onClick = {handleLogOut}>Log out</Button>
+          {RenderContent({ data, error, isPending })}
+        </div>
       ) : (
-        <Button value="Login" onClick={handleClick} >Login</Button>
+        <Form onSubmit={handleLogIn}>
+          <Form.Group controlId="password">
+            <Form.Label>Please enter your password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Log In
+          </Button>
+        </Form>
       )}
       <ErrorModal error={error} />
     </PageContainer>
   );
+
+  function checkEntry() {
+    // TODO
+    return password === "admin";
+  }
 }
+
+
 
 interface AlumCardProps {
   alum: CuratedAlum;
@@ -49,7 +79,7 @@ function RenderContent({ data, error, isPending }: any): JSX.Element {
   // const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
   return (
     <div>
-      <Button>Log out</Button>
+
       {isPending ? (
         <Spinner animation="border" />
       ) : (
