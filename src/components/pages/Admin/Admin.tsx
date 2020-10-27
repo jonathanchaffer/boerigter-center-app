@@ -15,10 +15,12 @@ export function Admin(): JSX.Element {
   const [isLoggedIn, toggleSetLoggedIn] = useState(false);
   const [password, setPassword] = useState("");
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
+  const [message, setMessage] = useState("Please enter your password");
+  //var message = "Please enter your password";
   const param = { data, error, isPending };
 
-  const handleLogIn = () => {
-    toggleSetLoggedIn(true);
+  const handleSubmit = () => {
+    checkEntry();
   }
   const handleLogOut = () => {
     toggleSetLoggedIn(false);
@@ -35,9 +37,9 @@ export function Admin(): JSX.Element {
           {RenderContent({ data, error, isPending })}
         </div>
       ) : (
-        <Form onSubmit={handleLogIn}>
+        <Form onSubmit={handleSubmit}>
           <Form.Group controlId="password">
-            <Form.Label>Please enter your password</Form.Label>
+            <Form.Label>{message}</Form.Label>
             <Form.Control
               type="password"
               placeholder="Password"
@@ -56,7 +58,10 @@ export function Admin(): JSX.Element {
 
   function checkEntry() {
     // TODO
-    return password === "admin";
+    password === "admin" ? toggleSetLoggedIn(true) : (//message = "That was not the correct password, please try again", 
+      toggleSetLoggedIn(false),
+      setPassword(""),//);
+      setMessage("That was not the correct password, please try again"));
   }
 }
 
