@@ -1,7 +1,7 @@
 import { AlumniStoriesList, AlumStoryDetails, LoginModal, MapView, Navigation } from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { getPeopleGroveAlumni, isLoggedInToPG } from "services";
+import { getPeopleGroveAlumni } from "services";
 
 export function App(): JSX.Element {
   return (
@@ -16,16 +16,16 @@ export function App(): JSX.Element {
         </Route>
         <Route exact path="/poll" />
         <Route exact path="/career">
-          <MapView getData={() => []} />
+          <MapView getData={async () => []} />
         </Route>
         <Route exact path="/alumni">
           <>
-            <MapView getData={isLoggedInToPG() ? getPeopleGroveAlumni : () => []} />
-            {!isLoggedInToPG() && <LoginModal />}
+            <MapView getData={getPeopleGroveAlumni} />
+            <LoginModal />
           </>
         </Route>
         <Route exact path="/study-abroad">
-          <MapView getData={() => []} />
+          <MapView getData={async () => []} />
         </Route>
         <Route>
           <Redirect to="/career" />
