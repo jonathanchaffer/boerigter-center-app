@@ -11,6 +11,9 @@ export function App(): JSX.Element {
         <Route exact path="/stories">
           <AlumniStoriesList />
         </Route>
+        <Route exact path="/stories/admin">
+          <AlumniStoriesList />
+        </Route>
         <Route exact path="/admin">
           <Admin />
         </Route>
