@@ -7,3 +7,8 @@ export async function getAlumniStories(): Promise<CuratedAlum[]> {
     return { ...doc.data(), uid: doc.id } as CuratedAlum;
   });
 }
+
+export async function getAlumStory(uid: string): Promise<CuratedAlum> {
+  const snapshot = await db.doc(`alumniStories/${uid}`).get();
+  return snapshot.data() as CuratedAlum;
+}

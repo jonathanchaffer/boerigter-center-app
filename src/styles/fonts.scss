@@ -4,8 +4,31 @@
   src: local("Verlag-Book"), url("../assets/fonts/Verlag-Book.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "Verlag";
+  font-weight: bold;
+  src: local("Verlag-Bold"), url("../assets/fonts/Verlag-Bold.otf") format("opentype");
+}
+
 $font-stack: "Verlag", Helvetica, sans-serif !important;
 
-body {
+body,
+.popover {
   font-family: $font-stack;
+  font-size: 1.125rem !important;
+
+  h4,
+  h2,
+  h1 {
+    font-weight: bold;
+  }
+
+  h4,
+  h1 {
+    margin-bottom: 0.25rem !important;
+  }
+
+  .light {
+    font-weight: lighter;
+  }
 }

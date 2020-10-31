@@ -43,5 +43,6 @@ module.exports = {
     "sort-keys": "error",
     "sort-keys-fix/sort-keys-fix": "error",
     "react/no-unused-prop-types": "off",
+    "react/require-default-props": "off",
   },
 };
