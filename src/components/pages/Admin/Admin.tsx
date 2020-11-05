@@ -1,41 +1,28 @@
 import { PageContainer } from "components";
 import { ErrorModal } from "components/reusables";
-import { CuratedAlum } from "models";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useAsync } from "react-async";
-import { Card, Spinner } from "react-bootstrap";
-import { getAlumniStories } from "services";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
-
+import { getAlumniStories } from "services";
 
 export function Admin(): JSX.Element {
   const [isLoggedIn, toggleSetLoggedIn] = useState(false);
   const [password, setPassword] = useState("");
 
   const [message, setMessage] = useState("Please enter your password");
-  const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
-  const param = { data, error, isPending };
+  const { error } = useAsync({ promiseFn: getAlumniStories });
 
   const handleSubmit = () => {
     if(password === "admin"){
-      window.location.assign('/stories/admin');//Comment out this line to make it stay on the 
-      //same page and create more admin controls
+      window.location.assign("/stories/admin");// Comment out this line to make it stay on the 
+      // same page and create more admin controls
       toggleSetLoggedIn(true);
       setPassword("");
     }else{
       setMessage("That was not the correct password, please try again");
       setPassword("");
     }
-  }
-  const handleLogOut = () => {
-    toggleSetLoggedIn(false);
-    setPassword("");
-  }
-
-  const handleClick = () => {
-    window.location.assign('/stories/admin');
   }
 
   return (
