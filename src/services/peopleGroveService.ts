@@ -3,7 +3,7 @@ import { PeopleGroveAlum } from "models";
 import * as placeholderAlumni from "placeholders/placeholder-alumni.json";
 
 const axiosInstance = axios.create({
-  baseURL: "https://cors-anywhere.herokuapp.com/https://connection.hope.edu/api/",
+  baseURL: "https://boerigter-center-app.herokuapp.com/https://connection.hope.edu/api/",
   headers: {
     "Content-Type": "application/json",
   },
