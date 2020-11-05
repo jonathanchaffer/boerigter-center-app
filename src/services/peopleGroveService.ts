@@ -1,6 +1,5 @@
 import axios from "axios";
 import { PeopleGroveAlum } from "models";
-// import * as placeholderAlumni from "placeholders/placeholder-alumni.json";
 
 const axiosInstance = axios.create({
   baseURL: "https://boerigter-center-app.herokuapp.com/https://connection.hope.edu/api/",
@@ -58,8 +57,4 @@ export async function getPeopleGroveAlumni(): Promise<PeopleGroveAlum[]> {
       return { ...user, type: "alum" } as PeopleGroveAlum;
     }),
   );
-
-  // return placeholderAlumni.users.map(user => {
-  //   return { ...user, type: "alum" } as PeopleGroveAlum;
-  // });
 }
