@@ -4,6 +4,8 @@ import { Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { useHistory } from "react-router-dom";
+import "./LoginModal.scss";
 
 interface LoginModalProps {
   isLoggedIn: boolean;
@@ -24,6 +26,7 @@ export function LoginModal({
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | undefined>(undefined);
+  const history = useHistory();
 
   function handleLogIn() {
     setIsLoading(true);
@@ -65,9 +68,16 @@ export function LoginModal({
                 onChange={e => setPassword(e.target.value)}
               />
             </Form.Group>
-            <div>
+            <div className="login-modal-buttons">
               <Button variant="primary" disabled={isLoading} onClick={handleLogIn}>
                 Login
+              </Button>
+              <Button
+                variant="outline-secondary"
+                disabled={isLoading}
+                onClick={() => history.goBack()}
+              >
+                Cancel
               </Button>
               {isLoading && (
                 <>
