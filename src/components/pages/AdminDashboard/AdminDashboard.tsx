@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { getAlumniStories } from "services";
 
-export function Admin(): JSX.Element {
+export function AdminDashboard(): JSX.Element {
   const [isLoggedIn, toggleSetLoggedIn] = useState(false);
   const [password, setPassword] = useState("");
 

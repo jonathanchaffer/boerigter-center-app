@@ -1,4 +1,4 @@
-import { AlumniStoriesList, Admin, AlumStoryDetails, LoginModal, MapView, Navigation } from "components";
+import { AdminDashboard, AlumniStoriesList, AlumStoryDetails, LoginModal, MapView, Navigation } from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { getPeopleGroveAlumni } from "services";
@@ -15,7 +15,7 @@ export function App(): JSX.Element {
           <AlumniStoriesList />
         </Route>
         <Route exact path="/admin">
-          <Admin />
+          <AdminDashboard />
         </Route>
         <Route exact path="/stories/:id">
           <AlumStoryDetails />

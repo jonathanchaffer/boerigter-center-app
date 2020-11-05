@@ -1,4 +1,4 @@
-export * from "./Admin";
-export * from "./AlumniStoriesList";
+export * from "./AdminDashboard";
 export * from "./AlumniStoriesList";
 export * from "./AlumStoryDetails";
+
