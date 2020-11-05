@@ -32,7 +32,6 @@ export function loginToPG(email: string, password: string): Promise<void> {
   });
 }
 
-// TODO: get actual data from peoplegrove
 export async function getPeopleGroveAlumni(): Promise<PeopleGroveAlum[]> {
   const accessToken = getPGUser()?.token;
 
