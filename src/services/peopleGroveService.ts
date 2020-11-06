@@ -33,27 +33,30 @@ export function loginToPG(email: string, password: string): Promise<void> {
 }
 
 export async function getPeopleGroveAlumni(): Promise<PeopleGroveAlum[]> {
-  const accessToken = getPGUser()?.token;
+  if (getPGUser()) {
+    const accessToken = getPGUser()?.token;
 
-  const data = {
-    filters: { condition: "UNION ALL", rules: [] },
-    includeUserId: [],
-    matchIndex: { index: 0, pageId: "person" },
-    page: 0,
-    tabType: "active",
-    userBuckets: false,
-    viewType: "map",
-  };
+    const data = {
+      filters: { condition: "UNION ALL", rules: [] },
+      includeUserId: [],
+      matchIndex: { index: 0, pageId: "person" },
+      page: 0,
+      tabType: "active",
+      userBuckets: false,
+      viewType: "map",
+    };
 
-  const options = {
-    headers: {
-      authorization: `bearer ${accessToken}`,
-    },
-  };
+    const options = {
+      headers: {
+        authorization: `bearer ${accessToken}`,
+      },
+    };
 
-  return axiosInstance.post("get-network-hub-users", data, options).then(response =>
-    response.data.users.map((user: any) => {
-      return { ...user, type: "alum" } as PeopleGroveAlum;
-    }),
-  );
+    return axiosInstance.post("get-network-hub-users", data, options).then(response =>
+      response.data.users.map((user: any) => {
+        return { ...user, type: "alum" } as PeopleGroveAlum;
+      }),
+    );
+  }
+  return [];
 }
