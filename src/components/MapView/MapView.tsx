@@ -41,7 +41,7 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
     <>
       <div className="map-container">
         <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY || "" }}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}
           defaultCenter={{
             lat: 39.381266,
             lng: -97.922211,

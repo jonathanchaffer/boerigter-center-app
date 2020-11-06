@@ -6,7 +6,7 @@ import "styles/fonts.scss";
 import "styles/index.scss";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
+  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   appId: "1:600507081671:web:acf828e427865ecb0c2fe2",
   authDomain: "boerigter-center-app.firebaseapp.com",
   databaseURL: "https://boerigter-center-app.firebaseio.com",
