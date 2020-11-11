@@ -1,7 +1,14 @@
-import { AlumniStoriesList, AlumStoryDetails, LoginModal, MapView, Navigation } from "components";
+import {
+  AdminDashboard,
+  AlumniStoriesList,
+  AlumStoryDetails,
+  LoginModal,
+  MapView,
+  Navigation,
+} from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { getPeopleGroveAlumni } from "services";
+import { getPeopleGroveAlumni, isLoggedInToPG, loginToPG } from "services";
 
 export function App(): JSX.Element {
   return (
@@ -10,6 +17,12 @@ export function App(): JSX.Element {
       <Switch>
         <Route exact path="/stories">
           <AlumniStoriesList />
+        </Route>
+        <Route exact path="/stories/admin">
+          <AlumniStoriesList />
+        </Route>
+        <Route exact path="/admin">
+          <AdminDashboard />
         </Route>
         <Route exact path="/stories/:id">
           <AlumStoryDetails />
@@ -21,7 +34,19 @@ export function App(): JSX.Element {
         <Route exact path="/alumni">
           <>
             <MapView getData={getPeopleGroveAlumni} />
-            <LoginModal />
+            <LoginModal
+              isLoggedIn={isLoggedInToPG()}
+              loginFn={loginToPG}
+              description={
+                <span>
+                  Please log in using your{" "}
+                  <a href="https://connection.hope.edu/" target="blank">
+                    connection.hope.edu
+                  </a>{" "}
+                  credentials to view this content.
+                </span>
+              }
+            />
           </>
         </Route>
         <Route exact path="/study-abroad">

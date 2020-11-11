@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import { ErrorModal } from "components";
+import React, { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { isLoggedInToPG, loginToPG } from "services";
-import { ErrorModal } from "./ErrorModal";
-// TODO: use Formik for data validation
+import { useHistory } from "react-router-dom";
+import "./LoginModal.scss";
 
-export function LoginModal(): JSX.Element {
-  const [isOpen, setIsOpen] = useState(!isLoggedInToPG());
+interface LoginModalProps {
+  isLoggedIn: boolean;
+  loginFn: (email: string, password: string) => Promise<any>;
+  title?: string;
+  description?: string | React.ReactNode;
+}
+
+// TODO: use Formik for data validation
+export function LoginModal({
+  isLoggedIn,
+  loginFn,
+  title,
+  description,
+}: LoginModalProps): JSX.Element {
+  const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | undefined>(undefined);
+  const history = useHistory();
 
   function handleLogIn() {
     setIsLoading(true);
-    loginToPG(email, password)
+    loginFn(email, password)
       .then(() => {
         setIsOpen(false);
         window.location.reload();
@@ -25,18 +39,16 @@ export function LoginModal(): JSX.Element {
       .finally(() => setIsLoading(false));
   }
 
+  useEffect(() => {
+    setIsOpen(!isLoggedIn);
+  }, [isLoggedIn]);
+
   return (
     <>
-      <Modal show={isOpen} centered onHide={() => setIsOpen(false)}>
+      <Modal show={isOpen} centered>
         <Modal.Body>
-          <Modal.Title>Login</Modal.Title>
-          <p>
-            Please log in using your{" "}
-            <a href="https://connection.hope.edu/" target="blank">
-              connection.hope.edu
-            </a>{" "}
-            credentials to view this content.
-          </p>
+          <Modal.Title>{title || "Login"}</Modal.Title>
+          <p>{description || ""}</p>
           <Form>
             <Form.Group controlId="email">
               <Form.Label>Email</Form.Label>
@@ -56,9 +68,16 @@ export function LoginModal(): JSX.Element {
                 onChange={e => setPassword(e.target.value)}
               />
             </Form.Group>
-            <div>
+            <div className="login-modal-buttons">
               <Button variant="primary" disabled={isLoading} onClick={handleLogIn}>
                 Login
+              </Button>
+              <Button
+                variant="outline-secondary"
+                disabled={isLoading}
+                onClick={() => history.goBack()}
+              >
+                Cancel
               </Button>
               {isLoading && (
                 <>

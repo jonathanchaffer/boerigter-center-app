@@ -1,4 +1,5 @@
 import { App } from "components";
+import { UserProvider } from "contexts";
 import * as firebase from "firebase";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -17,10 +18,13 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore();
+export const auth = firebase.auth();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <UserProvider>
+      <App />
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById("root"),
 );
