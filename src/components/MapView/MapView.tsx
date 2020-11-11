@@ -4,7 +4,7 @@ import GoogleMapReact from "google-map-react";
 import { Mappable } from "models/Mappable";
 import React, { useState } from "react";
 import { useAsync } from "react-async";
-import { ListGroup, OverlayTrigger, Popover } from "react-bootstrap";
+import { ListGroup, OverlayTrigger, Popover, Spinner } from "react-bootstrap";
 import { ClusterFeature, PointFeature } from "supercluster";
 import useSupercluster from "use-supercluster";
 import "./MapView.scss";
@@ -18,7 +18,7 @@ interface MapViewProps<I extends Mappable> {
 export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.Element {
   const [mapZoom, setMapZoom] = useState(4);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
-  const { data, error } = useAsync({ promiseFn: getData });
+  const { data, error, isPending } = useAsync({ promiseFn: getData });
 
   const points: PointFeature<I>[] = data
     ? data.map((item: I) => {
@@ -39,6 +39,11 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
 
   return (
     <>
+      {isPending && (
+        <div className="pending-map-container">
+          <Spinner animation="border" variant="light" />
+        </div>
+      )}
       <div className="map-container">
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}

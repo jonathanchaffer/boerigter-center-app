@@ -1,11 +1,11 @@
 import axios from "axios";
 import { PeopleGroveAlum } from "models";
-import * as placeholderAlumni from "placeholders/placeholder-alumni.json";
 
 const axiosInstance = axios.create({
-  baseURL: "https://cors-anywhere.herokuapp.com/https://connection.hope.edu/api/",
+  baseURL: "https://boerigter-center-app.herokuapp.com/https://connection.hope.edu/api/",
   headers: {
     "Content-Type": "application/json",
+    hubidentifier: "hopecollege",
   },
 });
 
@@ -32,32 +32,31 @@ export function loginToPG(email: string, password: string): Promise<void> {
   });
 }
 
-// TODO: get actual data from peoplegrove
 export async function getPeopleGroveAlumni(): Promise<PeopleGroveAlum[]> {
-  // const accessToken = getPGUser()?.token;
+  if (getPGUser()) {
+    const accessToken = getPGUser()?.token;
 
-  // const data = {
-  //   filters: { condition: "UNION ALL", rules: [] },
-  //   includeUserId: [],
-  //   matchIndex: { index: 0, pageId: "person" },
-  //   page: 0,
-  //   tabType: "active",
-  //   userBuckets: false,
-  //   viewType: "map",
-  // };
+    const data = {
+      filters: { condition: "UNION ALL", rules: [] },
+      includeUserId: [],
+      matchIndex: { index: 0, pageId: "person" },
+      page: 0,
+      tabType: "active",
+      userBuckets: false,
+      viewType: "map",
+    };
 
-  // const options = {
-  //   headers: {
-  //     authorization: `bearer ${accessToken}`,
-  //   },
-  // };
+    const options = {
+      headers: {
+        authorization: `bearer ${accessToken}`,
+      },
+    };
 
-  // return axiosInstance.post("get-network-hub-users", data, options).then(response =>
-  //   response.data.users.map((user: any) => {
-  //     return { ...user, type: "alum" } as PeopleGroveAlum;
-  //   }),
-  // );
-  return placeholderAlumni.users.map(user => {
-    return { ...user, type: "alum" } as PeopleGroveAlum;
-  });
+    return axiosInstance.post("get-network-hub-users", data, options).then(response =>
+      response.data.users.map((user: any) => {
+        return { ...user, type: "alum" } as PeopleGroveAlum;
+      }),
+    );
+  }
+  return [];
 }

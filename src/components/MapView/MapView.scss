@@ -2,6 +2,18 @@
 @import "styles/fonts.scss";
 @import "styles/index.scss";
 
+.pending-map-container {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  background-color: #0000003d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
 .map-container {
   position: absolute;
   height: 100vh;
