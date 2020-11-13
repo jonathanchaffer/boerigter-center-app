@@ -26,3 +26,8 @@ export async function addAlumStory(newAlum: CuratedAlum): Promise<string> {
   const snapshot = await db.collection("alumniStories").add(newAlum);
   return snapshot.id;
 }
+
+/** Deletes an alum from the database. */
+export async function deleteAlumStory(id: string): Promise<void> {
+  return db.doc(`alumniStories/${id}`).delete();
+}
