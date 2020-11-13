@@ -12,3 +12,7 @@ export async function getAlumStory(id: string): Promise<CuratedAlum> {
   const snapshot = await db.doc(`alumniStories/${id}`).get();
   return { ...snapshot.data(), id: snapshot.id } as CuratedAlum;
 }
+
+export async function updateAlumStory(id: string, newAlum: CuratedAlum): Promise<void> {
+  return db.doc(`alumniStories/${id}`).update({ newAlum });
+}
