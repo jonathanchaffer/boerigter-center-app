@@ -5,9 +5,10 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link, useLocation } from "react-router-dom";
 import "./Navigation.scss";
 
-export function Navigation(): JSX.Element {
+export function Navigation(pos: "top" | "bottom"): JSX.Element {
+  const fix = pos as "top" | "bottom";
   return (
-    <Navbar bg="light">
+    <Navbar bg="light" fixed={fix}>
       <Container>
         <Nav>
           <NavLink path="/stories">Alumni Stories</NavLink>
