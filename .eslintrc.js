@@ -24,8 +24,6 @@ module.exports = {
   plugins: ["react", "react-hooks", "@typescript-eslint", "sort-keys-fix"],
   rules: {
     "comma-dangle": ["error", "always-multiline"],
-    "import/no-default-export": "error",
-    "import/prefer-default-export": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -36,13 +34,15 @@ module.exports = {
         tsx: "never",
       },
     ],
+    "import/no-default-export": "error",
     "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
     "no-unused-vars": "warn",
     quotes: ["error", "double"],
     "react/jsx-filename-extension": [1, { extensions: [".tsx"] }],
-    "sort-keys": "error",
-    "sort-keys-fix/sort-keys-fix": "error",
     "react/no-unused-prop-types": "off",
     "react/require-default-props": "off",
+    "sort-keys": "error",
+    "sort-keys-fix/sort-keys-fix": "error",
   },
 };
