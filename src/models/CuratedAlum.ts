@@ -1,5 +1,5 @@
 export interface CuratedAlum {
-  uid: string;
+  id: string;
   firstName: string;
   lastName: string;
   location: string;

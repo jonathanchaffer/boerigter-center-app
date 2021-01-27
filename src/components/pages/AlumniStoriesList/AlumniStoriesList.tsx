@@ -22,7 +22,7 @@ export function AlumniStoriesList(): JSX.Element {
         {isPending ? (
           <Spinner animation="border" />
         ) : (
-          data && data.map(alum => <AlumCard key={alum.uid} alum={alum} />)
+          data && data.map(alum => <AlumCard key={alum.id} alum={alum} />)
         )}
       </div>
       <ErrorModal error={error} />
@@ -37,7 +37,7 @@ interface AlumCardProps {
 function AlumCard({ alum }: AlumCardProps): JSX.Element {
   const history = useHistory();
   return (
-    <Card onClick={() => history.push(`/stories/${alum.uid}`)}>
+    <Card onClick={() => history.push(`/stories/${alum.id}`)}>
       <Card.Body>
         <Row>
           <Col xs={3} md={2} className="d-flex align-items-center">
@@ -61,7 +61,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
             </div>
           </Col>
           <Col xs="auto" className="d-flex align-items-center">
-            <a href={`/stories/${alum.uid}`} className="p-3">
+            <a href={`/stories/${alum.id}`} className="p-3">
               Learn More
               <i className="ml-2 fas fa-arrow-right" />
             </a>
