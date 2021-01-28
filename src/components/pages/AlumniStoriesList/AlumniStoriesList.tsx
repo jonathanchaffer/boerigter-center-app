@@ -1,8 +1,9 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
 import { PageContainer } from "components";
 import { AlumSecondaryInfo, ErrorModal } from "components/reusables";
+import { UserContext } from "contexts";
 import { CuratedAlum } from "models";
-import React from "react";
+import React, { useContext } from "react";
 import { useAsync } from "react-async";
 import { Button, Card, Spinner } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
@@ -36,6 +37,10 @@ interface AlumCardProps {
 
 function AlumCard({ alum }: AlumCardProps): JSX.Element {
   const history = useHistory();
+  const user = useContext(UserContext);
+
+  const isAdminPage = history.location.pathname === "/stories/admin";
+
   return (
     <Card onClick={() => history.push(`/stories/${alum.id}`)}>
       <Card.Body>
@@ -66,14 +71,16 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
                 Learn More
                 <i className="ml-2 fas fa-arrow-right" />
               </a>
-              <div className="buttons">
-                <Button variant="outline-secondary" size="sm">
-                  Edit
-                </Button>
-                <Button variant="danger" size="sm">
-                  Delete
-                </Button>
-              </div>
+              {user && isAdminPage && (
+                <div className="buttons">
+                  <Button variant="outline-secondary" size="sm">
+                    Edit
+                  </Button>
+                  <Button variant="danger" size="sm">
+                    Delete
+                  </Button>
+                </div>
+              )}
             </div>
           </Col>
         </Row>
