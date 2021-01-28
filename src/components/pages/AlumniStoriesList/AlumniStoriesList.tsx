@@ -4,7 +4,7 @@ import { AlumSecondaryInfo, ErrorModal } from "components/reusables";
 import { CuratedAlum } from "models";
 import React from "react";
 import { useAsync } from "react-async";
-import { Card, Spinner } from "react-bootstrap";
+import { Button, Card, Spinner } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Img from "react-cool-img";
@@ -61,10 +61,20 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
             </div>
           </Col>
           <Col xs="auto" className="d-flex align-items-center">
-            <a href={`/stories/${alum.id}`} className="p-3">
-              Learn More
-              <i className="ml-2 fas fa-arrow-right" />
-            </a>
+            <div className="d-flex flex-column justify-content-center">
+              <a href={`/stories/${alum.id}`} className="p-3">
+                Learn More
+                <i className="ml-2 fas fa-arrow-right" />
+              </a>
+              <div className="buttons">
+                <Button variant="outline-secondary" size="sm">
+                  Edit
+                </Button>
+                <Button variant="danger" size="sm">
+                  Delete
+                </Button>
+              </div>
+            </div>
           </Col>
         </Row>
       </Card.Body>
