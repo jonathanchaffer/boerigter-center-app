@@ -72,7 +72,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
                 <i className="ml-2 fas fa-arrow-right" />
               </a>
               {user && isAdminPage && (
-                <div className="buttons">
+                <div className="buttons spaced-children">
                   <Button variant="outline-secondary" size="sm">
                     Edit
                   </Button>

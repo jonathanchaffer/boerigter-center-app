@@ -60,6 +60,12 @@ img {
   }
 }
 
+.spaced-children {
+  *:not(:last-child) {
+    margin-right: 0.33rem;
+  }
+}
+
 hr {
   margin: 1.75rem 0;
 }
