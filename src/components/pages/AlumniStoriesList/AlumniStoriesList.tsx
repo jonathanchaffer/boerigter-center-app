@@ -42,7 +42,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
   const isAdminPage = history.location.pathname === "/stories/admin";
 
   return (
-    <Card onClick={() => history.push(`/stories/${alum.id}`)}>
+    <Card>
       <Card.Body>
         <Row>
           <Col xs={3} md={2} className="d-flex align-items-center">
