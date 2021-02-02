@@ -5,8 +5,10 @@ interface ConfirmationModalProps {
   show: boolean;
   onHide: () => void;
   onConfirm: () => Promise<void>;
+  confirmText?: string;
   title: string;
   message: string;
+  variant?: "danger";
 }
 
 export function ConfirmationModal({
@@ -14,6 +16,8 @@ export function ConfirmationModal({
   onHide,
   onConfirm,
   title,
+  confirmText,
+  variant,
   message,
 }: ConfirmationModalProps): JSX.Element {
   const [isPending, setIsPending] = useState(false);
@@ -32,6 +36,7 @@ export function ConfirmationModal({
                 Cancel
               </Button>
               <Button
+                variant={variant}
                 onClick={() => {
                   setIsPending(true);
                   onConfirm().then(() => {
@@ -40,7 +45,7 @@ export function ConfirmationModal({
                   });
                 }}
               >
-                OK
+                {confirmText || "OK"}
               </Button>
             </>
           )}

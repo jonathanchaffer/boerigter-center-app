@@ -94,6 +94,8 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
       <ConfirmationModal
         title="Delete alum story?"
         message="Are you sure you want to delete this alum story? This action cannot be undone."
+        confirmText="Delete"
+        variant="danger"
         show={isShowingConfirmDelete}
         onConfirm={() => {
           return deleteAlumStory(alum.id);
