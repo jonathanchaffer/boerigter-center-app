@@ -1,8 +1,5 @@
 @import "styles/colors.scss";
 .alumni-stories-list {
-  .card:hover {
-    cursor: pointer;
-  }
   .card-body {
     padding: 2rem;
 
@@ -10,10 +7,6 @@
       display: flex;
       flex-direction: row;
       justify-content: center;
-
-      .btn:not(:last-child) {
-        margin-right: 0.5rem;
-      }
     }
   }
 }

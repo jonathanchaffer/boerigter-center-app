@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useHistory } from "react-router-dom";
-import "./LoginModal.scss";
 
 interface LoginModalProps {
   isLoggedIn: boolean;
@@ -68,7 +67,7 @@ export function LoginModal({
                 onChange={e => setPassword(e.target.value)}
               />
             </Form.Group>
-            <div className="login-modal-buttons">
+            <div className="spaced-children">
               <Button variant="primary" disabled={isLoading} onClick={handleLogIn}>
                 Login
               </Button>
