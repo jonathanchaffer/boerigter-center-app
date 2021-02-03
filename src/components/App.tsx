@@ -20,21 +20,23 @@ export function App(): JSX.Element {
   const customStyles = {
     content: {
       backgroundColor: "clear",
-      bottom: "30%",
-      left: "30%",
-      marginRight: 0,
-      right: "auto",
-      top: "30%",
-      transform: "translate(-50%, -50%)",
+      bottom: "23px",
+      left: "1",
+      marginLeft: "0",
+      marginRight: "0",
+      right: "55px",
+      top: "1",
+      transform: "translate(0, 0)",
     },
     overlay: {
       backgroundColor: "clear",
-      bottom: "30%",
-      left: "30%",
-      marginRight: "-50%",
-      right: "auto",
-      top: "30%",
-      transform: "translate(-50%, -50%)",
+      bottom: "0",
+      left: "0",
+      marginLeft: "100",
+      marginRight: "100",
+      // right: "absolute",
+      top: "1",
+      transform: "translate(0%, 0%)",
     },
   };
 
@@ -67,9 +69,9 @@ export function App(): JSX.Element {
           </Route>
         </Switch>
       </Router>
-      <ReactModal isOpen contentLabel="Minimal Modal Example" style={customStyles}>
+      <ReactModal isOpen contentLabel="Button Modal" style={customStyles}>
         <Button className="dashboard-Down" onClick={handleClick}>
-          Bring Navigation to bottom
+          Bring NavBar to bottom
         </Button>
       </ReactModal>
       {/* https://github.com/reactjs/react-modal#api-documentation */}
