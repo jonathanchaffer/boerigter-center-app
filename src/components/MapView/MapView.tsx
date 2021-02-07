@@ -13,12 +13,18 @@ import "./MapView.scss";
 
 interface MapViewProps<I extends Mappable> {
   getData: () => Promise<I[]>;
+  pos: "top" | "bottom";
 }
 
-export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.Element {
+export function MapView<I extends Mappable>(
+  { getData }: MapViewProps<I>,
+  pos: "top" | "bottom",
+): JSX.Element {
   const [mapZoom, setMapZoom] = useState(4);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
+  // const [mapStyle, setMapStyle] = useState(pos)
   const { data, error } = useAsync({ promiseFn: getData });
+  const fix = Object.values(pos).join("") as "top" | "bottom";
 
   const points: PointFeature<I>[] = data
     ? data.map((item: I) => {
@@ -37,9 +43,22 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
     zoom: mapZoom,
   });
 
+  const navBarTopStyle = {
+    bottom: "55px",
+    top: "55px",
+  };
+  const navBarBottomStyle = {
+    bottom: "200px",
+    top: "0px",
+    // bottom: "200px",
+  };
+
+  // const divStyle = fix === "top" ? navBarTopStyle : navBarBottomStyle;
+  const divStyle = navBarBottomStyle;
+
   return (
     <>
-      <div className="map-container">
+      <div className="map-container" style={navBarTopStyle}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}
           defaultCenter={{

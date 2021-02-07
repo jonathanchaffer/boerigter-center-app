@@ -53,16 +53,16 @@ export function App(): JSX.Element {
           </Route>
           <Route exact path="/poll" />
           <Route exact path="/career">
-            <MapView getData={async () => []} />
+            <MapView getData={async () => []} pos={navPosition} />
           </Route>
           <Route exact path="/alumni">
             <>
-              <MapView getData={getPeopleGroveAlumni} />
+              <MapView getData={getPeopleGroveAlumni} pos={navPosition} />
               <LoginModal />
             </>
           </Route>
           <Route exact path="/study-abroad">
-            <MapView getData={async () => []} />
+            <MapView getData={async () => []} pos={navPosition} />
           </Route>
           <Route>
             <Redirect to="/career" />
