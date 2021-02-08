@@ -2,9 +2,9 @@ import { Mappable } from "models";
 
 export interface HandshakeCareer extends Mappable {
   type: "career";
-  jobTitle: string;
-  company: string;
-  ftptJob: string;
-  location: string;
-  photoUrl: string;
+  job_name: string;
+  employer_name: string;
+  employment_type_name: string;
+  location_points: string;
+  employer_logo_url: string;
 }

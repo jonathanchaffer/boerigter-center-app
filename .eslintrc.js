@@ -44,5 +44,6 @@ module.exports = {
     "react/require-default-props": "off",
     "sort-keys": "error",
     "sort-keys-fix/sort-keys-fix": "error",
+    camelcase: "off",
   },
 };
