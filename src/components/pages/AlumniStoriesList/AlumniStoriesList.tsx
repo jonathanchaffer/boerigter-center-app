@@ -11,6 +11,7 @@ import Row from "react-bootstrap/Row";
 import Img from "react-cool-img";
 import { useHistory } from "react-router-dom";
 import { getAlumniStories } from "services";
+import { URLPaths } from "utilities";
 import "./AlumniStoriesList.scss";
 
 export function AlumniStoriesList(): JSX.Element {
@@ -39,10 +40,10 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
   const history = useHistory();
   const user = useContext(UserContext);
 
-  const isAdminPage = history.location.pathname === "/stories/admin";
+  const isAdminPage = history.location.pathname === `${URLPaths.alumStories}${URLPaths.admin}`;
 
   return (
-    <Card onClick={() => history.push(`/stories/${alum.id}`)}>
+    <Card onClick={() => history.push(`${URLPaths.alumStories}/${alum.id}`)}>
       <Card.Body>
         <Row>
           <Col xs={3} md={2} className="d-flex align-items-center">
@@ -67,7 +68,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
           </Col>
           <Col xs="auto" className="d-flex align-items-center">
             <div className="d-flex flex-column justify-content-center">
-              <a href={`/stories/${alum.id}`} className="p-3">
+              <a href={`${URLPaths.alumStories}/${alum.id}`} className="p-3">
                 Learn More
                 <i className="ml-2 fas fa-arrow-right" />
               </a>
