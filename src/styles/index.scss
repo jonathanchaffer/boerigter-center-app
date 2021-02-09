@@ -49,14 +49,20 @@ img {
 
 .secondary-info {
   i {
-    margin-right: 0.5rem;
+    margin-right: 0.25rem;
     color: $md-gray;
     min-width: 30px;
   }
   span:not(:last-child),
   a:not(:last-child) {
-    margin-right: 2rem;
+    margin-right: 2.25rem;
     margin-bottom: 0.5rem;
+  }
+}
+
+.spaced-children {
+  *:not(:last-child) {
+    margin-right: 0.33rem;
   }
 }
 
