@@ -25,7 +25,7 @@ export function App(): JSX.Element {
         <Route exact path={`${URLPaths.alumStories}/:id`}>
           <AlumStoryDetails />
         </Route>
-        <Route exact path={URLPaths.poll} />
+        {/* <Route exact path={URLPaths.poll} /> */}
         <Route exact path={URLPaths.careerFinder}>
           <MapView getData={async () => []} />
         </Route>
@@ -47,11 +47,11 @@ export function App(): JSX.Element {
             />
           </>
         </Route>
-        <Route exact path={URLPaths.offCampusFinder}>
+        {/* <Route exact path={URLPaths.offCampusFinder}>
           <MapView getData={async () => []} />
-        </Route>
+        </Route> */}
         <Route>
-          <Redirect to={URLPaths.careerFinder} />
+          <Redirect to={URLPaths.alumFinder} />
         </Route>
       </Switch>
     </Router>

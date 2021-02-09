@@ -12,12 +12,12 @@ export function Navigation(): JSX.Element {
       <Container>
         <Nav>
           <NavLink path={URLPaths.alumStories}>Alumni Stories</NavLink>
-          <NavLink path={URLPaths.poll}>Quick Poll</NavLink>
+          {/* <NavLink path={URLPaths.poll}>Quick Poll</NavLink> */}
         </Nav>
         <Nav>
-          <NavLink path={URLPaths.careerFinder}>Career Opportunities</NavLink>
           <NavLink path={URLPaths.alumFinder}>Find Alumni</NavLink>
-          <NavLink path={URLPaths.offCampusFinder}>Off-Campus Study</NavLink>
+          <NavLink path={URLPaths.careerFinder}>Career Opportunities</NavLink>
+          {/* <NavLink path={URLPaths.offCampusFinder}>Off-Campus Study</NavLink> */}
         </Nav>
       </Container>
     </Navbar>
