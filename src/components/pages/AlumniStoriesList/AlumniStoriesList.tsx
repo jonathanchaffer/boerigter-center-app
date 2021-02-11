@@ -1,10 +1,11 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
 import { AlumSecondaryInfo, ConfirmationModal, ErrorModal, PageContainer } from "components";
+import { NewAlumModal } from "components/reusables/NewAlumModal";
 import { UserContext } from "contexts";
 import { CuratedAlum } from "models";
 import React, { useContext, useState } from "react";
 import { useAsync } from "react-async";
-import { Button, Card, Spinner } from "react-bootstrap";
+import { Button, Card, Spinner, ButtonGroup, ToggleButton } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Img from "react-cool-img";
@@ -18,7 +19,7 @@ export function AlumniStoriesList(): JSX.Element {
     <PageContainer>
       <div className="alumni-stories-list">
         <h1>Alumni Stories</h1>
-        <p>Alumni hand-picked by Boerigter Center staff.</p>
+        <p>Alumni hand-picked by Boerigter Center staff.</p> 
         {isPending ? (
           <Spinner animation="border" />
         ) : (
@@ -35,14 +36,23 @@ interface AlumCardProps {
 }
 
 function AlumCard({ alum }: AlumCardProps): JSX.Element {
+  
+  const [isShowingConfirmDelete, setIsShowingConfirmDelete] = useState(false);
+  const [checked, setChecked] = useState(false);
   const history = useHistory();
   const user = useContext(UserContext);
-  const [isShowingConfirmDelete, setIsShowingConfirmDelete] = useState(false);
-
   const isAdminPage = history.location.pathname === "/stories/admin";
+  const [isShowingNewAlumModal, setIsShowingNewAlumModal] = useState(false);
 
   return (
     <>
+      {user && isAdminPage && (
+                  <div className="buttons spaced-children">
+                    <Button variant="outline-secondary" size="lg" onClick={() => setIsShowingNewAlumModal(true)}>
+                      New Alumni 
+                    </Button>
+                    </div>
+        )} 
       <Card>
         <Card.Body>
           <Row>
@@ -84,13 +94,29 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
                     >
                       Delete
                     </Button>
-                  </div>
+                    <div className="d-flex flex-column justify-content-center">
+                      <ButtonGroup toggle className="mb-2">
+                        <ToggleButton
+                          type="checkbox"
+                          variant="outline-primary"
+                          size="sm"
+                          checked={checked}
+                          value="1"
+                          onChange={(e) => setChecked(e.currentTarget.checked)}
+                          
+                        >
+                          Display
+                        </ToggleButton>
+                      </ButtonGroup>
+                    </div>
+                  </div>              
                 )}
               </div>
             </Col>
           </Row>
         </Card.Body>
-      </Card>
+      </Card>  
+         
       <ConfirmationModal
         title="Delete alum story?"
         message="Are you sure you want to delete this alum story? This action cannot be undone."
@@ -101,6 +127,12 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
           return deleteAlumStory(alum.id);
         }}
         onHide={() => setIsShowingConfirmDelete(false)}
+      />
+      <NewAlumModal
+        title="Adding new Alumni Stories"
+        message="Adding new Alumni Stories"
+        show={isShowingNewAlumModal}
+        onCancel={() => setIsShowingNewAlumModal(false)}
       />
     </>
   );
