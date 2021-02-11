@@ -8,7 +8,7 @@ import {
 } from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { getPeopleGroveAlumni, isLoggedInToPG, loginToPG } from "services";
+import { getHandshakeCareers, getPeopleGroveAlumni, isLoggedInToPG, loginToPG } from "services";
 
 export function App(): JSX.Element {
   return (
@@ -29,7 +29,7 @@ export function App(): JSX.Element {
         </Route>
         <Route exact path="/poll" />
         <Route exact path="/career">
-          <MapView getData={async () => []} />
+          <MapView getData={getHandshakeCareers} />
         </Route>
         <Route exact path="/alumni">
           <>
