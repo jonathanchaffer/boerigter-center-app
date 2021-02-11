@@ -40,6 +40,8 @@ export function App(): JSX.Element {
     },
   };
 
+  const buttonText = navPosition === "top" ? "Bring NavBar to bottom" : "Bring NavBar to top";
+
   return (
     <div>
       <Router>
@@ -71,7 +73,7 @@ export function App(): JSX.Element {
       </Router>
       <ReactModal isOpen contentLabel="Button Modal" style={customStyles}>
         <Button className="dashboard-Down" onClick={handleClick}>
-          Bring NavBar to bottom
+          {buttonText};
         </Button>
       </ReactModal>
       {/* https://github.com/reactjs/react-modal#api-documentation */}

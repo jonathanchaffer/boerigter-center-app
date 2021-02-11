@@ -16,10 +16,11 @@ interface MapViewProps<I extends Mappable> {
   pos: "top" | "bottom";
 }
 
-export function MapView<I extends Mappable>(
-  { getData }: MapViewProps<I>,
-  pos: "top" | "bottom",
-): JSX.Element {
+export function MapView<I extends Mappable>({
+  getData,
+  pos,
+}: MapViewProps<I>): // pos: "top" | "bottom",
+JSX.Element {
   const [mapZoom, setMapZoom] = useState(4);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
   // const [mapStyle, setMapStyle] = useState(pos)
@@ -44,21 +45,22 @@ export function MapView<I extends Mappable>(
   });
 
   const navBarTopStyle = {
-    bottom: "55px",
-    top: "55px",
+    // Just to be clear:
+    // bottom: "0px",
+    // top: "0px",
   };
   const navBarBottomStyle = {
-    bottom: "200px",
-    top: "0px",
+    // bottom: "58px",
+    top: "-58px",
     // bottom: "200px",
   };
 
-  // const divStyle = fix === "top" ? navBarTopStyle : navBarBottomStyle;
-  const divStyle = navBarBottomStyle;
+  const divStyle = fix === "top" ? navBarTopStyle : navBarBottomStyle;
+  // const divStyle = navBarBottomStyle;
 
   return (
     <>
-      <div className="map-container" style={navBarTopStyle}>
+      <div id="mapDiv" className="map-container" style={divStyle}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}
           defaultCenter={{
