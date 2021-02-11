@@ -1,5 +1,5 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
-import { Mappable, PeopleGroveAlum } from "models";
+import { HandshakeCareer, Mappable, PeopleGroveAlum } from "models";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Img from "react-cool-img";
@@ -34,6 +34,31 @@ export function PopoverItem<I extends Mappable>({ item }: PopoverItemProps<I>): 
           </Col>
         </Row>
       );
+    }
+    case "career": {
+      const job = (item as unknown) as HandshakeCareer;
+      return (
+        <Row className="alum-popover-item">
+          <Col xs={3} className="d-flex align-items-center">
+            <div className="img-circle-container">
+              <Img
+                src={job.employer_logo_url}
+                placeholder={genericAvatar}
+                width="100%"
+                loading="lazy"
+              />
+            </div>
+          </Col>
+          <Col>
+            <div>
+              <h4>{`${job.job_name}`}</h4>
+              <p>{`${job.employer_name}`}</p>
+              <p>{`${job.employment_type_name}`}</p>
+            </div>
+          </Col>
+        </Row>
+      )
+      break;
     }
     default:
       return <span>#{item.id}</span>;
