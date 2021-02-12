@@ -17,7 +17,7 @@ export function App(): JSX.Element {
     }
   }
 
-  const customStyles = {
+  const topStyle = {
     content: {
       backgroundColor: "clear",
       bottom: "23px",
@@ -40,7 +40,31 @@ export function App(): JSX.Element {
     },
   };
 
-  const buttonText = navPosition === "top" ? "Bring NavBar to bottom" : "Bring NavBar to top";
+  const bottomStyle = {
+    content: {
+      backgroundColor: "clear",
+      bottom: "81px",
+      left: "1",
+      marginLeft: "0",
+      marginRight: "0",
+      right: "55px",
+      top: "1",
+      transform: "translate(0, 0)",
+    },
+    overlay: {
+      backgroundColor: "clear",
+      bottom: "0",
+      left: "0",
+      marginLeft: "100",
+      marginRight: "100",
+      // right: "absolute",
+      top: "1",
+      transform: "translate(0%, 0%)",
+    },
+  };
+
+  const buttonText = navPosition === "top" ? "Bring NavBar down" : "Bring NavBar up";
+  const buttonStyle = navPosition === "top" ? topStyle : bottomStyle;
 
   return (
     <div>
@@ -71,7 +95,7 @@ export function App(): JSX.Element {
           </Route>
         </Switch>
       </Router>
-      <ReactModal isOpen contentLabel="Button Modal" style={customStyles}>
+      <ReactModal isOpen contentLabel="Button Modal" style={buttonStyle}>
         <Button className="dashboard-Down" onClick={handleClick}>
           {buttonText};
         </Button>
