@@ -1,4 +1,5 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
+import placeholderImg from "assets/images/placeholder_img.jpg";
 import { HandshakeCareer, Mappable, PeopleGroveAlum } from "models";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
@@ -43,7 +44,7 @@ export function PopoverItem<I extends Mappable>({ item }: PopoverItemProps<I>): 
             <div>
               <Img
                 src={job.employer_logo_url}
-                placeholder={genericAvatar}
+                placeholder={placeholderImg}
                 width="100%"
                 loading="lazy"
               />
