@@ -57,8 +57,7 @@ export function PopoverItem<I extends Mappable>({ item }: PopoverItemProps<I>): 
             </div>
           </Col>
         </Row>
-      )
-      break;
+      );
     }
     default:
       return <span>#{item.id}</span>;
