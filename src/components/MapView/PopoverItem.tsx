@@ -50,21 +50,23 @@ export function PopoverItem<I extends Mappable>({ item }: PopoverItemProps<I>): 
               />
             </div>
           </Col>
-          <Col>
-            <h4>{job.job_name}</h4>
-            <div className="secondary-info d-flex flex-column">
-              {job.employer_name && (
-                <span>
-                  <i className="fas fa-briefcase" />
-                  {job.employer_name}
-                </span>
-              )}
-              {job.employment_type_name && (
-                <span>
-                  <i className="fas fa-clock" />
-                  {job.employment_type_name}
-                </span>
-              )}
+          <Col className="d-flex align-items-center">
+            <div>
+              <h4>{job.job_name}</h4>
+              <div className="secondary-info d-flex flex-column">
+                {job.employer_name && (
+                  <span>
+                    <i className="fas fa-briefcase" />
+                    {job.employer_name}
+                  </span>
+                )}
+                {job.employment_type_name && (
+                  <span>
+                    <i className="fas fa-clock" />
+                    {job.employment_type_name}
+                  </span>
+                )}
+              </div>
             </div>
           </Col>
         </Row>
