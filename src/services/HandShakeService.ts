@@ -1,28 +1,24 @@
 import { HandshakeCareer } from "models";
-import { results } from "../assets/HandshakeResponse.json"
+import { results } from "placeholders/HandshakeResponse.json";
 
-export async function getHandshakeCareers(): Promise<HandshakeCareer[]>{
+export async function getHandshakeCareers(): Promise<HandshakeCareer[]> {
+  const careers = [];
 
-    const careers: HandshakeCareer[] = [];
-    const temp = 5;
-    for(let i = 0; temp; i += 1){
-      const temp_length = 1;
-        for(let j = 0; temp_length; j += 1){
-          const location_point = results[i].job.location_points[j];
-          const points = typeof location_point === "string" ?location_point.split(","):"";
-          const job = {
-            employer_logo_url: results[i].employer_logo,
-            employer_name: results[i].employer_name,
-            employment_type_name: results[i].employment_type_name,
-            id: results[i].id,
-            job_name: results[i].job_name,
-            latitude: Number(points[0]),
-            longitude: Number(points[1]),
-            type: "career",
-          } as HandshakeCareer;
-
-         careers.concat(job);
-        }
+  for (let i = 0; i < results.length; i++) {
+    for (let j = 0; j < results[i].job.location_points.length; j++) {
+      const points = results[i].job.location_points[j].split(",");
+      const job = {
+        employer_logo_url: results[i].employer_logo,
+        employer_name: results[i].employer_name,
+        employment_type_name: results[i].employment_type_name,
+        id: results[i].id,
+        job_name: results[i].job_name,
+        latitude: Number(points[0]),
+        longitude: Number(points[1]),
+        type: "career",
+      } as HandshakeCareer;
+      careers.push(job);
     }
-    return careers;
-    }
+  }
+  return careers;
+}

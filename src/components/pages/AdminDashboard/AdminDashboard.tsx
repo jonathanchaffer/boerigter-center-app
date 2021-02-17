@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { loginAsAdmin, logout } from "services";
+import { URLPaths } from "utilities";
 
 export function AdminDashboard(): JSX.Element {
   const user = useContext(UserContext);
@@ -26,7 +27,7 @@ export function AdminDashboard(): JSX.Element {
               </Button>
             </div>
             <hr />
-            <Link to="/stories/admin">
+            <Link to={`${URLPaths.alumStories}${URLPaths.admin}`}>
               <Button>Edit Alumni Stories</Button>
             </Link>
           </>

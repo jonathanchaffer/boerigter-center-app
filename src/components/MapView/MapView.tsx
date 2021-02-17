@@ -132,10 +132,21 @@ interface ItemPinProps<I extends Mappable> {
 }
 
 function ItemPin<I extends Mappable>({ item }: ItemPinProps<I>): JSX.Element {
+  let iconName;
+  switch (item.type) {
+    case "alum":
+      iconName = "fas fa-user";
+      break;
+    case "career":
+      iconName = "fas fa-briefcase";
+      break;
+    default:
+      iconName = "fas fa-map-pin";
+  }
   return (
     <PopoverTrigger popoverId={item.id.toString()} item={item}>
       <button type="button" className="point-marker">
-        <i className="fas fa-user" />
+        <i className={iconName} />
       </button>
     </PopoverTrigger>
   );
