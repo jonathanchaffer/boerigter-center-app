@@ -31,47 +31,41 @@ function AlumPopoverItem({ alum }: AlumPopoverItemProps): JSX.Element {
   const { data, isPending } = useAsync({ promiseFn });
 
   return (
-    <>
-      <Row className="alum-popover-item">
-        {isPending ? (
-          <Col className="d-flex justify-content-center">
-            <Spinner animation="border" variant="secondary" size="sm" />
-          </Col>
-        ) : (
-          <>
-            <Col xs={3} className="d-flex align-items-center">
-              <div className="img-circle-container">
-                <Img
-                  src={alum.photoUrl}
-                  placeholder={genericAvatar}
-                  alt={`${alum.firstName} ${alum.lastName}`}
-                  width="100%"
-                  lazy
-                />
-              </div>
-            </Col>
-            <Col className="d-flex align-items-center">
-              <div>
-                <h4>{`${alum.firstName} ${alum.lastName}`}</h4>
-                <div className="secondary-info d-flex flex-column">
-                  {alum.majors?.length > 0 && (
-                    <span>
-                      <i className="fas fa-graduation-cap" />
-                      {commaSeparatedList(alum.majors)}
-                    </span>
-                  )}
-                  {data?.workHistory[0] && (
-                    <span>
-                      <i className="fas fa-briefcase" />
-                      {data.workHistory[0].companyTitle}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </Col>
-          </>
-        )}
-      </Row>
-    </>
+    <Row className="alum-popover-item">
+      <Col xs={3} className="d-flex align-items-center">
+        <div className="img-circle-container">
+          <Img
+            src={alum.photoUrl}
+            placeholder={genericAvatar}
+            alt={`${alum.firstName} ${alum.lastName}`}
+            width="100%"
+            lazy
+          />
+        </div>
+      </Col>
+      <Col className="d-flex align-items-center">
+        <div>
+          <h4>{`${alum.firstName} ${alum.lastName}`}</h4>
+          <div className="secondary-info d-flex flex-column">
+            {alum.majors?.length > 0 && (
+              <span>
+                <i className="fas fa-graduation-cap" />
+                {commaSeparatedList(alum.majors)}
+              </span>
+            )}
+            {isPending ? (
+              <Spinner animation="border" variant="secondary" size="sm" />
+            ) : (
+              data?.workHistory[0] && (
+                <span>
+                  <i className="fas fa-briefcase" />
+                  {data.workHistory[0].companyTitle}
+                </span>
+              )
+            )}
+          </div>
+        </div>
+      </Col>
+    </Row>
   );
 }
