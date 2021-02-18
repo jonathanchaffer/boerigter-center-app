@@ -33,6 +33,7 @@ export function NewAlumModal({
     linkedIn: '',
     email: '',
     phone: '',
+    display: true,
   };
 
   return (
@@ -74,7 +75,7 @@ export function NewAlumModal({
             </Form.Group>
             <Form.Group controlId="quotes">
                 <Form.Label>Quotes</Form.Label>
-                <Form.Control type="text" placeholder="Enter quotes" onChange={ e => newAlum.quotes = e.target.value.split(",")}/>
+                <Form.Control type="text" placeholder="Enter quotes" onChange={ e => newAlum.quotes = e.target.value.split(".")}/>
             </Form.Group>
             <Form.Group controlId="gradYear">
                 <Form.Label>Graduated Year</Form.Label>

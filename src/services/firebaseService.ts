@@ -18,7 +18,7 @@ export async function getAlumStory(id: string): Promise<CuratedAlum> {
 /** Updates an existing alum in the database. Some or all fields may
  * be updated, depending on what's included in the newAlum param. */
 export async function updateAlumStory(id: string, newAlum: CuratedAlum): Promise<void> {
-  return db.doc(`alumniStories/${id}`).update({ newAlum });
+  return db.doc(`alumniStories/${id}`).update({ ...newAlum });
 }
 
 /** Adds a new alum to the database and returns the id of the created document. */

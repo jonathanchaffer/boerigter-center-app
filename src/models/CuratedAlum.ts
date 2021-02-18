@@ -15,4 +15,5 @@ export interface CuratedAlum {
   linkedIn?: string;
   email?: string;
   phone?: string;
+  display: boolean;
 }

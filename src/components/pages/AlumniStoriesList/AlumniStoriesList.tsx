@@ -1,6 +1,7 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
 import { AlumSecondaryInfo, ConfirmationModal, ErrorModal, PageContainer } from "components";
 import { NewAlumModal } from "components/reusables/NewAlumModal";
+import { EditAlumModal } from "components/reusables/EditAlumModal";
 import { UserContext } from "contexts";
 import { CuratedAlum } from "models";
 import React, { useContext, useState } from "react";
@@ -10,24 +11,43 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Img from "react-cool-img";
 import { useHistory } from "react-router-dom";
-import { deleteAlumStory, getAlumniStories } from "services";
+import { deleteAlumStory, getAlumniStories, updateAlumStory } from "services";
 import "./AlumniStoriesList.scss";
 
 export function AlumniStoriesList(): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
+  const history = useHistory();
+  const user = useContext(UserContext);
+  const isAdminPage = history.location.pathname === "/stories/admin";
+  const [isShowingNewAlumModal, setIsShowingNewAlumModal] = useState(false);
   return (
     <PageContainer>
       <div className="alumni-stories-list">
         <h1>Alumni Stories</h1>
-        <p>Alumni hand-picked by Boerigter Center staff.</p> 
+        <p>Alumni hand-picked by Boerigter Center staff.</p>
+        {user && isAdminPage && (
+                  <div className="buttons spaced-children">
+                    <Button variant="outline-secondary" size="lg" onClick={() => setIsShowingNewAlumModal(true)} >
+                      New Alumni 
+                    </Button>
+                    <br />
+                    </div>
+        )} 
         {isPending ? (
-          <Spinner animation="border" />
+          <Spinner animation="border"  />
         ) : (
-          data && data.map(alum => <AlumCard key={alum.id} alum={alum} />)
+          data && data.filter(alum => isAdminPage || (alum.display === true) ).map(alum => <AlumCard key={alum.id} alum={alum} />)
         )}
       </div>
       <ErrorModal error={error} />
+      <NewAlumModal
+        title="Adding new Alumni Stories"
+        message="Adding new Alumni Stories"
+        show={isShowingNewAlumModal}
+        onCancel={() => setIsShowingNewAlumModal(false)}
+      />
     </PageContainer>
+    
   );
 }
 
@@ -42,17 +62,10 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
   const history = useHistory();
   const user = useContext(UserContext);
   const isAdminPage = history.location.pathname === "/stories/admin";
-  const [isShowingNewAlumModal, setIsShowingNewAlumModal] = useState(false);
+  const [isShowingEditAlumModal, setIsShowingEditAlumModal] = useState(false);
 
   return (
     <>
-      {user && isAdminPage && (
-                  <div className="buttons spaced-children">
-                    <Button variant="outline-secondary" size="lg" onClick={() => setIsShowingNewAlumModal(true)}>
-                      New Alumni 
-                    </Button>
-                    </div>
-        )} 
       <Card>
         <Card.Body>
           <Row>
@@ -84,9 +97,11 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
                 </a>
                 {user && isAdminPage && (
                   <div className="buttons spaced-children">
-                    <Button variant="outline-secondary" size="sm">
-                      Edit
+                    <div className="buttons spaced-children">
+                    <Button variant="outline-secondary" size="sm" onClick={() => setIsShowingEditAlumModal(true)} >
+                      Edit 
                     </Button>
+                    </div>
                     <Button
                       variant="danger"
                       size="sm"
@@ -102,8 +117,11 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
                           size="sm"
                           checked={checked}
                           value="1"
-                          onChange={(e) => setChecked(e.currentTarget.checked)}
-                          
+                          onChange={(e) => {setChecked(
+                            e.currentTarget.checked); 
+                            (alum.display = !alum.display); 
+                            (updateAlumStory(alum.id, alum));
+                          }}
                         >
                           Display
                         </ToggleButton>
@@ -128,11 +146,12 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
         }}
         onHide={() => setIsShowingConfirmDelete(false)}
       />
-      <NewAlumModal
-        title="Adding new Alumni Stories"
-        message="Adding new Alumni Stories"
-        show={isShowingNewAlumModal}
-        onCancel={() => setIsShowingNewAlumModal(false)}
+      <EditAlumModal
+        title="Edit Alumni Stories"
+        message="Edit Alumni Stories"
+        show={isShowingEditAlumModal}
+        onCancel={() => setIsShowingEditAlumModal(false)}
+        currentAlum= {alum}
       />
     </>
   );
