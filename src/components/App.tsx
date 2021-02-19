@@ -16,7 +16,10 @@ export function App(): JSX.Element {
     <Router>
       <Navigation />
       <Switch>
-        <Route path={URLPaths.alumStories}>
+        <Route exact path={URLPaths.alumStories}>
+          <AlumniStoriesList />
+        </Route>
+        <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
           <AlumniStoriesList />
         </Route>
         <Route exact path={URLPaths.admin}>
