@@ -5,6 +5,8 @@ import Button from "react-bootstrap/esm/Button";
 import ReactModal from "react-modal";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { getPeopleGroveAlumni } from "services";
+import "./App.scss";
+// import {colors} from "../styles/colors";
 
 export function App(): JSX.Element {
   const [navPosition, setNavPosition] = useState<"top" | "bottom">("top");
@@ -21,22 +23,24 @@ export function App(): JSX.Element {
     content: {
       backgroundColor: "clear",
       bottom: "23px",
+      height: "82px",
+
       left: "1",
-      marginLeft: "0",
-      marginRight: "0",
+      // marginLeft: "0",
+      // marginRight: "0",
       right: "55px",
       top: "1",
-      transform: "translate(0, 0)",
+      // transform: "translate(0, 0)",
     },
     overlay: {
       backgroundColor: "clear",
-      bottom: "0",
-      left: "0",
-      marginLeft: "100",
-      marginRight: "100",
+      // bottom: "0",
+      // left: "0",
+      // marginLeft: "100",
+      // marginRight: "100",
       // right: "absolute",
-      top: "1",
-      transform: "translate(0%, 0%)",
+      // top: "1",
+      // transform: "translate(0%, 0%)",
     },
   };
 
@@ -44,27 +48,38 @@ export function App(): JSX.Element {
     content: {
       backgroundColor: "clear",
       bottom: "81px",
+      height: "82px",
       left: "1",
-      marginLeft: "0",
-      marginRight: "0",
+      // marginLeft: "0",
+      // marginRight: "0",
       right: "55px",
       top: "1",
-      transform: "translate(0, 0)",
+      // transform: "translate(0, 0)",
     },
     overlay: {
       backgroundColor: "clear",
-      bottom: "0",
-      left: "0",
-      marginLeft: "100",
-      marginRight: "100",
+      // bottom: "0",
+      // left: "0",
+      // marginLeft: "100",
+      // marginRight: "100",
       // right: "absolute",
-      top: "1",
-      transform: "translate(0%, 0%)",
+      // top: "1",
+      // transform: "translate(0%, 0%)",
     },
   };
 
   const buttonText = navPosition === "top" ? "Bring NavBar down" : "Bring NavBar up";
-  const buttonStyle = navPosition === "top" ? topStyle : bottomStyle;
+  const modalStyle = navPosition === "top" ? topStyle : bottomStyle;
+
+  // const buttonStyle = {
+  //   backgroundColor: "#f46a1f",
+  // };
+
+  // const logoStyle = {
+  //   height: "80px",
+  //   position: "fixed",
+  //   zIndex: "100",
+  // };
 
   return (
     <div>
@@ -95,11 +110,16 @@ export function App(): JSX.Element {
           </Route>
         </Switch>
       </Router>
-      <ReactModal isOpen contentLabel="Button Modal" style={buttonStyle}>
-        <Button className="dashboard-Down" onClick={handleClick}>
-          {buttonText};
+      <ReactModal isOpen contentLabel="Button Modal" style={modalStyle}>
+        <Button id="navBarDown" onClick={handleClick}>
+          {buttonText}
         </Button>
       </ReactModal>
+      {/* <div style={{ zIndex: 100 }} > */}
+      {/* <div>
+        <img id="tagline" alt="Where will you go?" src="../../whereWillYouGo.jpg" />
+      </div> */}
+
       {/* https://github.com/reactjs/react-modal#api-documentation */}
     </div>
   );
