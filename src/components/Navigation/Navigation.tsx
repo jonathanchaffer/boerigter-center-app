@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, useLocation } from "react-router-dom";
+import { URLPaths } from "utilities";
 import "./Navigation.scss";
 
 export function Navigation(): JSX.Element {
@@ -10,13 +11,13 @@ export function Navigation(): JSX.Element {
     <Navbar bg="light">
       <Container>
         <Nav>
-          <NavLink path="/stories">Alumni Stories</NavLink>
-          <NavLink path="/poll">Quick Poll</NavLink>
+          <NavLink path={URLPaths.alumStories}>Alumni Stories</NavLink>
+          {/* <NavLink path={URLPaths.poll}>Quick Poll</NavLink> */}
         </Nav>
         <Nav>
-          <NavLink path="/career">Career Opportunities</NavLink>
-          <NavLink path="/alumni">Find Alumni</NavLink>
-          <NavLink path="/study-abroad">Off-Campus Study</NavLink>
+          <NavLink path={URLPaths.alumFinder}>Find Alumni</NavLink>
+          <NavLink path={URLPaths.careerFinder}>Career Opportunities</NavLink>
+          {/* <NavLink path={URLPaths.offCampusFinder}>Off-Campus Study</NavLink> */}
         </Nav>
       </Container>
     </Navbar>

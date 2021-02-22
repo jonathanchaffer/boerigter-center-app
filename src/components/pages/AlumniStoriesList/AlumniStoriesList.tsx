@@ -12,7 +12,9 @@ import Row from "react-bootstrap/Row";
 import Img from "react-cool-img";
 import { useHistory } from "react-router-dom";
 import { deleteAlumStory, getAlumniStories, updateAlumStory } from "services";
+import { URLPaths } from "utilities";
 import "./AlumniStoriesList.scss";
+
 
 export function AlumniStoriesList(): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
@@ -58,11 +60,11 @@ interface AlumCardProps {
 function AlumCard({ alum }: AlumCardProps): JSX.Element {
   
   const [isShowingConfirmDelete, setIsShowingConfirmDelete] = useState(false);
-  const [checked, setChecked] = useState(false);
   const history = useHistory();
   const user = useContext(UserContext);
-  const isAdminPage = history.location.pathname === "/stories/admin";
   const [isShowingEditAlumModal, setIsShowingEditAlumModal] = useState(false);
+  const isAdminPage = history.location.pathname === `${URLPaths.alumStories}${URLPaths.admin}`;
+  const [checked, setChecked] = useState(false);
 
   return (
     <>
@@ -91,7 +93,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
             </Col>
             <Col xs="auto" className="d-flex align-items-center">
               <div className="d-flex flex-column justify-content-center">
-                <a href={`/stories/${alum.id}`} className="p-3">
+                <a href={`${URLPaths.alumStories}/${alum.id}`} className="p-3">
                   Learn More
                   <i className="ml-2 fas fa-arrow-right" />
                 </a>
@@ -103,7 +105,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
                     </Button>
                     </div>
                     <Button
-                      variant="danger"
+                      variant="outline-danger"
                       size="sm"
                       onClick={() => setIsShowingConfirmDelete(true)}
                     >
@@ -115,13 +117,13 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
                           type="checkbox"
                           variant="outline-primary"
                           size="sm"
-                          checked={checked}
-                          value="1"
+                          checked= {alum.display}
+                          value="check"
                           onChange={(e) => {setChecked(
                             e.currentTarget.checked); 
                             (alum.display = !alum.display); 
                             (updateAlumStory(alum.id, alum));
-                          }}
+                          }} 
                         >
                           Display
                         </ToggleButton>

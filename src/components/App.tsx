@@ -9,29 +9,30 @@ import {
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { getPeopleGroveAlumni, isLoggedInToPG, loginToPG } from "services";
+import { URLPaths } from "utilities";
 
 export function App(): JSX.Element {
   return (
     <Router>
       <Navigation />
       <Switch>
-        <Route exact path="/stories">
+        <Route exact path={URLPaths.alumStories}>
           <AlumniStoriesList />
         </Route>
-        <Route exact path="/stories/admin">
+        <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
           <AlumniStoriesList />
         </Route>
-        <Route exact path="/admin">
+        <Route exact path={URLPaths.admin}>
           <AdminDashboard />
         </Route>
-        <Route exact path="/stories/:id">
+        <Route exact path={`${URLPaths.alumStories}/:id`}>
           <AlumStoryDetails />
         </Route>
-        <Route exact path="/poll" />
-        <Route exact path="/career">
+        {/* <Route exact path={URLPaths.poll} /> */}
+        <Route exact path={URLPaths.careerFinder}>
           <MapView getData={async () => []} />
         </Route>
-        <Route exact path="/alumni">
+        <Route exact path={URLPaths.alumFinder}>
           <>
             <MapView getData={getPeopleGroveAlumni} />
             <LoginModal
@@ -49,11 +50,11 @@ export function App(): JSX.Element {
             />
           </>
         </Route>
-        <Route exact path="/study-abroad">
+        {/* <Route exact path={URLPaths.offCampusFinder}>
           <MapView getData={async () => []} />
-        </Route>
+        </Route> */}
         <Route>
-          <Redirect to="/career" />
+          <Redirect to={URLPaths.alumFinder} />
         </Route>
       </Switch>
     </Router>

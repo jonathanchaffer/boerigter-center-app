@@ -5,6 +5,11 @@
   z-index: 2;
 }
 
+.navbar.bg-light {
+  background-color: $off-white !important;
+  border: $lt-border;
+}
+
 .nav-link {
   padding: 0.5rem 1rem !important;
   border-radius: $border-radius;
@@ -18,10 +23,10 @@
 
 .nav-link:hover {
   background-color: $hope-orange;
-  color: $white !important;
+  color: $off-white !important;
 }
 
 .nav-link.active {
   background-color: $hope-blue;
-  color: $white !important;
+  color: $off-white !important;
 }
