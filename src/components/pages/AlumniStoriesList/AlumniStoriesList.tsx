@@ -75,7 +75,8 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
       <Row>
         <Col xs="auto" className="d-flex align-items-center">
           <Button
-            style={{ width: "3rem" }}
+            variant="link"
+            className="hide-show-btn"
             onClick={() => {
               // TODO: add error handling to this async call
               updateAlumStory(alum.id, { ...alum, display: !isDisplaying }).then(() =>
