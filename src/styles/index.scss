@@ -89,9 +89,9 @@ hr {
 .card,
 .btn {
   border-radius: $border-radius;
-  background-color: $off-white;
 }
 
-.list-group-item {
+.popover,
+.card .list-group-item {
   background-color: $off-white;
 }
