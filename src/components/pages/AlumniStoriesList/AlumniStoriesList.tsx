@@ -24,20 +24,25 @@ export function AlumniStoriesList(): JSX.Element {
   return (
     <PageContainer>
       <div className="alumni-stories-list">
-        <h1>Alumni Stories</h1>
-        <p>Alumni hand-picked by Boerigter Center staff.</p>
-        {user && isAdminPage && (
-          <div className="buttons spaced-children">
-            <Button
-              variant="outline-secondary"
-              size="lg"
-              onClick={() => setIsShowingNewAlumModal(true)}
-            >
-              New Alumni
-            </Button>
-            <br />
+        <div className="d-flex justify-content-between">
+          <div>
+            <h1>Alumni Stories</h1>
+            <p>Alumni hand-picked by Boerigter Center staff.</p>
           </div>
-        )}
+          <div>
+            {user && isAdminPage && (
+              <Button
+                variant="outline-primary"
+                onClick={() => setIsShowingNewAlumModal(true)}
+                size="lg"
+              >
+                <i className="fas fa-plus mr-2" />
+                New Alum
+              </Button>
+            )}
+          </div>
+        </div>
+        <br />
         {isPending ? (
           <Spinner animation="border" />
         ) : (
