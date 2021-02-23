@@ -78,7 +78,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
   return (
     <>
       <Row>
-        <Col xs="auto" className="d-flex align-items-center">
+        <Col xs="auto" className="d-flex align-items-center p-0">
           <Button
             variant="link"
             className="hide-show-btn"
