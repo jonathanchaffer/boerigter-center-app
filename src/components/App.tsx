@@ -8,7 +8,7 @@ import {
 } from "components";
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { getHandshakeCareers, getPeopleGroveAlumni, isLoggedInToPG, loginToPG } from "services";
+import { getAllPeopleGroveAlumni, getHandshakeCareers, isLoggedInToPG, loginToPG } from "services";
 import { URLPaths } from "utilities";
 
 export function App(): JSX.Element {
@@ -34,7 +34,7 @@ export function App(): JSX.Element {
         </Route>
         <Route exact path={URLPaths.alumFinder}>
           <>
-            <MapView getData={getPeopleGroveAlumni} />
+            <MapView getData={getAllPeopleGroveAlumni} />
             <LoginModal
               isLoggedIn={isLoggedInToPG()}
               loginFn={loginToPG}
