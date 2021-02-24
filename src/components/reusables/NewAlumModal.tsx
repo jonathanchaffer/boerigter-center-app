@@ -105,7 +105,7 @@ export function NewAlumModal({
         <Button variant="outline-secondary" onClick={onCancel}>
             Cancel
         </Button>
-        <Button variant="outline-primary" onClick={() => {addAlumStory(newAlum); onCancel();}}>
+        <Button variant="outline-primary" onClick={() => {addAlumStory(newAlum); onCancel(); window.location.reload()}}>
             Submit    
         </Button>  
         </Modal.Body>
