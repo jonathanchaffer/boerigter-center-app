@@ -47,6 +47,7 @@ export function App(): JSX.Element {
                   credentials to view this content.
                 </span>
               }
+              tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
             />
           </>
         </Route>
