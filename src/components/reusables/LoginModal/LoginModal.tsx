@@ -11,6 +11,7 @@ interface LoginModalProps {
   loginFn: (email: string, password: string) => Promise<any>;
   title?: string;
   description?: string | React.ReactNode;
+  passwordResetFn?: (email: string) => Promise<void>;
 }
 
 // TODO: use Formik for data validation
@@ -19,11 +20,14 @@ export function LoginModal({
   loginFn,
   title,
   description,
+  passwordResetFn,
 }: LoginModalProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
+  const [hasSentEmail, setHasSentEmail] = useState(false);
   const [error, setError] = useState<Error | undefined>(undefined);
   const history = useHistory();
 
@@ -78,12 +82,33 @@ export function LoginModal({
               >
                 Cancel
               </Button>
-              {isLoading && (
-                <>
-                  <Spinner animation="border" size="sm" className="mr-1" />
-                  <span>Logging in. This may take a moment.</span>
-                </>
+              {!isLoading && !isSendingEmail && !hasSentEmail && passwordResetFn && (
+                <Button
+                  variant="link"
+                  onClick={() => {
+                    setIsSendingEmail(true);
+                    passwordResetFn(email)
+                      .catch(err => setError(err))
+                      .finally(() => {
+                        setIsSendingEmail(false);
+                        setHasSentEmail(true);
+                      });
+                  }}
+                >
+                  Forgot password?
+                </Button>
               )}
+              {hasSentEmail && (
+                <div className="mt-3">Password reset email sent. Please check your inbox.</div>
+              )}
+              {isLoading ||
+                (isSendingEmail && (
+                  <>
+                    <Spinner animation="border" size="sm" className="mx-2" />
+                    {isLoading && <span>Logging in. This may take a moment.</span>}
+                    {isSendingEmail && <span>Sending password reset email...</span>}
+                  </>
+                ))}
             </div>
           </Form>
         </Modal.Body>

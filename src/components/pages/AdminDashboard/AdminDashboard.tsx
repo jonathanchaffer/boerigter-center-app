@@ -3,7 +3,7 @@ import { UserContext } from "contexts";
 import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import { loginAsAdmin, logout } from "services";
+import { loginAsAdmin, logout, sendPasswordResetEmail } from "services";
 import { URLPaths } from "utilities";
 
 export function AdminDashboard(): JSX.Element {
@@ -16,6 +16,7 @@ export function AdminDashboard(): JSX.Element {
         loginFn={loginAsAdmin}
         title="Admin Login"
         description="Please login using your admin credentials to view this content."
+        passwordResetFn={sendPasswordResetEmail}
       />
       <PageContainer>
         {user && (
