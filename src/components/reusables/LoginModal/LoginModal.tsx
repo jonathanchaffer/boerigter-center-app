@@ -80,8 +80,8 @@ export function LoginModal({
               </Button>
               {isLoading && (
                 <>
-                  <Spinner animation="border" size="sm" />{" "}
-                  <span>Logging you in. This might take a minute or two.</span>
+                  <Spinner animation="border" size="sm" className="mr-1" />
+                  <span>Logging in. This may take a moment.</span>
                 </>
               )}
             </div>
