@@ -1,26 +1,106 @@
-import {
+/* eslint-disable react/jsx-props-no-spreading */
+import { 
   AdminDashboard,
-  AlumniStoriesList,
-  AlumStoryDetails,
-  LoginModal,
-  MapView,
-  Navigation,
+  AlumniStoriesList, 
+  AlumStoryDetails, 
+  LoginModal, 
+  MapView, 
+  Navigation 
 } from "components";
-import React from "react";
+import React, { useState } from "react";
+import Button from "react-bootstrap/esm/Button";
+import ReactModal from "react-modal";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { getAllPeopleGroveAlumni, getHandshakeCareers, isLoggedInToPG, loginToPG } from "services";
 import { URLPaths } from "utilities";
+import "./App.scss";
 
 export function App(): JSX.Element {
+  const [navPosition, setNavPosition] = useState<"top" | "bottom">("top");
+
+  function handleClick() {
+    if (navPosition === "top") {
+      setNavPosition("bottom");
+    } else {
+      setNavPosition("top");
+    }
+  }
+
+  const topStyle = {
+    content: {
+      backgroundColor: "clear",
+      bottom: "23px",
+      height: "82px",
+
+      left: "1",
+      // marginLeft: "0",
+      // marginRight: "0",
+      right: "55px",
+      top: "1",
+      // transform: "translate(0, 0)",
+    },
+    overlay: {
+      backgroundColor: "clear",
+      // bottom: "0",
+      // left: "0",
+      // marginLeft: "100",
+      // marginRight: "100",
+      // right: "absolute",
+      // top: "1",
+      // transform: "translate(0%, 0%)",
+    },
+  };
+
+  const bottomStyle = {
+    content: {
+      backgroundColor: "clear",
+      bottom: "81px",
+      height: "82px",
+      left: "1",
+      // marginLeft: "0",
+      // marginRight: "0",
+      right: "55px",
+      top: "1",
+      // transform: "translate(0, 0)",
+    },
+    overlay: {
+      backgroundColor: "clear",
+      // bottom: "0",
+      // left: "0",
+      // marginLeft: "100",
+      // marginRight: "100",
+      // right: "absolute",
+      // top: "1",
+      // transform: "translate(0%, 0%)",
+    },
+  };
+
+  const buttonText = navPosition === "top" ? "Bring NavBar down" : "Bring NavBar up";
+  const modalStyle = navPosition === "top" ? topStyle : bottomStyle;
+
+  // const buttonStyle = {
+  //   backgroundColor: "#f46a1f",
+  // };
+
+  // const logoStyle = {
+  //   height: "80px",
+  //   position: "fixed",
+  //   zIndex: "100",
+  // };
+
   return (
-    <Router>
-      <Navigation />
-      <Switch>
-        <Route exact path={URLPaths.alumStories}>
-          <AlumniStoriesList />
-        </Route>
-        <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
-          <AlumniStoriesList />
+    <div>
+      <Router>
+        <Navigation {...navPosition} />
+        <Switch>
+          <Route exact path={URLPaths.alumStories}>
+            <AlumniStoriesList {...navPosition}/>
+          </Route>
+          <Route exact path="/stories/:id">
+            <AlumStoryDetails />
+          </Route>
+          <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
+          <AlumniStoriesList {...navPosition} />
         </Route>
         <Route exact path={URLPaths.admin}>
           <AdminDashboard />
@@ -28,14 +108,14 @@ export function App(): JSX.Element {
         <Route exact path={`${URLPaths.alumStories}/:id`}>
           <AlumStoryDetails />
         </Route>
-        {/* <Route exact path={URLPaths.poll} /> */}
-        <Route exact path={URLPaths.careerFinder}>
-          <MapView getData={getHandshakeCareers} />
+          {/* <Route exact path="/poll" /> */}
+          <Route exact path={URLPaths.careerFinder}>
+          <MapView getData={getHandshakeCareers} pos={navPosition} />
         </Route>
-        <Route exact path={URLPaths.alumFinder}>
-          <>
-            <MapView getData={getAllPeopleGroveAlumni} />
-            <LoginModal
+          <Route exact path={URLPaths.alumFinder}>
+            <>
+              <MapView getData={getAllPeopleGroveAlumni} pos={navPosition} />
+              <LoginModal
               isLoggedIn={isLoggedInToPG()}
               loginFn={loginToPG}
               description={
@@ -48,15 +128,26 @@ export function App(): JSX.Element {
                 </span>
               }
             />
-          </>
-        </Route>
-        {/* <Route exact path={URLPaths.offCampusFinder}>
-          <MapView getData={async () => []} />
+            </>
+          </Route>
+          {/* <Route exact path={URLPaths.offCampusFinder}>
+          <MapView getData={async () => []} pos={navPosition} />
         </Route> */}
-        <Route>
+          <Route>
           <Redirect to={URLPaths.alumFinder} />
         </Route>
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
+      <ReactModal isOpen contentLabel="Button Modal" style={modalStyle}>
+        <Button id="navBarDown" onClick={handleClick}>
+          {buttonText}
+        </Button>
+      </ReactModal>
+      {/* <div>
+        <img id="tagline" alt="Where will you go?" src="../../whereWillYouGo.png" />
+      </div> */}
+
+      {/* https://github.com/reactjs/react-modal#api-documentation */}
+    </div>
   );
 }

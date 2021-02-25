@@ -6,9 +6,11 @@ import { Link, useLocation } from "react-router-dom";
 import { URLPaths } from "utilities";
 import "./Navigation.scss";
 
-export function Navigation(): JSX.Element {
+export function Navigation(pos: "top" | "bottom"): JSX.Element {
+  // const fix = ((pos as unknown) as []).join("") as "top" | "bottom";
+  const fix = Object.values(pos).join("") as "top" | "bottom";
   return (
-    <Navbar bg="light">
+    <Navbar bg="light" fixed={fix}>
       <Container>
         <Nav>
           <NavLink path={URLPaths.alumStories}>Alumni Stories</NavLink>

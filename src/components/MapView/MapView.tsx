@@ -13,12 +13,19 @@ import "./MapView.scss";
 
 interface MapViewProps<I extends Mappable> {
   getData: () => Promise<I[]>;
+  pos: "top" | "bottom";
 }
 
-export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.Element {
+export function MapView<I extends Mappable>({
+  getData,
+  pos,
+}: MapViewProps<I>):
+JSX.Element {
   const [mapZoom, setMapZoom] = useState(4);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
-  const { data, error, isPending } = useAsync({ promiseFn: getData });
+  // const [mapStyle, setMapStyle] = useState(pos)
+  const { data, error, isPending  } = useAsync({ promiseFn: getData });
+  const fix = Object.values(pos).join("") as "top" | "bottom";
 
   const points: PointFeature<I>[] = data
     ? data.map((item: I) => {
@@ -37,8 +44,23 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
     zoom: mapZoom,
   });
 
+  const navBarTopStyle = {
+    // Just to be clear:
+    // bottom: "0px",
+    // top: "0px",
+  };
+  const navBarBottomStyle = {
+    // bottom: "58px",
+    top: "-58px",
+    // bottom: "200px",
+  };
+
+  const divStyle = fix === "top" ? navBarTopStyle : navBarBottomStyle;
+  // const divStyle = navBarBottomStyle;
+
   return (
     <>
+      <div id="mapDiv" className="map-container" style={divStyle}>
       {isPending && (
         <div className="pending-map-container">
           <Spinner animation="border" variant="light" />
@@ -88,6 +110,7 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
             );
           })}
         </GoogleMapReact>
+      </div>
       </div>
       <ErrorModal error={error} />
     </>

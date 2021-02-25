@@ -1,0 +1,12 @@
+@import "styles/colors.scss";
+
+#navBarDown {
+  background-color: $hope-orange !important;
+}
+
+#tagline {
+  margin-top: 0px;
+  height: "80px" !important;
+  position: "sticky";
+  z-index: "100";
+}
