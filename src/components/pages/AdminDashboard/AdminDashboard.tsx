@@ -27,9 +27,12 @@ export function AdminDashboard(): JSX.Element {
               </Button>
             </div>
             <hr />
-            <Link to={`${URLPaths.alumStories}${URLPaths.admin}`}>
-              <Button>Edit Alumni Stories</Button>
-            </Link>
+            <div className="spaced-children">
+              <Link to={`${URLPaths.alumStories}${URLPaths.admin}`}>
+                <Button>Edit Alumni Stories</Button>
+              </Link>
+              <Button>Change Password</Button>
+            </div>
           </>
         )}
       </PageContainer>
