@@ -44,20 +44,19 @@
 .point-marker:focus {
   cursor: pointer;
   box-shadow: 0 0 1rem $white;
-  z-index: 1;
+  z-index: 100000 !important;
+  opacity: 1 !important;
 }
 
 .cluster-marker {
   background-color: $hope-blue;
   font-family: $font-stack;
-  font-size: 14pt;
+  font-size: 18pt;
 }
 
 .point-marker {
   background-color: $lake-mi-blue;
-  padding: 6px;
-  width: 1.5rem;
-  height: 1.5rem;
+  font-size: 14pt;
 }
 
 .map-popover {
