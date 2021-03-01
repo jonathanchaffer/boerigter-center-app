@@ -117,7 +117,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
                           type="checkbox"
                           variant="outline-primary"
                           size="sm"
-                          checked= {alum.display}
+                          checked= {checked}
                           value="check"
                           onChange={(e) => {setChecked(
                             e.currentTarget.checked); 
@@ -144,7 +144,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
         variant="danger"
         show={isShowingConfirmDelete}
         onConfirm={() => {
-          return deleteAlumStory(alum.id);
+          return deleteAlumStory(alum.id).finally(() => { window.location.reload() });
         }}
         onHide={() => setIsShowingConfirmDelete(false)}
       />
