@@ -168,7 +168,7 @@ function PopoverTrigger<I extends Mappable>({
   return (
     <OverlayTrigger
       trigger="focus"
-      placement="top"
+      placement="auto"
       overlay={
         <Popover id={`popover-${popoverId.toString()}`} className="map-popover">
           <Popover.Content>
