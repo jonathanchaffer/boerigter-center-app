@@ -37,7 +37,7 @@ export function MapView<I extends Mappable>({
 
   const { clusters, supercluster } = useSupercluster({
     bounds: mapBounds,
-    options: { maxZoom: 20, radius: 75 },
+    options: { maxZoom: 20, radius: 114 },
     points,
     zoom: mapZoom,
   });
