@@ -4,7 +4,6 @@ import { OverlayTrigger, Spinner, Tooltip } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { useHistory } from "react-router-dom";
 
 interface LoginModalProps {
   isLoggedIn: boolean;
@@ -31,7 +30,6 @@ export function LoginModal({
   const [isSendingEmail, setIsSendingEmail] = useState(false);
   const [hasSentEmail, setHasSentEmail] = useState(false);
   const [error, setError] = useState<Error | undefined>(undefined);
-  const history = useHistory();
 
   function handleLogIn() {
     setIsLoading(true);
@@ -89,7 +87,7 @@ export function LoginModal({
               <Button
                 variant="outline-secondary"
                 disabled={isLoading}
-                onClick={() => history.goBack()}
+                onClick={() => setIsOpen(false)}
               >
                 Cancel
               </Button>
