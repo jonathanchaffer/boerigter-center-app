@@ -13,12 +13,27 @@ import { deleteAlumStory, getAlumniStories } from "services";
 import { URLPaths } from "utilities";
 import "./AlumniStoriesList.scss";
 
-export function AlumniStoriesList(): JSX.Element {
+export function AlumniStoriesList(pos: ("top") | ("bottom")): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
+  const fix = Object.values(pos).join("") as "top" | "bottom";
+
+  const navBarTopStyle = {
+    // Just to be clear:
+    // bottom: "0px",
+     paddingTop: "58px",
+  };
+  const navBarBottomStyle = {
+    // marginTop: "-58px",
+  };
+
+  const divStyle = fix === "top" ? navBarTopStyle : navBarBottomStyle;
+
   return (
+    // <div style={divStyle}>
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <PageContainer>
-      <div className="alumni-stories-list">
-        <h1>Alumni Stories</h1>
+      <div className="alumni-stories-list" style={divStyle}>
+        <h1>Alumni stories</h1>
         <p>Alumni hand-picked by Boerigter Center staff.</p>
         {isPending ? (
           <Spinner animation="border" />
@@ -28,6 +43,7 @@ export function AlumniStoriesList(): JSX.Element {
       </div>
       <ErrorModal error={error} />
     </PageContainer>
+    // </div>
   );
 }
 

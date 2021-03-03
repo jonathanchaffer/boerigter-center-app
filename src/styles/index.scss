@@ -95,3 +95,10 @@ hr {
 .list-group-item {
   background-color: $off-white;
 }
+
+#tagline {
+  margin-top: 0px;
+  width: "80px"!important;
+  position: "fixed";
+  // z-index: "";
+}

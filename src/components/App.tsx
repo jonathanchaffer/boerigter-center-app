@@ -5,7 +5,7 @@ import {
   AlumStoryDetails, 
   LoginModal, 
   MapView, 
-  Navigation 
+  Navigation, 
 } from "components";
 import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
@@ -13,6 +13,7 @@ import ReactModal from "react-modal";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { getAllPeopleGroveAlumni, getHandshakeCareers, isLoggedInToPG, loginToPG } from "services";
 import { URLPaths } from "utilities";
+import tagline from "../assets/images/where_will_you_go.png";
 import "./App.scss";
 
 export function App(): JSX.Element {
@@ -78,16 +79,6 @@ export function App(): JSX.Element {
   const buttonText = navPosition === "top" ? "Bring NavBar down" : "Bring NavBar up";
   const modalStyle = navPosition === "top" ? topStyle : bottomStyle;
 
-  // const buttonStyle = {
-  //   backgroundColor: "#f46a1f",
-  // };
-
-  // const logoStyle = {
-  //   height: "80px",
-  //   position: "fixed",
-  //   zIndex: "100",
-  // };
-
   return (
     <div>
       <Router>
@@ -143,9 +134,9 @@ export function App(): JSX.Element {
           {buttonText}
         </Button>
       </ReactModal>
-      {/* <div>
-        <img id="tagline" alt="Where will you go?" src="../../whereWillYouGo.png" />
-      </div> */}
+      <div>
+        <img id="tagline" alt="Where will you go?" src={tagline} />
+      </div>
 
       {/* https://github.com/reactjs/react-modal#api-documentation */}
     </div>
