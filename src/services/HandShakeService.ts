@@ -1,6 +1,21 @@
 import { HandshakeCareer } from "models";
 import { results } from "placeholders/HandshakeResponse.json";
 
+export function removeDuplicateCareers(careers: HandshakeCareer[]): Promise<HandshakeCareer[]> {
+  const filteredCareers = [];
+  let previousJob = careers[0];
+  filteredCareers.push(previousJob);
+  for(let i = 1; i < careers.length; i++) {
+    if(previousJob.latitude === careers[i].latitude && previousJob.longitude === careers[i].longitude){
+      if(previousJob.employer_name !== careers[i].employer_name && previousJob.job_name !== careers[i].job_name){
+        previousJob = careers[i];
+        filteredCareers.push(previousJob);
+      }
+    }
+  }
+  return filteredCareers;
+}
+
 export async function getHandshakeCareers(): Promise<HandshakeCareer[]> {
   const careers = [];
 
@@ -20,5 +35,6 @@ export async function getHandshakeCareers(): Promise<HandshakeCareer[]> {
       careers.push(job);
     }
   }
-  return careers;
+  const filteredCareers = removeDuplicateCareers(careers);
+  return filteredCareers;
 }
