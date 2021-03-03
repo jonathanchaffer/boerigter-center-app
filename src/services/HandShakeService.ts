@@ -1,19 +1,15 @@
 import { HandshakeCareer } from "models";
 import { results } from "placeholders/HandshakeResponse.json";
 
-export function removeDuplicateCareers(careers: HandshakeCareer[]): HandshakeCareer[] {
-  const filteredCareers = [];
-  let previousJob = careers[0];
-  filteredCareers.push(previousJob);
-  for(let i = 1; i < careers.length; i++) {
-    if(previousJob.latitude === careers[i].latitude && previousJob.longitude === careers[i].longitude){
-      if(previousJob.employer_name !== careers[i].employer_name && previousJob.job_name !== careers[i].job_name){
-        previousJob = careers[i];
-        filteredCareers.push(previousJob);
+export function removeDuplicateCareers(careers: HandshakeCareer[], nextCareer: HandshakeCareer): boolean {
+  for(let i = 0; i < careers.length; i++) {
+    if(nextCareer.latitude === careers[i].latitude && nextCareer.longitude === careers[i].longitude){
+      if(nextCareer.job_name === careers[i].job_name && nextCareer.job_name === careers[i].job_name){
+        return true;
       }
-    }
+    } 
   }
-  return filteredCareers;
+  return false;
 }
 
 export async function getHandshakeCareers(): Promise<HandshakeCareer[]> {
@@ -32,9 +28,10 @@ export async function getHandshakeCareers(): Promise<HandshakeCareer[]> {
         longitude: Number(points[1]),
         type: "career",
       } as HandshakeCareer;
-      careers.push(job);
+      if(!removeDuplicateCareers(careers,job)){
+        careers.push(job);
+      }
     }
   }
-  const filteredCareers = removeDuplicateCareers(careers);
-  return filteredCareers;
+  return careers;
 }
