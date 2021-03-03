@@ -1,6 +1,6 @@
 import { ErrorModal } from "components";
 import React, { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
+import { OverlayTrigger, Spinner, Tooltip } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -12,6 +12,7 @@ interface LoginModalProps {
   title?: string;
   description?: string | React.ReactNode;
   passwordResetFn?: (email: string) => Promise<void>;
+  tooltip?: string;
 }
 
 // TODO: use Formik for data validation
@@ -21,6 +22,7 @@ export function LoginModal({
   title,
   description,
   passwordResetFn,
+  tooltip,
 }: LoginModalProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -50,7 +52,16 @@ export function LoginModal({
     <>
       <Modal show={isOpen} centered>
         <Modal.Body>
-          <Modal.Title>{title || "Login"}</Modal.Title>
+          <Modal.Title className="d-flex justify-content-between">
+            {title || "Login"}
+            {tooltip && (
+              <OverlayTrigger overlay={<Tooltip id="tooltip">{tooltip}</Tooltip>} placement="right">
+                <Button variant="link">
+                  <i className="fas fa-info-circle" />
+                </Button>
+              </OverlayTrigger>
+            )}
+          </Modal.Title>
           <p>{description || ""}</p>
           <Form>
             <Form.Group controlId="email">
