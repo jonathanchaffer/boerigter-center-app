@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { 
+import {
   AdminDashboard,
-  AlumniStoriesList, 
-  AlumStoryDetails, 
-  LoginModal, 
-  MapView, 
-  Navigation, 
+  AlumniStoriesList,
+  AlumStoryDetails,
+  LoginModal,
+  MapView,
+  Navigation,
 } from "components";
 import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
@@ -85,48 +85,48 @@ export function App(): JSX.Element {
         <Navigation {...navPosition} />
         <Switch>
           <Route exact path={URLPaths.alumStories}>
-            <AlumniStoriesList {...navPosition}/>
+            <AlumniStoriesList {...navPosition} />
           </Route>
           <Route exact path="/stories/:id">
             <AlumStoryDetails />
           </Route>
           <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
-          <AlumniStoriesList {...navPosition} />
-        </Route>
-        <Route exact path={URLPaths.admin}>
-          <AdminDashboard />
-        </Route>
-        <Route exact path={`${URLPaths.alumStories}/:id`}>
-          <AlumStoryDetails />
-        </Route>
+            <AlumniStoriesList {...navPosition} />
+          </Route>
+          <Route exact path={URLPaths.admin}>
+            <AdminDashboard />
+          </Route>
+          <Route exact path={`${URLPaths.alumStories}/:id`}>
+            <AlumStoryDetails />
+          </Route>
           {/* <Route exact path="/poll" /> */}
           <Route exact path={URLPaths.careerFinder}>
-          <MapView getData={getHandshakeCareers} pos={navPosition} />
-        </Route>
+            <MapView getData={getHandshakeCareers} pos={navPosition} />
+          </Route>
           <Route exact path={URLPaths.alumFinder}>
             <>
               <MapView getData={getAllPeopleGroveAlumni} pos={navPosition} />
               <LoginModal
-              isLoggedIn={isLoggedInToPG()}
-              loginFn={loginToPG}
-              description={
-                <span>
-                  Please log in using your{" "}
-                  <a href="https://connection.hope.edu/" target="blank">
-                    connection.hope.edu
-                  </a>{" "}
-                  credentials to view this content.
-                </span>
-              }
-            />
+                isLoggedIn={isLoggedInToPG()}
+                loginFn={loginToPG}
+                description={
+                  <span>
+                    Please log in using your{" "}
+                    <a href="https://connection.hope.edu/" target="blank">
+                      connection.hope.edu
+                    </a>{" "}
+                    credentials to view this content.
+                  </span>
+                }
+              />
             </>
           </Route>
           {/* <Route exact path={URLPaths.offCampusFinder}>
           <MapView getData={async () => []} pos={navPosition} />
         </Route> */}
           <Route>
-          <Redirect to={URLPaths.alumFinder} />
-        </Route>
+            <Redirect to={URLPaths.alumFinder} />
+          </Route>
         </Switch>
       </Router>
       <ReactModal isOpen contentLabel="Button Modal" style={modalStyle}>
