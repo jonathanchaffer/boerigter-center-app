@@ -1,7 +1,7 @@
 import { HandshakeCareer } from "models";
 import { results } from "placeholders/HandshakeResponse.json";
 
-export function removeDuplicateCareers(careers: HandshakeCareer[]): Promise<HandshakeCareer[]> {
+export function removeDuplicateCareers(careers: HandshakeCareer[]): HandshakeCareer[] {
   const filteredCareers = [];
   let previousJob = careers[0];
   filteredCareers.push(previousJob);
