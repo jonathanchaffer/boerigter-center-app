@@ -9,14 +9,14 @@ const axiosInstance = axios.create({
   },
 });
 
-export function getPGUser(): any | undefined {
+export function getPGAuth(): any | undefined {
   const item = localStorage.getItem("pg_user");
   if (item === null) return undefined;
   return JSON.parse(item);
 }
 
 export function isLoggedInToPG(): boolean {
-  return getPGUser()?.found || false;
+  return getPGAuth()?.found || false;
 }
 
 export function loginToPG(email: string, password: string): Promise<void> {
@@ -32,9 +32,9 @@ export function loginToPG(email: string, password: string): Promise<void> {
   });
 }
 
-export async function getPeopleGroveAlumni(): Promise<PeopleGroveAlum[]> {
-  if (getPGUser()) {
-    const accessToken = getPGUser()?.token;
+export async function getAllPeopleGroveAlumni(): Promise<PeopleGroveAlum[]> {
+  if (getPGAuth()) {
+    const accessToken = getPGAuth()?.token;
 
     const data = {
       filters: { condition: "UNION ALL", rules: [] },
@@ -59,4 +59,20 @@ export async function getPeopleGroveAlumni(): Promise<PeopleGroveAlum[]> {
     );
   }
   return [];
+}
+
+export async function getPeopleGroveAlum(username: string): Promise<PeopleGroveAlum> {
+  if (getPGAuth()) {
+    const accessToken = getPGAuth()?.token;
+
+    const options = {
+      headers: {
+        authorization: `bearer ${accessToken}`,
+      },
+    };
+
+    return (await axiosInstance.get(`users/${username}?hubIdentifier=hopecollege`, options)).data;
+  }
+
+  return Promise.reject();
 }
