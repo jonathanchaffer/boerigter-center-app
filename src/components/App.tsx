@@ -38,20 +38,23 @@ export function App(): JSX.Element {
           <MapView getData={getHandshakeCareers} />
         </Route>
         <Route exact path={URLPaths.alumFinder}>
-          <MapView getData={getAllPeopleGroveAlumni} />
-          <LoginModal
-            isLoggedIn={isLoggedInToPG()}
-            loginFn={loginToPG}
-            description={
-              <span>
-                Please log in using your{" "}
-                <a href="https://connection.hope.edu/" target="blank">
-                  connection.hope.edu
-                </a>{" "}
-                credentials to view this content.
-              </span>
-            }
-          />
+          <>
+            <MapView getData={getAllPeopleGroveAlumni} />
+            <LoginModal
+              isLoggedIn={isLoggedInToPG()}
+              loginFn={loginToPG}
+              description={
+                <span>
+                  Please log in using your{" "}
+                  <a href="https://connection.hope.edu/" target="blank">
+                    connection.hope.edu
+                  </a>{" "}
+                  credentials to view this content.
+                </span>
+              }
+              tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
+            />
+          </>
         </Route>
         <Route exact path={URLPaths.logout}>
           <LogoutPage />
