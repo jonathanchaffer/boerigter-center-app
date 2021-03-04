@@ -11,3 +11,7 @@ export function loginAsAdmin(
 export function logout(): Promise<void> {
   return auth.signOut();
 }
+
+export function sendPasswordResetEmail(email: string): Promise<void> {
+  return auth.sendPasswordResetEmail(email);
+}

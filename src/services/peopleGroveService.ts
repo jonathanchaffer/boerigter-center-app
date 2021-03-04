@@ -32,6 +32,10 @@ export function loginToPG(email: string, password: string): Promise<void> {
   });
 }
 
+export function logoutOfPG(): void {
+  localStorage.removeItem("pg_user");
+}
+
 export async function getAllPeopleGroveAlumni(): Promise<PeopleGroveAlum[]> {
   if (getPGAuth()) {
     const accessToken = getPGAuth()?.token;

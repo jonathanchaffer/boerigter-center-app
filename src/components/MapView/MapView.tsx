@@ -7,6 +7,7 @@ import { useAsync } from "react-async";
 import { ListGroup, OverlayTrigger, Popover, Spinner } from "react-bootstrap";
 import { ClusterFeature, PointFeature } from "supercluster";
 import useSupercluster from "use-supercluster";
+import { getPinOpacity, getPinSize, getPinZIndex } from "utilities";
 import "./MapView.scss";
 
 // tutorial followed for clustering: https://www.leighhalliday.com/google-maps-clustering
@@ -14,14 +15,15 @@ import "./MapView.scss";
 interface MapViewProps<I extends Mappable> {
   getData: () => Promise<I[]>;
   pos: "top" | "bottom";
+  defaultZoom?: number;
 }
 
 export function MapView<I extends Mappable>({
   getData,
   pos,
-}: MapViewProps<I>):
-JSX.Element {
-  const [mapZoom, setMapZoom] = useState(4);
+  defaultZoom,
+}: MapViewProps<I>): JSX.Element {
+  const [mapZoom, setMapZoom] = useState(defaultZoom || 5);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
   // const [mapStyle, setMapStyle] = useState(pos)
   const { data, error, isPending  } = useAsync({ promiseFn: getData });
@@ -39,7 +41,7 @@ JSX.Element {
 
   const { clusters, supercluster } = useSupercluster({
     bounds: mapBounds,
-    options: { maxZoom: 20, radius: 75 },
+    options: { maxZoom: 20, radius: 114 },
     points,
     zoom: mapZoom,
   });
@@ -106,7 +108,13 @@ JSX.Element {
                 lng={longitude}
               />
             ) : (
-              <ItemPin item={item} key={item.id} lat={latitude} lng={longitude} />
+              <ItemPin
+                item={item}
+                key={item.id}
+                lat={latitude}
+                lng={longitude}
+                totalNumPoints={clusters.length}
+              />
             );
           })}
         </GoogleMapReact>
@@ -131,7 +139,7 @@ function ClusterPin<I extends Mappable>({
   totalNumPoints,
 }: ClusterPinProps<I>): JSX.Element {
   // Calculate the size of the pin. Better done programatically than in CSS.
-  const size = 25 + Math.min((items.length / totalNumPoints) * 20, 50);
+  const size = getPinSize(items.length, totalNumPoints);
   return (
     <PopoverTrigger popoverId={id} items={items}>
       <button
@@ -139,7 +147,9 @@ function ClusterPin<I extends Mappable>({
         className="cluster-marker"
         style={{
           height: `${size}px`,
+          opacity: getPinOpacity(items.length),
           width: `${size}px`,
+          zIndex: getPinZIndex(items.length),
         }}
       >
         <span>{items.length}</span>
@@ -152,9 +162,10 @@ interface ItemPinProps<I extends Mappable> {
   item: I;
   lat: number;
   lng: number;
+  totalNumPoints: number;
 }
 
-function ItemPin<I extends Mappable>({ item }: ItemPinProps<I>): JSX.Element {
+function ItemPin<I extends Mappable>({ item, totalNumPoints }: ItemPinProps<I>): JSX.Element {
   let iconName;
   switch (item.type) {
     case "alum":
@@ -166,9 +177,19 @@ function ItemPin<I extends Mappable>({ item }: ItemPinProps<I>): JSX.Element {
     default:
       iconName = "fas fa-map-pin";
   }
+  const size = getPinSize(1, totalNumPoints);
   return (
     <PopoverTrigger popoverId={item.id.toString()} item={item}>
-      <button type="button" className="point-marker">
+      <button
+        type="button"
+        className="point-marker"
+        style={{
+          height: `${size}px`,
+          opacity: getPinOpacity(1),
+          width: `${size}px`,
+          zIndex: getPinZIndex(1),
+        }}
+      >
         <i className={iconName} />
       </button>
     </PopoverTrigger>
@@ -191,7 +212,7 @@ function PopoverTrigger<I extends Mappable>({
   return (
     <OverlayTrigger
       trigger="focus"
-      placement="top"
+      placement="auto"
       overlay={
         <Popover id={`popover-${popoverId.toString()}`} className="map-popover">
           <Popover.Content>
