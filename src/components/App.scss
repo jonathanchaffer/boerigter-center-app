@@ -1,12 +1,15 @@
 @import "styles/colors.scss";
 
-#navBarDown {
-  background-color: $hope-orange !important;
-}
+// #navBarDown {
+//   background-color: $hope-orange !important;
+//   z-index: 1500;
+// }
 
 // #tagline {
 //   margin-top: 0px;
-//   width: "80px"!important;
-//   position: "fixed";
-//   // z-index: "";
+//   margin-left: 2rem;
+//   width: 32rem !important;
+//   position: fixed;
+//   z-index: 1000;
+//   pointer-events: none;
 // }

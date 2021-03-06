@@ -34,52 +34,66 @@ export function App(): JSX.Element {
   }
 
   const topStyle = {
-    content: {
-      backgroundColor: "clear",
-      bottom: "23px",
-      height: "82px",
+    // backgroundColor: "clear",
+    bottom: "23.5px",
+    left: "1",
+    right: "55px",
+    top: "1",
 
-      left: "1",
-      // marginLeft: "0",
-      // marginRight: "0",
-      right: "55px",
-      top: "1",
-      // transform: "translate(0, 0)",
-    },
-    overlay: {
-      backgroundColor: "clear",
-      // bottom: "0",
-      // left: "0",
-      // marginLeft: "100",
-      // marginRight: "100",
-      // right: "absolute",
-      // top: "1",
-      // transform: "translate(0%, 0%)",
-    },
+    // content: {
+    //   backgroundColor: "clear",
+    //   bottom: "23px",
+    //   height: "82px",
+
+    //   left: "1",
+    //   // marginLeft: "0",
+    //   // marginRight: "0",
+    //   right: "55px",
+    //   top: "1",
+    //   // transform: "translate(0, 0)",
+    // },
+    // overlay: {
+    //   backgroundColor: "clear",
+    //   // bottom: "0",
+    //   // left: "0",
+    //   // marginLeft: "100",
+    //   // marginRight: "100",
+    //   // right: "absolute",
+    //   // top: "1",
+    //   // transform: "translate(0%, 0%)",
+    // },
   };
 
   const bottomStyle = {
-    content: {
-      backgroundColor: "clear",
-      bottom: "81px",
-      height: "82px",
+
+    // backgroundColor: "clear",
+      bottom: "80px",
       left: "1",
-      // marginLeft: "0",
-      // marginRight: "0",
       right: "55px",
       top: "1",
-      // transform: "translate(0, 0)",
-    },
-    overlay: {
-      backgroundColor: "clear",
-      // bottom: "0",
-      // left: "0",
-      // marginLeft: "100",
-      // marginRight: "100",
-      // right: "absolute",
-      // top: "1",
-      // transform: "translate(0%, 0%)",
-    },
+      
+
+    // content: {
+    //   backgroundColor: "clear",
+    //   bottom: "81px",
+    //   height: "82px",
+    //   left: "1",
+    //   // marginLeft: "0",
+    //   // marginRight: "0",
+    //   right: "55px",
+    //   top: "1",
+    //   // transform: "translate(0, 0)",
+    // },
+    // overlay: {
+    //   backgroundColor: "clear",
+    //   // bottom: "0",
+    //   // left: "0",
+    //   // marginLeft: "100",
+    //   // marginRight: "100",
+    //   // right: "absolute",
+    //   // top: "1",
+    //   // transform: "translate(0%, 0%)",
+    // },
   };
 
   const buttonText = navPosition === "top" ? "Bring NavBar down" : "Bring NavBar up";
@@ -135,12 +149,12 @@ export function App(): JSX.Element {
           </Route>
         </Switch>
       </Router>
-      <ReactModal isOpen contentLabel="Button Modal" style={modalStyle}>
-        <Button id="navBarDown" onClick={handleClick}>
+      {/* <ReactModal isOpen contentLabel="Button Modal" style={modalStyle}> */}
+        <Button id="navBarDown" onClick={handleClick} style={modalStyle}>
           {buttonText}
         </Button>
-      </ReactModal>
-      <div>
+      {/* </ReactModal> */}
+      <div id="tagline-div">
         <img id="tagline" alt="Where will you go?" src={tagline} />
       </div>
 
