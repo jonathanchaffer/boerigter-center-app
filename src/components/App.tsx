@@ -6,10 +6,10 @@ import {
   LoginModal,
   MapView,
   Navigation,
+  // NavButton,
 } from "components";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
-import ReactModal from "react-modal";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { 
   getAllPeopleGroveAlumni, 
@@ -32,72 +32,22 @@ export function App(): JSX.Element {
       setNavPosition("top");
     }
   }
-
   const topStyle = {
-    // backgroundColor: "clear",
-    bottom: "23.5px",
-    left: "1",
-    right: "55px",
-    top: "1",
-
-    // content: {
-    //   backgroundColor: "clear",
-    //   bottom: "23px",
-    //   height: "82px",
-
-    //   left: "1",
-    //   // marginLeft: "0",
-    //   // marginRight: "0",
-    //   right: "55px",
-    //   top: "1",
-    //   // transform: "translate(0, 0)",
-    // },
-    // overlay: {
-    //   backgroundColor: "clear",
-    //   // bottom: "0",
-    //   // left: "0",
-    //   // marginLeft: "100",
-    //   // marginRight: "100",
-    //   // right: "absolute",
-    //   // top: "1",
-    //   // transform: "translate(0%, 0%)",
-    // },
-  };
-
-  const bottomStyle = {
-
-    // backgroundColor: "clear",
-      bottom: "80px",
-      left: "1",
-      right: "55px",
-      top: "1",
-      
-
-    // content: {
-    //   backgroundColor: "clear",
-    //   bottom: "81px",
-    //   height: "82px",
-    //   left: "1",
-    //   // marginLeft: "0",
-    //   // marginRight: "0",
-    //   right: "55px",
-    //   top: "1",
-    //   // transform: "translate(0, 0)",
-    // },
-    // overlay: {
-    //   backgroundColor: "clear",
-    //   // bottom: "0",
-    //   // left: "0",
-    //   // marginLeft: "100",
-    //   // marginRight: "100",
-    //   // right: "absolute",
-    //   // top: "1",
-    //   // transform: "translate(0%, 0%)",
-    // },
-  };
-
-  const buttonText = navPosition === "top" ? "Bring NavBar down" : "Bring NavBar up";
-  const modalStyle = navPosition === "top" ? topStyle : bottomStyle;
+        bottom: "23.5px",
+        left: "1",
+        right: "55px",
+        top: "1",
+      };
+    
+      const bottomStyle = {
+          bottom: "80px",
+          left: "1",
+          right: "55px",
+          top: "1",
+      };
+    
+      const buttonText = navPosition === "top" ? "Bring NavBar down" : "Bring NavBar up";
+      const buttonStyle = navPosition === "top" ? topStyle : bottomStyle;
 
   return (
     <div>
@@ -121,6 +71,7 @@ export function App(): JSX.Element {
           </Route>
           <Route exact path={URLPaths.careerFinder}>
             <MapView getData={getHandshakeCareers} pos={navPosition} />
+            <Tagline/>
           </Route>
           <Route exact path={URLPaths.alumFinder}>
             <>
@@ -139,6 +90,9 @@ export function App(): JSX.Element {
                 }
                 tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
             />
+            <Tagline/>
+            {/* <NavButton true up={navPosition} handleClick={handleClick()}/> */}
+            {/* <NavButton /> */}
             </>
           </Route>
         <Route exact path={URLPaths.logout}>
@@ -149,16 +103,9 @@ export function App(): JSX.Element {
           </Route>
         </Switch>
       </Router>
-      {/* <ReactModal isOpen contentLabel="Button Modal" style={modalStyle}> */}
-        <Button id="navBarDown" onClick={handleClick} style={modalStyle}>
-          {buttonText}
-        </Button>
-      {/* </ReactModal> */}
-      <div id="tagline-div">
-        <img id="tagline" alt="Where will you go?" src={tagline} />
-      </div>
-
-      {/* https://github.com/reactjs/react-modal#api-documentation */}
+      <Button id="navBarDown" onClick={handleClick} style={buttonStyle}>
+        {buttonText}
+      </Button>
     </div>
   );
 }
@@ -173,3 +120,44 @@ function LogoutPage(): JSX.Element {
 
   return <></>;
 }
+
+function Tagline(): JSX.Element {
+
+  return (
+    <div id="tagline-div">
+      <img id="tagline" alt="Where will you go?" src={tagline} />
+    </div>
+  );
+}
+
+// function NavButton(map: boolean, pos: "top" | "bottom", 
+//   handleClick: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined,
+// ): JSX.Element {
+  
+//   const topStyle = {
+//     bottom: "23.5px",
+//     left: "1",
+//     right: "55px",
+//     top: "1",
+//   };
+
+//   const bottomStyle = {
+//       bottom: "80px",
+//       left: "1",
+//       right: "55px",
+//       top: "1",
+//   };
+
+//   const buttonText = pos === "top" ? "Bring NavBar down" : "Bring NavBar up";
+//   const buttonStyle = pos === "top" ? topStyle : bottomStyle;
+
+  
+
+//   return (
+//     <Button id="navBarDown" onClick={handleClick} style={buttonStyle}>
+//       {buttonText}
+//     </Button>
+//   );
+// }
+
+
