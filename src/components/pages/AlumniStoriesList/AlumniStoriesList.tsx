@@ -159,7 +159,9 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
         variant="danger"
         show={isShowingConfirmDelete}
         onConfirm={() => {
-          return deleteAlumStory(alum.id);
+          return deleteAlumStory(alum.id).finally(() => {
+            window.location.reload();
+          });
         }}
         onHide={() => setIsShowingConfirmDelete(false)}
       />

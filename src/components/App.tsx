@@ -6,9 +6,15 @@ import {
   MapView,
   Navigation,
 } from "components";
-import React from "react";
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { getAllPeopleGroveAlumni, getHandshakeCareers, isLoggedInToPG, loginToPG } from "services";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
+import {
+  getAllPeopleGroveAlumni,
+  getHandshakeCareers,
+  isLoggedInToPG,
+  loginToPG,
+  logoutOfPG,
+} from "services";
 import { URLPaths } from "utilities";
 
 export function App(): JSX.Element {
@@ -32,7 +38,6 @@ export function App(): JSX.Element {
           <AlumStoryDetails />
           <MapView background />
         </Route>
-        {/* <Route exact path={URLPaths.poll} /> */}
         <Route exact path={URLPaths.careerFinder}>
           <MapView getData={getHandshakeCareers} />
         </Route>
@@ -51,16 +56,28 @@ export function App(): JSX.Element {
                   credentials to view this content.
                 </span>
               }
+              tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
             />
           </>
         </Route>
-        {/* <Route exact path={URLPaths.offCampusFinder}>
-          <MapView getData={async () => []} />
-        </Route> */}
+        <Route exact path={URLPaths.logout}>
+          <LogoutPage />
+        </Route>
         <Route>
           <Redirect to={URLPaths.alumFinder} />
         </Route>
       </Switch>
     </Router>
   );
+}
+
+function LogoutPage(): JSX.Element {
+  const history = useHistory();
+
+  useEffect(() => {
+    logoutOfPG();
+    history.goBack();
+  });
+
+  return <></>;
 }

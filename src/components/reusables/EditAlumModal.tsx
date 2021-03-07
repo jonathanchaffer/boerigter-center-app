@@ -107,7 +107,7 @@ export function EditAlumModal({
         <Button variant="outline-secondary" onClick={onCancel}>
             Cancel
         </Button>
-        <Button variant="outline-primary" onClick={() => {updateAlumStory(newAlum.id, newAlum); onCancel(); window.location.reload()}}>
+        <Button variant="outline-primary" onClick={() => {updateAlumStory(newAlum.id, newAlum).catch( (e) => console.log(e) ).finally(() => { onCancel(); window.location.reload() });  }}>
             Submit    
         </Button>  
         </Modal.Body>
