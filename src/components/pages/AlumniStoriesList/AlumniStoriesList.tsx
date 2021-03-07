@@ -78,20 +78,22 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
   return (
     <>
       <Row>
-        <Col xs="auto" className="d-flex align-items-center p-0">
-          <Button
-            variant="outline-primary"
-            className="hide-show-btn"
-            onClick={() => {
-              // TODO: add error handling to this async call
-              updateAlumStory(alum.id, { ...alum, display: !isDisplaying }).then(() =>
-                setIsDisplaying(!isDisplaying),
-              );
-            }}
-          >
-            <i className={`fas ${isDisplaying ? "fa-eye" : "fa-eye-slash"}`} />
-          </Button>
-        </Col>
+        {user && isAdminPage && (
+          <Col xs="auto" className="d-flex align-items-center p-0">
+            <Button
+              variant="outline-primary"
+              className="hide-show-btn"
+              onClick={() => {
+                // TODO: add error handling to this async call
+                updateAlumStory(alum.id, { ...alum, display: !isDisplaying }).then(() =>
+                  setIsDisplaying(!isDisplaying),
+                );
+              }}
+            >
+              <i className={`fas ${isDisplaying ? "fa-eye" : "fa-eye-slash"}`} />
+            </Button>
+          </Col>
+        )}
         <Col>
           <Card style={{ opacity: isDisplaying ? 1 : 0.5 }}>
             <Card.Body>
