@@ -21,6 +21,12 @@
   top: 0;
 }
 
+.map-container.background {
+  z-index: -10000;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
 .cluster-marker,
 .point-marker {
   color: $off-white;

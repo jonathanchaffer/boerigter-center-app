@@ -12,10 +12,11 @@ import "./MapView.scss";
 // tutorial followed for clustering: https://www.leighhalliday.com/google-maps-clustering
 
 interface MapViewProps<I extends Mappable> {
-  getData: () => Promise<I[]>;
+  getData?: () => Promise<I[]>;
+  background?: boolean;
 }
 
-export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.Element {
+export function MapView<I extends Mappable>({ getData, background }: MapViewProps<I>): JSX.Element {
   const [mapZoom, setMapZoom] = useState(4);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
   const { data, error, isPending } = useAsync({ promiseFn: getData });
@@ -44,7 +45,7 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
           <Spinner animation="border" variant="light" />
         </div>
       )}
-      <div className="map-container">
+      <div className={`map-container${background ? " background" : ""}`}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}
           defaultCenter={{
@@ -52,7 +53,7 @@ export function MapView<I extends Mappable>({ getData }: MapViewProps<I>): JSX.E
             lng: -97.922211,
           }}
           zoom={mapZoom}
-          options={{ maxZoom: 10 }}
+          options={{ maxZoom: 10, zoomControl: !background }}
           onChange={({ zoom, bounds }) => {
             setMapZoom(zoom);
             setMapBounds([bounds.nw.lng, bounds.se.lat, bounds.se.lng, bounds.nw.lat]);
