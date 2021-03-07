@@ -80,7 +80,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
       <Row>
         <Col xs="auto" className="d-flex align-items-center p-0">
           <Button
-            variant="link"
+            variant="outline-primary"
             className="hide-show-btn"
             onClick={() => {
               // TODO: add error handling to this async call
