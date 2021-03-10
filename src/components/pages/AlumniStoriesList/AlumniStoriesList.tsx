@@ -85,7 +85,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
   const user = useContext(UserContext);
   const [isShowingEditAlumModal, setIsShowingEditAlumModal] = useState(false);
   const isAdminPage = history.location.pathname === `${URLPaths.alumStories}${URLPaths.admin}`;
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(alum.display);
 
   return (
     <>
