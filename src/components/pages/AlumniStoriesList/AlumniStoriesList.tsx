@@ -1,7 +1,8 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
 import { AlumSecondaryInfo, ConfirmationModal, ErrorModal, PageContainer } from "components";
-import { EditAlumModal } from "components/reusables/EditAlumModal";
-import { NewAlumModal } from "components/reusables/NewAlumModal";
+// import { NewAlumModal } from "components/reusables/NewAlumModal";
+// import { EditAlumModal } from "components/reusables/EditAlumModal";
+import { AddEditAlumniModal } from "components/reusables/AddEditAlumniModal";
 import { UserContext } from "contexts";
 import { CuratedAlum } from "models";
 import React, { useContext, useState } from "react";
@@ -21,6 +22,26 @@ export function AlumniStoriesList(): JSX.Element {
   const user = useContext(UserContext);
   const isAdminPage = history.location.pathname === "/stories/admin";
   const [isShowingNewAlumModal, setIsShowingNewAlumModal] = useState(false);
+  const newAlum: CuratedAlum = {
+    bio: "",
+    company: "",
+    display: true,
+    email: "",
+    firstName: "",
+    gradYear: 0,
+    id: "",
+    lastName: "",
+    linkedIn: "",
+    location: "",
+    majors: [],
+    media: [],
+    minors: [],
+    phone: "",
+    profilePhoto: "",
+    quotes: [],
+    website: "",
+  };
+
   return (
     <PageContainer>
       <div className="alumni-stories-list">
@@ -53,11 +74,12 @@ export function AlumniStoriesList(): JSX.Element {
         )}
       </div>
       <ErrorModal error={error} />
-      <NewAlumModal
-        title="Adding new Alumni Stories"
-        message="Adding new Alumni Stories"
+      <AddEditAlumniModal
+        title="Add Alumni Stories"
+        message="Add Alumni Stories"
         show={isShowingNewAlumModal}
         onCancel={() => setIsShowingNewAlumModal(false)}
+        currentAlum={newAlum}
       />
     </PageContainer>
   );
@@ -165,7 +187,15 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
         }}
         onHide={() => setIsShowingConfirmDelete(false)}
       />
-      <EditAlumModal
+      {/* <EditAlumModal
+        title="Edit Alumni Stories"
+        message="Edit Alumni Stories"
+        show={isShowingEditAlumModal}
+        onCancel={() => setIsShowingEditAlumModal(false)}
+        currentAlum= {alum}
+      /> */}
+
+      <AddEditAlumniModal
         title="Edit Alumni Stories"
         message="Edit Alumni Stories"
         show={isShowingEditAlumModal}
