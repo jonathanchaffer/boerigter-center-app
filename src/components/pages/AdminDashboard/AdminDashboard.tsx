@@ -1,19 +1,36 @@
 import { LoginModal, PageContainer } from "components";
 import { ConfirmationModal, ErrorModal, InfoModal } from "components/reusables";
 import { UserContext } from "contexts";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { loginAsAdmin, logout, sendPasswordResetEmail } from "services";
+import { setTimeout } from "timers";
 import { URLPaths } from "utilities";
 
 export function AdminDashboard(): JSX.Element {
   const user = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [isShowingConfirmPasswordReset, setIsShowingConfirmPasswordReset] = useState(false);
   const [isShowingEmailSent, setIsShowingEmailSent] = useState(false);
   const [error, setError] = useState<Error | undefined>(undefined);
 
-  return (
+  useEffect(() => {
+    setIsLoading(true);
+    /* Adds a little bit of buffer time to check if user exists, so that if the
+     * user IS logged in, they don't see the login modal briefly when opening the
+     * admin page. */
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+  return isLoading ? (
+    <PageContainer>
+      <Spinner animation="border" />
+    </PageContainer>
+  ) : (
     <>
       <LoginModal
         isLoggedIn={!!user}
