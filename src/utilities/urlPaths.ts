@@ -3,6 +3,7 @@ export const URLPaths = {
   alumFinder: "/alumni",
   alumStories: "/stories",
   careerFinder: "/careers",
+  logout: "/logout",
   offCampusFinder: "/study-abroad",
   poll: "/poll",
 };
