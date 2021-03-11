@@ -41,20 +41,22 @@ export async function getHandshakeCareers(): Promise<HandshakeCareer[]> {
   const results = await fetchHandshakeCareers();
   console.log(results);
   for (let i = 0; i < results.length; i++) {
-    const job = {
-      employer_logo_url: "", // results[i].employer_logo,
-      employer_name: results[i].job.employer.name,
-      employment_type_name: results[i].job.duration,
-      id: results[i].id,
-      job_name: results[i].job.title,
-      latitude: results[i].job.employer.location.latitude,
-      longitude: results[i].job.employer.location.longitude,
-      type: "career",
-    } as HandshakeCareer;
-    /* if(!removeDuplicateCareers(careers,job)){
+    if(results[i].job.employer.location.latitude !== null && results[i].job.employer.location.longitude !== null){
+      const job = {
+        employer_logo_url: "", // results[i].employer_logo,
+        employer_name: results[i].job.employer.name,
+        employment_type_name: results[i].job.duration,
+        id: results[i].id,
+        job_name: results[i].job.title,
+        latitude: results[i].job.employer.location.latitude,
+        longitude: results[i].job.employer.location.longitude,
+        type: "career",
+      } as HandshakeCareer;
+      /* if(!removeDuplicateCareers(careers,job)){
+        careers.push(job);
+      } */
       careers.push(job);
-    } */
-    careers.push(job);
+    }
   }
   return careers;
 }
