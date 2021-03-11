@@ -26,14 +26,20 @@ export async function fetchHandshakeCareers(): Promise<any[]> {
       authorization: `Token token="${process.env.REACT_APP_HANDSHAKE_API_KEY}"`,
     },
   };
-  return (await axiosInstance.get("postings?page=1&per_page=50&sort_direction=desc",options)).data.postings;
+  let results: any[] = [];
+  for(let i = 0; i < 20; i++){
+  const url = `postings?page=${i}&per_page=50&sort_direction=desc`;
+  // eslint-disable-next-line no-await-in-loop
+  results = [...results, ...(await axiosInstance.get(url,options)).data.postings];
+  }
+  return results;
 }
 
 export async function getHandshakeCareers(): Promise<HandshakeCareer[]> {
   const careers = [];
-  
+
   const results = await fetchHandshakeCareers();
-  
+  console.log(results);
   for (let i = 0; i < results.length; i++) {
     const job = {
       employer_logo_url: "", // results[i].employer_logo,
