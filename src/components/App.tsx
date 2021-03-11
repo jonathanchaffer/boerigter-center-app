@@ -6,7 +6,7 @@ import {
   LoginModal,
   MapView,
   Navigation,
-  // NavButton,
+  NavButton,
 } from "components";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
@@ -39,15 +39,19 @@ export function App(): JSX.Element {
         top: "1",
       };
     
-      const bottomStyle = {
-          bottom: "80px",
-          left: "1",
-          right: "55px",
-          top: "1",
-      };
+  const bottomStyle = {
+    bottom: "80px",
+    left: "1",
+    right: "55px",
+    top: "1",
+  };
     
-      const buttonText = navPosition === "top" ? "Bring NavBar down" : "Bring NavBar up";
-      const buttonStyle = navPosition === "top" ? topStyle : bottomStyle;
+  const buttonText = navPosition === "top" ? "Bring NavBar down" : "Bring NavBar up";
+  const buttonStyle = navPosition === "top" ? topStyle : bottomStyle;
+
+  const buttonProps = {
+    
+  }
 
   return (
     <div>
@@ -56,9 +60,12 @@ export function App(): JSX.Element {
         <Switch>
           <Route exact path={URLPaths.alumStories}>
             <AlumniStoriesList {...navPosition} />
+            {/* <NavButton false {...navPosition} {...handleClick}/> */}
+            <NavButton map={false} pos={navPosition} handleClick={handleClick} />
           </Route>
           <Route exact path="/stories/:id">
-            <AlumStoryDetails />
+            <AlumStoryDetails {...navPosition}/>
+            <NavButton map={false} pos={navPosition} handleClick={handleClick} />
           </Route>
           <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
             <AlumniStoriesList {...navPosition} />
@@ -67,11 +74,12 @@ export function App(): JSX.Element {
             <AdminDashboard />
           </Route>
           <Route exact path={`${URLPaths.alumStories}/:id`}>
-            <AlumStoryDetails />
+            <AlumStoryDetails {...navPosition}/>
           </Route>
           <Route exact path={URLPaths.careerFinder}>
             <MapView getData={getHandshakeCareers} pos={navPosition} />
-            <Tagline/>
+            <Tagline pos={navPosition}/>
+            <NavButton map pos={navPosition} handleClick={handleClick} />
           </Route>
           <Route exact path={URLPaths.alumFinder}>
             <>
@@ -90,7 +98,8 @@ export function App(): JSX.Element {
                 }
                 tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
             />
-            <Tagline/>
+            <Tagline pos={navPosition}/>
+            <NavButton map pos={navPosition} handleClick={handleClick} />
             {/* <NavButton true up={navPosition} handleClick={handleClick()}/> */}
             {/* <NavButton /> */}
             </>
@@ -103,9 +112,9 @@ export function App(): JSX.Element {
           </Route>
         </Switch>
       </Router>
-      <Button id="navBarDown" onClick={handleClick} style={buttonStyle}>
+      {/* <Button id="navBarDown" onClick={handleClick} style={buttonStyle}>
         {buttonText}
-      </Button>
+      </Button> */}
     </div>
   );
 }
@@ -121,11 +130,24 @@ function LogoutPage(): JSX.Element {
   return <></>;
 }
 
-function Tagline(): JSX.Element {
+
+interface TaglineProps {
+  pos: "top" | "bottom"; 
+}
+function Tagline({pos}:TaglineProps): JSX.Element {
+  const topStyle = {
+    marginTop : "0px",
+  };
+
+  const bottomStyle = {
+    marginTop : "-58px",
+  };
+
+  const tagStyle = pos === "top" ? topStyle : bottomStyle;
 
   return (
     <div id="tagline-div">
-      <img id="tagline" alt="Where will you go?" src={tagline} />
+      <img id="tagline" alt="Where will you go?" src={tagline} style={tagStyle}/>
     </div>
   );
 }
