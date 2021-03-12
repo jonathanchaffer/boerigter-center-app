@@ -24,15 +24,19 @@ export function App(): JSX.Element {
       <Switch>
         <Route exact path={URLPaths.alumStories}>
           <AlumniStoriesList />
+          <MapView background />
         </Route>
         <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
           <AlumniStoriesList />
+          <MapView background />
         </Route>
         <Route exact path={URLPaths.admin}>
           <AdminDashboard />
+          <MapView background />
         </Route>
         <Route exact path={`${URLPaths.alumStories}/:id`}>
           <AlumStoryDetails />
+          <MapView background />
         </Route>
         <Route exact path={URLPaths.careerFinder}>
           <MapView getData={getHandshakeCareers} />
