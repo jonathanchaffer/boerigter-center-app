@@ -5,12 +5,24 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "styles/fonts.scss";
 import "styles/index.scss";
+import { commaSeparatedList } from "utilities";
 
-if (!process.env.REACT_APP_GOOGLE_API_KEY)
+const requiredEnvContents = ["REACT_APP_GOOGLE_API_KEY", "REACT_APP_HANDSHAKE_API_KEY"];
+
+const missingEnvContents: string[] = [];
+requiredEnvContents.forEach(key => {
+  if (!process.env[key]) {
+    missingEnvContents.push(key);
+  }
+});
+if (missingEnvContents.length > 0) {
   // eslint-disable-next-line no-console
   console.error(
-    "Google API key not found in your local repository. Make sure that you have a .env file in your root directory with the correct contents.",
+    `Your local environment is missing the following keys: ${commaSeparatedList(
+      missingEnvContents,
+    )}. Make sure that you have an .env file in your root directory with the required contents.`,
   );
+}
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
