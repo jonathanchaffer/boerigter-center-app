@@ -7,7 +7,7 @@ import Modal from "react-bootstrap/Modal";
 
 interface LoginModalProps {
   isLoggedIn: boolean;
-  loginFn: (email: string, password: string) => Promise<any>;
+  loginFn: (email: string, password: string) => Promise<void | firebase.auth.UserCredential>;
   title?: string;
   description?: string | React.ReactNode;
   passwordResetFn?: (email: string) => Promise<void>;
