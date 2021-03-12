@@ -1,6 +1,5 @@
 import axios from "axios";
 import { HandshakeCareer } from "models";
-// import { results } from "placeholders/HandshakeResponse.json";
 
 function convertToHandshakeCareer(data: any): HandshakeCareer | undefined {
   if (
