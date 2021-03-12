@@ -1,5 +1,5 @@
 import { App } from "components";
-import { UserProvider } from "contexts";
+import { HandshakeCareersProvider, UserProvider } from "contexts";
 import * as firebase from "firebase";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -41,7 +41,9 @@ export const auth = firebase.auth();
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
-      <App />
+      <HandshakeCareersProvider numPages={100}>
+        <App />
+      </HandshakeCareersProvider>
     </UserProvider>
   </React.StrictMode>,
   document.getElementById("root"),

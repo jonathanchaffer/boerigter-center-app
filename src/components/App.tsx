@@ -6,18 +6,17 @@ import {
   MapView,
   Navigation,
 } from "components";
-import React, { useEffect } from "react";
+import { HandshakeCareersContext } from "contexts";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
-import {
-  getAllPeopleGroveAlumni,
-  getHandshakeCareers,
-  isLoggedInToPG,
-  loginToPG,
-  logoutOfPG,
-} from "services";
+import { getAllPeopleGroveAlumni, isLoggedInToPG, loginToPG, logoutOfPG } from "services";
 import { URLPaths } from "utilities";
 
 export function App(): JSX.Element {
+  const { careers: handshakeCareers, isLoading: isHandshakeCareersLoading } = useContext(
+    HandshakeCareersContext,
+  );
+
   return (
     <Router>
       <Navigation />
@@ -35,7 +34,12 @@ export function App(): JSX.Element {
           <AlumStoryDetails />
         </Route>
         <Route exact path={URLPaths.careerFinder}>
-          <MapView getData={getHandshakeCareers} />
+          <MapView
+            getData={() => {
+              return Promise.resolve(handshakeCareers);
+            }}
+            isLoading={isHandshakeCareersLoading}
+          />
         </Route>
         <Route exact path={URLPaths.alumFinder}>
           <>

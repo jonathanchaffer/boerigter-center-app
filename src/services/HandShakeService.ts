@@ -2,6 +2,25 @@ import axios from "axios";
 import { HandshakeCareer } from "models";
 // import { results } from "placeholders/HandshakeResponse.json";
 
+function convertToHandshakeCareer(data: any): HandshakeCareer | undefined {
+  if (
+    data.job.employer.location.latitude !== null &&
+    data.job.employer.location.longitude !== null
+  ) {
+    return {
+      employer_logo_url: "",
+      employer_name: data.job.employer.name,
+      employment_type_name: data.job.duration,
+      id: data.id,
+      job_name: data.job.title,
+      latitude: data.job.employer.location.latitude,
+      longitude: data.job.employer.location.longitude,
+      type: "career",
+    } as HandshakeCareer;
+  }
+  return undefined;
+}
+
 const axiosInstance = axios.create({
   baseURL: "https://boerigter-center-app.herokuapp.com/https://app.joinhandshake.com/api/v1/",
   headers: {
@@ -9,40 +28,15 @@ const axiosInstance = axios.create({
   },
 });
 
-export async function fetchHandshakeCareers(): Promise<any[]> {
+export async function fetchHandshakeCareers(page: number): Promise<HandshakeCareer[]> {
   const options = {
     headers: {
       authorization: `Token token="${process.env.REACT_APP_HANDSHAKE_API_KEY}"`,
     },
   };
-  let results: any[] = [];
-  for(let i = 0; i < 20; i++){
-  const url = `postings?page=${i}&per_page=50&sort_direction=desc`;
-  // eslint-disable-next-line no-await-in-loop
-  results = [...results, ...(await axiosInstance.get(url,options)).data.postings];
-  }
-  return results;
-}
 
-export async function getHandshakeCareers(): Promise<HandshakeCareer[]> {
-  const careers = [];
-
-  const results = await fetchHandshakeCareers();
-
-  for (let i = 0; i < results.length; i++) {
-    if(results[i].job.employer.location.latitude !== null && results[i].job.employer.location.longitude !== null){
-      const job = {
-        employer_logo_url: "", // results[i].employer_logo,
-        employer_name: results[i].job.employer.name,
-        employment_type_name: results[i].job.duration,
-        id: results[i].id,
-        job_name: results[i].job.title,
-        latitude: results[i].job.employer.location.latitude,
-        longitude: results[i].job.employer.location.longitude,
-        type: "career",
-      } as HandshakeCareer;
-      careers.push(job);
-    }
-  }
-  return careers;
+  const url = `postings?page=${page}&per_page=50&sort_direction=desc`;
+  return (await axiosInstance.get(url, options)).data.postings
+    .map((posting: any) => convertToHandshakeCareer(posting))
+    .filter((career: HandshakeCareer | undefined) => career !== undefined);
 }
