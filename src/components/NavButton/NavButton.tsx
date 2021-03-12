@@ -8,17 +8,12 @@ interface NavButtonProps {
 }
 
 export function NavButton({map, pos, handleClick}: NavButtonProps): JSX.Element {
-  
-  // const page = map ? "map" : "notMap";
   let right;
-  let borderColor;
 
   if(map){
     right="55px";
-    borderColor="white";
   }else{
     right="15px";
-    borderColor="gray";
   }
 
   const topStyle = {

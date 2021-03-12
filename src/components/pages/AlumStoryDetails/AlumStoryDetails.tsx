@@ -17,12 +17,11 @@ export function AlumStoryDetails(pos: ("top") | ("bottom")): JSX.Element {
   const fix = Object.values(pos).join("") as "top" | "bottom";
 
   const navBarTopStyle = {
-    // Just to be clear:
-    // bottom: "0px",
      paddingTop: "58px",
   };
   const navBarBottomStyle = {
-    // marginTop: "-58px",
+    // Just to be clear:
+    // marginTop: "0px",
   };
 
   const divStyle = fix === "top" ? navBarTopStyle : navBarBottomStyle;

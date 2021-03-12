@@ -7,7 +7,6 @@ import { URLPaths } from "utilities";
 import "./Navigation.scss";
 
 export function Navigation(pos: "top" | "bottom"): JSX.Element {
-  // const fix = ((pos as unknown) as []).join("") as "top" | "bottom";
   const fix = Object.values(pos).join("") as "top" | "bottom";
   return (
     <Navbar bg="light" fixed={fix}>

@@ -25,7 +25,6 @@ export function MapView<I extends Mappable>({
 }: MapViewProps<I>): JSX.Element {
   const [mapZoom, setMapZoom] = useState(defaultZoom || 5);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
-  // const [mapStyle, setMapStyle] = useState(pos)
   const { data, error, isPending  } = useAsync({ promiseFn: getData });
   const fix = Object.values(pos).join("") as "top" | "bottom";
 
@@ -48,17 +47,13 @@ export function MapView<I extends Mappable>({
 
   const navBarTopStyle = {
     // Just to be clear:
-    // bottom: "0px",
     // top: "0px",
   };
   const navBarBottomStyle = {
-    // bottom: "58px",
     top: "-58px",
-    // bottom: "200px",
   };
 
   const divStyle = fix === "top" ? navBarTopStyle : navBarBottomStyle;
-  // const divStyle = navBarBottomStyle;
 
   return (
     <>

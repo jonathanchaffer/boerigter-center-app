@@ -9,7 +9,6 @@ import {
   NavButton,
 } from "components";
 import React, { useEffect, useState } from "react";
-import Button from "react-bootstrap/esm/Button";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { 
   getAllPeopleGroveAlumni, 
@@ -32,26 +31,6 @@ export function App(): JSX.Element {
       setNavPosition("top");
     }
   }
-  const topStyle = {
-        bottom: "23.5px",
-        left: "1",
-        right: "55px",
-        top: "1",
-      };
-    
-  const bottomStyle = {
-    bottom: "80px",
-    left: "1",
-    right: "55px",
-    top: "1",
-  };
-    
-  const buttonText = navPosition === "top" ? "Bring NavBar down" : "Bring NavBar up";
-  const buttonStyle = navPosition === "top" ? topStyle : bottomStyle;
-
-  const buttonProps = {
-    
-  }
 
   return (
     <div>
@@ -60,7 +39,6 @@ export function App(): JSX.Element {
         <Switch>
           <Route exact path={URLPaths.alumStories}>
             <AlumniStoriesList {...navPosition} />
-            {/* <NavButton false {...navPosition} {...handleClick}/> */}
             <NavButton map={false} pos={navPosition} handleClick={handleClick} />
           </Route>
           <Route exact path="/stories/:id">
@@ -100,8 +78,6 @@ export function App(): JSX.Element {
             />
             <Tagline pos={navPosition}/>
             <NavButton map pos={navPosition} handleClick={handleClick} />
-            {/* <NavButton true up={navPosition} handleClick={handleClick()}/> */}
-            {/* <NavButton /> */}
             </>
           </Route>
         <Route exact path={URLPaths.logout}>
@@ -112,9 +88,6 @@ export function App(): JSX.Element {
           </Route>
         </Switch>
       </Router>
-      {/* <Button id="navBarDown" onClick={handleClick} style={buttonStyle}>
-        {buttonText}
-      </Button> */}
     </div>
   );
 }
@@ -151,35 +124,3 @@ function Tagline({pos}:TaglineProps): JSX.Element {
     </div>
   );
 }
-
-// function NavButton(map: boolean, pos: "top" | "bottom", 
-//   handleClick: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined,
-// ): JSX.Element {
-  
-//   const topStyle = {
-//     bottom: "23.5px",
-//     left: "1",
-//     right: "55px",
-//     top: "1",
-//   };
-
-//   const bottomStyle = {
-//       bottom: "80px",
-//       left: "1",
-//       right: "55px",
-//       top: "1",
-//   };
-
-//   const buttonText = pos === "top" ? "Bring NavBar down" : "Bring NavBar up";
-//   const buttonStyle = pos === "top" ? topStyle : bottomStyle;
-
-  
-
-//   return (
-//     <Button id="navBarDown" onClick={handleClick} style={buttonStyle}>
-//       {buttonText}
-//     </Button>
-//   );
-// }
-
-
