@@ -9,17 +9,6 @@ const axiosInstance = axios.create({
   },
 });
 
-export function removeDuplicateCareers(careers: HandshakeCareer[], nextCareer: HandshakeCareer): boolean {
-  for(let i = 0; i < careers.length; i++) {
-    if(nextCareer.latitude === careers[i].latitude && nextCareer.longitude === careers[i].longitude){
-      if(nextCareer.job_name === careers[i].job_name && nextCareer.job_name === careers[i].job_name){
-        return true;
-      }
-    } 
-  }
-  return false;
-}
-
 export async function fetchHandshakeCareers(): Promise<any[]> {
   const options = {
     headers: {
@@ -39,7 +28,7 @@ export async function getHandshakeCareers(): Promise<HandshakeCareer[]> {
   const careers = [];
 
   const results = await fetchHandshakeCareers();
-  console.log(results);
+
   for (let i = 0; i < results.length; i++) {
     if(results[i].job.employer.location.latitude !== null && results[i].job.employer.location.longitude !== null){
       const job = {
@@ -52,9 +41,6 @@ export async function getHandshakeCareers(): Promise<HandshakeCareer[]> {
         longitude: results[i].job.employer.location.longitude,
         type: "career",
       } as HandshakeCareer;
-      /* if(!removeDuplicateCareers(careers,job)){
-        careers.push(job);
-      } */
       careers.push(job);
     }
   }
