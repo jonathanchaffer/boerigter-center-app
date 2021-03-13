@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/esm/Button";
+import "./MoveNavButton.scss";
 
 interface NavButtonProps {
   map: boolean;
@@ -7,7 +8,7 @@ interface NavButtonProps {
   handleClick: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined;
 }
 
-export function NavButton({map, pos, handleClick}: NavButtonProps): JSX.Element {
+export function MoveNavButton({map, pos, handleClick}: NavButtonProps): JSX.Element {
   let right;
 
   if(map){
@@ -36,8 +37,10 @@ export function NavButton({map, pos, handleClick}: NavButtonProps): JSX.Element 
   
 
   return (
-    <Button id="navBarDown" onClick={handleClick} style={buttonStyle}>
-      {buttonText}
-    </Button>
+    <div id="button-div" className="container" style={buttonStyle} >
+      <Button id="move-Nav-Button" onClick={handleClick} >
+        {buttonText}
+      </Button>
+    </div>
   );
 }

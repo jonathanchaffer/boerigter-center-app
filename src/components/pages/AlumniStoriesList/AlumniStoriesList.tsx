@@ -13,9 +13,12 @@ import { deleteAlumStory, getAlumniStories } from "services";
 import { URLPaths } from "utilities";
 import "./AlumniStoriesList.scss";
 
-export function AlumniStoriesList(pos: ("top") | ("bottom")): JSX.Element {
+interface AlumniStoriesListProps {
+  pos: "top" | "bottom"; 
+}
+
+export function AlumniStoriesList({pos}:AlumniStoriesListProps): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
-  const fix = Object.values(pos).join("") as "top" | "bottom";
 
   const navBarTopStyle = {
      paddingTop: "58px",
@@ -25,7 +28,7 @@ export function AlumniStoriesList(pos: ("top") | ("bottom")): JSX.Element {
     // marginTop: "0px",
   };
 
-  const divStyle = fix === "top" ? navBarTopStyle : navBarBottomStyle;
+  const divStyle = pos === "top" ? navBarTopStyle : navBarBottomStyle;
 
   return (
     <PageContainer>

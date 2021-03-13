@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import {
   AdminDashboard,
   AlumniStoriesList,
@@ -6,7 +5,7 @@ import {
   LoginModal,
   MapView,
   Navigation,
-  NavButton,
+  MoveNavButton,
 } from "components";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
@@ -33,31 +32,30 @@ export function App(): JSX.Element {
   }
 
   return (
-    <div>
       <Router>
-        <Navigation {...navPosition} />
+        <Navigation pos={navPosition} />
         <Switch>
           <Route exact path={URLPaths.alumStories}>
-            <AlumniStoriesList {...navPosition} />
-            <NavButton map={false} pos={navPosition} handleClick={handleClick} />
+            <AlumniStoriesList pos={navPosition} />
+            <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
           </Route>
           <Route exact path="/stories/:id">
-            <AlumStoryDetails {...navPosition}/>
-            <NavButton map={false} pos={navPosition} handleClick={handleClick} />
+            <AlumStoryDetails pos={navPosition}/>
+            <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
           </Route>
           <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
-            <AlumniStoriesList {...navPosition} />
+            <AlumniStoriesList pos={navPosition} />
           </Route>
           <Route exact path={URLPaths.admin}>
             <AdminDashboard />
           </Route>
           <Route exact path={`${URLPaths.alumStories}/:id`}>
-            <AlumStoryDetails {...navPosition}/>
+            <AlumStoryDetails pos={navPosition}/>
           </Route>
           <Route exact path={URLPaths.careerFinder}>
             <MapView getData={getHandshakeCareers} pos={navPosition} />
             <Tagline pos={navPosition}/>
-            <NavButton map pos={navPosition} handleClick={handleClick} />
+            <MoveNavButton map pos={navPosition} handleClick={handleClick} />
           </Route>
           <Route exact path={URLPaths.alumFinder}>
             <>
@@ -77,7 +75,7 @@ export function App(): JSX.Element {
                 tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
             />
             <Tagline pos={navPosition}/>
-            <NavButton map pos={navPosition} handleClick={handleClick} />
+            <MoveNavButton map pos={navPosition} handleClick={handleClick} />
             </>
           </Route>
         <Route exact path={URLPaths.logout}>
@@ -88,7 +86,6 @@ export function App(): JSX.Element {
           </Route>
         </Switch>
       </Router>
-    </div>
   );
 }
 

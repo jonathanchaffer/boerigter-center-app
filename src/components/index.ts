@@ -3,4 +3,4 @@ export * from "./MapView";
 export * from "./Navigation";
 export * from "./pages";
 export * from "./reusables";
-export * from "./NavButton";
+export * from "./MoveNavButton";

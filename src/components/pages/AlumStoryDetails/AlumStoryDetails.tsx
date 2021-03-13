@@ -9,12 +9,15 @@ import { useParams } from "react-router-dom";
 import { getAlumStory } from "services";
 import { fullName } from "utilities";
 
-export function AlumStoryDetails(pos: ("top") | ("bottom")): JSX.Element {
+interface AlumStoryDetailsProps {
+  pos: "top" | "bottom"; 
+}
+
+export function AlumStoryDetails({pos}:AlumStoryDetailsProps): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const promiseFn = useCallback(() => getAlumStory(id), [id]);
   const { data, error, isPending } = useAsync({ promiseFn });
   const alum = data;
-  const fix = Object.values(pos).join("") as "top" | "bottom";
 
   const navBarTopStyle = {
      paddingTop: "58px",
@@ -24,7 +27,7 @@ export function AlumStoryDetails(pos: ("top") | ("bottom")): JSX.Element {
     // marginTop: "0px",
   };
 
-  const divStyle = fix === "top" ? navBarTopStyle : navBarBottomStyle;
+  const divStyle = pos === "top" ? navBarTopStyle : navBarBottomStyle;
 
   return (
     <PageContainer>
