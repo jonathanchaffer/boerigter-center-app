@@ -13,12 +13,27 @@ import { deleteAlumStory, getAlumniStories } from "services";
 import { URLPaths } from "utilities";
 import "./AlumniStoriesList.scss";
 
-export function AlumniStoriesList(): JSX.Element {
+interface AlumniStoriesListProps {
+  pos: "top" | "bottom"; 
+}
+
+export function AlumniStoriesList({pos}:AlumniStoriesListProps): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
+
+  const navBarTopStyle = {
+     paddingTop: "58px",
+  };
+  const navBarBottomStyle = {
+    // Just to be clear:
+    // marginTop: "0px",
+  };
+
+  const divStyle = pos === "top" ? navBarTopStyle : navBarBottomStyle;
+
   return (
     <PageContainer>
-      <div className="alumni-stories-list">
-        <h1>Alumni Stories</h1>
+      <div className="alumni-stories-list" style={divStyle}>
+        <h1>Alumni stories</h1>
         <p>Alumni hand-picked by Boerigter Center staff.</p>
         {isPending ? (
           <Spinner animation="border" />

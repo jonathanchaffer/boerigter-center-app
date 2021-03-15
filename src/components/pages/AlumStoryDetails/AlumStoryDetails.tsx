@@ -9,13 +9,29 @@ import { useParams } from "react-router-dom";
 import { getAlumStory } from "services";
 import { fullName } from "utilities";
 
-export function AlumStoryDetails(): JSX.Element {
+interface AlumStoryDetailsProps {
+  pos: "top" | "bottom"; 
+}
+
+export function AlumStoryDetails({pos}:AlumStoryDetailsProps): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const promiseFn = useCallback(() => getAlumStory(id), [id]);
   const { data, error, isPending } = useAsync({ promiseFn });
   const alum = data;
+
+  const navBarTopStyle = {
+     paddingTop: "58px",
+  };
+  const navBarBottomStyle = {
+    // Just to be clear:
+    // marginTop: "0px",
+  };
+
+  const divStyle = pos === "top" ? navBarTopStyle : navBarBottomStyle;
+
   return (
     <PageContainer>
+      <div style={divStyle}>
       {isPending ? (
         <Spinner animation="border" />
       ) : (
@@ -68,6 +84,7 @@ export function AlumStoryDetails(): JSX.Element {
         )
       )}
       <ErrorModal error={error} />
+      </div>
     </PageContainer>
   );
 }
