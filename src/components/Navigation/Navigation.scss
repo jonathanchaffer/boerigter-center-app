@@ -8,6 +8,8 @@
 .navbar.bg-light {
   background-color: $off-white !important;
   border: $lt-border;
+  z-index: 1;
+  height: 8%;
 }
 
 .nav-link {

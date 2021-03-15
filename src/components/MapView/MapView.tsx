@@ -14,16 +14,19 @@ import "./MapView.scss";
 
 interface MapViewProps<I extends Mappable> {
   getData: () => Promise<I[]>;
+  pos: "top" | "bottom";
   defaultZoom?: number;
 }
 
 export function MapView<I extends Mappable>({
   getData,
+  pos,
   defaultZoom,
 }: MapViewProps<I>): JSX.Element {
   const [mapZoom, setMapZoom] = useState(defaultZoom || 5);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
-  const { data, error, isPending } = useAsync({ promiseFn: getData });
+  const { data, error, isPending  } = useAsync({ promiseFn: getData });
+  const fix = Object.values(pos).join("") as "top" | "bottom";
 
   const points: PointFeature<I>[] = data
     ? data.map((item: I) => {
@@ -42,8 +45,19 @@ export function MapView<I extends Mappable>({
     zoom: mapZoom,
   });
 
+  const navBarTopStyle = {
+    // Just to be clear:
+    // top: "0px",
+  };
+  const navBarBottomStyle = {
+    top: "-58px",
+  };
+
+  const divStyle = fix === "top" ? navBarTopStyle : navBarBottomStyle;
+
   return (
     <>
+      <div id="mapDiv" className="map-container" style={divStyle}>
       {isPending && (
         <div className="pending-map-container">
           <Spinner animation="border" variant="light" />
@@ -99,6 +113,7 @@ export function MapView<I extends Mappable>({
             );
           })}
         </GoogleMapReact>
+      </div>
       </div>
       <ErrorModal error={error} />
     </>
