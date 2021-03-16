@@ -1,8 +1,9 @@
 import { App } from "components";
-import { HandshakeCareersProvider, UserProvider } from "contexts";
+import { BackgroundLoaderProvider, HandshakeCareersContext, UserProvider } from "contexts";
 import * as firebase from "firebase";
 import React from "react";
 import ReactDOM from "react-dom";
+import { fetchHandshakeCareers } from "services";
 import "styles/fonts.scss";
 import "styles/index.scss";
 import { commaSeparatedList } from "utilities";
@@ -41,9 +42,13 @@ export const auth = firebase.auth();
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
-      <HandshakeCareersProvider numPages={100}>
+      <BackgroundLoaderProvider
+        numPages={100}
+        fetchFn={fetchHandshakeCareers}
+        context={HandshakeCareersContext}
+      >
         <App />
-      </HandshakeCareersProvider>
+      </BackgroundLoaderProvider>
     </UserProvider>
   </React.StrictMode>,
   document.getElementById("root"),
