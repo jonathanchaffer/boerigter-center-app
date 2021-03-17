@@ -16,7 +16,11 @@ import { deleteAlumStory, getAlumniStories, updateAlumStory } from "services";
 import { URLPaths } from "utilities";
 import "./AlumniStoriesList.scss";
 
-export function AlumniStoriesList(): JSX.Element {
+interface AlumniStoriesListProps {
+  pos: "top" | "bottom";
+}
+
+export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
   const history = useHistory();
   const user = useContext(UserContext);
@@ -42,9 +46,42 @@ export function AlumniStoriesList(): JSX.Element {
     website: "",
   };
 
+  // return (
+  //   <PageContainer>
+  //     <div className="alumni-stories-list">
+  //       <div className="d-flex justify-content-between">
+  //         <div>
+  //           <h1>Alumni Stories</h1>
+  //           <p>Alumni hand-picked by Boerigter Center staff.</p>
+  //         </div>
+  //         <div>
+  //           {user && isAdminPage && (
+  //             <Button
+  //               variant="outline-primary"
+  //               onClick={() => setIsShowingNewAlumModal(true)}
+  //               size="lg"
+  //             >
+  //               <i className="fas fa-plus mr-2" />
+  //               New Alum
+  //             </Button>
+  //           )}
+  //         </div>
+  //       </div>
+  //       <br />
+
+  const navBarTopStyle = {
+    paddingTop: "58px",
+  };
+  const navBarBottomStyle = {
+    // Just to be clear:
+    // marginTop: "0px",
+  };
+
+  const divStyle = pos === "top" ? navBarTopStyle : navBarBottomStyle;
+
   return (
     <PageContainer>
-      <div className="alumni-stories-list">
+      <div className="alumni-stories-list" style={divStyle}>
         <div className="d-flex justify-content-between">
           <div>
             <h1>Alumni Stories</h1>
@@ -63,7 +100,6 @@ export function AlumniStoriesList(): JSX.Element {
             )}
           </div>
         </div>
-        <br />
         {isPending ? (
           <Spinner animation="border" />
         ) : (

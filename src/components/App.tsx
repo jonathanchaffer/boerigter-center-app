@@ -4,46 +4,69 @@ import {
   AlumStoryDetails,
   LoginModal,
   MapView,
+  MoveNavButton,
   Navigation,
 } from "components";
-import React, { useEffect } from "react";
+import { HandshakeCareersContext } from "contexts";
+import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
-import {
-  getAllPeopleGroveAlumni,
-  getHandshakeCareers,
-  isLoggedInToPG,
-  loginToPG,
-  logoutOfPG,
-} from "services";
+import { getAllPeopleGroveAlumni, isLoggedInToPG, loginToPG, logoutOfPG } from "services";
 import { URLPaths } from "utilities";
+import tagline from "../assets/images/where_will_you_go.png";
+import "./App.scss";
 
 export function App(): JSX.Element {
+  const [navPosition, setNavPosition] = useState<"top" | "bottom">("top");
+  const { careers: handshakeCareers, isLoading: isHandshakeCareersLoading } = useContext(
+    HandshakeCareersContext,
+  );
+
+  function handleClick() {
+    if (navPosition === "top") {
+      setNavPosition("bottom");
+    } else {
+      setNavPosition("top");
+    }
+  }
+
   return (
     <Router>
-      <Navigation />
+      <Navigation pos={navPosition} />
       <Switch>
         <Route exact path={URLPaths.alumStories}>
-          <AlumniStoriesList />
-          <MapView background />
+          <AlumniStoriesList pos={navPosition} />
+          <MapView background pos={navPosition} />
+          <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
+        </Route>
+        <Route exact path="/stories/:id">
+          <AlumStoryDetails pos={navPosition} />
+          <MapView background pos={navPosition} />
+          <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
-          <AlumniStoriesList />
-          <MapView background />
+          <AlumniStoriesList pos={navPosition} />
+          <MapView background pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.admin}>
           <AdminDashboard />
-          <MapView background />
         </Route>
         <Route exact path={`${URLPaths.alumStories}/:id`}>
-          <AlumStoryDetails />
-          <MapView background />
+          <AlumStoryDetails pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.careerFinder}>
-          <MapView getData={getHandshakeCareers} />
+          <MapView
+            getData={() => {
+              return Promise.resolve(handshakeCareers);
+            }}
+            isLoading={isHandshakeCareersLoading}
+            pos={navPosition}
+          />
+          <Tagline pos={navPosition} />
+          <MoveNavButton map pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={URLPaths.alumFinder}>
           <>
-            <MapView getData={getAllPeopleGroveAlumni} />
+            <MapView getData={getAllPeopleGroveAlumni} pos={navPosition} />
             <LoginModal
               isLoggedIn={isLoggedInToPG()}
               loginFn={loginToPG}
@@ -58,6 +81,8 @@ export function App(): JSX.Element {
               }
               tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
             />
+            <Tagline pos={navPosition} />
+            <MoveNavButton map pos={navPosition} handleClick={handleClick} />
           </>
         </Route>
         <Route exact path={URLPaths.logout}>
@@ -80,4 +105,25 @@ function LogoutPage(): JSX.Element {
   });
 
   return <></>;
+}
+
+interface TaglineProps {
+  pos: "top" | "bottom";
+}
+function Tagline({ pos }: TaglineProps): JSX.Element {
+  const topStyle = {
+    marginTop: "0px",
+  };
+
+  const bottomStyle = {
+    marginTop: "-58px",
+  };
+
+  const tagStyle = pos === "top" ? topStyle : bottomStyle;
+
+  return (
+    <div id="tagline-div">
+      <img id="tagline" alt="Where will you go?" src={tagline} style={tagStyle} />
+    </div>
+  );
 }

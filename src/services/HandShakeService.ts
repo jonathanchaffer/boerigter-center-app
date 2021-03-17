@@ -1,24 +1,41 @@
+import axios from "axios";
 import { HandshakeCareer } from "models";
-import { results } from "placeholders/HandshakeResponse.json";
 
-export async function getHandshakeCareers(): Promise<HandshakeCareer[]> {
-  const careers = [];
-
-  for (let i = 0; i < results.length; i++) {
-    for (let j = 0; j < results[i].job.location_points.length; j++) {
-      const points = results[i].job.location_points[j].split(",");
-      const job = {
-        employer_logo_url: results[i].employer_logo,
-        employer_name: results[i].employer_name,
-        employment_type_name: results[i].employment_type_name,
-        id: results[i].id,
-        job_name: results[i].job_name,
-        latitude: Number(points[0]),
-        longitude: Number(points[1]),
-        type: "career",
-      } as HandshakeCareer;
-      careers.push(job);
-    }
+function convertToHandshakeCareer(data: any): HandshakeCareer | undefined {
+  if (
+    data.job.employer.location.latitude !== null &&
+    data.job.employer.location.longitude !== null
+  ) {
+    return {
+      employer_logo_url: "",
+      employer_name: data.job.employer.name,
+      employment_type_name: data.job.duration,
+      id: data.id,
+      job_name: data.job.title,
+      latitude: data.job.employer.location.latitude,
+      longitude: data.job.employer.location.longitude,
+      type: "career",
+    } as HandshakeCareer;
   }
-  return careers;
+  return undefined;
+}
+
+const axiosInstance = axios.create({
+  baseURL: "https://boerigter-center-app.herokuapp.com/https://app.joinhandshake.com/api/v1/",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+export async function fetchHandshakeCareers(page: number): Promise<HandshakeCareer[]> {
+  const options = {
+    headers: {
+      authorization: `Token token="${process.env.REACT_APP_HANDSHAKE_API_KEY}"`,
+    },
+  };
+
+  const url = `postings?page=${page}&per_page=50&sort_direction=desc`;
+  return (await axiosInstance.get(url, options)).data.postings
+    .map((posting: any) => convertToHandshakeCareer(posting))
+    .filter((career: HandshakeCareer | undefined) => career !== undefined);
 }
