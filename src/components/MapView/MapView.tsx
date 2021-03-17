@@ -1,9 +1,7 @@
 import { PopoverItem } from "components";
-import { ErrorModal } from "components/reusables";
 import GoogleMapReact from "google-map-react";
 import { Mappable } from "models/Mappable";
 import React, { useState } from "react";
-import { useAsync } from "react-async";
 import { ListGroup, OverlayTrigger, Popover, Spinner } from "react-bootstrap";
 import { ClusterFeature, PointFeature } from "supercluster";
 import useSupercluster from "use-supercluster";
@@ -13,21 +11,20 @@ import "./MapView.scss";
 // tutorial followed for clustering: https://www.leighhalliday.com/google-maps-clustering
 
 interface MapViewProps<I extends Mappable> {
-  getData: () => Promise<I[]>;
+  data: I[];
   pos: "top" | "bottom";
   defaultZoom?: number;
   isLoading?: boolean;
 }
 
 export function MapView<I extends Mappable>({
-  getData,
   pos,
   defaultZoom,
   isLoading,
+  data,
 }: MapViewProps<I>): JSX.Element {
   const [mapZoom, setMapZoom] = useState(defaultZoom || 5);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
-  const { data, error, isPending } = useAsync({ promiseFn: getData });
   const fix = Object.values(pos).join("") as "top" | "bottom";
 
   const points: PointFeature<I>[] = data
@@ -60,7 +57,7 @@ export function MapView<I extends Mappable>({
   return (
     <>
       <div id="mapDiv" className="map-container" style={divStyle}>
-        {(isPending || isLoading) && (
+        {isLoading && (
           <div className="pending-map-container">
             <Spinner animation="border" variant="light" />
           </div>
@@ -122,7 +119,6 @@ export function MapView<I extends Mappable>({
           </GoogleMapReact>
         </div>
       </div>
-      <ErrorModal error={error} />
     </>
   );
 }

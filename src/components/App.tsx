@@ -56,9 +56,7 @@ export function App(): JSX.Element {
         </Route>
         <Route exact path={URLPaths.careerFinder}>
           <MapView
-            getData={() => {
-              return Promise.resolve(handshakeCareers);
-            }}
+            data={handshakeCareers}
             isLoading={isHandshakeCareersLoading}
             pos={navPosition}
           />
@@ -68,9 +66,7 @@ export function App(): JSX.Element {
         <Route exact path={URLPaths.alumFinder}>
           <>
             <MapView
-              getData={() => {
-                return Promise.resolve(peopleGroveAlumni);
-              }}
+              data={peopleGroveAlumni}
               isLoading={isPeopleGroveAlumniLoading}
               pos={navPosition}
             />
