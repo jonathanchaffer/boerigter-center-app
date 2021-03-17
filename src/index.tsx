@@ -1,9 +1,14 @@
 import { App } from "components";
-import { BackgroundLoaderProvider, HandshakeCareersContext, UserProvider } from "contexts";
+import {
+  BackgroundLoaderProvider,
+  HandshakeCareersContext,
+  PeopleGroveAlumniContext,
+  UserProvider,
+} from "contexts";
 import * as firebase from "firebase";
 import React from "react";
 import ReactDOM from "react-dom";
-import { fetchHandshakeCareers } from "services";
+import { fetchHandshakeCareers, getAllPeopleGroveAlumni } from "services";
 import "styles/fonts.scss";
 import "styles/index.scss";
 import { commaSeparatedList } from "utilities";
@@ -47,7 +52,12 @@ ReactDOM.render(
         fetchFn={fetchHandshakeCareers}
         context={HandshakeCareersContext}
       >
-        <App />
+        <BackgroundLoaderProvider
+          fetchFn={getAllPeopleGroveAlumni}
+          context={PeopleGroveAlumniContext}
+        >
+          <App />
+        </BackgroundLoaderProvider>
       </BackgroundLoaderProvider>
     </UserProvider>
   </React.StrictMode>,

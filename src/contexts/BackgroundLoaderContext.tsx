@@ -14,7 +14,7 @@ export function createBackgroundLoaderContext<I>(): Context<BackgroundLoaderCont
 
 interface BackgroundLoaderProviderProps<I> {
   children: React.ReactNode;
-  numPages: number;
+  numPages?: number;
   fetchFn: (page: number) => Promise<I[]>;
   context: Context<BackgroundLoaderContextValues<I>>;
 }
@@ -37,15 +37,21 @@ export function BackgroundLoaderProvider<I>({
       return fetchFn(page);
     }
 
+    const num = numPages ?? 1;
+
+    // setTimeout(() => {
     setIsLoading(true);
-    for (let i = 0; i < numPages; i++) {
+    for (let i = 0; i < num; i++) {
       setIsLoading(true);
       fetchData(i)
-        .then(data => setItems(itms => [...itms, ...data]))
+        .then(data => {
+          setItems(itms => [...itms, ...data]);
+        })
         .finally(() => {
-          if (i === numPages - 1) setIsLoading(false);
+          if (i === num - 1) setIsLoading(false);
         });
     }
+    // }, 0);
   }, [numPages, fetchFn]);
 
   return <context.Provider value={{ isLoading, items }}>{children}</context.Provider>;

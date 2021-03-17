@@ -7,10 +7,10 @@ import {
   MoveNavButton,
   Navigation,
 } from "components";
-import { HandshakeCareersContext } from "contexts";
+import { HandshakeCareersContext, PeopleGroveAlumniContext } from "contexts";
 import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
-import { getAllPeopleGroveAlumni, isLoggedInToPG, loginToPG, logoutOfPG } from "services";
+import { isLoggedInToPG, loginToPG, logoutOfPG } from "services";
 import { URLPaths } from "utilities";
 import tagline from "../assets/images/where_will_you_go.png";
 import "./App.scss";
@@ -20,6 +20,9 @@ export function App(): JSX.Element {
 
   const { items: handshakeCareers, isLoading: isHandshakeCareersLoading } = useContext(
     HandshakeCareersContext,
+  );
+  const { items: peopleGroveAlumni, isLoading: isPeopleGroveAlumniLoading } = useContext(
+    PeopleGroveAlumniContext,
   );
 
   function handleClick() {
@@ -64,7 +67,13 @@ export function App(): JSX.Element {
         </Route>
         <Route exact path={URLPaths.alumFinder}>
           <>
-            <MapView getData={getAllPeopleGroveAlumni} pos={navPosition} />
+            <MapView
+              getData={() => {
+                return Promise.resolve(peopleGroveAlumni);
+              }}
+              isLoading={isPeopleGroveAlumniLoading}
+              pos={navPosition}
+            />
             <LoginModal
               isLoggedIn={isLoggedInToPG()}
               loginFn={loginToPG}
