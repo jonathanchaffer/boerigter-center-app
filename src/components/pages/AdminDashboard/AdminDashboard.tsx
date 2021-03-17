@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { loginAsAdmin, logout, sendPasswordResetEmail } from "services";
 import { setTimeout } from "timers";
 import { URLPaths } from "utilities";
+import "./AdminDashboard.scss";
 
 export function AdminDashboard(): JSX.Element {
   const user = useContext(UserContext);
@@ -32,6 +33,7 @@ export function AdminDashboard(): JSX.Element {
     </PageContainer>
   ) : (
     <>
+    <div id="page">
       <LoginModal
         isLoggedIn={!!user}
         loginFn={loginAsAdmin}
@@ -77,6 +79,7 @@ export function AdminDashboard(): JSX.Element {
         message="Please check your inbox."
       />
       <ErrorModal error={error} />
+      </div>
     </>
   );
 }
