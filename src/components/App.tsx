@@ -34,24 +34,24 @@ export function App(): JSX.Element {
       <Navigation pos={navPosition} />
       <Switch>
         <Route exact path={URLPaths.alumStories}>
+          <MapView background pos={navPosition} />
           <AlumniStoriesList pos={navPosition} />
-          <MapView background pos={navPosition} />
-          <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
-        </Route>
-        <Route exact path="/stories/:id">
-          <AlumStoryDetails pos={navPosition} />
-          <MapView background pos={navPosition} />
           <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
-          <AlumniStoriesList pos={navPosition} />
           <MapView background pos={navPosition} />
+          <AlumniStoriesList pos={navPosition} />
+          <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={URLPaths.admin}>
+          <MapView background pos={navPosition} />
           <AdminDashboard />
+          <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={`${URLPaths.alumStories}/:id`}>
+          <MapView background pos={navPosition} />
           <AlumStoryDetails pos={navPosition} />
+          <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={URLPaths.careerFinder}>
           <MapView
