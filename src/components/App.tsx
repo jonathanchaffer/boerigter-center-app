@@ -7,11 +7,12 @@ import {
   Navigation,
   MoveNavButton,
 } from "components";
-import React, { useEffect, useState } from "react";
+import { HandshakeCareersContext } from "contexts";
+import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { 
   getAllPeopleGroveAlumni, 
-  getHandshakeCareers, 
+  fetchHandshakeCareers, 
   isLoggedInToPG, 
   loginToPG, 
   logoutOfPG, 
@@ -22,6 +23,9 @@ import "./App.scss";
 
 export function App(): JSX.Element {
   const [navPosition, setNavPosition] = useState<"top" | "bottom">("top");
+  const { careers: handshakeCareers, isLoading: isHandshakeCareersLoading } = useContext(
+    HandshakeCareersContext,
+  );
 
   function handleClick() {
     if (navPosition === "top") {
@@ -53,7 +57,10 @@ export function App(): JSX.Element {
             <AlumStoryDetails pos={navPosition}/>
           </Route>
           <Route exact path={URLPaths.careerFinder}>
-            <MapView getData={getHandshakeCareers} pos={navPosition} />
+            <MapView getData={() => {
+              return Promise.resolve(handshakeCareers);
+            }}
+            isLoading={isHandshakeCareersLoading} pos={navPosition} />
             <Tagline pos={navPosition}/>
             <MoveNavButton map pos={navPosition} handleClick={handleClick} />
           </Route>

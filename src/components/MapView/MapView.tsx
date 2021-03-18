@@ -16,12 +16,14 @@ interface MapViewProps<I extends Mappable> {
   getData: () => Promise<I[]>;
   pos: "top" | "bottom";
   defaultZoom?: number;
+  isLoading?: boolean;
 }
 
 export function MapView<I extends Mappable>({
   getData,
   pos,
   defaultZoom,
+  isLoading,
 }: MapViewProps<I>): JSX.Element {
   const [mapZoom, setMapZoom] = useState(defaultZoom || 5);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
@@ -58,7 +60,7 @@ export function MapView<I extends Mappable>({
   return (
     <>
       <div id="mapDiv" className="map-container" style={divStyle}>
-      {isPending && (
+      {(isPending || isLoading) && (
         <div className="pending-map-container">
           <Spinner animation="border" variant="light" />
         </div>
