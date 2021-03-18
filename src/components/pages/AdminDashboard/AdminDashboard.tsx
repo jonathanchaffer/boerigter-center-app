@@ -28,9 +28,11 @@ export function AdminDashboard(): JSX.Element {
   }, []);
 
   return isLoading ? (
+    <div id="loader">
     <PageContainer>
       <Spinner animation="border" />
     </PageContainer>
+    </div>
   ) : (
     <>
     <div id="page">
