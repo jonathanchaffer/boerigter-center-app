@@ -46,29 +46,6 @@ export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element 
     website: "",
   };
 
-  // return (
-  //   <PageContainer>
-  //     <div className="alumni-stories-list">
-  //       <div className="d-flex justify-content-between">
-  //         <div>
-  //           <h1>Alumni Stories</h1>
-  //           <p>Alumni hand-picked by Boerigter Center staff.</p>
-  //         </div>
-  //         <div>
-  //           {user && isAdminPage && (
-  //             <Button
-  //               variant="outline-primary"
-  //               onClick={() => setIsShowingNewAlumModal(true)}
-  //               size="lg"
-  //             >
-  //               <i className="fas fa-plus mr-2" />
-  //               New Alum
-  //             </Button>
-  //           )}
-  //         </div>
-  //       </div>
-  //       <br />
-
   const navBarTopStyle = {
     paddingTop: "58px",
   };
@@ -116,6 +93,7 @@ export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element 
         show={isShowingNewAlumModal}
         onCancel={() => setIsShowingNewAlumModal(false)}
         currentAlum={newAlum}
+        isAdd={true}
       />
     </PageContainer>
   );
@@ -237,6 +215,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
         show={isShowingEditAlumModal}
         onCancel={() => setIsShowingEditAlumModal(false)}
         currentAlum={alum}
+        isAdd={false}
       />
     </>
   );

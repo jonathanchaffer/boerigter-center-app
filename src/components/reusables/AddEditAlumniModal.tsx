@@ -9,6 +9,7 @@ interface AddEditAlumniModalProps {
   title: string;
   message: string;
   currentAlum: CuratedAlum;
+  isAdd: boolean;
 }
   
 export function AddEditAlumniModal({
@@ -16,6 +17,7 @@ export function AddEditAlumniModal({
     onCancel,
     message,
     currentAlum,
+    isAdd,
 }: AddEditAlumniModalProps): JSX.Element {
   
   const alum: CuratedAlum = {
@@ -38,11 +40,11 @@ export function AddEditAlumniModal({
     display: currentAlum.display,
   };
 
-  function Submit(){
-      if(message==="Edit Alumni Stories") {
-        updateAlumStory(alum.id, alum).finally(() => { onCancel(); window.location.reload() });
-      } else if (message==="Add Alumni Stories") {
+  function submitAlum(){
+      if({isAdd}) {
         addAlumStory(alum).finally(() => { onCancel(); window.location.reload() });
+      } else {
+        updateAlumStory(alum.id, alum).finally(() => { onCancel(); window.location.reload() });
       }
 
   }
@@ -116,7 +118,7 @@ export function AddEditAlumniModal({
         <Button variant="outline-secondary" onClick={onCancel}>
             Cancel
         </Button>
-        <Button variant="outline-primary" onClick={()=>Submit()}>
+        <Button variant="outline-primary" onClick={()=>submitAlum()}>
             Submit    
         </Button>  
         </Modal.Body>
