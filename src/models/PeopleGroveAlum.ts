@@ -8,6 +8,7 @@ export interface PeopleGroveAlum extends Mappable {
   location: string;
   photoUrl: string;
   majors: string[];
+  cluster: false;
   workHistory: WorkHistoryEntry[];
 }
 
