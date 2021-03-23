@@ -1,4 +1,6 @@
+import tagline from "assets/images/where_will_you_go.png";
 import { PopoverItem } from "components";
+import { navbarHeight } from "components/Navigation";
 import GoogleMapReact from "google-map-react";
 import { Mappable } from "models/Mappable";
 import React, { useState } from "react";
@@ -25,7 +27,6 @@ export function MapView<I extends Mappable>({
 }: MapViewProps<I>): JSX.Element {
   const [mapZoom, setMapZoom] = useState(defaultZoom || 5);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
-  const fix = Object.values(pos).join("") as "top" | "bottom";
 
   const points: PointFeature<I>[] = data
     ? data.map((item: I) => {
@@ -44,24 +45,19 @@ export function MapView<I extends Mappable>({
     zoom: mapZoom,
   });
 
-  const navBarTopStyle = {
-    // Just to be clear:
-    // top: "0px",
-  };
-  const navBarBottomStyle = {
-    top: "-58px",
-  };
-
-  const divStyle = fix === "top" ? navBarTopStyle : navBarBottomStyle;
-
   return (
     <>
-      <div id="mapDiv" className="map-container" style={divStyle}>
+      <div
+        id="mapDiv"
+        className="map-container"
+        style={pos === "bottom" ? { top: `-${navbarHeight}` } : {}}
+      >
         {isLoading && (
           <div className="pending-map-container">
             <Spinner animation="border" variant="light" />
           </div>
         )}
+        <Tagline />
         <div className="map-container">
           <GoogleMapReact
             bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}
@@ -237,5 +233,13 @@ function PopoverTrigger<I extends Mappable>({
     >
       {children}
     </OverlayTrigger>
+  );
+}
+
+function Tagline(): JSX.Element {
+  return (
+    <div id="tagline-div">
+      <img id="tagline" alt="Where will you go?" src={tagline} />
+    </div>
   );
 }
