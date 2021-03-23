@@ -6,23 +6,22 @@ $button-Width: 146px;
 $div-show: 30px;
 
 #move-Nav-Button {
-    background-color: $hope-orange !important;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    border-radius: $border-radius;
-    height: $button-Height;
-    width: $button-Width;
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: $border-radius;
+  height: $button-Height;
+  width: $button-Width;
+}
 
-  #button-div {
-    position: fixed;
-    z-index: 1500;
-    background-color: white;
-    border-radius: 3px;
-    width: $button-Width+$div-show;
-    height: $button-Height+$div-show;
-    align-content: center;
+#button-div {
+  position: fixed;
+  z-index: 1500;
+  background-color: white;
+  border-radius: 3px;
+  width: $button-Width + $div-show;
+  height: $button-Height + $div-show;
+  align-content: center;
 }

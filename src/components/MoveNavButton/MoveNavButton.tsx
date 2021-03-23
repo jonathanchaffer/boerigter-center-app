@@ -28,13 +28,13 @@ export function MoveNavButton({ map, pos, handleClick }: NavButtonProps): JSX.El
     transform: `translateY(-${navbarHeight})`,
   };
 
-  const buttonText = pos === "top" ? "Bring NavBar down" : "Bring NavBar up";
+  const buttonIcon = pos === "top" ? "fas fa-arrow-down" : "fas fa-arrow-up";
   const buttonStyle = pos === "top" ? topStyle : bottomStyle;
 
   return (
     <div id="button-div" className="container" style={buttonStyle}>
-      <Button id="move-Nav-Button" onClick={handleClick}>
-        {buttonText}
+      <Button id="move-Nav-Button" variant="outline-secondary" onClick={handleClick}>
+        Nagivation <i className={buttonIcon} />
       </Button>
     </div>
   );
