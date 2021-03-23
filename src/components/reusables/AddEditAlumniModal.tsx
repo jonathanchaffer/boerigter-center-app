@@ -1,5 +1,5 @@
 import { CuratedAlum } from "models";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { addAlumStory, updateAlumStory } from "services";
 
@@ -19,16 +19,16 @@ export function AddEditAlumniModal({
   currentAlum,
   isAdd,
 }: AddEditAlumniModalProps): JSX.Element {
-  const alum: CuratedAlum = { ...currentAlum };
+  const [editedAlum, setEditedAlum] = useState<CuratedAlum>({ ...currentAlum });
 
   function submitAlum() {
     if (isAdd) {
-      addAlumStory(alum).finally(() => {
+      addAlumStory(editedAlum).finally(() => {
         onCancel();
         window.location.reload();
       });
     } else {
-      updateAlumStory(alum.id, alum).finally(() => {
+      updateAlumStory(editedAlum.id, editedAlum).finally(() => {
         onCancel();
         window.location.reload();
       });
@@ -45,10 +45,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter first name"
-              onChange={e => {
-                alum.firstName = e.target.value;
-              }}
-              defaultValue={alum.firstName}
+              onChange={e => setEditedAlum({ ...editedAlum, firstName: e.target.value })}
+              defaultValue={editedAlum.firstName}
             />
           </Form.Group>
           <Form.Group controlId="lastName">
@@ -56,10 +54,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter last name"
-              onChange={e => {
-                alum.lastName = e.target.value;
-              }}
-              defaultValue={alum.lastName}
+              onChange={e => setEditedAlum({ ...editedAlum, lastName: e.target.value })}
+              defaultValue={editedAlum.lastName}
             />
           </Form.Group>
           <Form.Group controlId="location">
@@ -67,10 +63,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter location"
-              onChange={e => {
-                alum.location = e.target.value;
-              }}
-              defaultValue={alum.location}
+              onChange={e => setEditedAlum({ ...editedAlum, location: e.target.value })}
+              defaultValue={editedAlum.location}
             />
           </Form.Group>
           <Form.Group controlId="majors">
@@ -78,10 +72,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter majors (major1,major2,major3,...)"
-              onChange={e => {
-                alum.majors = e.target.value.split(",");
-              }}
-              defaultValue={alum.majors}
+              onChange={e => setEditedAlum({ ...editedAlum, majors: e.target.value.split(",") })}
+              defaultValue={editedAlum.majors}
             />
           </Form.Group>
           <Form.Group controlId="minors">
@@ -89,10 +81,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter minors (minor1,minor2,minor3,...)"
-              onChange={e => {
-                alum.minors = e.target.value.split(",");
-              }}
-              defaultValue={alum.minors}
+              onChange={e => setEditedAlum({ ...editedAlum, minors: e.target.value.split(",") })}
+              defaultValue={editedAlum.minors}
             />
           </Form.Group>
           <Form.Group controlId="company">
@@ -100,10 +90,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter company"
-              onChange={e => {
-                alum.company = e.target.value;
-              }}
-              defaultValue={alum.company}
+              onChange={e => setEditedAlum({ ...editedAlum, company: e.target.value })}
+              defaultValue={editedAlum.company}
             />
           </Form.Group>
           <Form.Group controlId="profilePhoto">
@@ -111,10 +99,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter the link of profile photo"
-              onChange={e => {
-                alum.profilePhoto = e.target.value;
-              }}
-              defaultValue={alum.profilePhoto}
+              onChange={e => setEditedAlum({ ...editedAlum, profilePhoto: e.target.value })}
+              defaultValue={editedAlum.profilePhoto}
             />
           </Form.Group>
           <Form.Group controlId="bio">
@@ -122,10 +108,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter bio"
-              onChange={e => {
-                alum.bio = e.target.value;
-              }}
-              defaultValue={alum.bio}
+              onChange={e => setEditedAlum({ ...editedAlum, bio: e.target.value })}
+              defaultValue={editedAlum.bio}
             />
           </Form.Group>
           <Form.Group controlId="quotes">
@@ -133,10 +117,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter quotes (quote1|quote2|quote3|...)"
-              onChange={e => {
-                alum.quotes = e.target.value.split("|");
-              }}
-              defaultValue={alum.quotes}
+              onChange={e => setEditedAlum({ ...editedAlum, quotes: e.target.value.split("|") })}
+              defaultValue={editedAlum.quotes}
             />
           </Form.Group>
           <Form.Group controlId="gradYear">
@@ -144,10 +126,10 @@ export function AddEditAlumniModal({
             <Form.Control
               type="number"
               placeholder="Enter graduated year"
-              onChange={e => {
-                alum.gradYear = parseInt(e.target.value, 10);
-              }}
-              defaultValue={alum.gradYear}
+              onChange={e =>
+                setEditedAlum({ ...editedAlum, gradYear: parseInt(e.target.value, 10) })
+              }
+              defaultValue={editedAlum.gradYear}
             />
           </Form.Group>
           <Form.Group controlId="media">
@@ -155,10 +137,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter media"
-              onChange={e => {
-                alum.media = e.target.value.split(",");
-              }}
-              defaultValue={alum.media}
+              onChange={e => setEditedAlum({ ...editedAlum, media: e.target.value.split(",") })}
+              defaultValue={editedAlum.media}
             />
           </Form.Group>
           <Form.Group controlId="website">
@@ -166,10 +146,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter website"
-              onChange={e => {
-                alum.website = e.target.value;
-              }}
-              defaultValue={alum.website}
+              onChange={e => setEditedAlum({ ...editedAlum, website: e.target.value })}
+              defaultValue={editedAlum.website}
             />
           </Form.Group>
           <Form.Group controlId="linkedIn">
@@ -177,10 +155,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter LinkedIn"
-              onChange={e => {
-                alum.linkedIn = e.target.value;
-              }}
-              defaultValue={alum.linkedIn}
+              onChange={e => setEditedAlum({ ...editedAlum, linkedIn: e.target.value })}
+              defaultValue={editedAlum.linkedIn}
             />
           </Form.Group>
           <Form.Group controlId="email">
@@ -188,10 +164,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="email"
               placeholder="Enter email"
-              onChange={e => {
-                alum.email = e.target.value;
-              }}
-              defaultValue={alum.email}
+              onChange={e => setEditedAlum({ ...editedAlum, email: e.target.value })}
+              defaultValue={editedAlum.email}
             />
           </Form.Group>
           <Form.Group controlId="phone">
@@ -199,10 +173,8 @@ export function AddEditAlumniModal({
             <Form.Control
               type="text"
               placeholder="Enter phone number"
-              onChange={e => {
-                alum.phone = e.target.value;
-              }}
-              defaultValue={alum.phone}
+              onChange={e => setEditedAlum({ ...editedAlum, phone: e.target.value })}
+              defaultValue={editedAlum.phone}
             />
           </Form.Group>
         </Form>
