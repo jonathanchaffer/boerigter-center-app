@@ -51,7 +51,7 @@ export function PopoverItem<I extends Mappable>({ item }: PopoverItemProps<I>): 
                 )}
                 {job.job_city && (
                   <span>
-                    <i className="fas fa-home" />
+                    <i className="fas fa-location-arrow" />
                     {job.job_city}
                   </span>
                 )}
