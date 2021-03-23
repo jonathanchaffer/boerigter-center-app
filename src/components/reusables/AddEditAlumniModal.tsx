@@ -132,15 +132,6 @@ export function AddEditAlumniModal({
               defaultValue={editedAlum.gradYear}
             />
           </Form.Group>
-          <Form.Group controlId="media">
-            <Form.Label>Media</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter media"
-              onChange={e => setEditedAlum({ ...editedAlum, media: e.target.value.split(",") })}
-              defaultValue={editedAlum.media}
-            />
-          </Form.Group>
           <Form.Group controlId="website">
             <Form.Label>Website</Form.Label>
             <Form.Control

@@ -38,7 +38,6 @@ export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element 
     linkedIn: "",
     location: "",
     majors: [],
-    media: [],
     minors: [],
     phone: "",
     profilePhoto: "",
@@ -93,7 +92,7 @@ export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element 
         show={isShowingNewAlumModal}
         onCancel={() => setIsShowingNewAlumModal(false)}
         currentAlum={newAlum}
-        isAdd={true}
+        isAdd
       />
     </PageContainer>
   );

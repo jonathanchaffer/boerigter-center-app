@@ -10,7 +10,6 @@ export interface CuratedAlum {
   bio: string;
   quotes?: string[];
   gradYear: number;
-  media?: string[];
   website?: string;
   linkedIn?: string;
   email?: string;
