@@ -1,3 +1,4 @@
+import { navbarHeight } from "components/Navigation";
 import React from "react";
 import Button from "react-bootstrap/esm/Button";
 import "./MoveNavButton.scss";
@@ -19,16 +20,12 @@ export function MoveNavButton({ map, pos, handleClick }: NavButtonProps): JSX.El
 
   const topStyle = {
     bottom: "23.5px",
-    left: "1",
     right,
-    top: "1",
   };
 
   const bottomStyle = {
-    bottom: "80px",
-    left: "1",
-    right,
-    top: "1",
+    ...topStyle,
+    transform: `translateY(-${navbarHeight})`,
   };
 
   const buttonText = pos === "top" ? "Bring NavBar down" : "Bring NavBar up";
