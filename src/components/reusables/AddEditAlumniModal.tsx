@@ -36,7 +36,7 @@ export function AddEditAlumniModal({
   }
 
   return (
-    <Modal show={show} onCancel={onCancel} centered>
+    <Modal show={show} size="lg" onCancel={onCancel} centered>
       <Modal.Body>
         <h1>{message}</h1>
         <Form>
