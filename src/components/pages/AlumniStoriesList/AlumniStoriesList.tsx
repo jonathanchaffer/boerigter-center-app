@@ -26,6 +26,7 @@ export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element 
   const user = useContext(UserContext);
   const isAdminPage = history.location.pathname === "/stories/admin";
   const [isShowingNewAlumModal, setIsShowingNewAlumModal] = useState(false);
+
   const newAlum: CuratedAlum = {
     bio: "",
     company: "",
@@ -45,19 +46,9 @@ export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element 
     website: "",
   };
 
-  const navBarTopStyle = {
-    paddingTop: "58px",
-  };
-  const navBarBottomStyle = {
-    // Just to be clear:
-    // marginTop: "0px",
-  };
-
-  const divStyle = pos === "top" ? navBarTopStyle : navBarBottomStyle;
-
   return (
-    <PageContainer>
-      <div className="alumni-stories-list" style={divStyle}>
+    <PageContainer pos={pos}>
+      <div className="alumni-stories-list">
         <div className="d-flex justify-content-between">
           <div>
             <h1>Alumni Stories</h1>

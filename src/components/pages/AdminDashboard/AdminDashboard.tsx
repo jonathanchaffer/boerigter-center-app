@@ -9,7 +9,11 @@ import { loginAsAdmin, logout, sendPasswordResetEmail } from "services";
 import { setTimeout } from "timers";
 import { URLPaths } from "utilities";
 
-export function AdminDashboard(): JSX.Element {
+interface AdminDashboardProps {
+  pos: "top" | "bottom";
+}
+
+export function AdminDashboard({ pos }: AdminDashboardProps): JSX.Element {
   const user = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isShowingConfirmPasswordReset, setIsShowingConfirmPasswordReset] = useState(false);
@@ -27,56 +31,62 @@ export function AdminDashboard(): JSX.Element {
   }, []);
 
   return isLoading ? (
-    <PageContainer>
-      <Spinner animation="border" />
-    </PageContainer>
+    <div id="loader">
+      <PageContainer pos={pos}>
+        <Spinner animation="border" />
+      </PageContainer>
+    </div>
   ) : (
     <>
-      <LoginModal
-        isLoggedIn={!!user}
-        loginFn={loginAsAdmin}
-        title="Admin Login"
-        description="Please login using your admin credentials to view this content."
-        passwordResetFn={sendPasswordResetEmail}
-      />
-      <PageContainer>
-        {user && (
-          <>
-            <div className="d-flex justify-content-between align-items-center">
-              <h1>Admin Dashboard</h1>
-              <Button variant="outline-secondary" onClick={logout}>
-                Log Out
-              </Button>
-            </div>
-            <hr />
-            <div className="spaced-children">
-              <Link to={`${URLPaths.alumStories}${URLPaths.admin}`}>
-                <Button>Edit Alumni Stories</Button>
-              </Link>
-              <Button onClick={() => setIsShowingConfirmPasswordReset(true)}>Reset Password</Button>
-            </div>
-          </>
-        )}
-      </PageContainer>
-      <ConfirmationModal
-        show={isShowingConfirmPasswordReset}
-        onHide={() => setIsShowingConfirmPasswordReset(false)}
-        onConfirm={() => {
-          return sendPasswordResetEmail(user?.email || "")
-            .then(() => setIsShowingEmailSent(true))
-            .catch(err => setError(err));
-        }}
-        title="Send password reset email?"
-        message={`An email will be sent to ${user?.email} with a link to reset your password.`}
-        confirmText="Send Email"
-      />
-      <InfoModal
-        show={isShowingEmailSent}
-        onHide={() => setIsShowingEmailSent(false)}
-        title="Email Sent"
-        message="Please check your inbox."
-      />
-      <ErrorModal error={error} />
+      <div id="page">
+        <LoginModal
+          isLoggedIn={!!user}
+          loginFn={loginAsAdmin}
+          title="Admin Login"
+          description="Please login using your admin credentials to view this content."
+          passwordResetFn={sendPasswordResetEmail}
+        />
+        <PageContainer pos={pos}>
+          {user && (
+            <>
+              <div className="d-flex justify-content-between align-items-center">
+                <h1>Admin Dashboard</h1>
+                <Button variant="outline-secondary" onClick={logout}>
+                  Log Out
+                </Button>
+              </div>
+              <hr />
+              <div className="spaced-children">
+                <Link to={`${URLPaths.alumStories}${URLPaths.admin}`}>
+                  <Button>Edit Alumni Stories</Button>
+                </Link>
+                <Button onClick={() => setIsShowingConfirmPasswordReset(true)}>
+                  Reset Password
+                </Button>
+              </div>
+            </>
+          )}
+        </PageContainer>
+        <ConfirmationModal
+          show={isShowingConfirmPasswordReset}
+          onHide={() => setIsShowingConfirmPasswordReset(false)}
+          onConfirm={() => {
+            return sendPasswordResetEmail(user?.email || "")
+              .then(() => setIsShowingEmailSent(true))
+              .catch(err => setError(err));
+          }}
+          title="Send password reset email?"
+          message={`An email will be sent to ${user?.email} with a link to reset your password.`}
+          confirmText="Send Email"
+        />
+        <InfoModal
+          show={isShowingEmailSent}
+          onHide={() => setIsShowingEmailSent(false)}
+          title="Email Sent"
+          message="Please check your inbox."
+        />
+        <ErrorModal error={error} />
+      </div>
     </>
   );
 }
