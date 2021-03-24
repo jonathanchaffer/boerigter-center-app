@@ -6,6 +6,7 @@ import {
   MapView,
   Navigation,
   MoveNavButton,
+  AboutApp,
 } from "components";
 import { HandshakeCareersContext } from "contexts";
 import React, { useContext, useEffect, useState } from "react";
@@ -36,6 +37,7 @@ export function App(): JSX.Element {
   }
 
   return (
+    <div>
       <Router>
         <Navigation pos={navPosition} />
         <Switch>
@@ -93,6 +95,8 @@ export function App(): JSX.Element {
           </Route>
         </Switch>
       </Router>
+        <AboutApp pos={navPosition}/>
+        </div>
   );
 }
 
