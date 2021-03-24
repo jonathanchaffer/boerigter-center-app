@@ -20,40 +20,7 @@ export function PopoverItem<I extends Mappable>({ item }: PopoverItemProps<I>): 
     }
     case "career": {
       const job = (item as unknown) as HandshakeCareer;
-      // TODO: move this to its own component, similar to AlumPopoverItem
-      return (
-        <Row className="job-popover-item">
-          <Col xs={3} className="d-flex align-items-center">
-            <div>
-              <Img
-                src={job.employer_logo_url}
-                placeholder={placeholderImg}
-                width="100%"
-                loading="lazy"
-              />
-            </div>
-          </Col>
-          <Col className="d-flex align-items-center">
-            <div>
-              <h4>{job.job_name}</h4>
-              <div className="secondary-info d-flex flex-column">
-                {job.employer_name && (
-                  <span>
-                    <i className="fas fa-briefcase" />
-                    {job.employer_name}
-                  </span>
-                )}
-                {job.employment_type_name && (
-                  <span>
-                    <i className="fas fa-clock" />
-                    {job.employment_type_name}
-                  </span>
-                )}
-              </div>
-            </div>
-          </Col>
-        </Row>
-      );
+      return <CareerPopoverItem career={job} />;
     }
     default:
       return <span>#{item.id}</span>;
@@ -100,6 +67,52 @@ function AlumPopoverItem({ alum }: AlumPopoverItemProps): JSX.Element {
                   {data.workHistory[0].companyTitle}
                 </span>
               )
+            )}
+          </div>
+        </div>
+      </Col>
+    </Row>
+  );
+}
+
+interface CareerPopoverItemProps {
+  career: HandshakeCareer;
+}
+
+function CareerPopoverItem({ career }: CareerPopoverItemProps): JSX.Element {
+  return (
+    <Row className="job-popover-item">
+      <Col xs={3} className="d-flex align-items-center">
+        <div>
+          <Img
+            src={career.employer_logo_url}
+            placeholder={placeholderImg}
+            width="100%"
+            loading="lazy"
+          />
+        </div>
+      </Col>
+      <Col className="d-flex align-items-center">
+        <div>
+          <h4>{career.job_name}</h4>
+          <div className="secondary-info d-flex flex-column">
+            {career.employer_name && (
+              <span>
+                <i className="fas fa-briefcase" />
+                {career.employer_name}
+              </span>
+            )}
+            {career.employment_type_name && (
+              <span>
+                <i className="fas fa-clock" />
+                {career.employment_type_name}
+              </span>
+            )}
+            {career.job_city && (
+              <span>
+                <i className="fas fa-location-arrow" />
+                {career.job_city}
+              </span>
             )}
           </div>
         </div>
