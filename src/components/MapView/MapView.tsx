@@ -13,7 +13,8 @@ import "./MapView.scss";
 // tutorial followed for clustering: https://www.leighhalliday.com/google-maps-clustering
 
 interface MapViewProps<I extends Mappable> {
-  data: I[];
+  background?: boolean;
+  data?: I[];
   pos: "top" | "bottom";
   defaultZoom?: number;
   isLoading?: boolean;
@@ -22,6 +23,7 @@ interface MapViewProps<I extends Mappable> {
 export function MapView<I extends Mappable>({
   pos,
   defaultZoom,
+  background,
   isLoading,
   data,
 }: MapViewProps<I>): JSX.Element {
@@ -48,8 +50,7 @@ export function MapView<I extends Mappable>({
   return (
     <>
       <div
-        id="mapDiv"
-        className="map-container"
+        className={`map-container${background ? " background" : ""}`}
         style={pos === "bottom" ? { top: `-${navbarHeight}` } : {}}
       >
         {isLoading && (
@@ -57,63 +58,61 @@ export function MapView<I extends Mappable>({
             <Spinner animation="border" variant="light" />
           </div>
         )}
-        <Tagline />
-        <div className="map-container">
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}
-            defaultCenter={{
-              lat: 39.381266,
-              lng: -97.922211,
-            }}
-            zoom={mapZoom}
-            options={{ maxZoom: 10 }}
-            onChange={({ zoom, bounds }) => {
-              setMapZoom(zoom);
-              setMapBounds([bounds.nw.lng, bounds.se.lat, bounds.se.lng, bounds.nw.lat]);
-            }}
-          >
-            {clusters.map(pointOrCluster => {
-              /* Regardless of whether pointOrCluster is a PointFeature<ClusterProperties> or a PointFeature<I>, it has a
-               * 'geometry' property that we can use to get the latitude and longitude. */
-              const [longitude, latitude] = pointOrCluster.geometry.coordinates;
+        {!background && <Tagline />}
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}
+          defaultCenter={{
+            lat: 39.381266,
+            lng: -97.922211,
+          }}
+          zoom={mapZoom}
+          options={{ maxZoom: 10, zoomControl: !background }}
+          onChange={({ zoom, bounds }) => {
+            setMapZoom(zoom);
+            setMapBounds([bounds.nw.lng, bounds.se.lat, bounds.se.lng, bounds.nw.lat]);
+          }}
+        >
+          {clusters.map(pointOrCluster => {
+            /* Regardless of whether pointOrCluster is a PointFeature<ClusterProperties> or a PointFeature<I>, it has a
+             * 'geometry' property that we can use to get the latitude and longitude. */
+            const [longitude, latitude] = pointOrCluster.geometry.coordinates;
 
-              /* If pointOrCluster is a ClusterFeature<I>, then it has 'cluster' and 'cluster_id' properties.
-               * We can use these to display cluster information on the map. */
-              const cluster = pointOrCluster as ClusterFeature<I>;
-              const { cluster: isCluster, cluster_id: clusterId } = cluster.properties;
+            /* If pointOrCluster is a ClusterFeature<I>, then it has 'cluster' and 'cluster_id' properties.
+             * We can use these to display cluster information on the map. */
+            const cluster = pointOrCluster as ClusterFeature<I>;
+            const { cluster: isCluster, cluster_id: clusterId } = cluster.properties;
 
-              /* Otherwise, pointOrCluster is just a PointFeature<I>, and its 'properties' property is the I object itself. */
-              const point = pointOrCluster as PointFeature<I>;
-              const item = point.properties;
+            /* Otherwise, pointOrCluster is just a PointFeature<I>, and its 'properties' property is the I object itself. */
+            const point = pointOrCluster as PointFeature<I>;
+            const item = point.properties;
 
-              /* If isCluster, return the element that should display for cluster pins. */
-              if (isCluster) {
-                const leaves = supercluster?.getLeaves(clusterId, Infinity);
-                return (
-                  <ClusterPin
-                    id={clusterId.toString()}
-                    items={leaves?.map(pt => pt.properties) || []}
-                    totalNumPoints={clusters.length}
-                    key={clusterId}
-                    lat={latitude}
-                    lng={longitude}
-                  />
-                );
-              }
-
-              /* Otherwise, return the element that should display for item pins. */
+            /* If isCluster, return the element that should display for cluster pins. */
+            if (isCluster) {
+              const leaves = supercluster?.getLeaves(clusterId, Infinity);
               return (
-                <ItemPin
-                  item={item}
-                  key={item.id}
+                <ClusterPin
+                  id={clusterId.toString()}
+                  items={leaves?.map(pt => pt.properties) || []}
+                  totalNumPoints={clusters.length}
+                  key={clusterId}
                   lat={latitude}
                   lng={longitude}
-                  totalNumPoints={clusters.length}
                 />
               );
-            })}
-          </GoogleMapReact>
-        </div>
+            }
+
+            /* Otherwise, return the element that should display for item pins. */
+            return (
+              <ItemPin
+                item={item}
+                key={item.id}
+                lat={latitude}
+                lng={longitude}
+                totalNumPoints={clusters.length}
+              />
+            );
+          })}
+        </GoogleMapReact>
       </div>
     </>
   );
