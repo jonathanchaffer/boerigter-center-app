@@ -12,7 +12,7 @@ import "./MapView.scss";
 
 interface MapViewProps<I extends Mappable> {
   background?: boolean;
-  data: I[];
+  data?: I[];
   pos: "top" | "bottom";
   defaultZoom?: number;
   isLoading?: boolean;
@@ -58,13 +58,13 @@ export function MapView<I extends Mappable>({
 
   return (
     <>
-      <div id="mapDiv" className="map-container" style={divStyle}>
-        {isLoading && (
-          <div className="pending-map-container">
-            <Spinner animation="border" variant="light" />
-          </div>
-        )}
-        <div className={`map-container${background ? " background" : ""}`}>
+      <div className={`map-container${background ? " background" : ""}`} style={divStyle}>
+        <>
+          {isLoading && (
+            <div className="pending-map-container">
+              <Spinner animation="border" variant="light" />
+            </div>
+          )}
           <GoogleMapReact
             bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}
             defaultCenter={{
@@ -119,7 +119,7 @@ export function MapView<I extends Mappable>({
               );
             })}
           </GoogleMapReact>
-        </div>
+        </>
       </div>
     </>
   );

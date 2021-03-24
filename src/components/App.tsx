@@ -38,16 +38,20 @@ export function App(): JSX.Element {
       <Navigation pos={navPosition} />
       <Switch>
         <Route exact path={URLPaths.alumStories}>
+          <MapView background pos={navPosition} />
           <AlumniStoriesList pos={navPosition} />
           <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
+          <MapView background pos={navPosition} />
           <AlumniStoriesList pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.admin}>
+          <MapView background pos={navPosition} />
           <AdminDashboard />
         </Route>
         <Route exact path={`${URLPaths.alumStories}/:id`}>
+          <MapView background pos={navPosition} />
           <AlumStoryDetails pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.careerFinder}>
@@ -60,29 +64,27 @@ export function App(): JSX.Element {
           <MoveNavButton map pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={URLPaths.alumFinder}>
-          <>
-            <MapView
-              data={peopleGroveAlumni}
-              isLoading={isPeopleGroveAlumniLoading}
-              pos={navPosition}
-            />
-            <LoginModal
-              isLoggedIn={isLoggedInToPG()}
-              loginFn={loginToPG}
-              description={
-                <span>
-                  Please log in using your{" "}
-                  <a href="https://connection.hope.edu/" target="blank">
-                    connection.hope.edu
-                  </a>{" "}
-                  credentials to view this content.
-                </span>
-              }
-              tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
-            />
-            <Tagline pos={navPosition} />
-            <MoveNavButton map pos={navPosition} handleClick={handleClick} />
-          </>
+          <MapView
+            data={peopleGroveAlumni}
+            isLoading={isPeopleGroveAlumniLoading}
+            pos={navPosition}
+          />
+          <LoginModal
+            isLoggedIn={isLoggedInToPG()}
+            loginFn={loginToPG}
+            description={
+              <span>
+                Please log in using your{" "}
+                <a href="https://connection.hope.edu/" target="blank">
+                  connection.hope.edu
+                </a>{" "}
+                credentials to view this content.
+              </span>
+            }
+            tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
+          />
+          <Tagline pos={navPosition} />
+          <MoveNavButton map pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={URLPaths.logout}>
           <LogoutPage />

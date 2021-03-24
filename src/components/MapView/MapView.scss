@@ -23,7 +23,7 @@
 
 .map-container.background {
   z-index: -10000;
-  pointer-events: none;
+  // pointer-events: none;
   opacity: 0.15;
   position: fixed;
 }
@@ -80,9 +80,4 @@
 
 .job-popover-item {
   width: 36rem;
-}
-
-#mapDiv {
-  position: absolute;
-  // height: 865px;
 }
