@@ -14,25 +14,15 @@ import { URLPaths } from "utilities";
 import "./AlumniStoriesList.scss";
 
 interface AlumniStoriesListProps {
-  pos: "top" | "bottom"; 
+  pos: "top" | "bottom";
 }
 
-export function AlumniStoriesList({pos}:AlumniStoriesListProps): JSX.Element {
+export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
 
-  const navBarTopStyle = {
-     paddingTop: "58px",
-  };
-  const navBarBottomStyle = {
-    // Just to be clear:
-    // marginTop: "0px",
-  };
-
-  const divStyle = pos === "top" ? navBarTopStyle : navBarBottomStyle;
-
   return (
-    <PageContainer>
-      <div className="alumni-stories-list" style={divStyle}>
+    <PageContainer pos={pos}>
+      <div className="alumni-stories-list">
         <h1>Alumni stories</h1>
         <p>Alumni hand-picked by Boerigter Center staff.</p>
         {isPending ? (
