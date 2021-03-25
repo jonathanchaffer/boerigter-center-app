@@ -86,7 +86,7 @@ export function AddEditAlumniModal({
             <Form.Label>Photo URL</Form.Label>
             <Form.Control
               type="text"
-              placeholder="e.g. http://example.com/photo.jpg"
+              placeholder="e.g. https://example.com/photo.jpg"
               onChange={e => setEditedAlum({ ...editedAlum, profilePhoto: e.target.value.trim() })}
               defaultValue={editedAlum.profilePhoto}
             />
@@ -177,8 +177,8 @@ export function AddEditAlumniModal({
             <Form.Label>Website</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter website"
-              onChange={e => setEditedAlum({ ...editedAlum, website: e.target.value })}
+              placeholder="e.g. https://example.com"
+              onChange={e => setEditedAlum({ ...editedAlum, website: e.target.value.trim() })}
               defaultValue={editedAlum.website}
             />
           </Form.Group>
@@ -186,8 +186,8 @@ export function AddEditAlumniModal({
             <Form.Label>LinkedIn</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter LinkedIn"
-              onChange={e => setEditedAlum({ ...editedAlum, linkedIn: e.target.value })}
+              placeholder="e.g. https://linkedin.com/in/jane-doe"
+              onChange={e => setEditedAlum({ ...editedAlum, linkedIn: e.target.value.trim() })}
               defaultValue={editedAlum.linkedIn}
             />
           </Form.Group>
@@ -195,8 +195,8 @@ export function AddEditAlumniModal({
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter email"
-              onChange={e => setEditedAlum({ ...editedAlum, email: e.target.value })}
+              placeholder="e.g. example@example.com"
+              onChange={e => setEditedAlum({ ...editedAlum, email: e.target.value.trim() })}
               defaultValue={editedAlum.email}
             />
           </Form.Group>
@@ -204,8 +204,8 @@ export function AddEditAlumniModal({
             <Form.Label>Phone Number</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter phone number"
-              onChange={e => setEditedAlum({ ...editedAlum, phone: e.target.value })}
+              placeholder="e.g. 555-555-5555"
+              onChange={e => setEditedAlum({ ...editedAlum, phone: e.target.value.trim() })}
               defaultValue={editedAlum.phone}
             />
           </Form.Group>
