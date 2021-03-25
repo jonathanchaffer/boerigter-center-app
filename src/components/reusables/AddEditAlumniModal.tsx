@@ -86,21 +86,31 @@ export function AddEditAlumniModal({
             />
           </Form.Group>
           <Form.Group controlId="majors">
-            <Form.Label>Majors</Form.Label>
+            <Form.Label>Major(s)</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter majors (major1,major2,major3,...)"
-              onChange={e => setEditedAlum({ ...editedAlum, majors: e.target.value.split(",") })}
-              defaultValue={editedAlum.majors}
+              placeholder="Enter majors separated by commas (major1, major2, ...)"
+              onChange={e =>
+                setEditedAlum({
+                  ...editedAlum,
+                  majors: e.target.value.split(",").map(major => major.trim()),
+                })
+              }
+              defaultValue={editedAlum.majors.join(", ")}
             />
           </Form.Group>
           <Form.Group controlId="minors">
             <Form.Label>Minors</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter minors (minor1,minor2,minor3,...)"
-              onChange={e => setEditedAlum({ ...editedAlum, minors: e.target.value.split(",") })}
-              defaultValue={editedAlum.minors}
+              placeholder="Enter minors separated by commas (minor1, minor2, ...)"
+              onChange={e =>
+                setEditedAlum({
+                  ...editedAlum,
+                  minors: e.target.value.split(",").map(minor => minor.trim()),
+                })
+              }
+              defaultValue={editedAlum.minors?.join(", ") || ""}
             />
           </Form.Group>
           <Form.Group controlId="company">
