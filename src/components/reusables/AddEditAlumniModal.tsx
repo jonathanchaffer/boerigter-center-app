@@ -45,7 +45,7 @@ export function AddEditAlumniModal({
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter first name"
+                  placeholder="Jane"
                   onChange={e => setEditedAlum({ ...editedAlum, firstName: e.target.value })}
                   defaultValue={editedAlum.firstName}
                 />
@@ -56,9 +56,22 @@ export function AddEditAlumniModal({
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter last name"
+                  placeholder="Doe"
                   onChange={e => setEditedAlum({ ...editedAlum, lastName: e.target.value })}
                   defaultValue={editedAlum.lastName}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="gradYear">
+                <Form.Label>Graduation Year</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder={new Date().getFullYear().toString()}
+                  onChange={e =>
+                    setEditedAlum({ ...editedAlum, gradYear: parseInt(e.target.value, 10) })
+                  }
+                  defaultValue={editedAlum.gradYear}
                 />
               </Form.Group>
             </Col>
@@ -124,17 +137,6 @@ export function AddEditAlumniModal({
               placeholder="Enter quotes (quote1|quote2|quote3|...)"
               onChange={e => setEditedAlum({ ...editedAlum, quotes: e.target.value.split("|") })}
               defaultValue={editedAlum.quotes}
-            />
-          </Form.Group>
-          <Form.Group controlId="gradYear">
-            <Form.Label>Graduated Year</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter graduated year"
-              onChange={e =>
-                setEditedAlum({ ...editedAlum, gradYear: parseInt(e.target.value, 10) })
-              }
-              defaultValue={editedAlum.gradYear}
             />
           </Form.Group>
           <Form.Group controlId="website">
