@@ -36,7 +36,7 @@ export function AddEditAlumniModal({
   }
 
   return (
-    <Modal show={show} size="lg" onCancel={onCancel} centered className="add-edit-alumni-modal">
+    <Modal show={show} size="lg" onCancel={onCancel} className="add-edit-alumni-modal">
       <Form onSubmit={submitAlum}>
         <Modal.Header>
           <Modal.Title>
