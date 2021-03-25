@@ -160,8 +160,10 @@ export function AddEditAlumniModal({
           <Form.Group controlId="quotes">
             <Form.Label>Quotes</Form.Label>
             <Form.Control
+              as="textarea"
+              rows={3}
               type="text"
-              placeholder="Enter quotes separated by pipes (quote1 | quote2 | ...)"
+              placeholder="Enter any quotes separated by pipes (quote1 | quote2 | ...)"
               onChange={e =>
                 setEditedAlum({
                   ...editedAlum,
