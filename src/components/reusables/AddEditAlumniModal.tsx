@@ -23,18 +23,16 @@ export function AddEditAlumniModal({
   // TODO: add error handling
   function submitAlum(event: FormEvent) {
     event.preventDefault();
+
+    const submitFn = isNew
+      ? () => addAlumStory(editedAlum)
+      : () => updateAlumStory(editedAlum.id, editedAlum);
+
     setIsSubmitting(true);
-    if (isNew) {
-      addAlumStory(editedAlum).finally(() => {
-        setIsSubmitting(false);
-        window.location.reload();
-      });
-    } else {
-      updateAlumStory(editedAlum.id, editedAlum).finally(() => {
-        setIsSubmitting(false);
-        window.location.reload();
-      });
-    }
+    submitFn().finally(() => {
+      setIsSubmitting(false);
+      window.location.reload();
+    });
   }
 
   return (
@@ -107,6 +105,7 @@ export function AddEditAlumniModal({
                   placeholder="e.g. Holland, MI"
                   onChange={e => setEditedAlum({ ...editedAlum, location: e.target.value.trim() })}
                   defaultValue={editedAlum.location}
+                  required
                 />
               </Form.Group>
             </Col>
@@ -118,6 +117,7 @@ export function AddEditAlumniModal({
                   placeholder="e.g. SpinDance"
                   onChange={e => setEditedAlum({ ...editedAlum, company: e.target.value.trim() })}
                   defaultValue={editedAlum.company}
+                  required
                 />
               </Form.Group>
             </Col>
