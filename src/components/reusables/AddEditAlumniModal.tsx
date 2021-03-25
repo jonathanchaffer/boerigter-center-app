@@ -37,13 +37,13 @@ export function AddEditAlumniModal({
 
   return (
     <Modal show={show} size="lg" onCancel={onCancel} centered className="add-edit-alumni-modal">
-      <Modal.Header>
-        <Modal.Title>
-          {isNew ? "Add New Alum" : `Edit ${fullName(editedAlum.firstName, editedAlum.lastName)}`}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form onSubmit={submitAlum}>
+      <Form onSubmit={submitAlum}>
+        <Modal.Header>
+          <Modal.Title>
+            {isNew ? "Add New Alum" : `Edit ${fullName(editedAlum.firstName, editedAlum.lastName)}`}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <Form.Group>
             <strong>Basic Info</strong>
           </Form.Group>
@@ -191,14 +191,16 @@ export function AddEditAlumniModal({
             onChange={e => setEditedAlum({ ...editedAlum, phone: e.target.value.trim() })}
             defaultValue={editedAlum.phone || ""}
           />
+        </Modal.Body>
+        <Modal.Footer>
           <Button variant="outline-secondary" onClick={onCancel} disabled={isSubmitting}>
             Cancel
           </Button>
           <Button variant="outline-primary" type="submit" disabled={isSubmitting}>
             Submit
           </Button>
-        </Form>
-      </Modal.Body>
+        </Modal.Footer>
+      </Form>
     </Modal>
   );
 }
