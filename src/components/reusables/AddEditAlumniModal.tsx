@@ -22,7 +22,7 @@ export function AddEditAlumniModal({
 
   // TODO: add error handling
   function submitAlum(event: FormEvent) {
-    event.preventDefault();
+    event.preventDefault(); // prevents the page from reloading immediately on submit
 
     const submitFn = isNew
       ? () => addAlumStory(editedAlum)
