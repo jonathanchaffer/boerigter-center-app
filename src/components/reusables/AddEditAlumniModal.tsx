@@ -117,8 +117,8 @@ export function AddEditAlumniModal({
             <Form.Label>Company</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter company"
-              onChange={e => setEditedAlum({ ...editedAlum, company: e.target.value })}
+              placeholder="e.g. SpinDance"
+              onChange={e => setEditedAlum({ ...editedAlum, company: e.target.value.trim() })}
               defaultValue={editedAlum.company}
             />
           </Form.Group>
