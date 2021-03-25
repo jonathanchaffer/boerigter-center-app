@@ -91,15 +91,30 @@ export function AddEditAlumniModal({
               defaultValue={editedAlum.profilePhoto}
             />
           </Form.Group>
-          <Form.Group controlId="location">
-            <Form.Label>Location</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="e.g. Holland, MI"
-              onChange={e => setEditedAlum({ ...editedAlum, location: e.target.value.trim() })}
-              defaultValue={editedAlum.location}
-            />
-          </Form.Group>
+          <Form.Row>
+            <Col>
+              <Form.Group controlId="location">
+                <Form.Label>Location</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="e.g. Holland, MI"
+                  onChange={e => setEditedAlum({ ...editedAlum, location: e.target.value.trim() })}
+                  defaultValue={editedAlum.location}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="company">
+                <Form.Label>Company</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="e.g. SpinDance"
+                  onChange={e => setEditedAlum({ ...editedAlum, company: e.target.value.trim() })}
+                  defaultValue={editedAlum.company}
+                />
+              </Form.Group>
+            </Col>
+          </Form.Row>
           <Form.Group controlId="majors">
             <Form.Label>Major(s)</Form.Label>
             <Form.Control
@@ -128,15 +143,7 @@ export function AddEditAlumniModal({
               defaultValue={editedAlum.minors?.join(", ") || ""}
             />
           </Form.Group>
-          <Form.Group controlId="company">
-            <Form.Label>Company</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="e.g. SpinDance"
-              onChange={e => setEditedAlum({ ...editedAlum, company: e.target.value.trim() })}
-              defaultValue={editedAlum.company}
-            />
-          </Form.Group>
+
           <Form.Group controlId="bio">
             <Form.Label>Bio</Form.Label>
             <Form.Control
