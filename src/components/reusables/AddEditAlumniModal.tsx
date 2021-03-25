@@ -76,6 +76,15 @@ export function AddEditAlumniModal({
               </Form.Group>
             </Col>
           </Form.Row>
+          <Form.Group controlId="profilePhoto">
+            <Form.Label>Photo URL</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="e.g. http://example.com/photo.jpg"
+              onChange={e => setEditedAlum({ ...editedAlum, profilePhoto: e.target.value.trim() })}
+              defaultValue={editedAlum.profilePhoto}
+            />
+          </Form.Group>
           <Form.Group controlId="location">
             <Form.Label>Location</Form.Label>
             <Form.Control
@@ -120,15 +129,6 @@ export function AddEditAlumniModal({
               placeholder="e.g. SpinDance"
               onChange={e => setEditedAlum({ ...editedAlum, company: e.target.value.trim() })}
               defaultValue={editedAlum.company}
-            />
-          </Form.Group>
-          <Form.Group controlId="profilePhoto">
-            <Form.Label>Profile Photo</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter the link of profile photo"
-              onChange={e => setEditedAlum({ ...editedAlum, profilePhoto: e.target.value })}
-              defaultValue={editedAlum.profilePhoto}
             />
           </Form.Group>
           <Form.Group controlId="bio">
