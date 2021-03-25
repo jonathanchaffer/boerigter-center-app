@@ -143,10 +143,11 @@ export function AddEditAlumniModal({
               defaultValue={editedAlum.minors?.join(", ") || ""}
             />
           </Form.Group>
-
           <Form.Group controlId="bio">
             <Form.Label>Bio</Form.Label>
             <Form.Control
+              as="textarea"
+              rows={6}
               type="text"
               placeholder="Enter bio"
               onChange={e => setEditedAlum({ ...editedAlum, bio: e.target.value })}
