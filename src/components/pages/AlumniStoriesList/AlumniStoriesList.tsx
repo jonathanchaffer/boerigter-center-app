@@ -78,8 +78,6 @@ export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element 
       </div>
       <ErrorModal error={error} />
       <AddEditAlumniModal
-        title="Add Alumni Stories"
-        message="Add Alumni Stories"
         show={isShowingNewAlumModal}
         onCancel={() => setIsShowingNewAlumModal(false)}
         currentAlum={newAlum}
@@ -192,8 +190,6 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
         onHide={() => setIsShowingConfirmDelete(false)}
       />
       <AddEditAlumniModal
-        title="Edit Alumni Stories"
-        message="Edit Alumni Stories"
         show={isShowingEditAlumModal}
         onCancel={() => setIsShowingEditAlumModal(false)}
         currentAlum={alum}

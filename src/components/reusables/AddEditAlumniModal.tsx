@@ -6,8 +6,6 @@ import { addAlumStory, updateAlumStory } from "services";
 interface AddEditAlumniModalProps {
   show: boolean;
   onCancel: () => void;
-  title: string;
-  message: string;
   currentAlum: CuratedAlum;
   isNew: boolean;
 }
@@ -15,7 +13,6 @@ interface AddEditAlumniModalProps {
 export function AddEditAlumniModal({
   show,
   onCancel,
-  message,
   currentAlum,
   isNew,
 }: AddEditAlumniModalProps): JSX.Element {
@@ -38,7 +35,7 @@ export function AddEditAlumniModal({
   return (
     <Modal show={show} size="lg" onCancel={onCancel} centered>
       <Modal.Body>
-        <h1>{message}</h1>
+        <h1>{isNew ? "Add New Alum" : "Edit Alum"}</h1>
         <Form>
           <Form.Group controlId="firstName">
             <Form.Label>First Name</Form.Label>
