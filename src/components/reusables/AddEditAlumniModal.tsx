@@ -49,175 +49,148 @@ export function AddEditAlumniModal({
           </Form.Group>
           <Form.Row>
             <Col>
-              <Form.Group controlId="name">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="e.g. Jane"
-                  onChange={e => setEditedAlum({ ...editedAlum, firstName: e.target.value.trim() })}
-                  defaultValue={editedAlum.firstName}
-                  required
-                />
-              </Form.Group>
+              <AlumniFormGroup
+                attribute="firstName"
+                label="First Name"
+                placeholder="e.g. Jane"
+                onChange={e => setEditedAlum({ ...editedAlum, firstName: e.target.value.trim() })}
+                defaultValue={editedAlum.firstName}
+                required
+              />
             </Col>
             <Col>
-              <Form.Group controlId="lastName">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="e.g. Doe"
-                  onChange={e => setEditedAlum({ ...editedAlum, lastName: e.target.value.trim() })}
-                  defaultValue={editedAlum.lastName}
-                  required
-                />
-              </Form.Group>
+              <AlumniFormGroup
+                attribute="lastName"
+                label="Last Name"
+                placeholder="e.g. Doe"
+                onChange={e => setEditedAlum({ ...editedAlum, lastName: e.target.value.trim() })}
+                defaultValue={editedAlum.lastName}
+                required
+              />
             </Col>
             <Col>
-              <Form.Group controlId="gradYear">
-                <Form.Label>Graduation Year</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder={`e.g. ${new Date().getFullYear()}`}
-                  onChange={e =>
-                    setEditedAlum({ ...editedAlum, gradYear: parseInt(e.target.value, 10) })
-                  }
-                  defaultValue={editedAlum.gradYear || undefined}
-                  required
-                />
-              </Form.Group>
+              <AlumniFormGroup
+                type="number"
+                attribute="gradYear"
+                label="Graduation Year"
+                placeholder={`e.g. ${new Date().getFullYear()}`}
+                onChange={e =>
+                  setEditedAlum({ ...editedAlum, gradYear: parseInt(e.target.value, 10) })
+                }
+                defaultValue={editedAlum.gradYear ? editedAlum.gradYear.toString() : ""}
+                required
+              />
             </Col>
           </Form.Row>
-          <Form.Group controlId="profilePhoto">
-            <Form.Label>Photo URL</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="e.g. https://example.com/photo.jpg"
-              onChange={e => setEditedAlum({ ...editedAlum, profilePhoto: e.target.value.trim() })}
-              defaultValue={editedAlum.profilePhoto}
-            />
-          </Form.Group>
+          <AlumniFormGroup
+            attribute="profilePhoto"
+            label="Photo URL"
+            placeholder="e.g. https://example.com/photo.jpg"
+            onChange={e => setEditedAlum({ ...editedAlum, profilePhoto: e.target.value.trim() })}
+            defaultValue={editedAlum.profilePhoto || ""}
+          />
           <Form.Row>
             <Col>
-              <Form.Group controlId="location">
-                <Form.Label>Location</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="e.g. Holland, MI"
-                  onChange={e => setEditedAlum({ ...editedAlum, location: e.target.value.trim() })}
-                  defaultValue={editedAlum.location}
-                  required
-                />
-              </Form.Group>
+              <AlumniFormGroup
+                attribute="location"
+                label="Location"
+                placeholder="e.g. Holland, MI"
+                onChange={e => setEditedAlum({ ...editedAlum, location: e.target.value.trim() })}
+                defaultValue={editedAlum.location}
+                required
+              />
             </Col>
             <Col>
-              <Form.Group controlId="company">
-                <Form.Label>Company</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="e.g. SpinDance"
-                  onChange={e => setEditedAlum({ ...editedAlum, company: e.target.value.trim() })}
-                  defaultValue={editedAlum.company}
-                  required
-                />
-              </Form.Group>
+              <AlumniFormGroup
+                attribute="company"
+                label="Company"
+                placeholder="e.g. SpinDance"
+                onChange={e => setEditedAlum({ ...editedAlum, company: e.target.value.trim() })}
+                defaultValue={editedAlum.company}
+                required
+              />
             </Col>
           </Form.Row>
-          <Form.Group controlId="majors">
-            <Form.Label>Major(s)</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter majors separated by commas (major1, major2, ...)"
-              onChange={e =>
-                setEditedAlum({
-                  ...editedAlum,
-                  majors: e.target.value.split(",").map(major => major.trim()),
-                })
-              }
-              defaultValue={editedAlum.majors.join(", ")}
-              required
-            />
-          </Form.Group>
-          <Form.Group controlId="minors">
-            <Form.Label>Minor(s)</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter minors separated by commas (minor1, minor2, ...)"
-              onChange={e =>
-                setEditedAlum({
-                  ...editedAlum,
-                  minors: e.target.value.split(",").map(minor => minor.trim()),
-                })
-              }
-              defaultValue={editedAlum.minors?.join(", ") || ""}
-            />
-          </Form.Group>
-          <Form.Group controlId="bio">
-            <Form.Label>Bio</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={6}
-              type="text"
-              placeholder="Enter some interesting information about this alum"
-              onChange={e => setEditedAlum({ ...editedAlum, bio: e.target.value })}
-              defaultValue={editedAlum.bio}
-              required
-            />
-          </Form.Group>
+          <AlumniFormGroup
+            attribute="majors"
+            label="Major(s)"
+            placeholder="Enter majors separated by commas (major1, major2, ...)"
+            onChange={e =>
+              setEditedAlum({
+                ...editedAlum,
+                majors: e.target.value.split(",").map(major => major.trim()),
+              })
+            }
+            defaultValue={editedAlum.majors.join(", ")}
+            required
+          />
+          <AlumniFormGroup
+            attribute="minors"
+            label="Minors(s)"
+            placeholder="Enter minors separated by commas (major1, major2, ...)"
+            onChange={e =>
+              setEditedAlum({
+                ...editedAlum,
+                minors: e.target.value.split(",").map(minor => minor.trim()),
+              })
+            }
+            defaultValue={editedAlum.minors?.join(", ") || ""}
+          />
+          <AlumniFormGroup
+            as="textarea"
+            rows={6}
+            attribute="bio"
+            label="Bio"
+            placeholder="Enter some interesting information about this alum"
+            onChange={e => setEditedAlum({ ...editedAlum, bio: e.target.value.trim() })}
+            defaultValue={editedAlum.bio}
+            required
+          />
           <Form.Group>
             <strong>Other Info</strong>
           </Form.Group>
-          <Form.Group controlId="quotes">
-            <Form.Label>Quotes</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              type="text"
-              placeholder="Enter any quotes separated by pipes (quote1 | quote2 | ...)"
-              onChange={e =>
-                setEditedAlum({
-                  ...editedAlum,
-                  quotes: e.target.value.split("|").map(quote => quote.trim()),
-                })
-              }
-              defaultValue={editedAlum.quotes?.join(" | ")}
-            />
-          </Form.Group>
-          <Form.Group controlId="website">
-            <Form.Label>Website</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="e.g. https://example.com"
-              onChange={e => setEditedAlum({ ...editedAlum, website: e.target.value.trim() })}
-              defaultValue={editedAlum.website}
-            />
-          </Form.Group>
-          <Form.Group controlId="linkedIn">
-            <Form.Label>LinkedIn</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="e.g. https://linkedin.com/in/jane-doe"
-              onChange={e => setEditedAlum({ ...editedAlum, linkedIn: e.target.value.trim() })}
-              defaultValue={editedAlum.linkedIn}
-            />
-          </Form.Group>
-          <Form.Group controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="e.g. example@example.com"
-              onChange={e => setEditedAlum({ ...editedAlum, email: e.target.value.trim() })}
-              defaultValue={editedAlum.email}
-            />
-          </Form.Group>
-          <Form.Group controlId="phone">
-            <Form.Label>Phone Number</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="e.g. 555-555-5555"
-              onChange={e => setEditedAlum({ ...editedAlum, phone: e.target.value.trim() })}
-              defaultValue={editedAlum.phone}
-            />
-          </Form.Group>
+          <AlumniFormGroup
+            as="textarea"
+            rows={3}
+            attribute="quotes"
+            label="Quotes"
+            placeholder="Enter any quotes separated by pipes (quote1 | quote2 | ...)"
+            onChange={e =>
+              setEditedAlum({
+                ...editedAlum,
+                quotes: e.target.value.split("|").map(quote => quote.trim()),
+              })
+            }
+            defaultValue={editedAlum.quotes?.join(" | ") || ""}
+          />
+          <AlumniFormGroup
+            attribute="website"
+            label="Website"
+            placeholder="e.g. https://example.com"
+            onChange={e => setEditedAlum({ ...editedAlum, website: e.target.value.trim() })}
+            defaultValue={editedAlum.website || ""}
+          />
+          <AlumniFormGroup
+            attribute="linkedIn"
+            label="LinkedIn"
+            placeholder="e.g. https://linkedin.com/in/jane-doe"
+            onChange={e => setEditedAlum({ ...editedAlum, linkedIn: e.target.value.trim() })}
+            defaultValue={editedAlum.linkedIn || ""}
+          />
+          <AlumniFormGroup
+            attribute="email"
+            label="Email"
+            placeholder="e.g. example@example.com"
+            onChange={e => setEditedAlum({ ...editedAlum, email: e.target.value.trim() })}
+            defaultValue={editedAlum.email || ""}
+          />
+          <AlumniFormGroup
+            attribute="phone"
+            label="Phone"
+            placeholder="e.g. 555-555-5555"
+            onChange={e => setEditedAlum({ ...editedAlum, phone: e.target.value.trim() })}
+            defaultValue={editedAlum.phone || ""}
+          />
           <Button variant="outline-secondary" onClick={onCancel} disabled={isSubmitting}>
             Cancel
           </Button>
@@ -227,5 +200,47 @@ export function AddEditAlumniModal({
         </Form>
       </Modal.Body>
     </Modal>
+  );
+}
+
+interface AlumniFormGroupProps {
+  attribute: keyof CuratedAlum;
+  type?: "text" | "number";
+  as?: "textarea";
+  label: string;
+  placeholder: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
+  defaultValue: string;
+  required?: boolean;
+  rows?: number;
+}
+
+function AlumniFormGroup({
+  attribute,
+  label,
+  placeholder,
+  onChange,
+  defaultValue,
+  type,
+  as,
+  required,
+  rows,
+}: AlumniFormGroupProps) {
+  return (
+    <Form.Group controlId={attribute}>
+      <Form.Label>
+        {label}
+        {required && <span className="text-danger"> *</span>}
+      </Form.Label>
+      <Form.Control
+        placeholder={placeholder}
+        onChange={onChange}
+        type={type || "text"}
+        defaultValue={defaultValue}
+        as={as}
+        required={required}
+        rows={rows}
+      />
+    </Form.Group>
   );
 }
