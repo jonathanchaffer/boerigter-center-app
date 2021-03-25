@@ -2,6 +2,7 @@ import { CuratedAlum } from "models";
 import React, { useState } from "react";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import { addAlumStory, updateAlumStory } from "services";
+import { fullName } from "utilities";
 
 interface AddEditAlumniModalProps {
   show: boolean;
@@ -33,12 +34,17 @@ export function AddEditAlumniModal({
   }
 
   return (
-    <Modal show={show} size="lg" onCancel={onCancel} centered>
+    <Modal show={show} size="lg" onCancel={onCancel} centered className="add-edit-alumni-modal">
       <Modal.Header>
-        <Modal.Title>{isNew ? "Add New Alum" : "Edit Alum"}</Modal.Title>
+        <Modal.Title>
+          {isNew ? "Add New Alum" : `Edit ${fullName(editedAlum.firstName, editedAlum.lastName)}`}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
+          <Form.Group>
+            <strong>Basic Info</strong>
+          </Form.Group>
           <Form.Row>
             <Col>
               <Form.Group controlId="name">
@@ -109,7 +115,7 @@ export function AddEditAlumniModal({
             />
           </Form.Group>
           <Form.Group controlId="minors">
-            <Form.Label>Minors</Form.Label>
+            <Form.Label>Minor(s)</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter minors separated by commas (minor1, minor2, ...)"
@@ -139,6 +145,9 @@ export function AddEditAlumniModal({
               onChange={e => setEditedAlum({ ...editedAlum, bio: e.target.value })}
               defaultValue={editedAlum.bio}
             />
+          </Form.Group>
+          <Form.Group>
+            <strong>Other Info</strong>
           </Form.Group>
           <Form.Group controlId="quotes">
             <Form.Label>Quotes</Form.Label>
