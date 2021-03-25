@@ -1,5 +1,5 @@
 import { CuratedAlum } from "models";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import { addAlumStory, updateAlumStory } from "services";
 import { fullName } from "utilities";
@@ -18,16 +18,20 @@ export function AddEditAlumniModal({
   isNew,
 }: AddEditAlumniModalProps): JSX.Element {
   const [editedAlum, setEditedAlum] = useState<CuratedAlum>({ ...currentAlum });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function submitAlum() {
+  // TODO: add error handling
+  function submitAlum(event: FormEvent) {
+    event.preventDefault();
+    setIsSubmitting(true);
     if (isNew) {
       addAlumStory(editedAlum).finally(() => {
-        onCancel();
+        setIsSubmitting(false);
         window.location.reload();
       });
     } else {
       updateAlumStory(editedAlum.id, editedAlum).finally(() => {
-        onCancel();
+        setIsSubmitting(false);
         window.location.reload();
       });
     }
@@ -41,7 +45,7 @@ export function AddEditAlumniModal({
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form onSubmit={submitAlum}>
           <Form.Group>
             <strong>Basic Info</strong>
           </Form.Group>
@@ -54,6 +58,7 @@ export function AddEditAlumniModal({
                   placeholder="e.g. Jane"
                   onChange={e => setEditedAlum({ ...editedAlum, firstName: e.target.value.trim() })}
                   defaultValue={editedAlum.firstName}
+                  required
                 />
               </Form.Group>
             </Col>
@@ -65,6 +70,7 @@ export function AddEditAlumniModal({
                   placeholder="e.g. Doe"
                   onChange={e => setEditedAlum({ ...editedAlum, lastName: e.target.value.trim() })}
                   defaultValue={editedAlum.lastName}
+                  required
                 />
               </Form.Group>
             </Col>
@@ -78,6 +84,7 @@ export function AddEditAlumniModal({
                     setEditedAlum({ ...editedAlum, gradYear: parseInt(e.target.value, 10) })
                   }
                   defaultValue={editedAlum.gradYear || undefined}
+                  required
                 />
               </Form.Group>
             </Col>
@@ -127,6 +134,7 @@ export function AddEditAlumniModal({
                 })
               }
               defaultValue={editedAlum.majors.join(", ")}
+              required
             />
           </Form.Group>
           <Form.Group controlId="minors">
@@ -152,6 +160,7 @@ export function AddEditAlumniModal({
               placeholder="Enter some interesting information about this alum"
               onChange={e => setEditedAlum({ ...editedAlum, bio: e.target.value })}
               defaultValue={editedAlum.bio}
+              required
             />
           </Form.Group>
           <Form.Group>
@@ -209,13 +218,13 @@ export function AddEditAlumniModal({
               defaultValue={editedAlum.phone}
             />
           </Form.Group>
+          <Button variant="outline-secondary" onClick={onCancel} disabled={isSubmitting}>
+            Cancel
+          </Button>
+          <Button variant="outline-primary" type="submit" disabled={isSubmitting}>
+            Submit
+          </Button>
         </Form>
-        <Button variant="outline-secondary" onClick={onCancel}>
-          Cancel
-        </Button>
-        <Button variant="outline-primary" onClick={() => submitAlum()}>
-          Submit
-        </Button>
       </Modal.Body>
     </Modal>
   );
