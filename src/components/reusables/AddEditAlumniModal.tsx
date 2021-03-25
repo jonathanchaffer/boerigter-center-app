@@ -161,9 +161,14 @@ export function AddEditAlumniModal({
             <Form.Label>Quotes</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter quotes (quote1|quote2|quote3|...)"
-              onChange={e => setEditedAlum({ ...editedAlum, quotes: e.target.value.split("|") })}
-              defaultValue={editedAlum.quotes}
+              placeholder="Enter quotes separated by pipes (quote1 | quote2 | ...)"
+              onChange={e =>
+                setEditedAlum({
+                  ...editedAlum,
+                  quotes: e.target.value.split("|").map(quote => quote.trim()),
+                })
+              }
+              defaultValue={editedAlum.quotes?.join(" | ")}
             />
           </Form.Group>
           <Form.Group controlId="website">
