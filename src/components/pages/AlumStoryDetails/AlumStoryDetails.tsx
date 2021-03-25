@@ -10,80 +10,70 @@ import { getAlumStory } from "services";
 import { fullName } from "utilities";
 
 interface AlumStoryDetailsProps {
-  pos: "top" | "bottom"; 
+  pos: "top" | "bottom";
 }
 
-export function AlumStoryDetails({pos}:AlumStoryDetailsProps): JSX.Element {
+export function AlumStoryDetails({ pos }: AlumStoryDetailsProps): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const promiseFn = useCallback(() => getAlumStory(id), [id]);
   const { data, error, isPending } = useAsync({ promiseFn });
   const alum = data;
 
-  const navBarTopStyle = {
-     paddingTop: "58px",
-  };
-  const navBarBottomStyle = {
-    // Just to be clear:
-    // marginTop: "0px",
-  };
-
-  const divStyle = pos === "top" ? navBarTopStyle : navBarBottomStyle;
-
   return (
-    <PageContainer>
-      <div style={divStyle}>
-      {isPending ? (
-        <Spinner animation="border" />
-      ) : (
-        alum && (
-          <Row>
-            <Col xs={3}>
-              <Img
-                src={alum.profilePhoto || ""}
-                placeholder={genericAvatar}
-                alt={`${alum.firstName} ${alum.lastName}`}
-                width="100%"
-                loading="lazy"
-                className="img-circle"
-              />
-              <hr />
-              <AlumSecondaryInfo alum={alum} direction="column" />
-              <hr />
-              <AlumContactInfo alum={alum} />
-            </Col>
-            <Col>
-              <Row>
-                <Col>
-                  <h1>{fullName(alum.firstName, alum.lastName)}</h1>
-                  <span>{`Class of ${alum.gradYear}`}</span>
-                  <hr />
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={8}>
-                  <h4>About</h4>
-                  <p>{alum.bio}</p>
-                </Col>
-                <Col xs={4}>
-                  {alum.quotes && (
-                    <>
-                      <h4>Quotes</h4>
-                      <Card className="quotes">
-                        <Card.Body>
-                          {alum.quotes.map(quote => (
-                            <AlumQuote key={quote} quote={quote} />
-                          ))}
-                        </Card.Body>
-                      </Card>
-                    </>
-                  )}
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        )
-      )}
-      <ErrorModal error={error} />
+    <PageContainer pos={pos}>
+      <div>
+        {isPending ? (
+          <Spinner animation="border" />
+        ) : (
+          alum && (
+            <Row>
+              <Col xs={3}>
+                <Img
+                  src={alum.profilePhoto || ""}
+                  placeholder={genericAvatar}
+                  alt={`${alum.firstName} ${alum.lastName}`}
+                  width="100%"
+                  loading="lazy"
+                  className="img-circle"
+                />
+                <hr />
+                <AlumSecondaryInfo alum={alum} direction="column" />
+                <hr />
+                <AlumContactInfo alum={alum} />
+              </Col>
+              <Col>
+                <Row>
+                  <Col>
+                    <h1>{fullName(alum.firstName, alum.lastName)}</h1>
+                    <span>{`Class of ${alum.gradYear}`}</span>
+                    <hr />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={8}>
+                    <h4>About</h4>
+                    <p>{alum.bio}</p>
+                  </Col>
+                  <Col xs={4}>
+                    {alum.quotes && (
+                      <>
+                        <h4>Quotes</h4>
+                        <Card className="quotes">
+                          <Card.Body>
+                            {alum.quotes.map(quote => (
+                              <AlumQuote key={quote} quote={quote} />
+                            ))}
+                          </Card.Body>
+                        </Card>
+                      </>
+                    )}
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          )
+        )}
+        <ErrorModal error={error} />
       </div>
     </PageContainer>
   );

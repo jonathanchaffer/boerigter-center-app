@@ -12,7 +12,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { isLoggedInToPG, loginToPG, logoutOfPG } from "services";
 import { URLPaths } from "utilities";
-import tagline from "../assets/images/where_will_you_go.png";
 import "./App.scss";
 
 export function App(): JSX.Element {
@@ -38,20 +37,20 @@ export function App(): JSX.Element {
       <Navigation pos={navPosition} />
       <Switch>
         <Route exact path={URLPaths.alumStories}>
+          <MapView background pos={navPosition} />
           <AlumniStoriesList pos={navPosition} />
-          <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
-        </Route>
-        <Route exact path="/stories/:id">
-          <AlumStoryDetails pos={navPosition} />
           <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
+          <MapView background pos={navPosition} />
           <AlumniStoriesList pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.admin}>
-          <AdminDashboard />
+          <MapView background pos={navPosition} />
+          <AdminDashboard pos={navPosition} />
         </Route>
         <Route exact path={`${URLPaths.alumStories}/:id`}>
+          <MapView background pos={navPosition} />
           <AlumStoryDetails pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.careerFinder}>
@@ -60,7 +59,6 @@ export function App(): JSX.Element {
             isLoading={isHandshakeCareersLoading}
             pos={navPosition}
           />
-          <Tagline pos={navPosition} />
           <MoveNavButton map pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={URLPaths.alumFinder}>
@@ -84,7 +82,6 @@ export function App(): JSX.Element {
               }
               tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
             />
-            <Tagline pos={navPosition} />
             <MoveNavButton map pos={navPosition} handleClick={handleClick} />
           </>
         </Route>
@@ -108,25 +105,4 @@ function LogoutPage(): JSX.Element {
   });
 
   return <></>;
-}
-
-interface TaglineProps {
-  pos: "top" | "bottom";
-}
-function Tagline({ pos }: TaglineProps): JSX.Element {
-  const topStyle = {
-    marginTop: "0px",
-  };
-
-  const bottomStyle = {
-    marginTop: "-58px",
-  };
-
-  const tagStyle = pos === "top" ? topStyle : bottomStyle;
-
-  return (
-    <div id="tagline-div">
-      <img id="tagline" alt="Where will you go?" src={tagline} style={tagStyle} />
-    </div>
-  );
 }

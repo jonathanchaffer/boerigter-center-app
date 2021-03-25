@@ -11,6 +11,7 @@ function convertToHandshakeCareer(data: any): HandshakeCareer | undefined {
       employer_name: data.job.employer.name,
       employment_type_name: data.job.duration,
       id: data.id,
+      job_city: `${data.job.employer.location.city}, ${data.job.employer.location.state}`,
       job_name: data.job.title,
       latitude: data.job.employer.location.latitude,
       longitude: data.job.employer.location.longitude,
