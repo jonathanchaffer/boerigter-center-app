@@ -149,7 +149,7 @@ export function AddEditAlumniModal({
               as="textarea"
               rows={6}
               type="text"
-              placeholder="Enter bio"
+              placeholder="Enter some interesting information about this alum"
               onChange={e => setEditedAlum({ ...editedAlum, bio: e.target.value })}
               defaultValue={editedAlum.bio}
             />
