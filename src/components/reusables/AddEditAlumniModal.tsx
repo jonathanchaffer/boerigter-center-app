@@ -45,8 +45,8 @@ export function AddEditAlumniModal({
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Jane"
-                  onChange={e => setEditedAlum({ ...editedAlum, firstName: e.target.value })}
+                  placeholder="e.g. Jane"
+                  onChange={e => setEditedAlum({ ...editedAlum, firstName: e.target.value.trim() })}
                   defaultValue={editedAlum.firstName}
                 />
               </Form.Group>
@@ -56,8 +56,8 @@ export function AddEditAlumniModal({
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Doe"
-                  onChange={e => setEditedAlum({ ...editedAlum, lastName: e.target.value })}
+                  placeholder="e.g. Doe"
+                  onChange={e => setEditedAlum({ ...editedAlum, lastName: e.target.value.trim() })}
                   defaultValue={editedAlum.lastName}
                 />
               </Form.Group>
@@ -67,11 +67,11 @@ export function AddEditAlumniModal({
                 <Form.Label>Graduation Year</Form.Label>
                 <Form.Control
                   type="number"
-                  placeholder={new Date().getFullYear().toString()}
+                  placeholder={`e.g. ${new Date().getFullYear()}`}
                   onChange={e =>
                     setEditedAlum({ ...editedAlum, gradYear: parseInt(e.target.value, 10) })
                   }
-                  defaultValue={editedAlum.gradYear}
+                  defaultValue={editedAlum.gradYear || undefined}
                 />
               </Form.Group>
             </Col>
@@ -80,8 +80,8 @@ export function AddEditAlumniModal({
             <Form.Label>Location</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter location"
-              onChange={e => setEditedAlum({ ...editedAlum, location: e.target.value })}
+              placeholder="e.g. Holland, MI"
+              onChange={e => setEditedAlum({ ...editedAlum, location: e.target.value.trim() })}
               defaultValue={editedAlum.location}
             />
           </Form.Group>
