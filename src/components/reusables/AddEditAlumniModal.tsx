@@ -1,6 +1,6 @@
 import { CuratedAlum } from "models";
 import React, { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Col, Form, Modal } from "react-bootstrap";
 import { addAlumStory, updateAlumStory } from "services";
 
 interface AddEditAlumniModalProps {
@@ -34,27 +34,35 @@ export function AddEditAlumniModal({
 
   return (
     <Modal show={show} size="lg" onCancel={onCancel} centered>
+      <Modal.Header>
+        <Modal.Title>{isNew ? "Add New Alum" : "Edit Alum"}</Modal.Title>
+      </Modal.Header>
       <Modal.Body>
-        <h1>{isNew ? "Add New Alum" : "Edit Alum"}</h1>
         <Form>
-          <Form.Group controlId="firstName">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter first name"
-              onChange={e => setEditedAlum({ ...editedAlum, firstName: e.target.value })}
-              defaultValue={editedAlum.firstName}
-            />
-          </Form.Group>
-          <Form.Group controlId="lastName">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter last name"
-              onChange={e => setEditedAlum({ ...editedAlum, lastName: e.target.value })}
-              defaultValue={editedAlum.lastName}
-            />
-          </Form.Group>
+          <Form.Row>
+            <Col>
+              <Form.Group controlId="name">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter first name"
+                  onChange={e => setEditedAlum({ ...editedAlum, firstName: e.target.value })}
+                  defaultValue={editedAlum.firstName}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="lastName">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter last name"
+                  onChange={e => setEditedAlum({ ...editedAlum, lastName: e.target.value })}
+                  defaultValue={editedAlum.lastName}
+                />
+              </Form.Group>
+            </Col>
+          </Form.Row>
           <Form.Group controlId="location">
             <Form.Label>Location</Form.Label>
             <Form.Control
