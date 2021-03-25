@@ -9,7 +9,7 @@ interface AddEditAlumniModalProps {
   title: string;
   message: string;
   currentAlum: CuratedAlum;
-  isAdd: boolean;
+  isNew: boolean;
 }
 
 export function AddEditAlumniModal({
@@ -17,12 +17,12 @@ export function AddEditAlumniModal({
   onCancel,
   message,
   currentAlum,
-  isAdd,
+  isNew,
 }: AddEditAlumniModalProps): JSX.Element {
   const [editedAlum, setEditedAlum] = useState<CuratedAlum>({ ...currentAlum });
 
   function submitAlum() {
-    if (isAdd) {
+    if (isNew) {
       addAlumStory(editedAlum).finally(() => {
         onCancel();
         window.location.reload();
