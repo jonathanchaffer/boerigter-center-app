@@ -55,12 +55,12 @@ export function AlumStoryDetails({ pos }: AlumStoryDetailsProps): JSX.Element {
                     <p>{alum.bio}</p>
                   </Col>
                   <Col xs={4}>
-                    {alum.quotes && (
+                    {(alum.quotes || []).length > 0 && (
                       <>
                         <h4>Quotes</h4>
                         <Card className="quotes">
                           <Card.Body>
-                            {alum.quotes.map(quote => (
+                            {alum.quotes?.map(quote => (
                               <AlumQuote key={quote} quote={quote} />
                             ))}
                           </Card.Body>

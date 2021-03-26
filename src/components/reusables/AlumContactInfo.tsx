@@ -11,22 +11,22 @@ export function AlumContactInfo({ alum }: AlumContactInfoProps): JSX.Element {
   return (
     <div className="secondary-info d-flex flex-column">
       {alum.website && (
-        <a href={alum.website} target="blank">
+        <span>
           <i className="fas fa-globe-americas" />
           {alum.website}
-        </a>
+        </span>
       )}
       {alum.linkedIn && (
-        <a href={alum.linkedIn} target="blank">
+        <span>
           <i className="fab fa-linkedin-in" />
-          LinkedIn Profile
-        </a>
+          {alum.linkedIn}
+        </span>
       )}
       {alum.email && (
-        <a href={`mailto:${alum.email}`} target="blank">
+        <span>
           <i className="fas fa-envelope" />
           {alum.email}
-        </a>
+        </span>
       )}
       {alum.phone && (
         <span>
