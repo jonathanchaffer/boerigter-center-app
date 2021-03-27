@@ -98,7 +98,6 @@ export function AlumStoryDetails({ pos }: AlumStoryDetailsProps): JSX.Element {
           show={isShowingEditAlumModal}
           onCancel={() => setIsShowingEditAlumModal(false)}
           currentAlum={alum}
-          isNew={false}
         />
       )}
     </>

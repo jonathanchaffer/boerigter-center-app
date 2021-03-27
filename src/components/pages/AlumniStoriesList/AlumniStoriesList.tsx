@@ -24,25 +24,6 @@ export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element 
   const user = useContext(UserContext);
   const [isShowingNewAlumModal, setIsShowingNewAlumModal] = useState(false);
 
-  const newAlum: CuratedAlum = {
-    bio: "",
-    company: "",
-    display: true,
-    email: "",
-    firstName: "",
-    gradYear: 0,
-    id: "",
-    lastName: "",
-    linkedIn: "",
-    location: "",
-    majors: [],
-    minors: [],
-    phone: "",
-    profilePhoto: "",
-    quotes: [],
-    website: "",
-  };
-
   return (
     <PageContainer pos={pos}>
       <div className="alumni-stories-list">
@@ -77,8 +58,7 @@ export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element 
       <AddEditAlumniModal
         show={isShowingNewAlumModal}
         onCancel={() => setIsShowingNewAlumModal(false)}
-        currentAlum={newAlum}
-        isNew
+        currentAlum={undefined}
       />
     </PageContainer>
   );
@@ -188,7 +168,6 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
         show={isShowingEditAlumModal}
         onCancel={() => setIsShowingEditAlumModal(false)}
         currentAlum={alum}
-        isNew={false}
       />
     </>
   );
