@@ -11,7 +11,6 @@ import { Button, Card, Spinner } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Img from "react-cool-img";
-import { useHistory } from "react-router-dom";
 import { deleteAlumStory, getAlumniStories, updateAlumStory } from "services";
 import { URLPaths } from "utilities";
 import "./AlumniStoriesList.scss";
@@ -22,9 +21,7 @@ interface AlumniStoriesListProps {
 
 export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
-  const history = useHistory();
   const user = useContext(UserContext);
-  const isAdminPage = history.location.pathname === "/stories/admin";
   const [isShowingNewAlumModal, setIsShowingNewAlumModal] = useState(false);
 
   const newAlum: CuratedAlum = {
@@ -55,7 +52,7 @@ export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element 
             <p>Alumni hand-picked by Boerigter Center staff.</p>
           </div>
           <div>
-            {user && isAdminPage && (
+            {!!user && (
               <Button
                 variant="outline-primary"
                 onClick={() => setIsShowingNewAlumModal(true)}
@@ -72,7 +69,7 @@ export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element 
         ) : (
           data &&
           data
-            .filter(alum => isAdminPage || alum.display === true)
+            .filter(alum => !!user || alum.display === true)
             .map(alum => <AlumCard key={alum.id} alum={alum} />)
         )}
       </div>
@@ -93,16 +90,14 @@ interface AlumCardProps {
 
 function AlumCard({ alum }: AlumCardProps): JSX.Element {
   const [isShowingConfirmDelete, setIsShowingConfirmDelete] = useState(false);
-  const history = useHistory();
   const user = useContext(UserContext);
   const [isShowingEditAlumModal, setIsShowingEditAlumModal] = useState(false);
-  const isAdminPage = history.location.pathname === `${URLPaths.alumStories}${URLPaths.admin}`;
   const [isDisplaying, setIsDisplaying] = useState(alum.display);
 
   return (
     <>
       <Row>
-        {user && isAdminPage && (
+        {!!user && (
           <Col xs="auto" className="d-flex align-items-center p-0">
             <Button
               variant="outline-primary"
@@ -148,7 +143,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
                       Learn More
                       <i className="ml-2 fas fa-arrow-right" />
                     </a>
-                    {user && isAdminPage && (
+                    {!!user && (
                       <div className="buttons spaced-children">
                         <div className="buttons spaced-children">
                           <Button

@@ -5,9 +5,9 @@ import React, { useCallback } from "react";
 import { useAsync } from "react-async";
 import { Card, Col, Row, Spinner } from "react-bootstrap";
 import Img from "react-cool-img";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import { getAlumStory } from "services";
-import { fullName } from "utilities";
+import { fullName, URLPaths } from "utilities";
 
 interface AlumStoryDetailsProps {
   pos: "top" | "bottom";
@@ -18,6 +18,8 @@ export function AlumStoryDetails({ pos }: AlumStoryDetailsProps): JSX.Element {
   const promiseFn = useCallback(() => getAlumStory(id), [id]);
   const { data, error, isPending } = useAsync({ promiseFn });
   const alum = data;
+
+  if (!alum) return <Redirect to={URLPaths.alumStories} />;
 
   return (
     <PageContainer pos={pos}>
