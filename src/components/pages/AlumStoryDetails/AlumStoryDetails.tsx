@@ -19,7 +19,7 @@ export function AlumStoryDetails({ pos }: AlumStoryDetailsProps): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn });
   const alum = data;
 
-  if (!alum) return <Redirect to={URLPaths.alumStories} />;
+  if (!alum && !isPending) return <Redirect to={URLPaths.alumStories} />;
 
   return (
     <PageContainer pos={pos}>
