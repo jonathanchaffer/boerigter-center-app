@@ -57,7 +57,7 @@ export function AdminDashboard({ pos }: AdminDashboardProps): JSX.Element {
               </div>
               <hr />
               <div className="spaced-children">
-                <Link to={`${URLPaths.alumStories}${URLPaths.admin}`}>
+                <Link to={URLPaths.alumStories}>
                   <Button>Edit Alumni Stories</Button>
                 </Link>
                 <Button onClick={() => setIsShowingConfirmPasswordReset(true)}>
