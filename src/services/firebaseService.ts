@@ -11,9 +11,9 @@ export async function getAlumniStories(): Promise<CuratedAlum[]> {
 }
 
 /** Retrieves a specific alum from the database as a CuratedAlum. */
-export async function getAlumStory(id: string): Promise<CuratedAlum> {
+export async function getAlumStory(id: string): Promise<CuratedAlum | undefined> {
   const snapshot = await db.doc(`${dbCollections.alumniStories}/${id}`).get();
-  return { ...snapshot.data(), id: snapshot.id } as CuratedAlum;
+  return snapshot.data() ? ({ ...snapshot.data(), id: snapshot.id } as CuratedAlum) : undefined;
 }
 
 /** Updates an existing alum in the database. Some or all fields may
