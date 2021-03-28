@@ -4,7 +4,7 @@ import { UserContext } from "contexts";
 import React, { useContext, useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { loginAsAdmin, logout, sendPasswordResetEmail } from "services";
 import { setTimeout } from "timers";
 import { URLPaths } from "utilities";
@@ -19,6 +19,7 @@ export function AdminDashboard({ pos }: AdminDashboardProps): JSX.Element {
   const [isShowingConfirmPasswordReset, setIsShowingConfirmPasswordReset] = useState(false);
   const [isShowingEmailSent, setIsShowingEmailSent] = useState(false);
   const [error, setError] = useState<Error | undefined>(undefined);
+  const history = useHistory();
 
   useEffect(() => {
     setIsLoading(true);
@@ -51,7 +52,10 @@ export function AdminDashboard({ pos }: AdminDashboardProps): JSX.Element {
             <>
               <div className="d-flex justify-content-between align-items-center">
                 <h1>Admin Dashboard</h1>
-                <Button variant="outline-secondary" onClick={logout}>
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => logout().then(() => history.push("/"))}
+                >
                   Log Out
                 </Button>
               </div>
