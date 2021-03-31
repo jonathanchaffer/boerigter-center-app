@@ -41,10 +41,6 @@ export function App(): JSX.Element {
           <AlumniStoriesList pos={navPosition} />
           <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
         </Route>
-        <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
-          <MapView background pos={navPosition} />
-          <AlumniStoriesList pos={navPosition} />
-        </Route>
         <Route exact path={URLPaths.admin}>
           <MapView background pos={navPosition} />
           <AdminDashboard pos={navPosition} />

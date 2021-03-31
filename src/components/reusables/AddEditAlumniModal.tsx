@@ -7,18 +7,38 @@ import { fullName } from "utilities";
 interface AddEditAlumniModalProps {
   show: boolean;
   onCancel: () => void;
-  currentAlum: CuratedAlum;
-  isNew: boolean;
+  currentAlum: CuratedAlum | undefined;
 }
 
 export function AddEditAlumniModal({
   show,
   onCancel,
   currentAlum,
-  isNew,
 }: AddEditAlumniModalProps): JSX.Element {
-  const [editedAlum, setEditedAlum] = useState<CuratedAlum>({ ...currentAlum });
+  const emptyAlum: CuratedAlum = {
+    bio: "",
+    company: "",
+    display: true,
+    email: "",
+    firstName: "",
+    gradYear: 0,
+    id: "",
+    lastName: "",
+    linkedIn: "",
+    location: "",
+    majors: [],
+    minors: [],
+    phone: "",
+    profilePhoto: "",
+    quotes: [],
+    website: "",
+  };
+
+  const [editedAlum, setEditedAlum] = useState<CuratedAlum>(
+    currentAlum ? { ...currentAlum } : emptyAlum,
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isNew = currentAlum === undefined;
 
   // TODO: add error handling
   function submitAlum(event: FormEvent) {
