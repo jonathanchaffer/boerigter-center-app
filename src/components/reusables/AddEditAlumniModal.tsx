@@ -1,3 +1,4 @@
+import { PhotoUploader } from "components";
 import { CuratedAlum } from "models";
 import React, { FormEvent, useState } from "react";
 import { Button, Col, Form, Modal } from "react-bootstrap";
@@ -38,6 +39,7 @@ export function AddEditAlumniModal({
     currentAlum ? { ...currentAlum } : emptyAlum,
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadedPhoto, setUploadedPhoto] = useState<File | undefined>(undefined);
   const isNew = currentAlum === undefined;
 
   // TODO: add error handling
@@ -102,13 +104,10 @@ export function AddEditAlumniModal({
               />
             </Col>
           </Form.Row>
-          <AlumniFormGroup
-            attribute="profilePhoto"
-            label="Photo URL"
-            placeholder="e.g. https://example.com/photo.jpg"
-            onChange={e => setEditedAlum({ ...editedAlum, profilePhoto: e.target.value.trim() })}
-            defaultValue={editedAlum.profilePhoto || ""}
-          />
+          <Form.Group>
+            <Form.Label>Profile Photo</Form.Label>
+            <PhotoUploader onDrop={(photos: File[]) => setUploadedPhoto(photos[0])} />
+          </Form.Group>
           <Form.Row>
             <Col>
               <AlumniFormGroup
@@ -230,7 +229,7 @@ interface AlumniFormGroupProps {
   type?: "text" | "number";
   as?: "textarea";
   label: string;
-  placeholder: string;
+  placeholder?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
   defaultValue: string;
   required?: boolean;
