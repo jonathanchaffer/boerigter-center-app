@@ -2,7 +2,7 @@ import { PhotoUploader } from "components";
 import { CuratedAlum } from "models";
 import React, { FormEvent, useState } from "react";
 import { Button, Col, Form, Modal } from "react-bootstrap";
-import { addAlumStory, updateAlumStory } from "services";
+import { addAlumStory, updateAlumStory, uploadProfilePhoto } from "services";
 import { fullName } from "utilities";
 
 interface AddEditAlumniModalProps {
@@ -43,14 +43,20 @@ export function AddEditAlumniModal({
   const isNew = currentAlum === undefined;
 
   // TODO: add error handling
-  function submitAlum(event: FormEvent) {
+  async function submitAlum(event: FormEvent) {
     event.preventDefault(); // prevents the page from reloading immediately on submit
+    setIsSubmitting(true);
+
+    if (uploadedPhoto !== undefined) {
+      const snapshot = await uploadProfilePhoto(uploadedPhoto, editedAlum);
+      const url = await snapshot.ref.getDownloadURL();
+      editedAlum.profilePhoto = url;
+    }
 
     const submitFn = isNew
       ? () => addAlumStory(editedAlum)
       : () => updateAlumStory(editedAlum.id, editedAlum);
 
-    setIsSubmitting(true);
     submitFn().finally(() => {
       setIsSubmitting(false);
       window.location.reload();
