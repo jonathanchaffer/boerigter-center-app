@@ -30,6 +30,22 @@ Follow these steps to deploy code to the live site:
 
 Open [`boerigter-center-app.code-workspace`](.vscode/workspace.code-workspace) in VSCode to take advantage of the built-in configurations of this template, including ESLint configs, Prettier configs, and VSCode settings. It is highly recommended that you install all of the recommended VSCode extensions listed in [`extensions.json`](.vscode/extensions.json). If you are missing any of the recommended extensions, VSCode will prompt you to install them.
 
+## Contribution Guidelines
+
+### Branches
+
+- `master` holds production code.
+- `feature/<xyz>` holds code for new features.
+- `bugfix/<xyz>` holds code for bug fixes.
+
+Branches should be named according to the work being done on the branch, or should include the story ID shown on the corresponding PivotalTracker task.
+
+### Pull Requests & Code Review
+
+The [BitBucket repository](https://bitbucket.org/jonathanchaffer-hope/boerigter-center-app) is configured such that commits cannot be made to the `master` branch without an approved pull request. This is to ensure that proper code review is performed for every new feature.
+
+As a general rule of thumb, pull requests should be small, frequent, and easy to review, in order to avoid large merge conflicts. Ideally, each _individual feature_ will have a corresponding pull request, rather than each _group_ of features.
+
 ## Project Structure
 
 The [`src`](src) directory contains several subdirectories:
