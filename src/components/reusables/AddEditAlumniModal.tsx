@@ -258,7 +258,7 @@ interface AlumniFormGroupProps {
   type?: "text" | "number";
   as?: "textarea";
   label: string;
-  placeholder?: string;
+  placeholder: string;
   onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
   defaultValue: string;
   required?: boolean;
