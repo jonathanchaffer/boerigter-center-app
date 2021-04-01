@@ -1,4 +1,5 @@
-import React from "react";
+import { UserContext } from "contexts";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -12,12 +13,15 @@ interface NavigationProps {
 }
 
 export function Navigation({ pos }: NavigationProps): JSX.Element {
+  const user = useContext(UserContext);
+
   return (
     <Navbar bg="light" fixed={pos} style={{ height: navbarHeight }}>
       <Container>
         <Nav>
           <NavLink path={URLPaths.alumStories}>Alumni Stories</NavLink>
           {/* <NavLink path={URLPaths.poll}>Quick Poll</NavLink> */}
+          {!!user && <NavLink path={URLPaths.admin}>Admin</NavLink>}
         </Nav>
         <Nav>
           <NavLink path={URLPaths.alumFinder}>Find Alumni</NavLink>
