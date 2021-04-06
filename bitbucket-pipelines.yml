@@ -6,15 +6,25 @@ pipelines:
       - step:
           name: Test
           script:
-            - npm install && npm test
-
+            - npm install && npm test --passWithNoTests
       - step:
           name: Build
           script:
             - npm install && npm run build
           artifacts:
             - build/**
-
+  branches:
+    master:
+      - step:
+          name: Test
+          script:
+            - npm install && npm test --passWithNoTests
+      - step:
+          name: Build
+          script:
+            - npm install && npm run build
+          artifacts:
+            - build/**
       - step:
           name: Deploy to Firebase
           # deployment: production
