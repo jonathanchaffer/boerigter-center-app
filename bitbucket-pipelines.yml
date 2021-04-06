@@ -9,7 +9,6 @@ pipelines:
             - npm install eslint
             - npm install eslint-plugin-promise
             - npx eslint src/**/*.ts[x]
-            - npx eslint src/**/*.scss
           caches:
             - node
       - step:
