@@ -1,22 +1,22 @@
 image: node
 
 definitions:
-  - steps:
-      - step: &lint
-          name: Lint
-          script:
-            - npm install eslint
-            - npm install eslint-plugin-promise
-            - npx eslint src/**/*.ts[x]
-          caches:
-            - node
-      - step: &build
-          name: Build
-          script:
-            - npm install
-            - npm run build
-          artifacts:
-            - build/**
+  steps:
+    - step: &lint
+        name: Lint
+        script:
+          - npm install eslint
+          - npm install eslint-plugin-promise
+          - npx eslint src/**/*.ts[x]
+        caches:
+          - node
+    - step: &build
+        name: Build
+        script:
+          - npm install
+          - npm run build
+        artifacts:
+          - build/**
 
 pipelines:
   pull-requests:
