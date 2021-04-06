@@ -24,14 +24,12 @@ export function AddEditAlumniModal({
     gradYear: 0,
     id: "",
     lastName: "",
-    linkedIn: "",
     location: "",
     majors: [],
     minors: [],
     phone: "",
     profilePhoto: "",
     quotes: [],
-    website: "",
   };
 
   const [editedAlum, setEditedAlum] = useState<CuratedAlum>(
@@ -182,20 +180,6 @@ export function AddEditAlumniModal({
               })
             }
             defaultValue={editedAlum.quotes?.join(" | ") || ""}
-          />
-          <AlumniFormGroup
-            attribute="website"
-            label="Website"
-            placeholder="e.g. https://example.com"
-            onChange={e => setEditedAlum({ ...editedAlum, website: e.target.value.trim() })}
-            defaultValue={editedAlum.website || ""}
-          />
-          <AlumniFormGroup
-            attribute="linkedIn"
-            label="LinkedIn"
-            placeholder="e.g. https://linkedin.com/in/jane-doe"
-            onChange={e => setEditedAlum({ ...editedAlum, linkedIn: e.target.value.trim() })}
-            defaultValue={editedAlum.linkedIn || ""}
           />
           <AlumniFormGroup
             attribute="email"
