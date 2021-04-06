@@ -44,7 +44,7 @@ Branches should be named according to the work being done on the branch, or shou
 
 The [BitBucket repository](https://bitbucket.org/jonathanchaffer-hope/boerigter-center-app) is configured such that commits cannot be made to the `master` branch without an approved pull request. This is to ensure that proper code review is performed for every new feature.
 
-As a general rule of thumb, pull requests should be small, frequent, and easy to review, in order to avoid large merge conflicts. Ideally, each _individual feature_ will have a corresponding pull request, rather than each _group_ of features.
+As a general rule of thumb, pull requests should be small, frequent, and easy to review, in order to avoid large merge conflicts. Ideally, each _individual feature_ will have a corresponding pull request, rather than each _group_ of features. Pull requests should have a concise title and a helpful description describing the work that was done in the pull request.
 
 ## Project Structure
 
