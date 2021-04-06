@@ -17,6 +17,13 @@ definitions:
           - npm run build
         artifacts:
           - build/**
+    - step: &deploy
+        name: Deploy to Firebase
+        script:
+          - pipe: atlassian/firebase-deploy:0.2.4
+            variables:
+              FIREBASE_TOKEN: $FIREBASE_TOKEN
+              PROJECT_ID: $FIREBASE_PROJECT
 
 pipelines:
   pull-requests:
@@ -28,11 +35,4 @@ pipelines:
     master:
       - step: *lint
       - step: *build
-      - step:
-          name: Deploy to Firebase
-          # deployment: production
-          script:
-            - pipe: atlassian/firebase-deploy:0.2.4
-              variables:
-                FIREBASE_TOKEN: $FIREBASE_TOKEN
-                PROJECT_ID: $FIREBASE_PROJECT
+      - step: *deploy
