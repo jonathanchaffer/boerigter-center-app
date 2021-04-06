@@ -1,9 +1,8 @@
 image: node
 
-pipelines:
-  pull-requests:
-    "**":
-      - step:
+definitions:
+  - steps:
+      - step: &lint
           name: Lint
           script:
             - npm install eslint
@@ -11,21 +10,24 @@ pipelines:
             - npx eslint src/**/*.ts[x]
           caches:
             - node
-      - step:
+      - step: &build
           name: Build
           script:
             - npm install
             - npm run build
           artifacts:
             - build/**
+
+pipelines:
+  pull-requests:
+    "**":
+      - step: *lint
+      - step: *build
+
   branches:
     master:
-      - step:
-          name: Build
-          script:
-            - npm install && npm run build
-          artifacts:
-            - build/**
+      - step: *lint
+      - step: *build
       - step:
           name: Deploy to Firebase
           # deployment: production
