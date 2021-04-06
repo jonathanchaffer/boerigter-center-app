@@ -1,6 +1,14 @@
 image: node
 
 pipelines:
+  default:
+    - step:
+        name: Lint
+        script:
+          - npm install eslint
+          - npx eslint .
+        caches:
+          - node
   pull-requests:
     "**":
       - step:
