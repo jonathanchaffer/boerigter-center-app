@@ -91,6 +91,13 @@
   pointer-events: none !important;
 }
 
+#tagline {
+  margin-left: 2rem;
+  width: 32rem !important;
+  position: fixed;
+  z-index: 100;
+}
+
 // My team is creating a web app for which we need to have Google Maps show on a huge touchscreen display for our client.
 // We have concerns about the Google watermark and Terms of Service links on the bottom of the page on either side,
 // as we don't want users to accidentally or on-purpose open those links and be directed away from our app,
