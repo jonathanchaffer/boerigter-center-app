@@ -4,10 +4,6 @@ pipelines:
   pull-requests:
     "**":
       - step:
-          name: Test
-          script:
-            - npm install && npm test --passWithNoTests
-      - step:
           name: Build
           script:
             - npm install && npm run build
@@ -15,10 +11,6 @@ pipelines:
             - build/**
   branches:
     master:
-      - step:
-          name: Test
-          script:
-            - npm install && npm test --passWithNoTests
       - step:
           name: Build
           script:
