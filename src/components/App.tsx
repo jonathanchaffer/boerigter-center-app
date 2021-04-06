@@ -47,7 +47,6 @@ export function App(): JSX.Element {
           <AdminDashboard pos={navPosition} />
         </Route>
         <Route exact path={`${URLPaths.alumStories}/:id`}>
-          <MapView background pos={navPosition} />
           <AlumStoryDetails pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.careerFinder}>
