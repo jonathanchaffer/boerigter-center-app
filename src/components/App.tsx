@@ -24,6 +24,7 @@ export function App(): JSX.Element {
     PeopleGroveAlumniContext,
   );
 
+  // TODO: rename to handleMoveNavbarButtonClick
   function handleClick() {
     if (navPosition === "top") {
       setNavPosition("bottom");
