@@ -1,7 +1,7 @@
 image: node
 
 pipelines:
-  default:
+  pull-requests:
     - step:
         name: Test
         script:
