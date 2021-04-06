@@ -4,13 +4,13 @@ pipelines:
   pull-requests:
     "**":
       - step:
-        name: Lint
-        script:
-          - npm install eslint
-          - npm install eslint-plugin-promise
-          - npx eslint .
-        caches:
-          - node
+          name: Lint
+          script:
+            - npm install eslint
+            - npm install eslint-plugin-promise
+            - npx eslint .
+          caches:
+            - node
       - step:
           name: Build
           script:
