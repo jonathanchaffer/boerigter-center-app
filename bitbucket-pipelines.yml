@@ -20,7 +20,7 @@ definitions:
     - step: &deploy
         name: Deploy to Firebase
         script:
-          - pipe: atlassian/firebase-deploy:0.2.4
+          - pipe: atlassian/firebase-deploy:1.0.0
             variables:
               FIREBASE_TOKEN: $FIREBASE_TOKEN
               PROJECT_ID: $FIREBASE_PROJECT
