@@ -1,0 +1,38 @@
+image: node
+
+definitions:
+  steps:
+    - step: &lint
+        name: Lint
+        script:
+          - npm install eslint
+          - npm install eslint-plugin-promise
+          - npx eslint src/**/*.ts[x]
+        caches:
+          - node
+    - step: &build
+        name: Build
+        script:
+          - npm install
+          - npm run build
+        artifacts:
+          - build/**
+    - step: &deploy
+        name: Deploy to Firebase
+        script:
+          - pipe: atlassian/firebase-deploy:0.2.4
+            variables:
+              FIREBASE_TOKEN: $FIREBASE_TOKEN
+              PROJECT_ID: $FIREBASE_PROJECT
+
+pipelines:
+  pull-requests:
+    "**":
+      - step: *lint
+      - step: *build
+
+  branches:
+    master:
+      - step: *lint
+      - step: *build
+      - step: *deploy
