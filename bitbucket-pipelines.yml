@@ -20,6 +20,9 @@ definitions:
     - step: &deploy
         name: Deploy to Firebase
         script:
+          - cd functions
+          - npm install
+          - cd ..
           - pipe: atlassian/firebase-deploy:1.0.0
             variables:
               FIREBASE_TOKEN: $FIREBASE_TOKEN
