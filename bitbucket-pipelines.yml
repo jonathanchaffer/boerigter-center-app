@@ -20,21 +20,19 @@ definitions:
     - step: &deploy
         name: Deploy to Firebase
         script:
-          - firebase use $FIREBASE_PROJECT --token "$FIREBASE_TOKEN"
-          - firebase deploy --token "$FIREBASE_TOKEN"
-          # - pipe: atlassian/firebase-deploy:0.2.4
-          #   variables:
-          #     FIREBASE_TOKEN: $FIREBASE_TOKEN
-          #     PROJECT_ID: $FIREBASE_PROJECT
+          - pipe: atlassian/firebase-deploy:0.2.4
+            variables:
+              FIREBASE_TOKEN: $FIREBASE_TOKEN
+              PROJECT_ID: $FIREBASE_PROJECT
 
 pipelines:
   pull-requests:
     "**":
-      - step: *lint
-      - step: *build
+      # - step: *lint
+      # - step: *build
 
   branches:
     master:
-      - step: *lint
-      - step: *build
+      # - step: *lint
+      # - step: *build
       - step: *deploy
