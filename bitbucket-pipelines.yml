@@ -14,11 +14,17 @@ definitions:
     - step: &lint
         name: Check code style
         script:
+          - npm i eslint
+          - npm i eslint-config-airbnb
+          - npm i eslint-plugin-promise
           - npm list
           - npx eslint **/*.ts[x]
+        caches:
+          - node
     - step: &build
         name: Build application
         script:
+          - npm i
           - echo > ".env"
           - echo REACT_APP_GOOGLE_API_KEY=$GOOGLE_API_KEY >> ".env"
           - echo REACT_APP_HANDSHAKE_API_KEY=$HANDSHAKE_API_KEY >> ".env"
