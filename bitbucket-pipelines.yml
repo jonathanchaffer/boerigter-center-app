@@ -14,6 +14,7 @@ definitions:
     - step: &lint
         name: Check code style
         script:
+          - npm list
           - npx eslint **/*.ts[x]
     - step: &build
         name: Build application
