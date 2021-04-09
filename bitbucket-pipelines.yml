@@ -2,21 +2,10 @@ image: node
 
 definitions:
   steps:
-    - step: &install
-        name: Install dependencies
-        script:
-          - npm i --include=dev
-          - npm i eslint
-          - npm i eslint-plugin-promise
-          - npm list
-        caches:
-          - node
     - step: &lint
         name: Check code style
         script:
-          - npm i eslint
-          - npm i eslint-config-airbnb
-          - npm i eslint-plugin-promise
+          - npm i --include=dev
           - npm list
           - npx eslint **/*.ts[x]
         caches:
@@ -47,13 +36,11 @@ definitions:
 pipelines:
   pull-requests:
     "**":
-      - step: *install
       - step: *lint
       - step: *build
 
   branches:
     master:
-      - step: *install
       - step: *lint
       - step: *build
       - step: *deploy
