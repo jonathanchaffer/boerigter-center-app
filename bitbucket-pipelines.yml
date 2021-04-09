@@ -2,24 +2,30 @@ image: node
 
 definitions:
   steps:
+    - step: &install
+        name: Install dependencies
+        script:
+          - npm i --include=dev
+          - npm i eslint
+          - npm i eslint-plugin-promise
+          - npm list
+        caches:
+          - node
     - step: &lint
         name: Check code style
         script:
-          - npm install eslint
-          - npm install eslint-plugin-promise
           - npx eslint **/*.ts[x]
-        caches:
-          - node
     - step: &build
         name: Build application
         script:
-          - npm install
           - echo > ".env"
           - echo REACT_APP_GOOGLE_API_KEY=$GOOGLE_API_KEY >> ".env"
           - echo REACT_APP_HANDSHAKE_API_KEY=$HANDSHAKE_API_KEY >> ".env"
           - npm run build
         artifacts:
           - build/**
+        caches:
+          - node
     - step: &deploy
         name: Deploy to Firebase
         script:
