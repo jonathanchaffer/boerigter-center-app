@@ -2,6 +2,12 @@ image: node
 
 definitions:
   steps:
+    - step: &install
+        name: Install dependencies
+        script:
+          - npm install
+        caches:
+          - node
     - step: &lint
         name: Lint
         script:
@@ -11,7 +17,6 @@ definitions:
     - step: &build
         name: Build
         script:
-          - npm install
           - echo > ".env"
           - echo REACT_APP_GOOGLE_API_KEY=$GOOGLE_API_KEY >> ".env"
           - echo REACT_APP_HANDSHAKE_API_KEY=$HANDSHAKE_API_KEY >> ".env"
@@ -19,7 +24,7 @@ definitions:
         artifacts:
           - build/**
     - step: &deploy
-        name: Deploy
+        name: Deploy to Firebase
         deployment: production
         script:
           - cd functions
@@ -33,11 +38,13 @@ definitions:
 pipelines:
   pull-requests:
     "**":
+      - step: *install
       - step: *lint
       - step: *build
 
   branches:
     master:
+      - step: *install
       - step: *lint
       - step: *build
       - step: *deploy
