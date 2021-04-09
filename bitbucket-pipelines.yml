@@ -7,18 +7,21 @@ definitions:
         script:
           - npm install eslint
           - npm install eslint-plugin-promise
-          - npx eslint --fix src/**/*.ts[x]
+          - npx eslint **/*.ts[x]
         caches:
           - node
     - step: &build
         name: Build
         script:
           - npm install
+          - echo > ".env"
+          - echo REACT_APP_GOOGLE_API_KEY=$GOOGLE_API_KEY >> ".env"
+          - echo REACT_APP_HANDSHAKE_API_KEY=$HANDSHAKE_API_KEY >> ".env"
           - npm run build
         artifacts:
           - build/**
     - step: &deploy
-        name: Deploy to Firebase
+        name: Deploy
         script:
           - cd functions
           - npm install
