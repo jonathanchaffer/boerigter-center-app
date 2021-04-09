@@ -6,16 +6,19 @@ definitions:
         name: Install dependencies
         script:
           - npm install
+          - npm install eslint
+          - npm install eslint-plugin-promise
+          - cd functions
+          - npm install
+          - cd ..
         caches:
           - node
     - step: &lint
-        name: Lint
+        name: Check code style
         script:
-          - npm install eslint
-          - npm install eslint-plugin-promise
           - npx eslint **/*.ts[x]
     - step: &build
-        name: Build
+        name: Build application
         script:
           - echo > ".env"
           - echo REACT_APP_GOOGLE_API_KEY=$GOOGLE_API_KEY >> ".env"
@@ -27,9 +30,6 @@ definitions:
         name: Deploy to Firebase
         deployment: production
         script:
-          - cd functions
-          - npm install
-          - cd ..
           - pipe: atlassian/firebase-deploy:1.0.0
             variables:
               FIREBASE_TOKEN: $FIREBASE_TOKEN
