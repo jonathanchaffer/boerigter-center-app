@@ -40,11 +40,13 @@ definitions:
 pipelines:
   pull-requests:
     "**":
+      - step: *install
       - step: *lint
       - step: *build
 
   branches:
     master:
+      - step: *install
       - step: *lint
       - step: *build
       - step: *deploy
