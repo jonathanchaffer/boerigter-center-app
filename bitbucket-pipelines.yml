@@ -5,12 +5,10 @@ definitions:
     - step: &install
         name: Install dependencies
         script:
-          - npm install
-          - npm install eslint
-          - npm install eslint-config-airbnb
-          - npm install eslint-plugin-promise
+          - npm i --include=dev
+          - npm i eslint-plugin-promise
           - cd functions
-          - npm install
+          - npm i
           - cd ..
         caches:
           - node
