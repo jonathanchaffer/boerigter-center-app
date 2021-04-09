@@ -24,6 +24,7 @@ definitions:
           - node
     - step: &deploy
         name: Deploy
+        deployment: production
         script:
           - cd functions
           - npm install
