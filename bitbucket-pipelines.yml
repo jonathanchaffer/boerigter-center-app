@@ -35,7 +35,6 @@ pipelines:
     "**":
       - step: *lint
       - step: *build
-      - step: *deploy
 
   branches:
     master:
