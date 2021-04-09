@@ -3,11 +3,12 @@
 @import "styles/index.scss";
 
 $button-Height: 51px;
-$button-Width: 146px;
+$about-button-Width: 70px;
 $div-show: 30px; //Move to index.scss?
 
 #about-Button {
-    background-color: $hope-blue !important;
+    background-color: white !important;
+    color: black;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -15,25 +16,37 @@ $div-show: 30px; //Move to index.scss?
     transform: translate(-50%, -50%);
     border-radius: $border-radius;
     height: $button-Height;
-    width: $button-Width;
+    width: $about-button-Width;
+    pointer-events: initial;
   }
 
-  #button-div {
+  #about-button-div {
     position: fixed;
-    z-index: 1500;
+    display: flex;
     background-color: white;
     border-radius: 3px;
-    width: $button-Width+$div-show;
+    width: $about-button-Width+$div-show;
     height: $button-Height+$div-show;
     align-content: center;
 }
 
-#container {
-    position: absolute;
-    left: 500px;
-    bottom: 150px;
-    background-color: white;
-    border-radius: $border-radius;
-    width: 500px;
-    padding: 10px;
+.Modal {
+  position: absolute;
+  top: 250px;
+  left: 500px;
+  right: 500px;
+  background-color: white;
+  border-radius: $border-radius;
+  border: 1px solid $hope-blue;
+  height: fit-content;
+  padding: 10px;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
 }

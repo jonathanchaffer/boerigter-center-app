@@ -114,7 +114,11 @@ export function MapView<I extends Mappable>({
               />
             );
           })}
+
         </GoogleMapReact>
+        {/* These divs are to block the buttons in the map */}
+        <div id="leftDiv" > </div>
+        <div id="rightDiv" > </div>
       </div>
       </div>
       <ErrorModal error={error} />

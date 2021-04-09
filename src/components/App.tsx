@@ -95,8 +95,8 @@ export function App(): JSX.Element {
           </Route>
         </Switch>
       </Router>
-        <AboutApp pos={navPosition}/>
-        </div>
+      <AboutApp pos={navPosition}/>
+    </div>
   );
 }
 

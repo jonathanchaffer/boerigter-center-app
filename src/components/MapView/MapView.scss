@@ -84,5 +84,19 @@ img, a {
   pointer-events: none;
 }
 
-// My team is creating a web app for which we need to have Google Maps show on a huge touchscreen display for our client. We have concerns about the Google watermark and Terms of Service links on the bottom of the page on either side, as we don't want users to accidentally or on-purpose open those links and be directed away from our app, but we think the watermark should at least be visible. Is there a way to disable the links or something similar to prevent that? I'm expecting the solution to involve code, and we are using TypeScript in React.
-//I guess it's this or lay something over it which will block pointer events, but that seems a little more messy.
+#leftDiv{
+  position: absolute;
+  min-height: 23.5px;
+  min-width: 69px;
+  left: 3px;
+  bottom: 0px;
+  z-index: 3000;
+}
+#rightDiv{
+  position: absolute;
+  min-height: 17px;
+  min-width: 69px;
+  right: 2px;
+  bottom: 0px;
+  z-index: 3000;
+}
