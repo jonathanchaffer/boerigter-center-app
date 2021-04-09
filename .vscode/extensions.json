@@ -3,6 +3,7 @@
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "mscolnick.export-typescript",
-    "toba.vsfire"
+    "toba.vsfire",
+    "atlassian.atlascode"
   ]
 }
