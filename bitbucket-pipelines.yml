@@ -8,6 +8,8 @@ definitions:
           - npm install eslint
           - npm install eslint-plugin-promise
           - npx eslint **/*.ts[x]
+        caches:
+          - node
     - step: &build
         name: Build
         script:
@@ -18,6 +20,8 @@ definitions:
           - npm run build
         artifacts:
           - build/**
+        caches:
+          - node
     - step: &deploy
         name: Deploy
         script:
@@ -28,6 +32,8 @@ definitions:
             variables:
               FIREBASE_TOKEN: $FIREBASE_TOKEN
               PROJECT_ID: $FIREBASE_PROJECT
+        caches:
+          - node
 
 pipelines:
   pull-requests:
