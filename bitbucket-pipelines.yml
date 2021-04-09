@@ -8,8 +8,6 @@ definitions:
           - npm install eslint
           - npm install eslint-plugin-promise
           - npx eslint **/*.ts[x]
-        caches:
-          - node
     - step: &build
         name: Build
         script:
