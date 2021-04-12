@@ -5,8 +5,7 @@ definitions:
     - step: &lint
         name: Lint
         script:
-          - npm install eslint
-          - npm install eslint-plugin-promise
+          - npm install
           - npx eslint **/*.ts[x]
         caches:
           - node
@@ -20,6 +19,8 @@ definitions:
           - npm run build
         artifacts:
           - build/**
+        caches:
+          - node
     - step: &deploy
         name: Deploy
         script:
