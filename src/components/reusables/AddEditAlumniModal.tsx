@@ -1,7 +1,10 @@
+import genericAvatar from "assets/images/generic_avatar.jpg";
+import { PhotoUploader } from "components";
 import { CuratedAlum } from "models";
 import React, { FormEvent, useState } from "react";
 import { Button, Col, Form, Modal } from "react-bootstrap";
-import { addAlumStory, updateAlumStory } from "services";
+import Img from "react-cool-img";
+import { addAlumStory, updateAlumStory, uploadProfilePhoto } from "services";
 import { fullName } from "utilities";
 
 interface AddEditAlumniModalProps {
@@ -36,17 +39,25 @@ export function AddEditAlumniModal({
     currentAlum ? { ...currentAlum } : emptyAlum,
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadedPhoto, setUploadedPhoto] = useState<File | undefined>(undefined);
+  const [isReplacingPhoto, setIsReplacingPhoto] = useState(false);
   const isNew = currentAlum === undefined;
 
   // TODO: add error handling
-  function submitAlum(event: FormEvent) {
+  async function submitAlum(event: FormEvent) {
     event.preventDefault(); // prevents the page from reloading immediately on submit
+    setIsSubmitting(true);
+
+    if (uploadedPhoto !== undefined) {
+      const snapshot = await uploadProfilePhoto(uploadedPhoto, editedAlum);
+      const url = await snapshot.ref.getDownloadURL();
+      editedAlum.profilePhoto = url;
+    }
 
     const submitFn = isNew
       ? () => addAlumStory(editedAlum)
       : () => updateAlumStory(editedAlum.id, editedAlum);
 
-    setIsSubmitting(true);
     submitFn().finally(() => {
       setIsSubmitting(false);
       window.location.reload();
@@ -100,13 +111,30 @@ export function AddEditAlumniModal({
               />
             </Col>
           </Form.Row>
-          <AlumniFormGroup
-            attribute="profilePhoto"
-            label="Photo URL"
-            placeholder="e.g. https://example.com/photo.jpg"
-            onChange={e => setEditedAlum({ ...editedAlum, profilePhoto: e.target.value.trim() })}
-            defaultValue={editedAlum.profilePhoto || ""}
-          />
+          <Form.Group>
+            <Form.Label>Profile Photo</Form.Label>
+            {!!editedAlum.profilePhoto && !isReplacingPhoto ? (
+              <Form.Row>
+                <Col xs={2}>
+                  <Img
+                    src={editedAlum.profilePhoto || ""}
+                    placeholder={genericAvatar}
+                    alt={`${editedAlum.firstName} ${editedAlum.lastName}`}
+                    width="100%"
+                    loading="lazy"
+                    className="img-circle"
+                  />
+                </Col>
+                <Col className="d-flex align-items-center">
+                  <Button variant="outline-secondary" onClick={() => setIsReplacingPhoto(true)}>
+                    Replace
+                  </Button>
+                </Col>
+              </Form.Row>
+            ) : (
+              <PhotoUploader onDrop={(photos: File[]) => setUploadedPhoto(photos[0])} />
+            )}
+          </Form.Group>
           <Form.Row>
             <Col>
               <AlumniFormGroup
