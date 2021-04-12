@@ -3,15 +3,14 @@ image: node
 definitions:
   steps:
     - step: &lint
-        name: Lint
+        name: Check code style
         script:
-          - npm install eslint
-          - npm install eslint-plugin-promise
+          - npm install
           - npx eslint **/*.ts[x]
         caches:
           - node
     - step: &build
-        name: Build
+        name: Build application
         script:
           - npm install
           - echo > ".env"
@@ -20,8 +19,10 @@ definitions:
           - npm run build
         artifacts:
           - build/**
+        caches:
+          - node
     - step: &deploy
-        name: Deploy
+        name: Deploy to Firebase
         script:
           - cd functions
           - npm install

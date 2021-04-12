@@ -1,0 +1,18 @@
+@import "styles/colors.scss";
+@import "styles/index.scss";
+
+.photo-uploader {
+  .dropzone {
+    border-radius: $border-radius;
+    border: 1px dashed #ced4da;
+    transition-duration: $transition-duration;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .drag {
+    border-color: $lake-mi-blue;
+  }
+}
