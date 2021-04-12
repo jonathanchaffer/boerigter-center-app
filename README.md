@@ -46,6 +46,8 @@ The [BitBucket repository](https://bitbucket.org/jonathanchaffer-hope/boerigter-
 
 As a general rule of thumb, pull requests should be small, frequent, and easy to review, in order to avoid large merge conflicts. Ideally, each _individual feature_ will have a corresponding pull request, rather than each _group_ of features. Pull requests should have a concise title and a helpful description describing the work that was done in the pull request.
 
+Bitbucket pipelines have been set up to automatically check code style on every pull request. Learn more about pipelines [here](https://support.atlassian.com/bitbucket-cloud/docs/build-test-and-deploy-with-pipelines/).
+
 ### Documentation
 
 All code should be well-documented. This not only takes the form of comments, but also descriptive function and variable names. Specifically, functions and variables that are reused throughout the project should be documented with [JSDoc](https://en.wikipedia.org/wiki/JSDoc) comments, for example:
