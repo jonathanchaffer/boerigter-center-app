@@ -46,6 +46,28 @@ The [BitBucket repository](https://bitbucket.org/jonathanchaffer-hope/boerigter-
 
 As a general rule of thumb, pull requests should be small, frequent, and easy to review, in order to avoid large merge conflicts. Ideally, each _individual feature_ will have a corresponding pull request, rather than each _group_ of features. Pull requests should have a concise title and a helpful description describing the work that was done in the pull request.
 
+### Documentation
+
+All code should be well-documented. This not only takes the form of comments, but also descriptive function and variable names. Specifically, functions and variables that are reused throughout the project should be documented with [JSDoc](https://en.wikipedia.org/wiki/JSDoc) comments, for example:
+
+```
+/**
+ * Returns a random number between 0 and x.
+ *
+ * @param {number} x The maximum.
+ * @return {number} A random integer between 0 and x.
+ */
+export function getRandom(x: number): number {
+  return Math.floor(Math.random() * x);
+}
+```
+
+When documenting method bodies, it's not necessary to comment every single line of code, as most code should be **self-documenting**, meaning it's easy to tell what the code does by reading the code itself.
+
+As a general rule of thumb, non-JSDoc comments should explain **why** the code was implemented the way it was, rather than **what** the code does.
+
+Learn more about good commenting practice [here](https://javascript.info/comments).
+
 ## Project Structure
 
 The [`src`](src) directory contains several subdirectories:
