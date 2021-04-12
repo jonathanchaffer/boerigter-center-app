@@ -3,17 +3,16 @@ image: node
 definitions:
   steps:
     - step: &lint
-        name: Check code style
+        name: Lint
         script:
-          - npm i --include=dev
-          - npm list
+          - npm install
           - npx eslint **/*.ts[x]
         caches:
           - node
     - step: &build
-        name: Build application
+        name: Build
         script:
-          - npm i
+          - npm install
           - echo > ".env"
           - echo REACT_APP_GOOGLE_API_KEY=$GOOGLE_API_KEY >> ".env"
           - echo REACT_APP_HANDSHAKE_API_KEY=$HANDSHAKE_API_KEY >> ".env"
@@ -23,7 +22,7 @@ definitions:
         caches:
           - node
     - step: &deploy
-        name: Deploy to Firebase
+        name: Deploy
         script:
           - cd functions
           - npm install
