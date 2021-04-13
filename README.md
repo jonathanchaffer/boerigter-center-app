@@ -14,7 +14,7 @@ Once you've opened the workspace in VSCode, open a terminal and run `npm install
 
 This project also uses API keys to access certain data, which should be contained in a [`.env`](.env) file in the root directory. This file is purposely gitignored so no API keys are accessible in the public repository, so you will have to add it yourself – check with [Mike Jipping](jipping@hope.edu) for the required contents of the file.
 
-Finally, once everything is set up, open a terminal and run `npm start`. Open [http://localhost:3000](http://localhost:3000) to view the app in the browser. The page will automatically reload if you make any edits, and you will see any lint errors in the console.
+Finally, once everything is set up, open a terminal and run `npm start`. Open [http://localhost:3000](http://localhost:3000) to view a development version of the app in the browser. The page will automatically reload if you make any edits, and you will see any lint errors in the console.
 
 ## Deploying Code
 
@@ -87,6 +87,30 @@ Barrelling is highly recommended to simplify imports as the project gets larger.
 ## React Recommendations
 
 It is highly recommended that you use [functional components](https://reactjs.org/docs/components-and-props.html) over class components to utilize the [React Hooks](https://reactjs.org/docs/hooks-intro.html) API.
+
+## Back End
+
+The app runs on a [Google Firebase](https://firebase.google.com) back end using the Authentication, Firestore, Functions, Hosting, and Storage services. View the project's Firebase Console [here](https://console.firebase.google.com/u/0/project/boerigter-center-app/overview).
+
+### Administrator Access
+
+Users in [Firebase Authentication](https://console.firebase.google.com/u/0/project/boerigter-center-app/authentication/users) are admins who can edit the database. Use the Firebase Console to add new users. To upgrade an authenticated user to admin status, go to the `users` collection of the Firestore database and set the desired user's `isAdmin` status to `true`.
+
+### Database
+
+The [Firestore database](https://console.firebase.google.com/u/0/project/boerigter-center-app/firestore) contains three collections:
+
+- `users` contains documents representing users that have been registered to Firebase Authentication. Documents are automatically added to the collection via Firebase Functions, and by default, have `isAdmin` set to `false`.
+- `alumniStories` contains documents representing alumni added into the database by Boerigter Center staff. Documents contain various fields pertaining to curated alumni, including `firstName`, `lastName`, `majors`, `bio`, etc.
+- `alumniStories-dev` is a development-only version of the `alumniStories` collection made specifically for testing purposes, so developers can test functionality without changing live data. The React app will automatically switch between the production and development collections based on how the app is deployed (`npm start` will start the app in development mode).
+
+### Storage
+
+[Firebase Storage](https://console.firebase.google.com/u/0/project/boerigter-center-app/storage) currently only holds alumni profile photos uploaded by administrators.
+
+### Hosting and Deploying
+
+The live application is hosted at https://boerigter-center-app.web.app via [Firebase Hosting](https://console.firebase.google.com/u/0/project/boerigter-center-app/hosting). Code will automatically be deployed to the live site when merged into the `master` branch via pull request.
 
 ## Learn More
 
