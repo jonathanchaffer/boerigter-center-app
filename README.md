@@ -16,16 +16,6 @@ This project also uses API keys to access certain data, which should be containe
 
 Finally, once everything is set up, open a terminal and run `npm start`. Open [http://localhost:3000](http://localhost:3000) to view a development version of the app in the browser. The page will automatically reload if you make any edits, and you will see any lint errors in the console.
 
-## Deploying Code
-
-Follow these steps to deploy code to the live site:
-
-1. Always make sure you're currently on the `master` branch before deploying to the live site.
-2. Make sure you have the [Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli) installed.
-3. If you haven't done so already, use the Firebase CLI to switch to the [`boerigter-center-app`](https://console.firebase.google.com/u/0/project/boerigter-center-app) project.
-4. Run `npm run-script build` to build the app for production to the [`build`](build) folder.
-5. After a successful build, run `firebase deploy`. It may take a few minutes, but if successful, the project should be deployed to the [live site](https://boerigter-center-app.web.app).
-
 ## Configuration
 
 Open [`boerigter-center-app.code-workspace`](.vscode/workspace.code-workspace) in VSCode to take advantage of the built-in configurations of this template, including ESLint configs, Prettier configs, and VSCode settings. It is highly recommended that you install all of the recommended VSCode extensions listed in [`extensions.json`](.vscode/extensions.json). If you are missing any of the recommended extensions, VSCode will prompt you to install them.
@@ -111,6 +101,14 @@ The [Firestore database](https://console.firebase.google.com/u/0/project/boerigt
 ### Hosting and Deploying
 
 The live application is hosted at https://boerigter-center-app.web.app via [Firebase Hosting](https://console.firebase.google.com/u/0/project/boerigter-center-app/hosting). Code will automatically be deployed to the live site when merged into the `master` branch via pull request.
+
+Follow these steps to **manually** deploy code to the live site:
+
+1. Always make sure you're currently on the `master` branch before deploying to the live site.
+2. Make sure you have the [Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli) installed.
+3. If you haven't done so already, use the Firebase CLI to switch to the [`boerigter-center-app`](https://console.firebase.google.com/u/0/project/boerigter-center-app) project.
+4. Run `npm run-script build` to build the app for production to the [`build`](build) folder.
+5. After a successful build, run `firebase deploy`. It may take a few minutes, but if successful, the project should be deployed to the [live site](https://boerigter-center-app.web.app).
 
 ## Learn More
 
