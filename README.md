@@ -94,6 +94,8 @@ The [Firestore database](https://console.firebase.google.com/u/0/project/boerigt
 - `alumniStories` contains documents representing alumni added into the database by Boerigter Center staff. Documents contain various fields pertaining to curated alumni, including `firstName`, `lastName`, `majors`, `bio`, etc.
 - `alumniStories-dev` is a development-only version of the `alumniStories` collection made specifically for testing purposes, so developers can test functionality without changing live data. The React app will automatically switch between the production and development collections based on how the app is deployed (`npm start` will start the app in development mode).
 
+Firestore data can be backed up if desired; see [here](https://firebase.google.com/docs/firestore/manage-data/export-import) for instructions.
+
 ### Storage
 
 [Firebase Storage](https://console.firebase.google.com/u/0/project/boerigter-center-app/storage) currently only holds alumni profile photos uploaded by administrators.
