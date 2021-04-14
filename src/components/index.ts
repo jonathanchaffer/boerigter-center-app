@@ -4,3 +4,4 @@ export * from "./Navigation";
 export * from "./pages";
 export * from "./reusables";
 export * from "./MoveNavButton";
+export * from "./AboutApp";
