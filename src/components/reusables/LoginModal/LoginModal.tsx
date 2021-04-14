@@ -6,15 +6,21 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
 interface LoginModalProps {
+  /** Whether the user is already logged in. */
   isLoggedIn: boolean;
+  /** Function used to log in the user. */
   loginFn: (email: string, password: string) => Promise<void | firebase.auth.UserCredential>;
+  /** Title of the modal. */
   title?: string;
+  /** Description of the modal. */
   description?: string | React.ReactNode;
+  /** Function used to send a password reset email. */
   passwordResetFn?: (email: string) => Promise<void>;
+  /** Text for a tooltip displayed on the modal. */
   tooltip?: string;
 }
 
-// TODO: use Formik for data validation
+/** Reusable modal for logging in users. */
 export function LoginModal({
   isLoggedIn,
   loginFn,
