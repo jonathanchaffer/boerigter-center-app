@@ -4,7 +4,6 @@ import { dbCollections } from "utilities";
 
 /**
  * Retrieves all curated alumni from the database.
- *
  * @returns A Promise containing the retrieved documents as CuratedAlum objects.
  */
 export async function getAlumniStories(): Promise<CuratedAlum[]> {
@@ -16,7 +15,6 @@ export async function getAlumniStories(): Promise<CuratedAlum[]> {
 
 /**
  * Retrieves a specific alum from the database as a CuratedAlum.
- *
  * @param id The ID of the alum to retrieve.
  * @returns A Promise containing a specific alum, or undefined if the ID doesn't exist.
  */
@@ -28,7 +26,6 @@ export async function getAlumStory(id: string): Promise<CuratedAlum | undefined>
 /**
  * Updates an existing alum in the database. Some or all fields may
  * be updated, depending on what's included in the newAlum param.
- *
  * @param id The ID of the alum to update.
  * @param newAlum The updated version of the alum.
  * @returns A Promise representing the status of the update.
@@ -39,7 +36,6 @@ export async function updateAlumStory(id: string, newAlum: CuratedAlum): Promise
 
 /**
  * Adds a new alum to the database and returns the id of the created document.
- *
  * @param newAlum The alum to add.
  * @returns A Promise containing the ID of the added alum.
  */
@@ -50,7 +46,6 @@ export async function addAlumStory(newAlum: CuratedAlum): Promise<string> {
 
 /**
  * Deletes an alum from the database.
- *
  * @param id The ID of the alum to delete.
  * @returns A Promise representing the status of the delete.
  */

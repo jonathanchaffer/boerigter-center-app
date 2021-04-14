@@ -3,7 +3,6 @@ import { HandshakeCareer } from "models";
 
 /**
  * Converts raw objects to HandshakeCareer objects.
- *
  * @param data An object retrieved via the Handshake API.
  * @returns The object converted to a HandshakeCareer, or undefined if it cannot be converted properly.
  */
@@ -36,7 +35,6 @@ const axiosInstance = axios.create({
 
 /**
  * Retrieves career data from Handshake given a page number.
- *
  * @param page The page number to retrieve.
  * @returns A Promise containing an array of HandshakeCareer objects retrieved from Handshake.
  */

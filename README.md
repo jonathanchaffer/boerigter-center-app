@@ -53,7 +53,6 @@ All code should be well-documented. This not only takes the form of comments, bu
 ```
 /**
  * Returns a random number between 0 and x.
- *
  * @param {number} x The maximum.
  * @returns {number} A random integer between 0 and x.
  */
