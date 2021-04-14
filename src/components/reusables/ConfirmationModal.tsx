@@ -2,15 +2,23 @@ import React, { useState } from "react";
 import { Button, Modal, Spinner } from "react-bootstrap";
 
 interface ConfirmationModalProps {
+  /** Whether the modal should be visible. */
   show: boolean;
+  /** Function to be called when the modal is canceled or closed. */
   onHide: () => void;
+  /** Function to be called when the confirm button is clicked. */
   onConfirm: () => Promise<void>;
+  /** Text to be displayed on the confirm button. */
   confirmText?: string;
+  /** Title to be displayed on the modal. */
   title: string;
+  /** Message to be displayed on the modal. */
   message: string;
+  /** Variant of the confirm button. */
   variant?: "danger";
 }
 
+/** Reusable component for simple confirmation popups. */
 export function ConfirmationModal({
   show,
   onHide,
