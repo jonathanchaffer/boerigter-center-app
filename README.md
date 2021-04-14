@@ -27,6 +27,7 @@ Open [`boerigter-center-app.code-workspace`](.vscode/workspace.code-workspace) i
 - `master` holds production code.
 - `feature/<xyz>` holds code for new features.
 - `bugfix/<xyz>` holds code for bug fixes.
+- `docs/<xyz>` holds documentation updates.
 
 Branches should be named according to the work being done on the branch, or should include the story ID shown on the corresponding PivotalTracker task.
 
