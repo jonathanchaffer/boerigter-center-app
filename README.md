@@ -55,7 +55,7 @@ All code should be well-documented. This not only takes the form of comments, bu
  * Returns a random number between 0 and x.
  *
  * @param {number} x The maximum.
- * @return {number} A random integer between 0 and x.
+ * @returns {number} A random integer between 0 and x.
  */
 export function getRandom(x: number): number {
   return Math.floor(Math.random() * x);
