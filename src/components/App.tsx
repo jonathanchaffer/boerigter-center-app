@@ -12,7 +12,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { isLoggedInToPG, loginToPG, logoutOfPG } from "services";
 import { URLPaths } from "utilities";
-import "./App.scss";
 
 export function App(): JSX.Element {
   const [navPosition, setNavPosition] = useState<"top" | "bottom">("top");
