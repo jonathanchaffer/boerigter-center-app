@@ -2,9 +2,11 @@ import { InfoModal } from "components";
 import React, { useEffect, useState } from "react";
 
 interface ErrorModalProps {
+  /** The error to be displayed. */
   error: Error | undefined;
 }
 
+/** Reusable component for alerting the user to errors. */
 export function ErrorModal({ error }: ErrorModalProps): JSX.Element {
   const [isShowing, setIsShowing] = useState(false);
 
