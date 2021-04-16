@@ -112,7 +112,9 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
                   <div>
                     <h2>
                       {`${alum.firstName} ${alum.lastName}`}{" "}
-                      <span className="light">&apos;{alum.gradYear % 100}</span>
+                      <span className="light">
+                        &apos;{(alum.gradYear % 100).toString().padStart(2, "0")}
+                      </span>
                     </h2>
                     <AlumSecondaryInfo alum={alum} />
                   </div>
