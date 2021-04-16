@@ -69,7 +69,7 @@ export function AlumStoryDetails({ pos }: AlumStoryDetailsProps): JSX.Element {
                   <Row>
                     <Col xs={8}>
                       <h4>About</h4>
-                      <p>{alum.bio}</p>
+                      <p className="p-breaks">{alum.bio}</p>
                     </Col>
                     <Col xs={4}>
                       {(alum.quotes || []).length > 0 && (
