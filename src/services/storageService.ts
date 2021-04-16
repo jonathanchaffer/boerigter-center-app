@@ -1,6 +1,6 @@
 import firebase from "firebase";
-import { storageRef } from "index";
 import { CuratedAlum } from "models";
+import { storageRef } from "services";
 
 /**
  * Uploads a profile photo for an alum.

@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-import { auth } from "index";
+import { auth } from "services";
 
 /**
  * Logs in the user as an administrator.
