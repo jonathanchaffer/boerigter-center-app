@@ -31,14 +31,12 @@ export function AddEditAlumniModal({
     gradYear: 0,
     id: "",
     lastName: "",
-    linkedIn: "",
     location: "",
     majors: [],
     minors: [],
     phone: "",
     profilePhoto: "",
     quotes: [],
-    website: "",
   };
 
   const [editedAlum, setEditedAlum] = useState<CuratedAlum>(
@@ -215,34 +213,26 @@ export function AddEditAlumniModal({
             }
             defaultValue={editedAlum.quotes?.join(" | ") || ""}
           />
-          <AlumniFormGroup
-            attribute="website"
-            label="Website"
-            placeholder="e.g. https://example.com"
-            onChange={e => setEditedAlum({ ...editedAlum, website: e.target.value.trim() })}
-            defaultValue={editedAlum.website || ""}
-          />
-          <AlumniFormGroup
-            attribute="linkedIn"
-            label="LinkedIn"
-            placeholder="e.g. https://linkedin.com/in/jane-doe"
-            onChange={e => setEditedAlum({ ...editedAlum, linkedIn: e.target.value.trim() })}
-            defaultValue={editedAlum.linkedIn || ""}
-          />
-          <AlumniFormGroup
-            attribute="email"
-            label="Email"
-            placeholder="e.g. example@example.com"
-            onChange={e => setEditedAlum({ ...editedAlum, email: e.target.value.trim() })}
-            defaultValue={editedAlum.email || ""}
-          />
-          <AlumniFormGroup
-            attribute="phone"
-            label="Phone"
-            placeholder="e.g. 555-555-5555"
-            onChange={e => setEditedAlum({ ...editedAlum, phone: e.target.value.trim() })}
-            defaultValue={editedAlum.phone || ""}
-          />
+          <Form.Row>
+            <Col>
+              <AlumniFormGroup
+                attribute="email"
+                label="Email"
+                placeholder="e.g. example@example.com"
+                onChange={e => setEditedAlum({ ...editedAlum, email: e.target.value.trim() })}
+                defaultValue={editedAlum.email || ""}
+              />
+            </Col>
+            <Col>
+              <AlumniFormGroup
+                attribute="phone"
+                label="Phone"
+                placeholder="e.g. 555-555-5555"
+                onChange={e => setEditedAlum({ ...editedAlum, phone: e.target.value.trim() })}
+                defaultValue={editedAlum.phone || ""}
+              />
+            </Col>
+          </Form.Row>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="outline-secondary" onClick={onCancel} disabled={isSubmitting}>
