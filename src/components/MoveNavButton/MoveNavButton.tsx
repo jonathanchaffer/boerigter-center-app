@@ -34,7 +34,7 @@ export function MoveNavButton({ map, pos, handleClick }: NavButtonProps): JSX.El
   return (
     <div id="button-div" className="container" style={buttonStyle}>
       <Button id="move-Nav-Button" variant="outline-secondary" onClick={handleClick}>
-        Nagivation <i className={buttonIcon} />
+        Navigation <i className={buttonIcon} />
       </Button>
     </div>
   );
