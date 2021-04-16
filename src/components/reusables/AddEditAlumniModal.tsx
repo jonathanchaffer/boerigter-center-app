@@ -8,11 +8,15 @@ import { addAlumStory, updateAlumStory, uploadProfilePhoto } from "services";
 import { fullName } from "utilities";
 
 interface AddEditAlumniModalProps {
+  /** Whether the modal should be shown. */
   show: boolean;
+  /** Function to be called when canceling or closing the modal. */
   onCancel: () => void;
+  /** The alum to edit, or undefined if creating a new alum. */
   currentAlum: CuratedAlum | undefined;
 }
 
+/** Modal for adding/editing curated alumni. */
 export function AddEditAlumniModal({
   show,
   onCancel,
