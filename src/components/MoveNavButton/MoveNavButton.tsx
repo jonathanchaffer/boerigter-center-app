@@ -1,6 +1,6 @@
 import { navbarHeight } from "components/Navigation";
 import React from "react";
-import Button from "react-bootstrap/esm/Button";
+import Button from "react-bootstrap/Button";
 import "./MoveNavButton.scss";
 
 interface NavButtonProps {
