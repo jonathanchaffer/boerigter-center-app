@@ -2,6 +2,12 @@ image: node
 
 definitions:
   steps:
+    - step: &setup
+        name: Set up environment
+        script:
+          - echo > ".env"
+          - echo REACT_APP_GOOGLE_API_KEY=$GOOGLE_API_KEY >> ".env"
+          - echo REACT_APP_HANDSHAKE_API_KEY=$HANDSHAKE_API_KEY >> ".env"
     - step: &test
         name: Run unit tests
         script:
@@ -20,9 +26,6 @@ definitions:
         name: Build application
         script:
           - npm install
-          - echo > ".env"
-          - echo REACT_APP_GOOGLE_API_KEY=$GOOGLE_API_KEY >> ".env"
-          - echo REACT_APP_HANDSHAKE_API_KEY=$HANDSHAKE_API_KEY >> ".env"
           - npm run build
         artifacts:
           - build/**
@@ -42,6 +45,7 @@ definitions:
 pipelines:
   pull-requests:
     "**":
+      - step: *setup
       - step: *test
       - step: *lint
       - step: *build
