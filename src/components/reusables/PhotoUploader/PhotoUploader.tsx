@@ -4,9 +4,11 @@ import { useDropzone } from "react-dropzone";
 import "./PhotoUploader.scss";
 
 interface PhotoUploaderProps {
+  /** Function to be called when files are added to the uploader. */
   onDrop: (files: File[]) => void;
 }
 
+/** Reusable component for uploading photos. */
 export function PhotoUploader({ onDrop }: PhotoUploaderProps): JSX.Element {
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({
     accept: "image/*",

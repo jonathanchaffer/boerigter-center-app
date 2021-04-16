@@ -3,10 +3,13 @@ import React from "react";
 import { commaSeparatedList } from "utilities";
 
 interface AlumSecondaryInfoProps {
+  /** The alum whose details should be displayed. */
   alum: CuratedAlum;
+  /** Whether the details should be shown in a row or column. */
   direction?: "row" | "column";
 }
 
+/** Reusable component to display secondary information for an alum. */
 export function AlumSecondaryInfo({ alum, direction }: AlumSecondaryInfoProps): JSX.Element {
   return (
     <div className={`secondary-info d-flex flex-${direction || "row"}`}>
