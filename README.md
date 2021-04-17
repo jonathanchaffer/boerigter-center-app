@@ -74,6 +74,12 @@ The [`src`](src) directory contains several subdirectories:
 
 Barrelling is highly recommended to simplify imports as the project gets larger. You can learn more about barreling [here](https://basarat.gitbook.io/typescript/main-1/barrel).
 
+### Unit Tests
+
+Unit tests should have the same name as the file they are testing, and be in the same folder. For example, [`AlumContactInfo.tsx`](src/components/reusables/AlumContactInfo/AlumContactInfo.tsx) has a corresponding unit test [`AlumContactInfo.test.tsx`](src/components/reusables/AlumContactInfo/AlumContactInfo.test.tsx).
+
+**Note:** As of Spring 2021, we didn't have time to do comprehensive unit testing on this project, but the testing infrastructure _is_ in place, and tests are automatically run via Bitbucket Pipelines. Use [`AlumContactInfo.test.tsx`](src/components/reusables/AlumContactInfo/AlumContactInfo.test.tsx) as an example when writing unit tests in the future.
+
 ## React Recommendations
 
 It is highly recommended that you use [functional components](https://reactjs.org/docs/components-and-props.html) over class components to utilize the [React Hooks](https://reactjs.org/docs/hooks-intro.html) API.
