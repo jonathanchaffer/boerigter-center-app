@@ -2,6 +2,7 @@ import {
   AdminDashboard,
   AlumniStoriesList,
   AlumStoryDetails,
+  FrogPage,
   LoginModal,
   MapView,
   MoveNavButton,
@@ -79,6 +80,9 @@ export function App(): JSX.Element {
             />
             <MoveNavButton map pos={navPosition} handleClick={handleClick} />
           </>
+        </Route>
+        <Route exact path={URLPaths.frog}>
+          <FrogPage pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.logout}>
           <LogoutPage />

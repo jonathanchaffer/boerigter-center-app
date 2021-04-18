@@ -4,6 +4,7 @@ export const URLPaths = {
   alumFinder: "/alumni",
   alumStories: "/stories",
   careerFinder: "/careers",
+  frog: "/frog",
   logout: "/logout",
   offCampusFinder: "/study-abroad",
   poll: "/poll",
