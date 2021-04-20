@@ -7,13 +7,11 @@ import "./MoveNavButton.scss";
 interface NavButtonProps {
   /** Whether the button is being displayed over a map. */
   map: boolean;
-  /** Function to be called when the button is clicked. */
-  handleClick: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined;
 }
 
 /** Button that functions to move the navbar up and down for accessibility purposes. */
-export function MoveNavButton({ map, handleClick }: NavButtonProps): JSX.Element {
-  const { navPosition } = useContext(NavPositionContext);
+export function MoveNavButton({ map }: NavButtonProps): JSX.Element {
+  const { navPosition, toggleNavPosition } = useContext(NavPositionContext);
 
   let right;
 
@@ -38,7 +36,7 @@ export function MoveNavButton({ map, handleClick }: NavButtonProps): JSX.Element
 
   return (
     <div id="button-div" className="container" style={buttonStyle}>
-      <Button id="move-Nav-Button" variant="outline-secondary" onClick={handleClick}>
+      <Button id="move-Nav-Button" variant="outline-secondary" onClick={toggleNavPosition}>
         Navigation <i className={buttonIcon} />
       </Button>
     </div>

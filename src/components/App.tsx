@@ -15,7 +15,7 @@ import { isLoggedInToPG, loginToPG, logoutOfPG } from "services";
 import { URLPaths } from "utilities";
 
 export function App(): JSX.Element {
-  const { navPosition, toggleNavPosition } = useContext(NavPositionContext);
+  const { navPosition } = useContext(NavPositionContext);
 
   const { items: handshakeCareers, isLoading: isHandshakeCareersLoading } = useContext(
     HandshakeCareersContext,
@@ -24,14 +24,10 @@ export function App(): JSX.Element {
     PeopleGroveAlumniContext,
   );
 
-  function handleMoveNavbarButtonClick() {
-    toggleNavPosition();
-  }
-
   return (
     <Router>
       <Navigation pos={navPosition} />
-      <MoveNavButton map={false} handleClick={handleMoveNavbarButtonClick} />
+      <MoveNavButton map={false} />
       <Switch>
         <Route exact path={URLPaths.alumStories}>
           <MapView background />
