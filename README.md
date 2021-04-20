@@ -10,6 +10,8 @@ Provided below is a summary of how to use Hope Scope's main features:
 - The **Career Finder** displays job opportunities available to Hope students on a map, retrieved from [Handshake](https://hope.joinhandshake.com). No login is required to retrieve this data.
 - The **Alumni Stories** page provides a list of specific alumni curated by BCCC staff. Approved administrators are able to edit and add to this data by going to https://boerigter-center-app.web.app/admin and logging in using their admin credentials (different from Hope College Connection credentials). To get administrator access, contact [Mike Jipping](mailto:jipping@hope.edu). Instructions on how to add an administrator can be found in the [Administrator Access](#administrator-access) section below.
 
+The following sections provide documentation on the development of the app. If you are Boerigter Center staff or an everyday user, you likely don't need to read past here. Developers, read on!
+
 ## Getting Started
 
 Make sure you have [Node.js](https://www.npmjs.com/get-npm), [npm](https://www.npmjs.com/get-npm), [Git](https://git-scm.com/downloads), and [VSCode](https://code.visualstudio.com/Download) installed on your computer. Clone the repository, navigate to the [`.vscode`](.vscode) directory, and open the code workspace ([`boerigter-center-app.code-workspace`](.vscode/workspace.code-workspace)) in VSCode.
