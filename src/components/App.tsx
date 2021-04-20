@@ -27,7 +27,7 @@ export function App(): JSX.Element {
   return (
     <Router>
       <Navigation pos={navPosition} />
-      <MoveNavButton map={false} />
+      <MoveNavButton />
       <Switch>
         <Route exact path={URLPaths.alumStories}>
           <MapView background />
