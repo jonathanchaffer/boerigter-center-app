@@ -1,6 +1,14 @@
-# Boerigter Center App _(Working Title)_
+# Hope Scope (The Boerigter Center App)
 
-An app built for the Boerigter Center for Calling and Career at Hope College. Written by Jonathan Chaffer, Josie Crane, Nam Do, and Will von Seeger.
+This app was built for the Boerigter Center for Calling and Career at Hope College. Written by Jonathan Chaffer, Josie Crane, Nam Do, and Will von Seeger.
+
+## Overview
+
+Provided below is a summary of how to use Hope Scope's main features:
+
+- The **Alumni Finder** displays a collection graduated alumni on a map, retrieved from [The Hope College Connection](https://connection.hope.edu). Upon opening the app for the first time, you will be prompted to log in using your Hope College Connection credentials. This allows the app to gather alumni data from The Hope College Connection. If you do not have an account yet, go to https://connection.hope.edu and register. **Note:** The app currently only works with Hope College Connection accounts created using an email and password, not a LinkedIn account.
+- The **Career Finder** displays job opportunities available to Hope students on a map, retrieved from [Handshake](https://hope.joinhandshake.com). No login is required to retrieve this data.
+- The **Alumni Stories** page provides a list of specific alumni curated by BCCC staff. Approved administrators are able to edit and add to this data by going to https://boerigter-center-app.web.app/admin and logging in using their admin credentials (different from Hope College Connection credentials). To get administrator access, contact [Mike Jipping](mailto:jipping@hope.edu). Information on how to add an administrator to the app can be found [here](#admin-access).
 
 ## Getting Started
 
@@ -86,7 +94,7 @@ It is highly recommended that you use [functional components](https://reactjs.or
 
 The app runs on a [Google Firebase](https://firebase.google.com) back end using the Authentication, Firestore, Functions, Hosting, and Storage services. View the project's Firebase Console [here](https://console.firebase.google.com/u/0/project/boerigter-center-app/overview).
 
-### Administrator Access
+### <a name="admin-access"></a> Administrator Access
 
 Users in [Firebase Authentication](https://console.firebase.google.com/u/0/project/boerigter-center-app/authentication/users) are admins who can edit the database. Use the Firebase Console to add new users. To upgrade an authenticated user to admin status, go to the `users` collection of the Firestore database and set the desired user's `isAdmin` status to `true`.
 
