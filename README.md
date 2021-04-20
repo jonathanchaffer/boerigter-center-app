@@ -1,8 +1,16 @@
-# Boerigter Center App _(Working Title)_
+# Hope Scope (The Boerigter Center App)
 
-An app built for the Boerigter Center for Calling and Career at Hope College. Written by Jonathan Chaffer, Josie Crane, Nam Do, and Will von Seeger.
+This app was built for the Boerigter Center for Calling and Career at Hope College. Written by Jonathan Chaffer, Josie Crane, Nam Do, and Will von Seeger.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+
+Provided below is a summary of how to use Hope Scope's main features:
+
+- The **Alumni Finder** displays a collection graduated alumni on a map, retrieved from [The Hope College Connection](https://connection.hope.edu). Upon opening the app for the first time, you will be prompted to log in using your Hope College Connection credentials. This allows the app to gather alumni data from The Hope College Connection. If you do not have an account yet, go to https://connection.hope.edu and register. **Note:** The app currently only works with Hope College Connection accounts created using an email and password, not a LinkedIn account.
+- The **Career Finder** displays job opportunities available to Hope students on a map, retrieved from [Handshake](https://hope.joinhandshake.com). No login is required to retrieve this data.
+- The **Alumni Stories** page provides a list of specific alumni curated by BCCC staff. Approved administrators are able to edit and add to this data by going to https://boerigter-center-app.web.app/admin and logging in using their admin credentials (different from Hope College Connection credentials). To get administrator access, contact [Mike Jipping](mailto:jipping@hope.edu). Instructions on how to add an administrator can be found in the [Administrator Access](#administrator-access) section below.
+
+The following sections provide documentation on the development of the app. If you are Boerigter Center staff or an everyday user, you likely don't need to read past here. Developers, read on!
 
 ## Getting Started
 
@@ -120,6 +128,6 @@ Follow these steps to **manually** deploy code to the live site:
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
