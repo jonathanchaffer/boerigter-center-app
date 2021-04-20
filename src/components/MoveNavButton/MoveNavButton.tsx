@@ -7,7 +7,7 @@ import "./MoveNavButton.scss";
 /** Button that functions to move the navbar up and down for accessibility purposes. */
 export function MoveNavButton(): JSX.Element {
   const { navPosition, toggleNavPosition } = useContext(NavPositionContext);
-  const isMap = document.getElementsByClassName("map-container foreground").length > 0;
+  const isMap = document.getElementsByClassName("foreground-map").length > 0;
 
   let right;
 
