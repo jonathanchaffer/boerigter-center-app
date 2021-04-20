@@ -1,9 +1,10 @@
 import tagline from "assets/images/where_will_you_go.png";
 import { PopoverItem } from "components";
 import { navbarHeight } from "components/Navigation";
+import { NavPositionContext } from "contexts";
 import GoogleMapReact from "google-map-react";
 import { Mappable } from "models/Mappable";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ListGroup, OverlayTrigger, Popover, Spinner } from "react-bootstrap";
 import { ClusterFeature, PointFeature } from "supercluster";
 import useSupercluster from "use-supercluster";
@@ -17,8 +18,6 @@ interface MapViewProps<I extends Mappable> {
   background?: boolean;
   /** Array of data to be displayed on the map. */
   data?: I[];
-  /** Whether the navbar is currently at the top or bottom. */
-  pos: "top" | "bottom";
   /** Default zoom level. */
   defaultZoom?: number;
   /** Whether the data is still loading. */
@@ -27,7 +26,6 @@ interface MapViewProps<I extends Mappable> {
 
 /** Component that renders data on a map. */
 export function MapView<I extends Mappable>({
-  pos,
   defaultZoom,
   background,
   isLoading,
@@ -35,6 +33,7 @@ export function MapView<I extends Mappable>({
 }: MapViewProps<I>): JSX.Element {
   const [mapZoom, setMapZoom] = useState(defaultZoom || 5);
   const [mapBounds, setMapBounds] = useState<[number, number, number, number]>([-1, -1, -1, -1]);
+  const { navPosition } = useContext(NavPositionContext);
 
   const points: PointFeature<I>[] = data
     ? data.map((item: I) => {
@@ -57,7 +56,7 @@ export function MapView<I extends Mappable>({
     <>
       <div
         className={`map-container${background ? " background" : ""}`}
-        style={pos === "bottom" ? { top: `-${navbarHeight}` } : {}}
+        style={navPosition === "bottom" ? { top: `-${navbarHeight}` } : {}}
       >
         {isLoading && (
           <div className="pending-map-container">

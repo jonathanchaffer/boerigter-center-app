@@ -34,30 +34,22 @@ export function App(): JSX.Element {
       <MoveNavButton map={false} pos={navPosition} handleClick={handleMoveNavbarButtonClick} />
       <Switch>
         <Route exact path={URLPaths.alumStories}>
-          <MapView background pos={navPosition} />
+          <MapView background />
           <AlumniStoriesList pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.admin}>
-          <MapView background pos={navPosition} />
+          <MapView background />
           <AdminDashboard pos={navPosition} />
         </Route>
         <Route exact path={`${URLPaths.alumStories}/:id`}>
           <AlumStoryDetails pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.careerFinder}>
-          <MapView
-            data={handshakeCareers}
-            isLoading={isHandshakeCareersLoading}
-            pos={navPosition}
-          />
+          <MapView data={handshakeCareers} isLoading={isHandshakeCareersLoading} />
         </Route>
         <Route exact path={URLPaths.alumFinder}>
           <>
-            <MapView
-              data={peopleGroveAlumni}
-              isLoading={isPeopleGroveAlumniLoading}
-              pos={navPosition}
-            />
+            <MapView data={peopleGroveAlumni} isLoading={isPeopleGroveAlumniLoading} />
             <LoginModal
               isLoggedIn={isLoggedInToPG()}
               loginFn={loginToPG}
