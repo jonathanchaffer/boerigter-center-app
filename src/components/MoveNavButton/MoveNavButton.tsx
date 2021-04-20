@@ -1,19 +1,20 @@
 import { navbarHeight } from "components/Navigation";
-import React from "react";
+import { NavPositionContext } from "contexts";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import "./MoveNavButton.scss";
 
 interface NavButtonProps {
   /** Whether the button is being displayed over a map. */
   map: boolean;
-  /** Whether the navbar is currently on top or on bottom. */
-  pos: "top" | "bottom";
   /** Function to be called when the button is clicked. */
   handleClick: ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void) | undefined;
 }
 
 /** Button that functions to move the navbar up and down for accessibility purposes. */
-export function MoveNavButton({ map, pos, handleClick }: NavButtonProps): JSX.Element {
+export function MoveNavButton({ map, handleClick }: NavButtonProps): JSX.Element {
+  const { navPosition } = useContext(NavPositionContext);
+
   let right;
 
   if (map) {
@@ -32,8 +33,8 @@ export function MoveNavButton({ map, pos, handleClick }: NavButtonProps): JSX.El
     transform: `translateY(-${navbarHeight})`,
   };
 
-  const buttonIcon = pos === "top" ? "fas fa-arrow-down" : "fas fa-arrow-up";
-  const buttonStyle = pos === "top" ? topStyle : bottomStyle;
+  const buttonIcon = navPosition === "top" ? "fas fa-arrow-down" : "fas fa-arrow-up";
+  const buttonStyle = navPosition === "top" ? topStyle : bottomStyle;
 
   return (
     <div id="button-div" className="container" style={buttonStyle}>

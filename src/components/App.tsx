@@ -31,7 +31,7 @@ export function App(): JSX.Element {
   return (
     <Router>
       <Navigation pos={navPosition} />
-      <MoveNavButton map={false} pos={navPosition} handleClick={handleMoveNavbarButtonClick} />
+      <MoveNavButton map={false} handleClick={handleMoveNavbarButtonClick} />
       <Switch>
         <Route exact path={URLPaths.alumStories}>
           <MapView background />
