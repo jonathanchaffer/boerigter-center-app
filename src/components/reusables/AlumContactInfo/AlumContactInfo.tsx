@@ -1,6 +1,6 @@
 import { CuratedAlum } from "models";
 import React from "react";
-import { standardizedPhoneNumber } from "utilities";
+import { standardizePhoneNumber } from "utilities";
 
 interface AlumContactInfoProps {
   /** The alum whose details should be displayed. */
@@ -20,7 +20,7 @@ export function AlumContactInfo({ alum }: AlumContactInfoProps): JSX.Element {
       {alum.phone && (
         <span>
           <i className="fas fa-phone-alt" />
-          {standardizedPhoneNumber(alum.phone)}
+          {standardizePhoneNumber(alum.phone)}
         </span>
       )}
     </div>

@@ -5,7 +5,7 @@ import React, { FormEvent, useState } from "react";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import Img from "react-cool-img";
 import { addAlumStory, updateAlumStory, uploadProfilePhoto } from "services";
-import { fullName } from "utilities";
+import { generateFullName } from "utilities";
 
 interface AddEditAlumniModalProps {
   /** Whether the modal should be shown. */
@@ -73,7 +73,9 @@ export function AddEditAlumniModal({
       <Form onSubmit={submitAlum}>
         <Modal.Header>
           <Modal.Title>
-            {isNew ? "Add New Alum" : `Edit ${fullName(editedAlum.firstName, editedAlum.lastName)}`}
+            {isNew
+              ? "Add New Alum"
+              : `Edit ${generateFullName(editedAlum.firstName, editedAlum.lastName)}`}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

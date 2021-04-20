@@ -8,7 +8,7 @@ const phoneFormat = PNF.PhoneNumberFormat;
  * @param items An array of strings.
  * @returns A comma-separated list based on the items array.
  */
-export function commaSeparatedList(items: string[]): string {
+export function createCommaSeparatedList(items: string[]): string {
   return items.join(", ");
 }
 
@@ -18,7 +18,7 @@ export function commaSeparatedList(items: string[]): string {
  * @param last The last name (e.g. "Doe").
  * @returns The full name (e.g. "Jane Doe").
  */
-export function fullName(first: string, last: string): string {
+export function generateFullName(first: string, last: string): string {
   return `${first} ${last}`;
 }
 
@@ -27,6 +27,6 @@ export function fullName(first: string, last: string): string {
  * @param phoneNumber A phone number string in any format, e.g. "5555555555".
  * @returns A phone number string in standardized format, e.g. "(555) 555-5555".
  */
-export function standardizedPhoneNumber(phoneNumber: string): string {
+export function standardizePhoneNumber(phoneNumber: string): string {
   return phoneUtil.format(phoneUtil.parse(phoneNumber, "US"), phoneFormat.NATIONAL);
 }
