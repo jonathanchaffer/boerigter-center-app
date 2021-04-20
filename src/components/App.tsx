@@ -24,19 +24,18 @@ export function App(): JSX.Element {
     PeopleGroveAlumniContext,
   );
 
-  // TODO: rename to handleMoveNavbarButtonClick
-  function handleClick() {
+  function handleMoveNavbarButtonClick() {
     toggleNavPosition();
   }
 
   return (
     <Router>
       <Navigation pos={navPosition} />
+      <MoveNavButton map={false} pos={navPosition} handleClick={handleMoveNavbarButtonClick} />
       <Switch>
         <Route exact path={URLPaths.alumStories}>
           <MapView background pos={navPosition} />
           <AlumniStoriesList pos={navPosition} />
-          <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={URLPaths.admin}>
           <MapView background pos={navPosition} />
@@ -51,7 +50,6 @@ export function App(): JSX.Element {
             isLoading={isHandshakeCareersLoading}
             pos={navPosition}
           />
-          <MoveNavButton map pos={navPosition} handleClick={handleClick} />
         </Route>
         <Route exact path={URLPaths.alumFinder}>
           <>
@@ -74,7 +72,6 @@ export function App(): JSX.Element {
               }
               tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
             />
-            <MoveNavButton map pos={navPosition} handleClick={handleClick} />
           </>
         </Route>
         <Route exact path={URLPaths.frog}>
