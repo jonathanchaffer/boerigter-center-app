@@ -55,7 +55,7 @@ export function MapView<I extends Mappable>({
   return (
     <>
       <div
-        className={`map-container${background ? " background" : ""}`}
+        className={`map-container${background ? " background" : " foreground"}`}
         style={navPosition === "bottom" ? { top: `-${navbarHeight}` } : {}}
       >
         {isLoading && (

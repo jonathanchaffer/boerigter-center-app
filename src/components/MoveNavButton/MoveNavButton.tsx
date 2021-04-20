@@ -4,18 +4,14 @@ import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import "./MoveNavButton.scss";
 
-interface NavButtonProps {
-  /** Whether the button is being displayed over a map. */
-  map: boolean;
-}
-
 /** Button that functions to move the navbar up and down for accessibility purposes. */
-export function MoveNavButton({ map }: NavButtonProps): JSX.Element {
+export function MoveNavButton(): JSX.Element {
   const { navPosition, toggleNavPosition } = useContext(NavPositionContext);
+  const isMap = document.getElementsByClassName("map-container foreground").length > 0;
 
   let right;
 
-  if (map) {
+  if (isMap) {
     right = "55px";
   } else {
     right = "15px";
