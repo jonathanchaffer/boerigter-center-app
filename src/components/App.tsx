@@ -8,14 +8,14 @@ import {
   MoveNavButton,
   Navigation,
 } from "components";
-import { HandshakeCareersContext, PeopleGroveAlumniContext } from "contexts";
-import React, { useContext, useEffect, useState } from "react";
+import { HandshakeCareersContext, NavPositionContext, PeopleGroveAlumniContext } from "contexts";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { isLoggedInToPG, loginToPG, logoutOfPG } from "services";
 import { URLPaths } from "utilities";
 
 export function App(): JSX.Element {
-  const [navPosition, setNavPosition] = useState<"top" | "bottom">("top");
+  const { navPosition, toggleNavPosition } = useContext(NavPositionContext);
 
   const { items: handshakeCareers, isLoading: isHandshakeCareersLoading } = useContext(
     HandshakeCareersContext,
@@ -26,11 +26,7 @@ export function App(): JSX.Element {
 
   // TODO: rename to handleMoveNavbarButtonClick
   function handleClick() {
-    if (navPosition === "top") {
-      setNavPosition("bottom");
-    } else {
-      setNavPosition("top");
-    }
+    toggleNavPosition();
   }
 
   return (
