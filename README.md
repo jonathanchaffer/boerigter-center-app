@@ -2,8 +2,6 @@
 
 An app built for the Boerigter Center for Calling and Career at Hope College. Written by Jonathan Chaffer, Josie Crane, Nam Do, and Will von Seeger.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Getting Started
 
 Make sure you have [Node.js](https://www.npmjs.com/get-npm), [npm](https://www.npmjs.com/get-npm), [Git](https://git-scm.com/downloads), and [VSCode](https://code.visualstudio.com/Download) installed on your computer. Clone the repository, navigate to the [`.vscode`](.vscode) directory, and open the code workspace ([`boerigter-center-app.code-workspace`](.vscode/workspace.code-workspace)) in VSCode.
@@ -120,6 +118,6 @@ Follow these steps to **manually** deploy code to the live site:
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
