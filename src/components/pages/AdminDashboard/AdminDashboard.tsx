@@ -9,11 +9,7 @@ import { loginAsAdmin, logout, sendPasswordResetEmail } from "services";
 import { setTimeout } from "timers";
 import { URLPaths } from "utilities";
 
-interface AdminDashboardProps {
-  pos: "top" | "bottom";
-}
-
-export function AdminDashboard({ pos }: AdminDashboardProps): JSX.Element {
+export function AdminDashboard(): JSX.Element {
   const user = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isShowingConfirmPasswordReset, setIsShowingConfirmPasswordReset] = useState(false);
@@ -33,7 +29,7 @@ export function AdminDashboard({ pos }: AdminDashboardProps): JSX.Element {
 
   return isLoading ? (
     <div id="loader">
-      <PageContainer pos={pos}>
+      <PageContainer>
         <Spinner animation="border" />
       </PageContainer>
     </div>
@@ -47,7 +43,7 @@ export function AdminDashboard({ pos }: AdminDashboardProps): JSX.Element {
           description="Please login using your admin credentials to view this content."
           passwordResetFn={sendPasswordResetEmail}
         />
-        <PageContainer pos={pos}>
+        <PageContainer>
           {user && (
             <>
               <div className="d-flex justify-content-between align-items-center">

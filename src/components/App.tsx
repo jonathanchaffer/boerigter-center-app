@@ -8,15 +8,13 @@ import {
   MoveNavButton,
   Navigation,
 } from "components";
-import { HandshakeCareersContext, NavPositionContext, PeopleGroveAlumniContext } from "contexts";
+import { HandshakeCareersContext, PeopleGroveAlumniContext } from "contexts";
 import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { isLoggedInToPG, loginToPG, logoutOfPG } from "services";
 import { URLPaths } from "utilities";
 
 export function App(): JSX.Element {
-  const { navPosition } = useContext(NavPositionContext);
-
   const { items: handshakeCareers, isLoading: isHandshakeCareersLoading } = useContext(
     HandshakeCareersContext,
   );
@@ -31,14 +29,14 @@ export function App(): JSX.Element {
       <Switch>
         <Route exact path={URLPaths.alumStories}>
           <MapView background />
-          <AlumniStoriesList pos={navPosition} />
+          <AlumniStoriesList />
         </Route>
         <Route exact path={URLPaths.admin}>
           <MapView background />
-          <AdminDashboard pos={navPosition} />
+          <AdminDashboard />
         </Route>
         <Route exact path={`${URLPaths.alumStories}/:id`}>
-          <AlumStoryDetails pos={navPosition} />
+          <AlumStoryDetails />
         </Route>
         <Route exact path={URLPaths.careerFinder}>
           <MapView data={handshakeCareers} isLoading={isHandshakeCareersLoading} />
@@ -63,7 +61,7 @@ export function App(): JSX.Element {
           </>
         </Route>
         <Route exact path={URLPaths.frog}>
-          <FrogPage pos={navPosition} />
+          <FrogPage />
         </Route>
         <Route exact path={URLPaths.logout}>
           <LogoutPage />

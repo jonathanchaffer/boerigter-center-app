@@ -15,17 +15,13 @@ import { deleteAlumStory, getAlumniStories, updateAlumStory } from "services";
 import { URLPaths } from "utilities";
 import "./AlumniStoriesList.scss";
 
-interface AlumniStoriesListProps {
-  pos: "top" | "bottom";
-}
-
-export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element {
+export function AlumniStoriesList(): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
   const user = useContext(UserContext);
   const [isShowingNewAlumModal, setIsShowingNewAlumModal] = useState(false);
 
   return (
-    <PageContainer pos={pos}>
+    <PageContainer>
       <div className="alumni-stories-list">
         <div className="d-flex justify-content-between">
           <div>
