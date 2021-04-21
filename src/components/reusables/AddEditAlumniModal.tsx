@@ -214,7 +214,7 @@ export function AddEditAlumniModal({
               onChange={e =>
                 setEditedAlum({
                   ...editedAlum,
-                  quotes: e.target.value.split("|").map(quote => quote.trim()),
+                  quotes: ((e.target.value === "") ? [] : e.target.value.split("|").map(quote => quote.trim())),
                 })
               }
               defaultValue={editedAlum.quotes?.join(" | ") || ""}
