@@ -3,6 +3,8 @@ import Button from "react-bootstrap/esm/Button";
 import ReactModal from "react-modal";
 import "./AboutApp.scss";
 
+// ReactModal from https://github.com/reactjs/react-modal#installation
+
 interface AboutAppProps {
   pos: "top" | "bottom"; 
 }
@@ -32,10 +34,10 @@ const [display, setDisplay] = useState<true | false>(false);
   
   return (
       <div id="about-button-div" className="container" style={buttonStyle} >
-        <Button id="about-Button" onClick={handleClick} >
+        <Button id="about-Button" variant="outline-secondary" onClick={handleClick} >
           About
         </Button>
-        <ReactModal //ReactModal from https://github.com/reactjs/react-modal#installation
+        <ReactModal 
            isOpen={display}
            contentLabel="onRequestClose Example"
            onRequestClose={handleClick}

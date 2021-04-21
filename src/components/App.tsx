@@ -5,11 +5,8 @@ import {
   LoginModal,
   MapView,
   MoveNavButton,
-<<<<<<< HEAD
   Navigation,
-=======
   AboutApp,
->>>>>>> feature/about-section
 } from "components";
 import { HandshakeCareersContext, PeopleGroveAlumniContext } from "contexts";
 import React, { useContext, useEffect, useState } from "react";
@@ -37,7 +34,7 @@ export function App(): JSX.Element {
   }
 
   return (
-<<<<<<< HEAD
+    <div>
     <Router>
       <Navigation pos={navPosition} />
       <Switch>
@@ -82,53 +79,6 @@ export function App(): JSX.Element {
                 </span>
               }
               tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
-=======
-    <div>
-      <Router>
-        <Navigation pos={navPosition} />
-        <Switch>
-          <Route exact path={URLPaths.alumStories}>
-            <AlumniStoriesList pos={navPosition} />
-            <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
-          </Route>
-          <Route exact path="/stories/:id">
-            <AlumStoryDetails pos={navPosition}/>
-            <MoveNavButton map={false} pos={navPosition} handleClick={handleClick} />
-          </Route>
-          <Route exact path={`${URLPaths.alumStories}${URLPaths.admin}`}>
-            <AlumniStoriesList pos={navPosition} />
-          </Route>
-          <Route exact path={URLPaths.admin}>
-            <AdminDashboard />
-          </Route>
-          <Route exact path={`${URLPaths.alumStories}/:id`}>
-            <AlumStoryDetails pos={navPosition}/>
-          </Route>
-          <Route exact path={URLPaths.careerFinder}>
-            <MapView getData={() => {
-              return Promise.resolve(handshakeCareers);
-            }}
-            isLoading={isHandshakeCareersLoading} pos={navPosition} />
-            <Tagline pos={navPosition}/>
-            <MoveNavButton map pos={navPosition} handleClick={handleClick} />
-          </Route>
-          <Route exact path={URLPaths.alumFinder}>
-            <>
-              <MapView getData={getAllPeopleGroveAlumni} pos={navPosition} />
-              <LoginModal
-                isLoggedIn={isLoggedInToPG()}
-                loginFn={loginToPG}
-                description={
-                  <span>
-                    Please log in using your{" "}
-                    <a href="https://connection.hope.edu/" target="blank">
-                      connection.hope.edu
-                    </a>{" "}
-                    credentials to view this content.
-                  </span>
-                }
-                tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
->>>>>>> feature/about-section
             />
             <MoveNavButton map pos={navPosition} handleClick={handleClick} />
           </>
@@ -136,13 +86,6 @@ export function App(): JSX.Element {
         <Route exact path={URLPaths.logout}>
           <LogoutPage />
         </Route>
-<<<<<<< HEAD
-        <Route>
-          <Redirect to={URLPaths.alumFinder} />
-        </Route>
-      </Switch>
-    </Router>
-=======
           <Route>
             <Redirect to={URLPaths.alumFinder} />
           </Route>
@@ -150,7 +93,6 @@ export function App(): JSX.Element {
       </Router>
       <AboutApp pos={navPosition}/>
     </div>
->>>>>>> feature/about-section
   );
 }
 
