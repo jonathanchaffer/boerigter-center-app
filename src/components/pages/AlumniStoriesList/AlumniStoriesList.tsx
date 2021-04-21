@@ -73,6 +73,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
   const user = useContext(UserContext);
   const [isShowingEditAlumModal, setIsShowingEditAlumModal] = useState(false);
   const [isDisplaying, setIsDisplaying] = useState(alum.display);
+  const [error, setError] = useState<Error | undefined>(undefined);
 
   return (
     <>
@@ -83,10 +84,9 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
               variant="outline-primary"
               className="hide-show-btn"
               onClick={() => {
-                // TODO: add error handling to this async call
-                updateAlumStory(alum.id, { ...alum, display: !isDisplaying }).then(() =>
-                  setIsDisplaying(!isDisplaying),
-                );
+                updateAlumStory(alum.id, { ...alum, display: !isDisplaying })
+                  .then(() => setIsDisplaying(!isDisplaying))
+                  .catch(err => setError(err));
               }}
             >
               <i className={`fas ${isDisplaying ? "fa-eye" : "fa-eye-slash"}`} />
@@ -112,7 +112,9 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
                   <div>
                     <h2>
                       {`${alum.firstName} ${alum.lastName}`}{" "}
-                      <span className="light">&apos;{alum.gradYear % 100}</span>
+                      <span className="light">
+                        &apos;{(alum.gradYear % 100).toString().padStart(2, "0")}
+                      </span>
                     </h2>
                     <AlumSecondaryInfo alum={alum} />
                   </div>
@@ -169,6 +171,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
         onCancel={() => setIsShowingEditAlumModal(false)}
         currentAlum={alum}
       />
+      <ErrorModal error={error} />
     </>
   );
 }

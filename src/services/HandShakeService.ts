@@ -1,6 +1,11 @@
 import axios from "axios";
 import { HandshakeCareer } from "models";
 
+/**
+ * Converts raw objects to HandshakeCareer objects.
+ * @param data An object retrieved via the Handshake API.
+ * @returns The object converted to a HandshakeCareer, or undefined if it cannot be converted properly.
+ */
 function convertToHandshakeCareer(data: any): HandshakeCareer | undefined {
   if (
     data.job.employer.location.latitude !== null &&
@@ -28,6 +33,11 @@ const axiosInstance = axios.create({
   },
 });
 
+/**
+ * Retrieves career data from Handshake given a page number.
+ * @param page The page number to retrieve.
+ * @returns A Promise containing an array of HandshakeCareer objects retrieved from Handshake.
+ */
 export async function fetchHandshakeCareers(page: number): Promise<HandshakeCareer[]> {
   const options = {
     headers: {

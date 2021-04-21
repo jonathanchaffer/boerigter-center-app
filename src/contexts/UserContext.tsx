@@ -1,6 +1,6 @@
 import { User } from "firebase";
-import { auth } from "index";
 import React, { createContext, useEffect, useState } from "react";
+import { auth } from "services";
 
 export const UserContext = createContext<User | undefined>(undefined);
 

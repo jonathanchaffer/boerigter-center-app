@@ -10,16 +10,22 @@ import useSupercluster from "use-supercluster";
 import { getPinOpacity, getPinSize, getPinZIndex } from "utilities";
 import "./MapView.scss";
 
-// tutorial followed for clustering: https://www.leighhalliday.com/google-maps-clustering
+// Tutorial followed for clustering: https://www.leighhalliday.com/google-maps-clustering
 
 interface MapViewProps<I extends Mappable> {
+  /** Whether the map should be displayed in the background, i.e. behind primary elements. */
   background?: boolean;
+  /** Array of data to be displayed on the map. */
   data?: I[];
+  /** Whether the navbar is currently at the top or bottom. */
   pos: "top" | "bottom";
+  /** Default zoom level. */
   defaultZoom?: number;
+  /** Whether the data is still loading. */
   isLoading?: boolean;
 }
 
+/** Component that renders data on a map. */
 export function MapView<I extends Mappable>({
   pos,
   defaultZoom,

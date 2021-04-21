@@ -9,16 +9,28 @@ const axiosInstance = axios.create({
   },
 });
 
+/**
+ * @returns The currently stored PeopleGrove authentication object, or undefined if there is none.
+ */
 export function getPGAuth(): any | undefined {
   const item = localStorage.getItem("pg_user");
   if (item === null) return undefined;
   return JSON.parse(item);
 }
 
+/**
+ * @returns true if the user is logged in to PeopleGrove, false otherwise.
+ */
 export function isLoggedInToPG(): boolean {
   return getPGAuth()?.found || false;
 }
 
+/**
+ * Tries to log in a user to PeopleGrove.
+ * @param email The email address to log in with.
+ * @param password The password to log in with.
+ * @returns A Promise representing the login status.
+ */
 export function loginToPG(email: string, password: string): Promise<void> {
   const data = JSON.stringify({
     email,
@@ -32,10 +44,17 @@ export function loginToPG(email: string, password: string): Promise<void> {
   });
 }
 
+/**
+ * Logs the user out of PeopleGrove.
+ */
 export function logoutOfPG(): void {
   localStorage.removeItem("pg_user");
 }
 
+/**
+ * Retrieves a list of all alumni from PeopleGrove, using the map view type.
+ * @returns A Promise containing the list of all PeopleGrove alumni.
+ */
 export async function getAllPeopleGroveAlumni(): Promise<PeopleGroveAlum[]> {
   if (getPGAuth()) {
     const accessToken = getPGAuth()?.token;
@@ -65,6 +84,11 @@ export async function getAllPeopleGroveAlumni(): Promise<PeopleGroveAlum[]> {
   return [];
 }
 
+/**
+ * Retrieves more detailed data for one specific alum on PeopleGrove.
+ * @param username The username of a specific PeopleGrove alum.
+ * @returns A more detailed blob of data for a specific alum on PeopleGrove.
+ */
 export async function getPeopleGroveAlum(username: string): Promise<PeopleGroveAlum> {
   if (getPGAuth()) {
     const accessToken = getPGAuth()?.token;

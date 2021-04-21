@@ -2,6 +2,7 @@ import {
   AdminDashboard,
   AlumniStoriesList,
   AlumStoryDetails,
+  FrogPage,
   LoginModal,
   MapView,
   MoveNavButton,
@@ -13,7 +14,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { isLoggedInToPG, loginToPG, logoutOfPG } from "services";
 import { URLPaths } from "utilities";
-import "./App.scss";
 
 export function App(): JSX.Element {
   const [navPosition, setNavPosition] = useState<"top" | "bottom">("top");
@@ -25,6 +25,7 @@ export function App(): JSX.Element {
     PeopleGroveAlumniContext,
   );
 
+  // TODO: rename to handleMoveNavbarButtonClick
   function handleClick() {
     if (navPosition === "top") {
       setNavPosition("bottom");
@@ -48,7 +49,6 @@ export function App(): JSX.Element {
           <AdminDashboard pos={navPosition} />
         </Route>
         <Route exact path={`${URLPaths.alumStories}/:id`}>
-          <MapView background pos={navPosition} />
           <AlumStoryDetails pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.careerFinder}>
@@ -82,6 +82,9 @@ export function App(): JSX.Element {
             />
             <MoveNavButton map pos={navPosition} handleClick={handleClick} />
           </>
+        </Route>
+        <Route exact path={URLPaths.frog}>
+          <FrogPage pos={navPosition} />
         </Route>
         <Route exact path={URLPaths.logout}>
           <LogoutPage />

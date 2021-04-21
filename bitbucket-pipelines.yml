@@ -10,12 +10,13 @@ definitions:
         caches:
           - node
     - step: &build
-        name: Build application
+        name: Build and test
         script:
-          - npm install
           - echo > ".env"
           - echo REACT_APP_GOOGLE_API_KEY=$GOOGLE_API_KEY >> ".env"
           - echo REACT_APP_HANDSHAKE_API_KEY=$HANDSHAKE_API_KEY >> ".env"
+          - npm install
+          - npm run test
           - npm run build
         artifacts:
           - build/**
