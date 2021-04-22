@@ -39,7 +39,6 @@ export function BackgroundLoaderProvider<I>({
 
     const num = numPages ?? 1;
 
-    // setTimeout(() => {
     setIsLoading(true);
     for (let i = 0; i < num; i++) {
       setIsLoading(true);
@@ -51,7 +50,6 @@ export function BackgroundLoaderProvider<I>({
           if (i === num - 1) setIsLoading(false);
         });
     }
-    // }, 0);
   }, [numPages, fetchFn]);
 
   return <context.Provider value={{ isLoading, items }}>{children}</context.Provider>;

@@ -1,6 +1,6 @@
 import { CuratedAlum } from "models";
 import React from "react";
-import { commaSeparatedList } from "utilities";
+import { createCommaSeparatedList } from "utilities";
 
 interface AlumSecondaryInfoProps {
   /** The alum whose details should be displayed. */
@@ -22,7 +22,7 @@ export function AlumSecondaryInfo({ alum, direction }: AlumSecondaryInfoProps): 
       {alum.majors && (
         <span>
           <i className="fas fa-graduation-cap" />
-          {commaSeparatedList(alum.majors)}
+          {createCommaSeparatedList(alum.majors)}
         </span>
       )}
       {alum.company && (

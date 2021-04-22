@@ -6,7 +6,7 @@ import { useAsync } from "react-async";
 import { Col, Row, Spinner } from "react-bootstrap";
 import Img from "react-cool-img";
 import { getPeopleGroveAlum } from "services";
-import { commaSeparatedList } from "utilities";
+import { createCommaSeparatedList } from "utilities";
 
 interface PopoverItemProps<I extends Mappable> {
   item: I;
@@ -55,7 +55,7 @@ function AlumPopoverItem({ alum }: AlumPopoverItemProps): JSX.Element {
             {alum.majors?.length > 0 && (
               <span>
                 <i className="fas fa-graduation-cap" />
-                {commaSeparatedList(alum.majors)}
+                {createCommaSeparatedList(alum.majors)}
               </span>
             )}
             {isPending ? (

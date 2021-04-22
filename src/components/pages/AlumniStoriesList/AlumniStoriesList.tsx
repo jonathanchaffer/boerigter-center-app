@@ -1,7 +1,5 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
 import { AlumSecondaryInfo, ConfirmationModal, ErrorModal, PageContainer } from "components";
-// import { NewAlumModal } from "components/reusables/NewAlumModal";
-// import { EditAlumModal } from "components/reusables/EditAlumModal";
 import { AddEditAlumniModal } from "components/reusables/AddEditAlumniModal";
 import { UserContext } from "contexts";
 import { CuratedAlum } from "models";

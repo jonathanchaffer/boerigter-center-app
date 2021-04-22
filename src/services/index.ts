@@ -1,6 +1,6 @@
 export * from "./authService";
 export * from "./firebaseService";
 export * from "./firestoreService";
-export * from "./HandShakeService";
+export * from "./handshakeService";
 export * from "./peopleGroveService";
 export * from "./storageService";
