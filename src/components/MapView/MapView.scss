@@ -90,23 +90,25 @@
 .map-container a {
   pointer-events: none !important;
 }
-  
-#leftDiv{
+
+.click-blocker {
   position: absolute;
-  min-height: 23.5px;
   min-width: 69px;
-  left: 3px;
-  bottom: 0px;
+  bottom: 0;
   z-index: 3000;
 }
-#rightDiv{
+
+.click-blocker.left {
+  min-height: 23.5px;
+  left: 3px;
+}
+
+.click-blocker.right {
   position: absolute;
   min-height: 17px;
-  min-width: 69px;
   right: 2px;
-  bottom: 0px;
-  z-index: 3000;
 }
+
 #tagline {
   margin-left: 3rem;
   margin-top: 2rem;
