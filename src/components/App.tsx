@@ -28,6 +28,7 @@ export function App(): JSX.Element {
       <Router>
         <Navigation />
         <MoveNavButton />
+        <AboutApp />
         <Switch>
           <Route exact path={URLPaths.alumStories}>
             <MapView background />
@@ -73,7 +74,6 @@ export function App(): JSX.Element {
           </Route>
         </Switch>
       </Router>
-      <AboutApp />
     </div>
   );
 }
