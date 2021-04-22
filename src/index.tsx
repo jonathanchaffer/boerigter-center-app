@@ -2,6 +2,7 @@ import { App } from "components";
 import {
   BackgroundLoaderProvider,
   HandshakeCareersContext,
+  NavPositionProvider,
   PeopleGroveAlumniContext,
   UserProvider,
 } from "contexts";
@@ -10,7 +11,7 @@ import ReactDOM from "react-dom";
 import { fetchHandshakeCareers, getAllPeopleGroveAlumni } from "services";
 import "styles/fonts.scss";
 import "styles/index.scss";
-import { commaSeparatedList } from "utilities";
+import { createCommaSeparatedList } from "utilities";
 
 const requiredEnvContents = ["REACT_APP_GOOGLE_API_KEY", "REACT_APP_HANDSHAKE_API_KEY"];
 
@@ -23,7 +24,7 @@ requiredEnvContents.forEach(key => {
 if (missingEnvContents.length > 0) {
   // eslint-disable-next-line no-console
   console.error(
-    `Your local environment is missing the following keys: ${commaSeparatedList(
+    `Your local environment is missing the following keys: ${createCommaSeparatedList(
       missingEnvContents,
     )}. Make sure that you have an .env file in your root directory with the required contents.`,
   );
@@ -41,7 +42,9 @@ ReactDOM.render(
           fetchFn={getAllPeopleGroveAlumni}
           context={PeopleGroveAlumniContext}
         >
-          <App />
+          <NavPositionProvider>
+            <App />
+          </NavPositionProvider>
         </BackgroundLoaderProvider>
       </BackgroundLoaderProvider>
     </UserProvider>

@@ -1,12 +1,11 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
-import { PhotoUploader } from "components";
+import { ErrorModal, PhotoUploader } from "components";
 import { CuratedAlum } from "models";
 import React, { FormEvent, useState } from "react";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import Img from "react-cool-img";
 import { addAlumStory, updateAlumStory, uploadProfilePhoto } from "services";
-import { fullName } from "utilities";
-import { ErrorModal } from "./ErrorModal";
+import { generateFullName } from "utilities";
 
 interface AddEditAlumniModalProps {
   /** Whether the modal should be shown. */
@@ -79,7 +78,7 @@ export function AddEditAlumniModal({
             <Modal.Title>
               {isNew
                 ? "Add New Alum"
-                : `Edit ${fullName(editedAlum.firstName, editedAlum.lastName)}`}
+                : `Edit ${generateFullName(editedAlum.firstName, editedAlum.lastName)}`}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

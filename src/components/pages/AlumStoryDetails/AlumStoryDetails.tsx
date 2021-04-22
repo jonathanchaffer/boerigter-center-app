@@ -9,13 +9,9 @@ import { Button, Card, Col, Row, Spinner } from "react-bootstrap";
 import Img from "react-cool-img";
 import { Redirect, useParams } from "react-router-dom";
 import { getAlumStory } from "services";
-import { fullName, URLPaths } from "utilities";
+import { generateFullName, URLPaths } from "utilities";
 
-interface AlumStoryDetailsProps {
-  pos: "top" | "bottom";
-}
-
-export function AlumStoryDetails({ pos }: AlumStoryDetailsProps): JSX.Element {
+export function AlumStoryDetails(): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const user = useContext(UserContext);
   const [isShowingEditAlumModal, setIsShowingEditAlumModal] = useState(false);
@@ -27,7 +23,7 @@ export function AlumStoryDetails({ pos }: AlumStoryDetailsProps): JSX.Element {
 
   return (
     <>
-      <PageContainer pos={pos}>
+      <PageContainer>
         <div>
           {isPending ? (
             <Spinner animation="border" />
@@ -51,7 +47,7 @@ export function AlumStoryDetails({ pos }: AlumStoryDetailsProps): JSX.Element {
                 <Col>
                   <Row>
                     <Col>
-                      <h1>{fullName(alum.firstName, alum.lastName)}</h1>
+                      <h1>{generateFullName(alum.firstName, alum.lastName)}</h1>
                       <span>{`Class of ${alum.gradYear}`}</span>
                     </Col>
                     {!!user && (

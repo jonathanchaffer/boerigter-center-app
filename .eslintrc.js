@@ -46,5 +46,6 @@ module.exports = {
     "sort-keys-fix/sort-keys-fix": "error",
     camelcase: "off",
     "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
+    "@typescript-eslint/no-empty-function": "off",
   },
 };
