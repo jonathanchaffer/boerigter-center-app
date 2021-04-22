@@ -2,13 +2,12 @@
 @import "styles/index.scss";
 
 .navbar {
-  z-index: 2;
+  z-index: 30;
 }
 
 .navbar.bg-light {
   background-color: $off-white !important;
   border: $lt-border;
-  z-index: 2;
   height: 8%;
 }
 
