@@ -11,11 +11,7 @@ import { Redirect, useParams } from "react-router-dom";
 import { getAlumStory } from "services";
 import { fullName, URLPaths } from "utilities";
 
-interface AlumStoryDetailsProps {
-  pos: "top" | "bottom";
-}
-
-export function AlumStoryDetails({ pos }: AlumStoryDetailsProps): JSX.Element {
+export function AlumStoryDetails(): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const user = useContext(UserContext);
   const [isShowingEditAlumModal, setIsShowingEditAlumModal] = useState(false);
@@ -27,7 +23,7 @@ export function AlumStoryDetails({ pos }: AlumStoryDetailsProps): JSX.Element {
 
   return (
     <>
-      <PageContainer pos={pos}>
+      <PageContainer>
         <div>
           {isPending ? (
             <Spinner animation="border" />

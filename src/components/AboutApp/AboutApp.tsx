@@ -1,13 +1,11 @@
 import { navbarHeight } from "components/Navigation";
 import { InfoModal } from "components/reusables";
-import React, { useState } from "react";
+import { NavPositionContext } from "contexts";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 
-interface AboutAppProps {
-  pos: "top" | "bottom";
-}
-
-export function AboutApp({ pos }: AboutAppProps): JSX.Element {
+export function AboutApp(): JSX.Element {
+  const { navPosition } = useContext(NavPositionContext);
   const [display, setDisplay] = useState<true | false>(false);
 
   const topStyle = {
@@ -20,7 +18,7 @@ export function AboutApp({ pos }: AboutAppProps): JSX.Element {
     transform: `translateY(-${navbarHeight})`,
   };
 
-  const buttonStyle = pos === "top" ? topStyle : bottomStyle;
+  const buttonStyle = navPosition === "top" ? topStyle : bottomStyle;
 
   function handleClick() {
     setDisplay(!display);
