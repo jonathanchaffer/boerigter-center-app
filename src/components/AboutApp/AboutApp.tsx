@@ -1,3 +1,4 @@
+import { navbarHeight } from "components/Navigation";
 import { InfoModal } from "components/reusables";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
@@ -12,15 +13,11 @@ export function AboutApp({ pos }: AboutAppProps): JSX.Element {
   const topStyle = {
     bottom: "23.5px",
     left: "15px",
-    right: "1",
-    top: "1",
   };
 
   const bottomStyle = {
-    bottom: "80px",
-    left: "15px",
-    right: "1",
-    top: "1",
+    ...topStyle,
+    transform: `translateY(-${navbarHeight})`,
   };
 
   const buttonStyle = pos === "top" ? topStyle : bottomStyle;
