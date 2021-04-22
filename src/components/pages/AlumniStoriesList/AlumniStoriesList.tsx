@@ -1,7 +1,5 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
 import { AlumSecondaryInfo, ConfirmationModal, ErrorModal, PageContainer } from "components";
-// import { NewAlumModal } from "components/reusables/NewAlumModal";
-// import { EditAlumModal } from "components/reusables/EditAlumModal";
 import { AddEditAlumniModal } from "components/reusables/AddEditAlumniModal";
 import { UserContext } from "contexts";
 import { CuratedAlum } from "models";
@@ -15,17 +13,13 @@ import { deleteAlumStory, getAlumniStories, updateAlumStory } from "services";
 import { URLPaths } from "utilities";
 import "./AlumniStoriesList.scss";
 
-interface AlumniStoriesListProps {
-  pos: "top" | "bottom";
-}
-
-export function AlumniStoriesList({ pos }: AlumniStoriesListProps): JSX.Element {
+export function AlumniStoriesList(): JSX.Element {
   const { data, error, isPending } = useAsync({ promiseFn: getAlumniStories });
   const user = useContext(UserContext);
   const [isShowingNewAlumModal, setIsShowingNewAlumModal] = useState(false);
 
   return (
-    <PageContainer pos={pos}>
+    <PageContainer>
       <div className="alumni-stories-list">
         <div className="d-flex justify-content-between">
           <div>
@@ -73,6 +67,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
   const user = useContext(UserContext);
   const [isShowingEditAlumModal, setIsShowingEditAlumModal] = useState(false);
   const [isDisplaying, setIsDisplaying] = useState(alum.display);
+  const [error, setError] = useState<Error | undefined>(undefined);
 
   return (
     <>
@@ -83,10 +78,9 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
               variant="outline-primary"
               className="hide-show-btn"
               onClick={() => {
-                // TODO: add error handling to this async call
-                updateAlumStory(alum.id, { ...alum, display: !isDisplaying }).then(() =>
-                  setIsDisplaying(!isDisplaying),
-                );
+                updateAlumStory(alum.id, { ...alum, display: !isDisplaying })
+                  .then(() => setIsDisplaying(!isDisplaying))
+                  .catch(err => setError(err));
               }}
             >
               <i className={`fas ${isDisplaying ? "fa-eye" : "fa-eye-slash"}`} />
@@ -171,6 +165,7 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
         onCancel={() => setIsShowingEditAlumModal(false)}
         currentAlum={alum}
       />
+      <ErrorModal error={error} />
     </>
   );
 }

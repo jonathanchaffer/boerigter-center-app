@@ -1,5 +1,4 @@
 export function getPinSize(numChildren: number, numOnScreen: number): number {
-  // return 25 + Math.min((numChildren / numOnScreen) * 30, 125);
   return 25 + 50 * (numChildren / numOnScreen) ** 0.25;
 }
 

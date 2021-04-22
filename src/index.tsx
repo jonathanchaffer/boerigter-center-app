@@ -2,6 +2,7 @@ import { App } from "components";
 import {
   BackgroundLoaderProvider,
   HandshakeCareersContext,
+  NavPositionProvider,
   PeopleGroveAlumniContext,
   UserProvider,
 } from "contexts";
@@ -41,7 +42,9 @@ ReactDOM.render(
           fetchFn={getAllPeopleGroveAlumni}
           context={PeopleGroveAlumniContext}
         >
-          <App />
+          <NavPositionProvider>
+            <App />
+          </NavPositionProvider>
         </BackgroundLoaderProvider>
       </BackgroundLoaderProvider>
     </UserProvider>
