@@ -1,9 +1,6 @@
 import { InfoModal } from "components/reusables";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import "./AboutApp.scss";
-
-// ReactModal from https://github.com/reactjs/react-modal#installation
 
 interface AboutAppProps {
   pos: "top" | "bottom";
@@ -33,8 +30,13 @@ export function AboutApp({ pos }: AboutAppProps): JSX.Element {
   }
 
   return (
-    <div id="about-button-div" className="container" style={buttonStyle}>
-      <Button id="about-Button" variant="outline-secondary" onClick={handleClick}>
+    <div className="container bottom-button-div" style={buttonStyle}>
+      <Button
+        id="about-button"
+        className="bottom-button"
+        variant="outline-secondary"
+        onClick={handleClick}
+      >
         About
       </Button>
       <InfoModal

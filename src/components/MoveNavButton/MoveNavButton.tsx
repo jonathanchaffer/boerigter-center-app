@@ -1,7 +1,6 @@
 import { navbarHeight } from "components/Navigation";
 import React from "react";
 import Button from "react-bootstrap/Button";
-import "./MoveNavButton.scss";
 
 interface NavButtonProps {
   /** Whether the button is being displayed over a map. */
@@ -36,8 +35,13 @@ export function MoveNavButton({ map, pos, handleClick }: NavButtonProps): JSX.El
   const buttonStyle = pos === "top" ? topStyle : bottomStyle;
 
   return (
-    <div id="button-div" className="container" style={buttonStyle}>
-      <Button id="move-Nav-Button" variant="outline-secondary" onClick={handleClick}>
+    <div className="container bottom-button-div" style={buttonStyle}>
+      <Button
+        id="move-Nav-Button"
+        className="bottom-button"
+        variant="outline-secondary"
+        onClick={handleClick}
+      >
         Navigation <i className={buttonIcon} />
       </Button>
     </div>

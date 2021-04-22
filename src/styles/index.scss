@@ -100,3 +100,22 @@ hr {
 .p-breaks {
   white-space: pre-line;
 }
+
+.bottom-button-div {
+  $button-height: 51px;
+  z-index: 1500;
+  position: fixed;
+  background-color: white;
+  border-radius: 3px;
+  width: auto;
+  height: $button-height + 30px;
+  display: flex;
+  align-items: center;
+
+  .bottom-button {
+    border-radius: $border-radius;
+    height: $button-height;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
