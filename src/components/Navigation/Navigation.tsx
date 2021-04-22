@@ -1,4 +1,4 @@
-import { UserContext } from "contexts";
+import { NavPositionContext, UserContext } from "contexts";
 import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -8,15 +8,13 @@ import { URLPaths } from "utilities";
 import "./Navigation.scss";
 
 export const navbarHeight = "4.5rem";
-interface NavigationProps {
-  pos: "top" | "bottom";
-}
 
-export function Navigation({ pos }: NavigationProps): JSX.Element {
+export function Navigation(): JSX.Element {
   const user = useContext(UserContext);
+  const { navPosition } = useContext(NavPositionContext);
 
   return (
-    <Navbar bg="light" fixed={pos} style={{ height: navbarHeight }}>
+    <Navbar bg="light" fixed={navPosition} style={{ height: navbarHeight }}>
       <Container>
         <Nav>
           <NavLink path={URLPaths.alumStories}>Alumni Stories</NavLink>
