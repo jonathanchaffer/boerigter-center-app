@@ -1,4 +1,5 @@
 import {
+  AboutApp,
   AdminDashboard,
   AlumniStoriesList,
   AlumStoryDetails,
@@ -23,54 +24,57 @@ export function App(): JSX.Element {
   );
 
   return (
-    <Router>
-      <Navigation />
-      <MoveNavButton />
-      <Switch>
-        <Route exact path={URLPaths.alumStories}>
-          <MapView background />
-          <AlumniStoriesList />
-        </Route>
-        <Route exact path={URLPaths.admin}>
-          <MapView background />
-          <AdminDashboard />
-        </Route>
-        <Route exact path={`${URLPaths.alumStories}/:id`}>
-          <AlumStoryDetails />
-        </Route>
-        <Route exact path={URLPaths.careerFinder}>
-          <MapView data={handshakeCareers} isLoading={isHandshakeCareersLoading} />
-        </Route>
-        <Route exact path={URLPaths.alumFinder}>
-          <>
-            <MapView data={peopleGroveAlumni} isLoading={isPeopleGroveAlumniLoading} />
-            <LoginModal
-              isLoggedIn={isLoggedInToPG()}
-              loginFn={loginToPG}
-              description={
-                <span>
-                  Please log in using your{" "}
-                  <a href="https://connection.hope.edu/" target="blank">
-                    connection.hope.edu
-                  </a>{" "}
-                  credentials to view this content.
-                </span>
-              }
-              tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
-            />
-          </>
-        </Route>
-        <Route exact path={URLPaths.frog}>
-          <FrogPage />
-        </Route>
-        <Route exact path={URLPaths.logout}>
-          <LogoutPage />
-        </Route>
-        <Route>
-          <Redirect to={URLPaths.alumFinder} />
-        </Route>
-      </Switch>
-    </Router>
+    <div>
+      <Router>
+        <Navigation />
+        <MoveNavButton />
+        <AboutApp />
+        <Switch>
+          <Route exact path={URLPaths.alumStories}>
+            <MapView background />
+            <AlumniStoriesList />
+          </Route>
+          <Route exact path={URLPaths.admin}>
+            <MapView background />
+            <AdminDashboard />
+          </Route>
+          <Route exact path={`${URLPaths.alumStories}/:id`}>
+            <AlumStoryDetails />
+          </Route>
+          <Route exact path={URLPaths.careerFinder}>
+            <MapView data={handshakeCareers} isLoading={isHandshakeCareersLoading} />
+          </Route>
+          <Route exact path={URLPaths.alumFinder}>
+            <>
+              <MapView data={peopleGroveAlumni} isLoading={isPeopleGroveAlumniLoading} />
+              <LoginModal
+                isLoggedIn={isLoggedInToPG()}
+                loginFn={loginToPG}
+                description={
+                  <span>
+                    Please log in using your{" "}
+                    <a href="https://connection.hope.edu/" target="blank">
+                      connection.hope.edu
+                    </a>{" "}
+                    credentials to view this content.
+                  </span>
+                }
+                tooltip="The Hope College Connection site allows you to login via two methods: email/password, or LinkedIn. Currently, in this app, you can only login using the email/password method. Sorry for any inconvenience."
+              />
+            </>
+          </Route>
+          <Route exact path={URLPaths.frog}>
+            <FrogPage />
+          </Route>
+          <Route exact path={URLPaths.logout}>
+            <LogoutPage />
+          </Route>
+          <Route>
+            <Redirect to={URLPaths.alumFinder} />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 

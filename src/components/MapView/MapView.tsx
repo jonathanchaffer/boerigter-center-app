@@ -118,6 +118,9 @@ export function MapView<I extends Mappable>({
             );
           })}
         </GoogleMapReact>
+        {/* These divs are to block the buttons in the map */}
+        <div className="click-blocker left"> </div>
+        <div className="click-blocker right"> </div>
       </div>
     </>
   );
