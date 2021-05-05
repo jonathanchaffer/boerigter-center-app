@@ -162,7 +162,10 @@ function AlumCard({ alum }: AlumCardProps): JSX.Element {
       />
       <AddEditAlumniModal
         show={isShowingEditAlumModal}
-        onCancel={() => setIsShowingEditAlumModal(false)}
+        onCancel={() => {
+          window.location.reload();
+          setIsShowingEditAlumModal(false);
+        }}
         currentAlum={alum}
       />
       <ErrorModal error={error} />
