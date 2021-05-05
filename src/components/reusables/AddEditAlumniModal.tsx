@@ -23,7 +23,7 @@ export function AddEditAlumniModal({
   currentAlum,
 }: AddEditAlumniModalProps): JSX.Element {
   const [editedAlum, setEditedAlum] = useState<CuratedAlum>(
-    currentAlum ? { ...currentAlum } : emptyAlum,
+    currentAlum ? { ...currentAlum } : { ...emptyAlum },
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadedPhoto, setUploadedPhoto] = useState<File | undefined>(undefined);
