@@ -7,6 +7,22 @@ import Img from "react-cool-img";
 import { addAlumStory, updateAlumStory, uploadProfilePhoto } from "services";
 import { generateFullName } from "utilities";
 
+export const emptyAlum: CuratedAlum = {
+  bio: "",
+  company: "",
+  display: true,
+  email: "",
+  firstName: "",
+  gradYear: 0,
+  id: "",
+  lastName: "",
+  location: "",
+  majors: [],
+  minors: [],
+  phone: "",
+  profilePhoto: "",
+  quotes: [],
+};
 interface AddEditAlumniModalProps {
   /** Whether the modal should be shown. */
   show: boolean;
@@ -22,23 +38,6 @@ export function AddEditAlumniModal({
   onCancel,
   currentAlum,
 }: AddEditAlumniModalProps): JSX.Element {
-  const emptyAlum: CuratedAlum = {
-    bio: "",
-    company: "",
-    display: true,
-    email: "",
-    firstName: "",
-    gradYear: 0,
-    id: "",
-    lastName: "",
-    location: "",
-    majors: [],
-    minors: [],
-    phone: "",
-    profilePhoto: "",
-    quotes: [],
-  };
-
   const [editedAlum, setEditedAlum] = useState<CuratedAlum>(
     currentAlum ? { ...currentAlum } : emptyAlum,
   );
@@ -213,7 +212,10 @@ export function AddEditAlumniModal({
               onChange={e =>
                 setEditedAlum({
                   ...editedAlum,
-                  quotes: ((e.target.value === "") ? [] : e.target.value.split("|").map(quote => quote.trim())),
+                  quotes:
+                    e.target.value === ""
+                      ? []
+                      : e.target.value.split("|").map(quote => quote.trim()),
                 })
               }
               defaultValue={editedAlum.quotes?.join(" | ") || ""}
