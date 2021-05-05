@@ -1,6 +1,6 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
 import { ErrorModal, PhotoUploader } from "components";
-import { CuratedAlum } from "models";
+import { CuratedAlum, emptyAlum } from "models";
 import React, { FormEvent, useState } from "react";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import Img from "react-cool-img";
@@ -22,25 +22,8 @@ export function AddEditAlumniModal({
   onCancel,
   currentAlum,
 }: AddEditAlumniModalProps): JSX.Element {
-  const emptyAlum: CuratedAlum = {
-    bio: "",
-    company: "",
-    display: true,
-    email: "",
-    firstName: "",
-    gradYear: 0,
-    id: "",
-    lastName: "",
-    location: "",
-    majors: [],
-    minors: [],
-    phone: "",
-    profilePhoto: "",
-    quotes: [],
-  };
-
   const [editedAlum, setEditedAlum] = useState<CuratedAlum>(
-    currentAlum ? { ...currentAlum } : emptyAlum,
+    currentAlum ? { ...currentAlum } : { ...emptyAlum },
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadedPhoto, setUploadedPhoto] = useState<File | undefined>(undefined);
@@ -72,7 +55,7 @@ export function AddEditAlumniModal({
 
   return (
     <>
-      <Modal show={show} size="lg" onCancel={onCancel} className="add-edit-alumni-modal">
+      <Modal show={show} size="lg" className="add-edit-alumni-modal">
         <Form onSubmit={submitAlum}>
           <Modal.Header>
             <Modal.Title>
@@ -213,7 +196,10 @@ export function AddEditAlumniModal({
               onChange={e =>
                 setEditedAlum({
                   ...editedAlum,
-                  quotes: ((e.target.value === "") ? [] : e.target.value.split("|").map(quote => quote.trim())),
+                  quotes:
+                    e.target.value === ""
+                      ? []
+                      : e.target.value.split("|").map(quote => quote.trim()),
                 })
               }
               defaultValue={editedAlum.quotes?.join(" | ") || ""}
