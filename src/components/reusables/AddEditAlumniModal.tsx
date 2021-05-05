@@ -1,28 +1,12 @@
 import genericAvatar from "assets/images/generic_avatar.jpg";
 import { ErrorModal, PhotoUploader } from "components";
-import { CuratedAlum } from "models";
+import { CuratedAlum, emptyAlum } from "models";
 import React, { FormEvent, useState } from "react";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import Img from "react-cool-img";
 import { addAlumStory, updateAlumStory, uploadProfilePhoto } from "services";
 import { generateFullName } from "utilities";
 
-export const emptyAlum: CuratedAlum = {
-  bio: "",
-  company: "",
-  display: true,
-  email: "",
-  firstName: "",
-  gradYear: 0,
-  id: "",
-  lastName: "",
-  location: "",
-  majors: [],
-  minors: [],
-  phone: "",
-  profilePhoto: "",
-  quotes: [],
-};
 interface AddEditAlumniModalProps {
   /** Whether the modal should be shown. */
   show: boolean;
@@ -71,7 +55,15 @@ export function AddEditAlumniModal({
 
   return (
     <>
-      <Modal show={show} size="lg" onCancel={onCancel} className="add-edit-alumni-modal">
+      <Modal
+        show={show}
+        size="lg"
+        onCancel={() => {
+          window.location.reload();
+          onCancel();
+        }}
+        className="add-edit-alumni-modal"
+      >
         <Form onSubmit={submitAlum}>
           <Modal.Header>
             <Modal.Title>

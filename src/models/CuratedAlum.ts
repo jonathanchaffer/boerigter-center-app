@@ -14,3 +14,20 @@ export interface CuratedAlum {
   phone?: string;
   display: boolean;
 }
+
+export const emptyAlum: CuratedAlum = {
+  bio: "",
+  company: "",
+  display: true,
+  email: "",
+  firstName: "",
+  gradYear: 0,
+  id: "",
+  lastName: "",
+  location: "",
+  majors: [],
+  minors: [],
+  phone: "",
+  profilePhoto: "",
+  quotes: [],
+};
